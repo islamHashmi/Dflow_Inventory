@@ -1,0 +1,288 @@
+﻿using System;
+using System.Windows.Forms;
+using Dflow_Inventory.DataContext;
+using System.Linq;
+using Dflow_Inventory.Helpers;
+using System.Drawing;
+
+namespace Dflow_Inventory.ContentPage
+{
+    public partial class ItemMaster : Form
+    {
+        private Inventory_DflowEntities db;
+
+        private int _itemId = 0;
+
+        public ItemMaster()
+        {
+            InitializeComponent();
+
+            TxtItemName.Focus();
+
+            Autogenerate_ItemCode();
+
+            ComboBox();
+
+            Get_Data();
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (TxtItemName.Text == string.Empty)
+                {
+                    MessageBox.Show("Item Name is mandatory.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                using (db = new Inventory_DflowEntities())
+                {
+                    Item_Master item = new Item_Master();
+
+                    if (_itemId == 0)
+                    {
+                        db.Item_Master.Add(item);
+
+                        item.itemCode = TxtItemCode.Text.Trim();
+                        item.entryBy = SessionHelper.UserId;
+                        item.entryDate = DateTime.Now;
+                        item.active = true;
+                    }
+                    else
+                    {
+                        item = db.Item_Master.FirstOrDefault(m => m.itemId == _itemId && m.active == true);
+
+                        item.updatedBy = SessionHelper.UserId;
+                        item.updatedDate = DateTime.Now;
+                    }
+
+                    decimal _sellingPrice = 0, _openStock = 0;
+
+                    decimal.TryParse(TxtPrice.Text, out _sellingPrice);
+                    decimal.TryParse(TxtOpeningStk.Text, out _openStock);
+
+                    item.itemName = TxtItemName.Text;
+                    item.itemDescription = string.IsNullOrWhiteSpace(TxtDescription.Text) ? null : TxtDescription.Text;
+                    item.unitId = Convert.ToString(CmbUnit.SelectedValue) == "0" ? null : (int?)Convert.ToInt32(CmbUnit.SelectedValue);
+                    item.sellingPrice = _sellingPrice == 0 ? null : (decimal?)_sellingPrice;
+                    item.openingStock = _openStock == 0 ? null : (decimal?)_openStock;
+
+                    db.SaveChanges();
+
+                    Clear_Controls();
+
+                    Get_Data();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void Clear_Controls()
+        {
+            TxtItemName.Text = string.Empty;
+            TxtDescription.Text = string.Empty;
+            TxtOpeningStk.Text = string.Empty;
+            TxtPrice.Text = string.Empty;
+            CmbUnit.SelectedValue = 0;
+
+            _itemId = 0;
+
+            Autogenerate_ItemCode();
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Clear_Controls();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void ComboBox()
+        {
+            using (db = new Inventory_DflowEntities())
+            {
+                var units = db.Unit_Master.Where(m => m.active == true).ToList();
+
+                units.Insert(0, new Unit_Master { unitName = "--- Select Unit ---", unitId = 0 });
+
+                CmbUnit.DataSource = units;
+                CmbUnit.DisplayMember = "unitName";
+                CmbUnit.ValueMember = "unitId";
+            }
+        }
+
+        private void CellContentClick(int columnIndex, int rowIndex)
+        {
+            if (rowIndex >= 0)
+            {
+                int itemId = 0;
+
+                int.TryParse(Convert.ToString(DgvList["itemId", rowIndex].Value), out itemId);
+
+                using (db = new Inventory_DflowEntities())
+                {
+                    var item = db.Item_Master.FirstOrDefault(x => x.itemId == itemId);
+
+                    if (item != null)
+                    {
+                        _itemId = item.itemId;
+                        TxtItemCode.Text = item.itemCode;
+                        TxtItemName.Text = item.itemName;
+                        TxtDescription.Text = item.itemDescription;
+                        TxtPrice.Text = Convert.ToString(item.sellingPrice);
+                        TxtOpeningStk.Text = Convert.ToString(item.openingStock);
+                        CmbUnit.SelectedValue = item.unitId ?? 0;
+                    }
+                }
+
+                tabControl1.SelectedIndex = 0;
+            }
+        }
+
+        private void DgvList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                CellContentClick(e.ColumnIndex, e.RowIndex);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void Autogenerate_ItemCode()
+        {
+            using (db = new Inventory_DflowEntities())
+            {
+                var itemCode = db.Item_Master.Max(m => m.itemCode);
+
+                int _itemCode = 0;
+
+                int.TryParse(itemCode, out _itemCode);
+
+                TxtItemCode.Text = string.Format("{0}", _itemCode + 1);
+            }
+        }
+
+        private void Get_Data()
+        {
+            using (db = new Inventory_DflowEntities())
+            {
+                var items = (from m in db.Item_Master
+                             join b in db.Unit_Master on m.unitId equals b.unitId into unit
+                             from b in unit.DefaultIfEmpty()
+                             where m.active == true
+                             select new
+                             {
+                                 itemId = m.itemId,
+                                 itemCode = m.itemCode,
+                                 itemName = m.itemName,
+                                 description = m.itemDescription,
+                                 unitId = m.unitId == null ? 0 : m.unitId,
+                                 unitCode = b.unitCode,
+                                 sellingPrice = m.sellingPrice,
+                                 openingStock = m.openingStock,
+                                 active = m.active
+                             }).ToList();
+                            
+                DgvList.DataSource = items;
+
+                Set_Column_Unit();
+            }
+        }
+
+        private void Set_Column_Unit()
+        {
+            DgvList.Columns["itemId"].Visible = false;
+            DgvList.Columns["unitId"].Visible = false;
+            DgvList.Columns["active"].Visible = false;
+
+            DgvList.Columns["itemCode"].HeaderText = "Item Code";
+            DgvList.Columns["itemCode"].DisplayIndex = 0;
+
+            DgvList.Columns["itemName"].HeaderText = "Item Name";
+            DgvList.Columns["itemName"].DisplayIndex = 1;
+
+            DgvList.Columns["description"].HeaderText = "Description";
+            DgvList.Columns["description"].DisplayIndex = 2;
+
+            DgvList.Columns["unitCode"].HeaderText = "Unit Code";
+            DgvList.Columns["unitCode"].DisplayIndex = 3;
+
+            DgvList.Columns["sellingPrice"].HeaderText = "Selling Price";
+            DgvList.Columns["sellingPrice"].DisplayIndex = 4;
+
+            DgvList.Columns["openingStock"].HeaderText = "Opening Stock";
+            DgvList.Columns["openingStock"].DisplayIndex = 5;
+        }
+
+        private void DgvList_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {                
+                if(DgvList.CurrentCell != null)
+                {
+                    if (e.KeyCode == Keys.Enter)
+                    {
+                        CellContentClick(DgvList.CurrentCell.ColumnIndex, DgvList.CurrentCell.RowIndex);
+                    }   
+                    else if(e.KeyCode == Keys.Delete)
+                    {
+                        int itemId = 0;
+
+                        int.TryParse(Convert.ToString(DgvList["itemId", DgvList.CurrentCell.RowIndex]), out itemId);
+
+                        using (db = new Inventory_DflowEntities())
+                        {
+                            var item = db.Item_Master.FirstOrDefault(x => x.itemId == itemId);
+
+                            if (item != null)
+                            {
+                                item.active = false;
+
+                                db.SaveChanges();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void DgvList_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var grid = sender as DataGridView;
+            var rowIdx = (e.RowIndex + 1).ToString();
+
+            var centerFormat = new StringFormat()
+            {
+                Alignment = StringAlignment.Center,
+
+                LineAlignment = StringAlignment.Center
+            };
+
+            Size textSize = TextRenderer.MeasureText(rowIdx, this.Font);
+
+            if (grid.RowHeadersWidth < textSize.Width + 40)
+            {
+                grid.RowHeadersWidth = textSize.Width + 40;
+            }
+
+            var headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
+            e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
+        }
+    }
+}
