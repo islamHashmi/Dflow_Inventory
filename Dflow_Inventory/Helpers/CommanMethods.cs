@@ -20,16 +20,14 @@ namespace Dflow_Inventory.Helpers
             return true;
         }
 
-        internal static string ConvertDate(string date)
+        internal static DateTime? ConvertDate(string date)
         {
-            string _date = string.Empty;
-
             if (!string.IsNullOrWhiteSpace(date))
             {
-                _date = DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
+                return (DateTime?)DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             }
 
-            return _date;
+            return null;
         }
 
         internal static bool Allow_CRUD()

@@ -28,6 +28,91 @@
           <Property Name="updatedBy" Type="int" />
           <Property Name="updatedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="Designation">
+          <Key>
+            <PropertyRef Name="designationId" />
+          </Key>
+          <Property Name="designationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="designationName" Type="varchar" MaxLength="50" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="entryBy" Type="int" Nullable="false" />
+          <Property Name="entryDate" Type="datetime" Nullable="false" />
+          <Property Name="updatedBy" Type="int" />
+          <Property Name="updatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DistributorMaster">
+          <Key>
+            <PropertyRef Name="distributorId" />
+          </Key>
+          <Property Name="distributorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="distributorCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="distributorName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="250" />
+          <Property Name="city" Type="varchar" MaxLength="100" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
+          <Property Name="pincode" Type="char" MaxLength="6" />
+          <Property Name="officeNo" Type="char" MaxLength="10" />
+          <Property Name="mobileNo" Type="char" MaxLength="10" />
+          <Property Name="faxNo" Type="char" MaxLength="10" />
+          <Property Name="emailId" Type="varchar" MaxLength="256" />
+          <Property Name="gstNo" Type="varchar" MaxLength="50" />
+          <Property Name="panNo" Type="varchar" MaxLength="50" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="entryBy" Type="int" Nullable="false" />
+          <Property Name="entryDate" Type="datetime" />
+          <Property Name="updatedBy" Type="int" />
+          <Property Name="updatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employeeCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="middleName" Type="varchar" MaxLength="50" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" />
+          <Property Name="address" Type="varchar" MaxLength="250" />
+          <Property Name="city" Type="varchar" MaxLength="50" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
+          <Property Name="pincode" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="mobileNo" Type="char" MaxLength="10" />
+          <Property Name="dateOfBirth" Type="date" />
+          <Property Name="sex" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="designationId" Type="int" />
+          <Property Name="hireDate" Type="date" />
+          <Property Name="salary" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="maritalStatus" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="emailId" Type="varchar" MaxLength="256" />
+          <Property Name="empStatus" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="entryBy" Type="int" Nullable="false" />
+          <Property Name="entryDate" Type="datetime" Nullable="false" />
+          <Property Name="updatedBy" Type="int" />
+          <Property Name="updatedDate" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EmploymentStatus">
+          <Key>
+            <PropertyRef Name="empStatusCode" />
+            <PropertyRef Name="empStatusDesc" />
+            <PropertyRef Name="active" />
+          </Key>
+          <Property Name="empStatusCode" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="empStatusDesc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Inventory_Dflow.dbo.Gender' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="genderCode" />
+            <PropertyRef Name="genderDescription" />
+          </Key>
+          <Property Name="genderCode" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="genderDescription" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="ItemMaster">
           <Key>
             <PropertyRef Name="itemId" />
@@ -43,6 +128,43 @@
           <Property Name="entryBy" Type="int" Nullable="false" />
           <Property Name="entryDate" Type="datetime" Nullable="false" />
           <Property Name="updatedBy" Type="int" />
+          <Property Name="updatedDate" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Inventory_Dflow.dbo.maritalStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="maritalStatus">
+          <Key>
+            <PropertyRef Name="maritalStatusCode" />
+            <PropertyRef Name="maritalStatusDesc" />
+          </Key>
+          <Property Name="maritalStatusCode" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="maritalStatusDesc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PurchaseDetail">
+          <Key>
+            <PropertyRef Name="purchaseDetailId" />
+          </Key>
+          <Property Name="purchaseDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="purhcaseId" Type="int" Nullable="false" />
+          <Property Name="itemId" Type="int" Nullable="false" />
+          <Property Name="unit" Type="varchar" MaxLength="50" />
+          <Property Name="rate" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="quantity" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="PurchaseHeader">
+          <Key>
+            <PropertyRef Name="purchaseId" />
+          </Key>
+          <Property Name="purchaseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="poNumber" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="purchaseDate" Type="date" Nullable="false" />
+          <Property Name="supplierId" Type="int" Nullable="false" />
+          <Property Name="totalQuantity" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="totalAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="entryBy" Type="int" Nullable="false" />
+          <Property Name="entryDate" Type="datetime" Nullable="false" />
+          <Property Name="updateBy" Type="int" />
           <Property Name="updatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="SupplierMaster">
@@ -81,6 +203,18 @@
           <Property Name="updatedBy" Type="int" />
           <Property Name="updatedDate" Type="datetime" />
         </EntityType>
+        <Association Name="FK_Employee_Designation">
+          <End Role="Designation" Type="Self.Designation" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Designation">
+              <PropertyRef Name="designationId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="designationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ItemMaster_UnitMaster">
           <End Role="UnitMaster" Type="Self.UnitMaster" Multiplicity="0..1" />
           <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
@@ -93,14 +227,90 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PurchaseDetail_ItemMaster">
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="1" />
+          <End Role="PurchaseDetail" Type="Self.PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMaster">
+              <PropertyRef Name="itemId" />
+            </Principal>
+            <Dependent Role="PurchaseDetail">
+              <PropertyRef Name="itemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseDetail_PurchaseHeader">
+          <End Role="PurchaseHeader" Type="Self.PurchaseHeader" Multiplicity="1" />
+          <End Role="PurchaseDetail" Type="Self.PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseHeader">
+              <PropertyRef Name="purchaseId" />
+            </Principal>
+            <Dependent Role="PurchaseDetail">
+              <PropertyRef Name="purhcaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseHeader_SupplierMaster">
+          <End Role="SupplierMaster" Type="Self.SupplierMaster" Multiplicity="1" />
+          <End Role="PurchaseHeader" Type="Self.PurchaseHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SupplierMaster">
+              <PropertyRef Name="supplierId" />
+            </Principal>
+            <Dependent Role="PurchaseHeader">
+              <PropertyRef Name="supplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Inventory_DflowModelStoreContainer">
           <EntitySet Name="CustomerMaster" EntityType="Self.CustomerMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DistributorMaster" EntityType="Self.DistributorMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemMaster" EntityType="Self.ItemMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseDetail" EntityType="Self.PurchaseDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseHeader" EntityType="Self.PurchaseHeader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierMaster" EntityType="Self.SupplierMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnitMaster" EntityType="Self.UnitMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmploymentStatus" EntityType="Self.EmploymentStatus" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[EmploymentStatus].[empStatusCode] AS [empStatusCode], 
+[EmploymentStatus].[empStatusDesc] AS [empStatusDesc], 
+[EmploymentStatus].[active] AS [active]
+FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Gender" EntityType="Self.Gender" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Gender].[genderCode] AS [genderCode], 
+[Gender].[genderDescription] AS [genderDescription]
+FROM [dbo].[Gender] AS [Gender]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="maritalStatus" EntityType="Self.maritalStatus" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[maritalStatus].[maritalStatusCode] AS [maritalStatusCode], 
+[maritalStatus].[maritalStatusDesc] AS [maritalStatusDesc]
+FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Employee_Designation" Association="Self.FK_Employee_Designation">
+            <End Role="Designation" EntitySet="Designation" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
           <AssociationSet Name="FK_ItemMaster_UnitMaster" Association="Self.FK_ItemMaster_UnitMaster">
             <End Role="UnitMaster" EntitySet="UnitMaster" />
             <End Role="ItemMaster" EntitySet="ItemMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseDetail_ItemMaster" Association="Self.FK_PurchaseDetail_ItemMaster">
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+            <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseDetail_PurchaseHeader" Association="Self.FK_PurchaseDetail_PurchaseHeader">
+            <End Role="PurchaseHeader" EntitySet="PurchaseHeader" />
+            <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseHeader_SupplierMaster" Association="Self.FK_PurchaseHeader_SupplierMaster">
+            <End Role="SupplierMaster" EntitySet="SupplierMaster" />
+            <End Role="PurchaseHeader" EntitySet="PurchaseHeader" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -124,6 +334,7 @@
           <NavigationProperty Name="UnitMaster" Relationship="Self.FK_ItemMaster_UnitMaster" FromRole="ItemMaster" ToRole="UnitMaster" />
           <Property Name="itemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="itemDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PurchaseDetails" Relationship="Inventory_DflowModel.FK_PurchaseDetail_ItemMaster" FromRole="Item_Master" ToRole="PurchaseDetail" />
         </EntityType>
         <EntityType Name="Unit_Master">
           <Key>
@@ -160,6 +371,30 @@
           </AssociationSet>
           <EntitySet Name="Customer_Master" EntityType="Inventory_DflowModel.Customer_Master" />
           <EntitySet Name="Supplier_Master" EntityType="Inventory_DflowModel.Supplier_Master" />
+          <EntitySet Name="Designations" EntityType="Inventory_DflowModel.Designation" />
+          <EntitySet Name="PurchaseDetails" EntityType="Inventory_DflowModel.PurchaseDetail" />
+          <EntitySet Name="PurchaseHeaders" EntityType="Inventory_DflowModel.PurchaseHeader" />
+          <AssociationSet Name="FK_PurchaseDetail_ItemMaster" Association="Inventory_DflowModel.FK_PurchaseDetail_ItemMaster">
+            <End Role="Item_Master" EntitySet="Item_Master" />
+            <End Role="PurchaseDetail" EntitySet="PurchaseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseDetail_PurchaseHeader" Association="Inventory_DflowModel.FK_PurchaseDetail_PurchaseHeader">
+            <End Role="PurchaseHeader" EntitySet="PurchaseHeaders" />
+            <End Role="PurchaseDetail" EntitySet="PurchaseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseHeader_SupplierMaster" Association="Inventory_DflowModel.FK_PurchaseHeader_SupplierMaster">
+            <End Role="Supplier_Master" EntitySet="Supplier_Master" />
+            <End Role="PurchaseHeader" EntitySet="PurchaseHeaders" />
+          </AssociationSet>
+          <EntitySet Name="Employees" EntityType="Inventory_DflowModel.Employee" />
+          <AssociationSet Name="FK_Employee_Designation" Association="Inventory_DflowModel.FK_Employee_Designation">
+            <End Role="Designation" EntitySet="Designations" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <EntitySet Name="Employment_Status" EntityType="Inventory_DflowModel.Employment_Status" />
+          <EntitySet Name="Genders" EntityType="Inventory_DflowModel.Gender" />
+          <EntitySet Name="marital_Status" EntityType="Inventory_DflowModel.marital_Status" />
+          <EntitySet Name="Distributor_Master" EntityType="Inventory_DflowModel.Distributor_Master" />
         </EntityContainer>
         <EntityType Name="Customer_Master">
           <Key>
@@ -191,6 +426,177 @@
           <Property Name="supplierId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="supplierCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="supplierName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pincode" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="officeNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="mobileNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="faxNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="emailId" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="gstNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="panNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="entryBy" Type="Int32" Nullable="false" />
+          <Property Name="entryDate" Type="DateTime" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <Property Name="updatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PurchaseHeaders" Relationship="Inventory_DflowModel.FK_PurchaseHeader_SupplierMaster" FromRole="Supplier_Master" ToRole="PurchaseHeader" />
+        </EntityType>
+        <EntityType Name="Designation">
+          <Key>
+            <PropertyRef Name="designationId" />
+          </Key>
+          <Property Name="designationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="designationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="entryBy" Type="Int32" Nullable="false" />
+          <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <Property Name="updatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Employees" Relationship="Inventory_DflowModel.FK_Employee_Designation" FromRole="Designation" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="PurchaseDetail">
+          <Key>
+            <PropertyRef Name="purchaseDetailId" />
+          </Key>
+          <Property Name="purchaseDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="purhcaseId" Type="Int32" Nullable="false" />
+          <Property Name="itemId" Type="Int32" Nullable="false" />
+          <Property Name="unit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="quantity" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="ItemMaster" Relationship="Inventory_DflowModel.FK_PurchaseDetail_ItemMaster" FromRole="PurchaseDetail" ToRole="Item_Master" />
+          <NavigationProperty Name="PurchaseHeader" Relationship="Inventory_DflowModel.FK_PurchaseDetail_PurchaseHeader" FromRole="PurchaseDetail" ToRole="PurchaseHeader" />
+        </EntityType>
+        <EntityType Name="PurchaseHeader">
+          <Key>
+            <PropertyRef Name="purchaseId" />
+          </Key>
+          <Property Name="purchaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="poNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="purchaseDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="supplierId" Type="Int32" Nullable="false" />
+          <Property Name="totalQuantity" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="totalAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="entryBy" Type="Int32" Nullable="false" />
+          <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updateBy" Type="Int32" />
+          <Property Name="updatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PurchaseDetails" Relationship="Inventory_DflowModel.FK_PurchaseDetail_PurchaseHeader" FromRole="PurchaseHeader" ToRole="PurchaseDetail" />
+          <NavigationProperty Name="SupplierMaster" Relationship="Inventory_DflowModel.FK_PurchaseHeader_SupplierMaster" FromRole="PurchaseHeader" ToRole="Supplier_Master" />
+        </EntityType>
+        <Association Name="FK_PurchaseDetail_ItemMaster">
+          <End Type="Inventory_DflowModel.Item_Master" Role="Item_Master" Multiplicity="1" />
+          <End Type="Inventory_DflowModel.PurchaseDetail" Role="PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item_Master">
+              <PropertyRef Name="itemId" />
+            </Principal>
+            <Dependent Role="PurchaseDetail">
+              <PropertyRef Name="itemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseDetail_PurchaseHeader">
+          <End Type="Inventory_DflowModel.PurchaseHeader" Role="PurchaseHeader" Multiplicity="1" />
+          <End Type="Inventory_DflowModel.PurchaseDetail" Role="PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseHeader">
+              <PropertyRef Name="purchaseId" />
+            </Principal>
+            <Dependent Role="PurchaseDetail">
+              <PropertyRef Name="purhcaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseHeader_SupplierMaster">
+          <End Type="Inventory_DflowModel.Supplier_Master" Role="Supplier_Master" Multiplicity="1" />
+          <End Type="Inventory_DflowModel.PurchaseHeader" Role="PurchaseHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier_Master">
+              <PropertyRef Name="supplierId" />
+            </Principal>
+            <Dependent Role="PurchaseHeader">
+              <PropertyRef Name="supplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employeeCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="firstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="middleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pincode" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="mobileNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="dateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="designationId" Type="Int32" />
+          <Property Name="hireDate" Type="DateTime" Precision="0" />
+          <Property Name="salary" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="maritalStatus" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="emailId" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="empStatus" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="entryBy" Type="Int32" Nullable="false" />
+          <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <Property Name="updatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Designation" Relationship="Inventory_DflowModel.FK_Employee_Designation" FromRole="Employee" ToRole="Designation" />
+        </EntityType>
+        <Association Name="FK_Employee_Designation">
+          <End Type="Inventory_DflowModel.Designation" Role="Designation" Multiplicity="0..1" />
+          <End Type="Inventory_DflowModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Designation">
+              <PropertyRef Name="designationId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="designationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Employment_Status">
+          <Key>
+            <PropertyRef Name="empStatusCode" />
+            <PropertyRef Name="empStatusDesc" />
+            <PropertyRef Name="active" />
+          </Key>
+          <Property Name="empStatusCode" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="empStatusDesc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="genderCode" />
+            <PropertyRef Name="genderDescription" />
+          </Key>
+          <Property Name="genderCode" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="genderDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="marital_Status">
+          <Key>
+            <PropertyRef Name="maritalStatusCode" />
+            <PropertyRef Name="maritalStatusDesc" />
+          </Key>
+          <Property Name="maritalStatusCode" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="maritalStatusDesc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Distributor_Master">
+          <Key>
+            <PropertyRef Name="distributorId" />
+          </Key>
+          <Property Name="distributorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="distributorCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="distributorName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -290,6 +696,126 @@
                 <ScalarProperty Name="supplierName" ColumnName="supplierName" />
                 <ScalarProperty Name="supplierCode" ColumnName="supplierCode" />
                 <ScalarProperty Name="supplierId" ColumnName="supplierId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Designations">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.Designation">
+              <MappingFragment StoreEntitySet="Designation">
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+                <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="designationName" ColumnName="designationName" />
+                <ScalarProperty Name="designationId" ColumnName="designationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseDetails">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.PurchaseDetail">
+              <MappingFragment StoreEntitySet="PurchaseDetail">
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+                <ScalarProperty Name="purhcaseId" ColumnName="purhcaseId" />
+                <ScalarProperty Name="purchaseDetailId" ColumnName="purchaseDetailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseHeaders">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.PurchaseHeader">
+              <MappingFragment StoreEntitySet="PurchaseHeader">
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="updateBy" ColumnName="updateBy" />
+                <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+                <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+                <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+                <ScalarProperty Name="totalQuantity" ColumnName="totalQuantity" />
+                <ScalarProperty Name="supplierId" ColumnName="supplierId" />
+                <ScalarProperty Name="purchaseDate" ColumnName="purchaseDate" />
+                <ScalarProperty Name="poNumber" ColumnName="poNumber" />
+                <ScalarProperty Name="purchaseId" ColumnName="purchaseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+                <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="empStatus" ColumnName="empStatus" />
+                <ScalarProperty Name="emailId" ColumnName="emailId" />
+                <ScalarProperty Name="maritalStatus" ColumnName="maritalStatus" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="hireDate" ColumnName="hireDate" />
+                <ScalarProperty Name="designationId" ColumnName="designationId" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+                <ScalarProperty Name="mobileNo" ColumnName="mobileNo" />
+                <ScalarProperty Name="pincode" ColumnName="pincode" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="middleName" ColumnName="middleName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="employeeCode" ColumnName="employeeCode" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employment_Status">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.Employment_Status">
+              <MappingFragment StoreEntitySet="EmploymentStatus">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="empStatusDesc" ColumnName="empStatusDesc" />
+                <ScalarProperty Name="empStatusCode" ColumnName="empStatusCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="genderDescription" ColumnName="genderDescription" />
+                <ScalarProperty Name="genderCode" ColumnName="genderCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="marital_Status">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.marital_Status">
+              <MappingFragment StoreEntitySet="maritalStatus">
+                <ScalarProperty Name="maritalStatusDesc" ColumnName="maritalStatusDesc" />
+                <ScalarProperty Name="maritalStatusCode" ColumnName="maritalStatusCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Distributor_Master">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.Distributor_Master">
+              <MappingFragment StoreEntitySet="DistributorMaster">
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+                <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="panNo" ColumnName="panNo" />
+                <ScalarProperty Name="gstNo" ColumnName="gstNo" />
+                <ScalarProperty Name="emailId" ColumnName="emailId" />
+                <ScalarProperty Name="faxNo" ColumnName="faxNo" />
+                <ScalarProperty Name="mobileNo" ColumnName="mobileNo" />
+                <ScalarProperty Name="officeNo" ColumnName="officeNo" />
+                <ScalarProperty Name="pincode" ColumnName="pincode" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="distributorName" ColumnName="distributorName" />
+                <ScalarProperty Name="distributorCode" ColumnName="distributorCode" />
+                <ScalarProperty Name="distributorId" ColumnName="distributorId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

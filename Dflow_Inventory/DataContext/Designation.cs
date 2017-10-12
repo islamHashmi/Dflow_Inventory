@@ -12,27 +12,21 @@ namespace Dflow_Inventory.DataContext
     using System;
     using System.Collections.Generic;
     
-    public partial class Item_Master
+    public partial class Designation
     {
-        public Item_Master()
+        public Designation()
         {
-            this.PurchaseDetails = new HashSet<PurchaseDetail>();
+            this.Employees = new HashSet<Employee>();
         }
     
-        public int itemId { get; set; }
-        public string itemName { get; set; }
-        public Nullable<int> unitId { get; set; }
-        public Nullable<decimal> sellingPrice { get; set; }
-        public Nullable<decimal> openingStock { get; set; }
+        public int designationId { get; set; }
+        public string designationName { get; set; }
         public bool active { get; set; }
         public int entryBy { get; set; }
         public System.DateTime entryDate { get; set; }
         public Nullable<int> updatedBy { get; set; }
         public Nullable<System.DateTime> updatedDate { get; set; }
-        public string itemCode { get; set; }
-        public string itemDescription { get; set; }
     
-        public virtual Unit_Master UnitMaster { get; set; }
-        public virtual ICollection<PurchaseDetail> PurchaseDetails { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

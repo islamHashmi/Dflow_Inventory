@@ -284,5 +284,34 @@ namespace Dflow_Inventory.ContentPage
             var headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
             e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
         }
+
+        private void TxtPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+                    e.Handled = true;
+
+                if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+                    e.Handled = true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void TxtOpeningStk_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                    e.Handled = true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

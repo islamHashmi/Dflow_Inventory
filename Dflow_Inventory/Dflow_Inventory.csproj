@@ -58,6 +58,24 @@
     <Compile Include="ContentPage\CustomerMaster.Designer.cs">
       <DependentUpon>CustomerMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContentPage\DesignationMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContentPage\DesignationMaster.Designer.cs">
+      <DependentUpon>DesignationMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContentPage\DistributorMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContentPage\DistributorMaster.Designer.cs">
+      <DependentUpon>DistributorMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContentPage\EmployeeMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContentPage\EmployeeMaster.Designer.cs">
+      <DependentUpon>EmployeeMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="ContentPage\ItemMaster.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +103,9 @@
     <Compile Include="DataContext\Customer_Master.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataContext\Designation.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataContext\dflowModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -100,7 +121,28 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dflowModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DataContext\Distributor_Master.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Employee.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Employment_Status.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Gender.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataContext\Item_Master.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\marital_Status.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\PurchaseDetail.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\PurchaseHeader.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataContext\Supplier_Master.cs">
@@ -134,6 +176,15 @@
     </Compile>
     <EmbeddedResource Include="ContentPage\CustomerMaster.resx">
       <DependentUpon>CustomerMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContentPage\DesignationMaster.resx">
+      <DependentUpon>DesignationMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContentPage\DistributorMaster.resx">
+      <DependentUpon>DistributorMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContentPage\EmployeeMaster.resx">
+      <DependentUpon>EmployeeMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ContentPage\ItemMaster.resx">
       <DependentUpon>ItemMaster.cs</DependentUpon>

@@ -1,6 +1,6 @@
 ﻿namespace Dflow_Inventory.ContentPage
 {
-    partial class CustomerMaster
+    partial class DistributorMaster
     {
         /// <summary>
         /// Required designer variable.
@@ -53,9 +53,9 @@
             this.TxtCity = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.TxtCustomerName = new System.Windows.Forms.TextBox();
+            this.TxtDistributorName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.TxtCustomerCode = new System.Windows.Forms.TextBox();
+            this.TxtDistributorCode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.Link_shorcut = new System.Windows.Forms.LinkLabel();
@@ -77,8 +77,8 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(693, 495);
-            this.tabControl1.TabIndex = 2;
+            this.tabControl1.Size = new System.Drawing.Size(742, 492);
+            this.tabControl1.TabIndex = 3;
             // 
             // tabPage1
             // 
@@ -104,17 +104,17 @@
             this.tabPage1.Controls.Add(this.TxtCity);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.TxtCustomerName);
+            this.tabPage1.Controls.Add(this.TxtDistributorName);
             this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.TxtCustomerCode);
+            this.tabPage1.Controls.Add(this.TxtDistributorCode);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Location = new System.Drawing.Point(4, 30);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage1.Size = new System.Drawing.Size(685, 461);
+            this.tabPage1.Size = new System.Drawing.Size(734, 458);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Add Supplier";
+            this.tabPage1.Text = "Add Distributor";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // TxtEmailId
@@ -326,14 +326,14 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Address";
             // 
-            // TxtCustomerName
+            // TxtDistributorName
             // 
-            this.TxtCustomerName.Location = new System.Drawing.Point(191, 66);
-            this.TxtCustomerName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.TxtCustomerName.MaxLength = 200;
-            this.TxtCustomerName.Name = "TxtCustomerName";
-            this.TxtCustomerName.Size = new System.Drawing.Size(402, 23);
-            this.TxtCustomerName.TabIndex = 2;
+            this.TxtDistributorName.Location = new System.Drawing.Point(191, 66);
+            this.TxtDistributorName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TxtDistributorName.MaxLength = 200;
+            this.TxtDistributorName.Name = "TxtDistributorName";
+            this.TxtDistributorName.Size = new System.Drawing.Size(402, 23);
+            this.TxtDistributorName.TabIndex = 2;
             // 
             // label2
             // 
@@ -344,23 +344,23 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Name";
             // 
-            // TxtCustomerCode
+            // TxtDistributorCode
             // 
-            this.TxtCustomerCode.Location = new System.Drawing.Point(191, 35);
-            this.TxtCustomerCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.TxtCustomerCode.Name = "TxtCustomerCode";
-            this.TxtCustomerCode.ReadOnly = true;
-            this.TxtCustomerCode.Size = new System.Drawing.Size(156, 23);
-            this.TxtCustomerCode.TabIndex = 1;
+            this.TxtDistributorCode.Location = new System.Drawing.Point(191, 35);
+            this.TxtDistributorCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TxtDistributorCode.Name = "TxtDistributorCode";
+            this.TxtDistributorCode.ReadOnly = true;
+            this.TxtDistributorCode.Size = new System.Drawing.Size(156, 23);
+            this.TxtDistributorCode.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(54, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 18);
+            this.label1.Size = new System.Drawing.Size(101, 18);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Customer Code";
+            this.label1.Text = "Distributor Code";
             // 
             // tabPage2
             // 
@@ -370,16 +370,16 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(685, 461);
+            this.tabPage2.Size = new System.Drawing.Size(734, 458);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "View Suppliers";
+            this.tabPage2.Text = "View Distributors";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // Link_shorcut
             // 
             this.Link_shorcut.AutoSize = true;
             this.Link_shorcut.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Link_shorcut.Location = new System.Drawing.Point(590, 4);
+            this.Link_shorcut.Location = new System.Drawing.Point(639, 4);
             this.Link_shorcut.Name = "Link_shorcut";
             this.Link_shorcut.Size = new System.Drawing.Size(92, 18);
             this.Link_shorcut.TabIndex = 2;
@@ -401,26 +401,26 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DgvList.DefaultCellStyle = dataGridViewCellStyle1;
             this.DgvList.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.DgvList.Location = new System.Drawing.Point(3, 26);
+            this.DgvList.Location = new System.Drawing.Point(3, 23);
             this.DgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DgvList.Name = "DgvList";
             this.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvList.Size = new System.Drawing.Size(679, 431);
+            this.DgvList.Size = new System.Drawing.Size(728, 431);
             this.DgvList.TabIndex = 0;
             this.DgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvList_CellDoubleClick);
             this.DgvList.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvList_RowPostPaint);
             this.DgvList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvList_KeyDown);
             // 
-            // CustomerMaster
+            // DistributorMaster
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(693, 495);
+            this.ClientSize = new System.Drawing.Size(742, 492);
             this.Controls.Add(this.tabControl1);
-            this.Font = new System.Drawing.Font("Gill Sans MT", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "CustomerMaster";
-            this.Text = "CustomerMaster";
+            this.Name = "DistributorMaster";
+            this.Text = "Distributor Master";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -457,9 +457,9 @@
         private System.Windows.Forms.TextBox TxtCity;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox TxtCustomerName;
+        private System.Windows.Forms.TextBox TxtDistributorName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox TxtCustomerCode;
+        private System.Windows.Forms.TextBox TxtDistributorCode;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.LinkLabel Link_shorcut;

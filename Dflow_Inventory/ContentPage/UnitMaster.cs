@@ -18,7 +18,6 @@ namespace Dflow_Inventory.ContentPage
         public UnitMaster()
         {
             InitializeComponent();
-
             Get_Data();
         }
 
@@ -131,7 +130,7 @@ namespace Dflow_Inventory.ContentPage
             {
                 int unitId = 0;
 
-                int.TryParse(Convert.ToString(DgvList["unitId", rowIndex]), out unitId);
+                int.TryParse(Convert.ToString(DgvList["unitId", rowIndex].Value), out unitId);
 
                 using (db = new Inventory_DflowEntities())
                 {

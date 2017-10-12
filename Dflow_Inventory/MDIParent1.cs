@@ -87,5 +87,41 @@ namespace Dflow_Inventory
                 throw;
             }
         }
+
+        private void designationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new DesignationMaster());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void employeeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new EmployeeMaster());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void distributorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new DistributorMaster());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

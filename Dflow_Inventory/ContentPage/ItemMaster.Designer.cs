@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.TxtDescription = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.BtnSave = new System.Windows.Forms.Button();
             this.TxtOpeningStk = new System.Windows.Forms.TextBox();
@@ -46,8 +48,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.Link_shorcut = new System.Windows.Forms.LinkLabel();
             this.DgvList = new System.Windows.Forms.DataGridView();
-            this.TxtDescription = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -93,6 +93,24 @@
             this.tabPage1.Text = "Add Item";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // TxtDescription
+            // 
+            this.TxtDescription.Location = new System.Drawing.Point(201, 106);
+            this.TxtDescription.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TxtDescription.Multiline = true;
+            this.TxtDescription.Name = "TxtDescription";
+            this.TxtDescription.Size = new System.Drawing.Size(287, 87);
+            this.TxtDescription.TabIndex = 3;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(53, 109);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(71, 18);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Description";
+            // 
             // BtnCancel
             // 
             this.BtnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(87)))), ((int)(((byte)(51)))));
@@ -102,7 +120,7 @@
             this.BtnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(78, 30);
-            this.BtnCancel.TabIndex = 11;
+            this.BtnCancel.TabIndex = 8;
             this.BtnCancel.Text = "Cancel";
             this.BtnCancel.UseVisualStyleBackColor = false;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
@@ -116,7 +134,7 @@
             this.BtnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(72, 30);
-            this.BtnSave.TabIndex = 10;
+            this.BtnSave.TabIndex = 7;
             this.BtnSave.Text = "Save";
             this.BtnSave.UseVisualStyleBackColor = false;
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -127,8 +145,8 @@
             this.TxtOpeningStk.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TxtOpeningStk.Name = "TxtOpeningStk";
             this.TxtOpeningStk.Size = new System.Drawing.Size(156, 23);
-            this.TxtOpeningStk.TabIndex = 9;
-            this.TxtOpeningStk.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TxtOpeningStk.TabIndex = 6;
+            this.TxtOpeningStk.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtOpeningStk_KeyPress);
             // 
             // label5
             // 
@@ -145,8 +163,8 @@
             this.TxtPrice.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TxtPrice.Name = "TxtPrice";
             this.TxtPrice.Size = new System.Drawing.Size(156, 23);
-            this.TxtPrice.TabIndex = 7;
-            this.TxtPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TxtPrice.TabIndex = 5;
+            this.TxtPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPrice_KeyPress);
             // 
             // label4
             // 
@@ -164,7 +182,7 @@
             this.CmbUnit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CmbUnit.Name = "CmbUnit";
             this.CmbUnit.Size = new System.Drawing.Size(156, 26);
-            this.CmbUnit.TabIndex = 5;
+            this.CmbUnit.TabIndex = 4;
             // 
             // label3
             // 
@@ -181,7 +199,7 @@
             this.TxtItemName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TxtItemName.Name = "TxtItemName";
             this.TxtItemName.Size = new System.Drawing.Size(287, 23);
-            this.TxtItemName.TabIndex = 3;
+            this.TxtItemName.TabIndex = 2;
             // 
             // label2
             // 
@@ -218,7 +236,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(628, 365);
+            this.tabPage2.Size = new System.Drawing.Size(628, 413);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "View Items";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -239,16 +257,16 @@
             this.DgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DgvList.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgvList.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvList.DefaultCellStyle = dataGridViewCellStyle3;
             this.DgvList.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.DgvList.Location = new System.Drawing.Point(3, 26);
+            this.DgvList.Location = new System.Drawing.Point(3, 74);
             this.DgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DgvList.Name = "DgvList";
             this.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -257,24 +275,6 @@
             this.DgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvList_CellDoubleClick);
             this.DgvList.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvList_RowPostPaint);
             this.DgvList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvList_KeyDown);
-            // 
-            // TxtDescription
-            // 
-            this.TxtDescription.Location = new System.Drawing.Point(201, 106);
-            this.TxtDescription.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.TxtDescription.Multiline = true;
-            this.TxtDescription.Name = "TxtDescription";
-            this.TxtDescription.Size = new System.Drawing.Size(287, 87);
-            this.TxtDescription.TabIndex = 13;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(53, 109);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(71, 18);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Description";
             // 
             // ItemMaster
             // 

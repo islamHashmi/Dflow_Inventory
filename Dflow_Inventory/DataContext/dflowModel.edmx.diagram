@@ -5,11 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="92d3f08cb58d40b788a9021cd9ef6f47" Name="Diagram1">
-        <EntityTypeShape EntityType="Inventory_DflowModel.Item_Master" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.Unit_Master" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.Item_Master" Width="1.5" PointX="2.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.Unit_Master" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
         <AssociationConnector Association="Inventory_DflowModel.FK_ItemMaster_UnitMaster" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.Customer_Master" Width="1.5" PointX="5.125" PointY="0.875" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.Supplier_Master" Width="1.5" PointX="7.125" PointY="0.875" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.Customer_Master" Width="1.5" PointX="4" PointY="0.5" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.Supplier_Master" Width="1.5" PointX="5.75" PointY="0.5" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.Designation" Width="1.5" PointX="11" PointY="0.5" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.PurchaseDetail" Width="1.5" PointX="9.25" PointY="0.5" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.PurchaseHeader" Width="1.5" PointX="7.5" PointY="0.5" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_PurchaseDetail_ItemMaster" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_PurchaseDetail_PurchaseHeader" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_PurchaseHeader_SupplierMaster" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.Employee" Width="1.5" PointX="0.5" PointY="3.5" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_Employee_Designation" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.Employment_Status" Width="1.5" PointX="7.5" PointY="4" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.Gender" Width="1.5" PointX="9.25" PointY="3.5" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.marital_Status" Width="1.5" PointX="11" PointY="3.375" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.Distributor_Master" Width="1.5" PointX="2.25" PointY="4.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

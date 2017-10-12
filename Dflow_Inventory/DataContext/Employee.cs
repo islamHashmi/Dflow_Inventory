@@ -12,32 +12,32 @@ namespace Dflow_Inventory.DataContext
     using System;
     using System.Collections.Generic;
     
-    public partial class Supplier_Master
+    public partial class Employee
     {
-        public Supplier_Master()
-        {
-            this.PurchaseHeaders = new HashSet<PurchaseHeader>();
-        }
-    
-        public int supplierId { get; set; }
-        public string supplierCode { get; set; }
-        public string supplierName { get; set; }
+        public int employeeId { get; set; }
+        public string employeeCode { get; set; }
+        public string firstName { get; set; }
+        public string middleName { get; set; }
+        public string lastName { get; set; }
         public string address { get; set; }
         public string city { get; set; }
         public string state { get; set; }
         public string pincode { get; set; }
-        public string officeNo { get; set; }
         public string mobileNo { get; set; }
-        public string faxNo { get; set; }
+        public Nullable<System.DateTime> dateOfBirth { get; set; }
+        public string sex { get; set; }
+        public Nullable<int> designationId { get; set; }
+        public Nullable<System.DateTime> hireDate { get; set; }
+        public Nullable<decimal> salary { get; set; }
+        public string maritalStatus { get; set; }
         public string emailId { get; set; }
-        public string gstNo { get; set; }
-        public string panNo { get; set; }
+        public string empStatus { get; set; }
         public bool active { get; set; }
         public int entryBy { get; set; }
-        public Nullable<System.DateTime> entryDate { get; set; }
+        public System.DateTime entryDate { get; set; }
         public Nullable<int> updatedBy { get; set; }
         public Nullable<System.DateTime> updatedDate { get; set; }
     
-        public virtual ICollection<PurchaseHeader> PurchaseHeaders { get; set; }
+        public virtual Designation Designation { get; set; }
     }
 }
