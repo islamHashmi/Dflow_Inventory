@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dtpOrderDate = new System.Windows.Forms.DateTimePicker();
@@ -44,12 +44,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.DgvItems = new System.Windows.Forms.DataGridView();
-            this.Col_Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LstVendor = new System.Windows.Forms.ListBox();
             this.TxtPONumber = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -60,6 +54,13 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.Link_shorcut = new System.Windows.Forms.LinkLabel();
             this.DgvList = new System.Windows.Forms.DataGridView();
+            this.Col_Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col_Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col_Rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.purchaseDetailId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -79,7 +80,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(869, 494);
+            this.tabControl1.Size = new System.Drawing.Size(842, 494);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -103,7 +104,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage1.Size = new System.Drawing.Size(861, 460);
+            this.tabPage1.Size = new System.Drawing.Size(834, 460);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Add Purchase Order";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -112,7 +113,7 @@
             // 
             this.dtpOrderDate.CustomFormat = "dd/MM/yyyy";
             this.dtpOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpOrderDate.Location = new System.Drawing.Point(715, 46);
+            this.dtpOrderDate.Location = new System.Drawing.Point(685, 46);
             this.dtpOrderDate.Name = "dtpOrderDate";
             this.dtpOrderDate.Size = new System.Drawing.Size(103, 23);
             this.dtpOrderDate.TabIndex = 24;
@@ -120,7 +121,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(660, 49);
+            this.label5.Location = new System.Drawing.Point(634, 50);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(34, 18);
             this.label5.TabIndex = 23;
@@ -128,10 +129,9 @@
             // 
             // TxtOrderNo
             // 
-            this.TxtOrderNo.Location = new System.Drawing.Point(535, 46);
+            this.TxtOrderNo.Location = new System.Drawing.Point(514, 46);
             this.TxtOrderNo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TxtOrderNo.Name = "TxtOrderNo";
-            this.TxtOrderNo.ReadOnly = true;
             this.TxtOrderNo.Size = new System.Drawing.Size(105, 23);
             this.TxtOrderNo.TabIndex = 22;
             // 
@@ -140,14 +140,14 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(437, 49);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(81, 18);
+            this.label6.Size = new System.Drawing.Size(61, 18);
             this.label6.TabIndex = 21;
-            this.label6.Text = "P.O. Number";
+            this.label6.Text = "Oder No.";
             // 
             // lblVendorId
             // 
             this.lblVendorId.AutoSize = true;
-            this.lblVendorId.Location = new System.Drawing.Point(645, 7);
+            this.lblVendorId.Location = new System.Drawing.Point(622, 7);
             this.lblVendorId.Name = "lblVendorId";
             this.lblVendorId.Size = new System.Drawing.Size(40, 18);
             this.lblVendorId.TabIndex = 20;
@@ -191,7 +191,8 @@
             this.Col_Rate,
             this.Col_Quantity,
             this.Col_Amount,
-            this.itemId});
+            this.itemId,
+            this.purchaseDetailId});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -210,6 +211,131 @@
             this.DgvItems.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvItems_CellEndEdit);
             this.DgvItems.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DgvItems_EditingControlShowing);
             this.DgvItems.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvItems_RowPostPaint);
+            // 
+            // LstVendor
+            // 
+            this.LstVendor.FormattingEnabled = true;
+            this.LstVendor.ItemHeight = 18;
+            this.LstVendor.Location = new System.Drawing.Point(668, 7);
+            this.LstVendor.Name = "LstVendor";
+            this.LstVendor.Size = new System.Drawing.Size(120, 22);
+            this.LstVendor.TabIndex = 16;
+            this.LstVendor.Visible = false;
+            this.LstVendor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LstVendor_KeyDown);
+            this.LstVendor.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LstVendor_MouseDoubleClick);
+            // 
+            // TxtPONumber
+            // 
+            this.TxtPONumber.Location = new System.Drawing.Point(145, 46);
+            this.TxtPONumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TxtPONumber.Name = "TxtPONumber";
+            this.TxtPONumber.ReadOnly = true;
+            this.TxtPONumber.Size = new System.Drawing.Size(105, 23);
+            this.TxtPONumber.TabIndex = 15;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(33, 49);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(81, 18);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "P.O. Number";
+            // 
+            // BtnCancel
+            // 
+            this.BtnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(87)))), ((int)(((byte)(51)))));
+            this.BtnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
+            this.BtnCancel.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCancel.Location = new System.Drawing.Point(117, 405);
+            this.BtnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.Size = new System.Drawing.Size(78, 30);
+            this.BtnCancel.TabIndex = 11;
+            this.BtnCancel.Text = "Cancel";
+            this.BtnCancel.UseVisualStyleBackColor = false;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
+            // BtnSave
+            // 
+            this.BtnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
+            this.BtnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
+            this.BtnSave.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSave.Location = new System.Drawing.Point(39, 405);
+            this.BtnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.BtnSave.Name = "BtnSave";
+            this.BtnSave.Size = new System.Drawing.Size(72, 30);
+            this.BtnSave.TabIndex = 10;
+            this.BtnSave.Text = "Save";
+            this.BtnSave.UseVisualStyleBackColor = false;
+            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            // 
+            // TxtVendorName
+            // 
+            this.TxtVendorName.Location = new System.Drawing.Point(145, 77);
+            this.TxtVendorName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TxtVendorName.Name = "TxtVendorName";
+            this.TxtVendorName.Size = new System.Drawing.Size(313, 23);
+            this.TxtVendorName.TabIndex = 3;
+            this.TxtVendorName.TextChanged += new System.EventHandler(this.TxtVendorName_TextChanged);
+            this.TxtVendorName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtVendorName_KeyDown);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(33, 80);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(88, 18);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Supplier Name";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.Link_shorcut);
+            this.tabPage2.Controls.Add(this.DgvList);
+            this.tabPage2.Location = new System.Drawing.Point(4, 30);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPage2.Size = new System.Drawing.Size(834, 460);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "View Purchase Order";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // Link_shorcut
+            // 
+            this.Link_shorcut.AutoSize = true;
+            this.Link_shorcut.Dock = System.Windows.Forms.DockStyle.Right;
+            this.Link_shorcut.Location = new System.Drawing.Point(739, 4);
+            this.Link_shorcut.Name = "Link_shorcut";
+            this.Link_shorcut.Size = new System.Drawing.Size(92, 18);
+            this.Link_shorcut.TabIndex = 1;
+            this.Link_shorcut.TabStop = true;
+            this.Link_shorcut.Text = "Show Shortcuts";
+            // 
+            // DgvList
+            // 
+            this.DgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DgvList.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvList.DefaultCellStyle = dataGridViewCellStyle5;
+            this.DgvList.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.DgvList.Location = new System.Drawing.Point(3, 26);
+            this.DgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.DgvList.Name = "DgvList";
+            this.DgvList.ReadOnly = true;
+            this.DgvList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DgvList.Size = new System.Drawing.Size(828, 430);
+            this.DgvList.TabIndex = 0;
+            this.DgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvList_CellDoubleClick);
             // 
             // Col_Item
             // 
@@ -261,136 +387,22 @@
             // 
             // itemId
             // 
+            this.itemId.Frozen = true;
             this.itemId.HeaderText = "ItemId";
             this.itemId.Name = "itemId";
             this.itemId.Visible = false;
             // 
-            // LstVendor
+            // purchaseDetailId
             // 
-            this.LstVendor.FormattingEnabled = true;
-            this.LstVendor.ItemHeight = 18;
-            this.LstVendor.Location = new System.Drawing.Point(691, 7);
-            this.LstVendor.Name = "LstVendor";
-            this.LstVendor.Size = new System.Drawing.Size(120, 22);
-            this.LstVendor.TabIndex = 16;
-            this.LstVendor.Visible = false;
-            this.LstVendor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LstVendor_KeyDown);
-            // 
-            // TxtPONumber
-            // 
-            this.TxtPONumber.Location = new System.Drawing.Point(145, 46);
-            this.TxtPONumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.TxtPONumber.Name = "TxtPONumber";
-            this.TxtPONumber.ReadOnly = true;
-            this.TxtPONumber.Size = new System.Drawing.Size(105, 23);
-            this.TxtPONumber.TabIndex = 15;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 49);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 18);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "P.O. Number";
-            // 
-            // BtnCancel
-            // 
-            this.BtnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(87)))), ((int)(((byte)(51)))));
-            this.BtnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
-            this.BtnCancel.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCancel.Location = new System.Drawing.Point(117, 405);
-            this.BtnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.BtnCancel.Name = "BtnCancel";
-            this.BtnCancel.Size = new System.Drawing.Size(78, 30);
-            this.BtnCancel.TabIndex = 11;
-            this.BtnCancel.Text = "Cancel";
-            this.BtnCancel.UseVisualStyleBackColor = false;
-            // 
-            // BtnSave
-            // 
-            this.BtnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
-            this.BtnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
-            this.BtnSave.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSave.Location = new System.Drawing.Point(39, 405);
-            this.BtnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.BtnSave.Name = "BtnSave";
-            this.BtnSave.Size = new System.Drawing.Size(72, 30);
-            this.BtnSave.TabIndex = 10;
-            this.BtnSave.Text = "Save";
-            this.BtnSave.UseVisualStyleBackColor = false;
-            // 
-            // TxtVendorName
-            // 
-            this.TxtVendorName.Location = new System.Drawing.Point(145, 77);
-            this.TxtVendorName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.TxtVendorName.Name = "TxtVendorName";
-            this.TxtVendorName.Size = new System.Drawing.Size(313, 23);
-            this.TxtVendorName.TabIndex = 3;
-            this.TxtVendorName.TextChanged += new System.EventHandler(this.TxtVendorName_TextChanged);
-            this.TxtVendorName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtVendorName_KeyDown);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 80);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 18);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Supplier Name";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.Link_shorcut);
-            this.tabPage2.Controls.Add(this.DgvList);
-            this.tabPage2.Location = new System.Drawing.Point(4, 30);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(1042, 460);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "View Purchase Order";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // Link_shorcut
-            // 
-            this.Link_shorcut.AutoSize = true;
-            this.Link_shorcut.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Link_shorcut.Location = new System.Drawing.Point(947, 4);
-            this.Link_shorcut.Name = "Link_shorcut";
-            this.Link_shorcut.Size = new System.Drawing.Size(92, 18);
-            this.Link_shorcut.TabIndex = 1;
-            this.Link_shorcut.TabStop = true;
-            this.Link_shorcut.Text = "Show Shortcuts";
-            // 
-            // DgvList
-            // 
-            this.DgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DgvList.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgvList.DefaultCellStyle = dataGridViewCellStyle5;
-            this.DgvList.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.DgvList.Location = new System.Drawing.Point(3, 26);
-            this.DgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.DgvList.Name = "DgvList";
-            this.DgvList.ReadOnly = true;
-            this.DgvList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvList.Size = new System.Drawing.Size(1036, 430);
-            this.DgvList.TabIndex = 0;
+            this.purchaseDetailId.HeaderText = "purchaseDetailId";
+            this.purchaseDetailId.Name = "purchaseDetailId";
+            this.purchaseDetailId.Visible = false;
             // 
             // PurchaseOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(869, 494);
+            this.ClientSize = new System.Drawing.Size(842, 494);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -424,12 +436,6 @@
         private System.Windows.Forms.LinkLabel Link_shorcut;
         private System.Windows.Forms.DataGridView DgvList;
         private System.Windows.Forms.DataGridView DgvItems;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Item;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Unit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Rate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Quantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Amount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn itemId;
         private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtpOrderDate;
@@ -437,5 +443,12 @@
         private System.Windows.Forms.TextBox TxtOrderNo;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblVendorId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Item;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Unit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Rate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn purchaseDetailId;
     }
 }

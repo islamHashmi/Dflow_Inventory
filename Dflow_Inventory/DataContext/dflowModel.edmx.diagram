@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="Inventory_DflowModel.Customer_Master" Width="1.5" PointX="4" PointY="0.5" />
         <EntityTypeShape EntityType="Inventory_DflowModel.Supplier_Master" Width="1.5" PointX="5.75" PointY="0.5" />
         <EntityTypeShape EntityType="Inventory_DflowModel.Designation" Width="1.5" PointX="11" PointY="0.5" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.PurchaseDetail" Width="1.5" PointX="9.25" PointY="0.5" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.PurchaseDetail" Width="1.5" PointX="7.75" PointY="0.5" />
         <AssociationConnector Association="Inventory_DflowModel.FK_PurchaseDetail_ItemMaster" />
         <EntityTypeShape EntityType="Inventory_DflowModel.Employee" Width="1.5" PointX="0.5" PointY="3.5" />
         <AssociationConnector Association="Inventory_DflowModel.FK_Employee_Designation" />
