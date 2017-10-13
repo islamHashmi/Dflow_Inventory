@@ -31,11 +31,12 @@ namespace Dflow_Inventory.DataContext
         public DbSet<Supplier_Master> Supplier_Master { get; set; }
         public DbSet<Designation> Designations { get; set; }
         public DbSet<PurchaseDetail> PurchaseDetails { get; set; }
-        public DbSet<PurchaseHeader> PurchaseHeaders { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Employment_Status> Employment_Status { get; set; }
         public DbSet<Gender> Genders { get; set; }
         public DbSet<marital_Status> marital_Status { get; set; }
         public DbSet<Distributor_Master> Distributor_Master { get; set; }
+        public DbSet<Vendor_Master> Vendor_Master { get; set; }
+        public DbSet<PurchaseHeader> PurchaseHeaders { get; set; }
     }
 }

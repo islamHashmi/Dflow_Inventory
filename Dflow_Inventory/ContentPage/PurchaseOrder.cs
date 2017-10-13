@@ -11,11 +11,13 @@ namespace Dflow_Inventory.ContentPage
     {
         private Inventory_DflowEntities db;
 
-        private int _purchaseOrderId = 0;
+        private int _purchaseId = 0;
 
         public PurchaseOrder()
         {
             InitializeComponent();
+
+            Autogenerate_PoNumber();
         }
 
         private void DgvItems_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -132,7 +134,7 @@ namespace Dflow_Inventory.ContentPage
         {
             try
             {
-                if(e.ColumnIndex == 0)
+                if (e.ColumnIndex == 0)
                 {
                     string itemName = Convert.ToString(DgvItems[e.ColumnIndex, e.RowIndex].Value);
 
@@ -188,34 +190,32 @@ namespace Dflow_Inventory.ContentPage
             DgvItems["Col_Amount", RowIndex].Value = _amount;
         }
 
-        private void TxtSupplierName_TextChanged(object sender, EventArgs e)
+        private void TxtVendorName_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                LstSupplier.Items.Clear();
-
                 using (db = new Inventory_DflowEntities())
                 {
-                    var suppliers = db.Supplier_Master
+                    var Vendors = db.Vendor_Master
                                     .Select(m => new
                                     {
-                                        supplierId = m.supplierId,
-                                        supplierName = m.supplierName,
+                                        vendorId = m.vendorId,
+                                        vendorName = m.vendorName,
                                         active = m.active
                                     })
-                                    .Where(m => m.active == true && m.supplierName.Contains(TxtSupplierName.Text.Trim()))
+                                    .Where(m => m.active == true && m.vendorName.Contains(TxtVendorName.Text.Trim()))
                                     .ToList();
 
-                    if(suppliers != null)
+                    if (Vendors != null)
                     {
-                        foreach(var s in suppliers)
-                        {
-                            LstSupplier.Items.Add(s.supplierName);
-                        }
+                        LstVendor.DataSource = Vendors;
+                        LstVendor.DisplayMember = "vendorName";
+                        LstVendor.ValueMember = "vendorId";
+                        LstVendor.SelectedIndex = -1;
                     }
                 }
 
-                LstSupplier_Show();
+                LstVendor_Show();
             }
             catch (Exception ex)
             {
@@ -223,25 +223,25 @@ namespace Dflow_Inventory.ContentPage
             }
         }
 
-        private void LstSupplier_Show()
+        private void LstVendor_Show()
         {
-            LstSupplier.Show();
-            LstSupplier.BringToFront();
-            LstSupplier.Location = new Point(TxtSupplierName.Location.X, TxtSupplierName.Location.Y + 25);
-            LstSupplier.Width = TxtSupplierName.Width;
-            LstSupplier.Height = 200;
+            LstVendor.Show();
+            LstVendor.BringToFront();
+            LstVendor.Location = new Point(TxtVendorName.Location.X, TxtVendorName.Location.Y + 25);
+            LstVendor.Width = TxtVendorName.Width;
+            LstVendor.Height = 200;
         }
 
-        private void TxtSupplierName_KeyDown(object sender, KeyEventArgs e)
+        private void TxtVendorName_KeyDown(object sender, KeyEventArgs e)
         {
             try
             {
-                if(e.KeyCode == Keys.Down)
+                if (e.KeyCode == Keys.Down)
                 {
-                    LstSupplier_Show();
+                    LstVendor_Show();
 
-                    LstSupplier.Focus();
-                }                
+                    LstVendor.Focus();
+                }
             }
             catch (Exception ex)
             {
@@ -249,16 +249,84 @@ namespace Dflow_Inventory.ContentPage
             }
         }
 
-        private void LstSupplier_KeyDown(object sender, KeyEventArgs e)
+        private void LstVendor_KeyDown(object sender, KeyEventArgs e)
         {
             try
             {
-                if(e.KeyCode == Keys.Enter)
+                if (e.KeyCode == Keys.Enter)
                 {
-                    TxtSupplierName.Text = Convert.ToString(LstSupplier.SelectedItem);
+                    string referredById = LstVendor.SelectedValue.ToString();
 
-                    LstSupplier.Hide();
-                }                
+                    TxtVendorName.Text = LstVendor.Text;
+
+                    lblVendorId.Text = referredById;
+
+                    LstVendor.Hide();
+
+                    TxtVendorName.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void LstVendor_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                string referredById = LstVendor.SelectedValue.ToString();
+
+                TxtVendorName.Text = LstVendor.Text;
+
+                lblVendorId.Text = referredById;
+
+                LstVendor.Hide();
+
+                TxtVendorName.Focus();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void LstVendor_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                LstVendor.Hide();
+                TxtVendorName.Focus();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void TxtVendorName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(TxtVendorName.Text))
+                {
+                    using (db = new Inventory_DflowEntities())
+                    {
+                        int _vendorId = 0;
+
+                        int.TryParse(lblVendorId.Text, out _vendorId);
+
+                        var vendor = db.Vendor_Master.FirstOrDefault(x => x.vendorId == _vendorId);
+
+                        if (vendor == null)
+                        {
+                            TxtVendorName.SelectAll();
+                            MessageBox.Show("'" + TxtVendorName.Text + "' not found in vendor master", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            e.Cancel = true;
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -270,13 +338,99 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var poNumber = db.Item_Master.Max(m => m.itemCode);
+                var poNumber = db.PurchaseHeaders.Max(m => m.poNumber);
 
                 int _poNumber = 0;
 
                 int.TryParse(poNumber, out _poNumber);
 
                 TxtPONumber.Text = string.Format("{0}", _poNumber + 1);
+            }
+        }
+
+        private void Get_Data()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Clear_Controls()
+        {
+            _purchaseId = 0;
+
+            Autogenerate_PoNumber();
+
+            TxtVendorName.Text = string.Empty;
+            TxtOrderNo.Text = string.Empty;
+
+            DgvItems.Rows.Clear();
+
+            lblVendorId.Text = string.Empty;
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (TxtVendorName.Text == string.Empty)
+                {
+                    MessageBox.Show("Vendor Name is mandatory.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                using (db = new Inventory_DflowEntities())
+                {
+                    PurchaseHeader ph = new PurchaseHeader();
+
+                    if (_purchaseId == 0)
+                    {
+                        db.PurchaseHeaders.Add(ph);
+
+                        ph.poNumber = TxtPONumber.Text.Trim();
+                        ph.entryBy = SessionHelper.UserId;
+                        ph.entryDate = DateTime.Now;
+                    }
+                    else
+                    {
+                        ph = db.PurchaseHeaders.FirstOrDefault(m => m.purchaseId == _purchaseId);
+
+                        ph.updatedBy = SessionHelper.UserId;
+                        ph.updatedDate = DateTime.Now;
+                    }
+
+                    ph.purchaseDate = (DateTime)CommanMethods.ConvertDate(dtpDate.Text);
+                    ph.orderNumber = TxtOrderNo.Text.Trim();
+                    ph.orderDate = CommanMethods.ConvertDate(dtpOrderDate.Text);
+
+                    int _vendorId = 0;
+                    int.TryParse(lblVendorId.Text, out _vendorId);
+
+                    //ph.s
+
+
+
+
+                    db.SaveChanges();
+
+                    Clear_Controls();
+
+                    Get_Data();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Clear_Controls();
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
     }

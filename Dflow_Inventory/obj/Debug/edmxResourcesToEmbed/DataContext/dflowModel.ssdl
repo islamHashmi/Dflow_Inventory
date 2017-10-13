@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Inventory_DflowModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CustomerMaster">
+    <Key>
+      <PropertyRef Name="customerId" />
+    </Key>
+    <Property Name="customerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customerCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="customerName" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="250" />
+    <Property Name="city" Type="varchar" MaxLength="100" />
+    <Property Name="state" Type="varchar" MaxLength="50" />
+    <Property Name="pincode" Type="char" MaxLength="6" />
+    <Property Name="officeNo" Type="char" MaxLength="10" />
+    <Property Name="mobileNo" Type="char" MaxLength="10" />
+    <Property Name="faxNo" Type="char" MaxLength="10" />
+    <Property Name="emailId" Type="varchar" MaxLength="256" />
+    <Property Name="gstNo" Type="varchar" MaxLength="50" />
+    <Property Name="panNo" Type="varchar" MaxLength="50" />
+    <Property Name="active" Type="bit" Nullable="false" />
+    <Property Name="entryBy" Type="int" Nullable="false" />
+    <Property Name="entryDate" Type="datetime" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Designation">
+    <Key>
+      <PropertyRef Name="designationId" />
+    </Key>
+    <Property Name="designationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="designationName" Type="varchar" MaxLength="50" />
+    <Property Name="active" Type="bit" Nullable="false" />
+    <Property Name="entryBy" Type="int" Nullable="false" />
+    <Property Name="entryDate" Type="datetime" Nullable="false" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DistributorMaster">
+    <Key>
+      <PropertyRef Name="distributorId" />
+    </Key>
+    <Property Name="distributorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="distributorCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="distributorName" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="250" />
+    <Property Name="city" Type="varchar" MaxLength="100" />
+    <Property Name="state" Type="varchar" MaxLength="50" />
+    <Property Name="pincode" Type="char" MaxLength="6" />
+    <Property Name="officeNo" Type="char" MaxLength="10" />
+    <Property Name="mobileNo" Type="char" MaxLength="10" />
+    <Property Name="faxNo" Type="char" MaxLength="10" />
+    <Property Name="emailId" Type="varchar" MaxLength="256" />
+    <Property Name="gstNo" Type="varchar" MaxLength="50" />
+    <Property Name="panNo" Type="varchar" MaxLength="50" />
+    <Property Name="active" Type="bit" Nullable="false" />
+    <Property Name="entryBy" Type="int" Nullable="false" />
+    <Property Name="entryDate" Type="datetime" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="employeeId" />
+    </Key>
+    <Property Name="employeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="employeeCode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="middleName" Type="varchar" MaxLength="50" />
+    <Property Name="lastName" Type="varchar" MaxLength="50" />
+    <Property Name="address" Type="varchar" MaxLength="250" />
+    <Property Name="city" Type="varchar" MaxLength="50" />
+    <Property Name="state" Type="varchar" MaxLength="50" />
+    <Property Name="pincode" Type="char" MaxLength="6" Nullable="false" />
+    <Property Name="mobileNo" Type="char" MaxLength="10" />
+    <Property Name="dateOfBirth" Type="date" />
+    <Property Name="sex" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="designationId" Type="int" />
+    <Property Name="hireDate" Type="date" />
+    <Property Name="salary" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="maritalStatus" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="emailId" Type="varchar" MaxLength="256" />
+    <Property Name="empStatus" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+    <Property Name="entryBy" Type="int" Nullable="false" />
+    <Property Name="entryDate" Type="datetime" Nullable="false" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedDate" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="EmploymentStatus">
+    <Key>
+      <PropertyRef Name="empStatusCode" />
+      <PropertyRef Name="empStatusDesc" />
+      <PropertyRef Name="active" />
+    </Key>
+    <Property Name="empStatusCode" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="empStatusDesc" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Inventory_Dflow.dbo.Gender' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="genderCode" />
+      <PropertyRef Name="genderDescription" />
+    </Key>
+    <Property Name="genderCode" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="genderDescription" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ItemMaster">
+    <Key>
+      <PropertyRef Name="itemId" />
+    </Key>
+    <Property Name="itemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="itemCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="itemName" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="itemDescription" Type="varchar" MaxLength="300" />
+    <Property Name="unitId" Type="int" />
+    <Property Name="sellingPrice" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="openingStock" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="active" Type="bit" Nullable="false" />
+    <Property Name="entryBy" Type="int" Nullable="false" />
+    <Property Name="entryDate" Type="datetime" Nullable="false" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedDate" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Inventory_Dflow.dbo.maritalStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="maritalStatus">
+    <Key>
+      <PropertyRef Name="maritalStatusCode" />
+      <PropertyRef Name="maritalStatusDesc" />
+    </Key>
+    <Property Name="maritalStatusCode" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="maritalStatusDesc" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PurchaseDetail">
+    <Key>
+      <PropertyRef Name="purchaseDetailId" />
+    </Key>
+    <Property Name="purchaseDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="purhcaseId" Type="int" Nullable="false" />
+    <Property Name="itemId" Type="int" Nullable="false" />
+    <Property Name="unit" Type="varchar" MaxLength="50" />
+    <Property Name="rate" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="quantity" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="PurchaseHeader">
+    <Key>
+      <PropertyRef Name="purchaseId" />
+    </Key>
+    <Property Name="purchaseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="poNumber" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="purchaseDate" Type="date" Nullable="false" />
+    <Property Name="orderNumber" Type="varchar" MaxLength="20" />
+    <Property Name="orderDate" Type="date" />
+    <Property Name="vendorId" Type="int" Nullable="false" />
+    <Property Name="totalQuantity" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="totalAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="entryBy" Type="int" Nullable="false" />
+    <Property Name="entryDate" Type="datetime" Nullable="false" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SupplierMaster">
+    <Key>
+      <PropertyRef Name="supplierId" />
+    </Key>
+    <Property Name="supplierId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="supplierCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="supplierName" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="250" />
+    <Property Name="city" Type="varchar" MaxLength="100" />
+    <Property Name="state" Type="varchar" MaxLength="50" />
+    <Property Name="pincode" Type="char" MaxLength="6" />
+    <Property Name="officeNo" Type="char" MaxLength="10" />
+    <Property Name="mobileNo" Type="char" MaxLength="10" />
+    <Property Name="faxNo" Type="char" MaxLength="10" />
+    <Property Name="emailId" Type="varchar" MaxLength="256" />
+    <Property Name="gstNo" Type="varchar" MaxLength="50" />
+    <Property Name="panNo" Type="varchar" MaxLength="50" />
+    <Property Name="active" Type="bit" Nullable="false" />
+    <Property Name="entryBy" Type="int" Nullable="false" />
+    <Property Name="entryDate" Type="datetime" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UnitMaster">
+    <Key>
+      <PropertyRef Name="unitId" />
+    </Key>
+    <Property Name="unitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="unitName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="unitCode" Type="varchar" MaxLength="50" />
+    <Property Name="active" Type="bit" Nullable="false" />
+    <Property Name="entryBy" Type="int" Nullable="false" />
+    <Property Name="entryDate" Type="datetime" Nullable="false" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="VendorMaster">
+    <Key>
+      <PropertyRef Name="vendorId" />
+    </Key>
+    <Property Name="vendorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="vendorCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="vendorName" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="250" />
+    <Property Name="city" Type="varchar" MaxLength="100" />
+    <Property Name="state" Type="varchar" MaxLength="50" />
+    <Property Name="pincode" Type="char" MaxLength="6" />
+    <Property Name="officeNo" Type="char" MaxLength="10" />
+    <Property Name="mobileNo" Type="char" MaxLength="10" />
+    <Property Name="faxNo" Type="char" MaxLength="10" />
+    <Property Name="emailId" Type="varchar" MaxLength="256" />
+    <Property Name="gstNo" Type="varchar" MaxLength="50" />
+    <Property Name="panNo" Type="varchar" MaxLength="50" />
+    <Property Name="active" Type="bit" Nullable="false" />
+    <Property Name="entryBy" Type="int" Nullable="false" />
+    <Property Name="entryDate" Type="datetime" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedDate" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_Employee_Designation">
+    <End Role="Designation" Type="Self.Designation" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Designation">
+        <PropertyRef Name="designationId" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="designationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemMaster_UnitMaster">
+    <End Role="UnitMaster" Type="Self.UnitMaster" Multiplicity="0..1" />
+    <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UnitMaster">
+        <PropertyRef Name="unitId" />
+      </Principal>
+      <Dependent Role="ItemMaster">
+        <PropertyRef Name="unitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchaseDetail_ItemMaster">
+    <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="1" />
+    <End Role="PurchaseDetail" Type="Self.PurchaseDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItemMaster">
+        <PropertyRef Name="itemId" />
+      </Principal>
+      <Dependent Role="PurchaseDetail">
+        <PropertyRef Name="itemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchaseDetail_PurchaseHeader">
+    <End Role="PurchaseHeader" Type="Self.PurchaseHeader" Multiplicity="1" />
+    <End Role="PurchaseDetail" Type="Self.PurchaseDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PurchaseHeader">
+        <PropertyRef Name="purchaseId" />
+      </Principal>
+      <Dependent Role="PurchaseDetail">
+        <PropertyRef Name="purhcaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchaseHeader_VendorMaster">
+    <End Role="VendorMaster" Type="Self.VendorMaster" Multiplicity="1" />
+    <End Role="PurchaseHeader" Type="Self.PurchaseHeader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VendorMaster">
+        <PropertyRef Name="vendorId" />
+      </Principal>
+      <Dependent Role="PurchaseHeader">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Inventory_DflowModelStoreContainer">
+    <EntitySet Name="CustomerMaster" EntityType="Self.CustomerMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DistributorMaster" EntityType="Self.DistributorMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ItemMaster" EntityType="Self.ItemMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PurchaseDetail" EntityType="Self.PurchaseDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PurchaseHeader" EntityType="Self.PurchaseHeader" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SupplierMaster" EntityType="Self.SupplierMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UnitMaster" EntityType="Self.UnitMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VendorMaster" EntityType="Self.VendorMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmploymentStatus" EntityType="Self.EmploymentStatus" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[EmploymentStatus].[empStatusCode] AS [empStatusCode], 
+[EmploymentStatus].[empStatusDesc] AS [empStatusDesc], 
+[EmploymentStatus].[active] AS [active]
+FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Gender" EntityType="Self.Gender" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[Gender].[genderCode] AS [genderCode], 
+[Gender].[genderDescription] AS [genderDescription]
+FROM [dbo].[Gender] AS [Gender]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="maritalStatus" EntityType="Self.maritalStatus" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[maritalStatus].[maritalStatusCode] AS [maritalStatusCode], 
+[maritalStatus].[maritalStatusDesc] AS [maritalStatusDesc]
+FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Employee_Designation" Association="Self.FK_Employee_Designation">
+      <End Role="Designation" EntitySet="Designation" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemMaster_UnitMaster" Association="Self.FK_ItemMaster_UnitMaster">
+      <End Role="UnitMaster" EntitySet="UnitMaster" />
+      <End Role="ItemMaster" EntitySet="ItemMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchaseDetail_ItemMaster" Association="Self.FK_PurchaseDetail_ItemMaster">
+      <End Role="ItemMaster" EntitySet="ItemMaster" />
+      <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchaseDetail_PurchaseHeader" Association="Self.FK_PurchaseDetail_PurchaseHeader">
+      <End Role="PurchaseHeader" EntitySet="PurchaseHeader" />
+      <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchaseHeader_VendorMaster" Association="Self.FK_PurchaseHeader_VendorMaster">
+      <End Role="VendorMaster" EntitySet="VendorMaster" />
+      <End Role="PurchaseHeader" EntitySet="PurchaseHeader" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

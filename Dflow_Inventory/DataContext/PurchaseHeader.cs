@@ -22,15 +22,17 @@ namespace Dflow_Inventory.DataContext
         public int purchaseId { get; set; }
         public string poNumber { get; set; }
         public System.DateTime purchaseDate { get; set; }
-        public int supplierId { get; set; }
+        public string orderNumber { get; set; }
+        public Nullable<System.DateTime> orderDate { get; set; }
+        public int vendorId { get; set; }
         public Nullable<decimal> totalQuantity { get; set; }
         public Nullable<decimal> totalAmount { get; set; }
         public int entryBy { get; set; }
         public System.DateTime entryDate { get; set; }
-        public Nullable<int> updateBy { get; set; }
+        public Nullable<int> updatedBy { get; set; }
         public Nullable<System.DateTime> updatedDate { get; set; }
     
         public virtual ICollection<PurchaseDetail> PurchaseDetails { get; set; }
-        public virtual Supplier_Master SupplierMaster { get; set; }
+        public virtual Vendor_Master VendorMaster { get; set; }
     }
 }

@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Inventory_DflowModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Item_Master">
+    <Key>
+      <PropertyRef Name="itemId" />
+    </Key>
+    <Property Name="itemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="itemName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="unitId" Type="Int32" />
+    <Property Name="sellingPrice" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="openingStock" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="active" Type="Boolean" Nullable="false" />
+    <Property Name="entryBy" Type="Int32" Nullable="false" />
+    <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedBy" Type="Int32" />
+    <Property Name="updatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="UnitMaster" Relationship="Self.FK_ItemMaster_UnitMaster" FromRole="ItemMaster" ToRole="UnitMaster" />
+    <Property Name="itemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="itemDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PurchaseDetails" Relationship="Inventory_DflowModel.FK_PurchaseDetail_ItemMaster" FromRole="Item_Master" ToRole="PurchaseDetail" />
+  </EntityType>
+  <EntityType Name="Unit_Master">
+    <Key>
+      <PropertyRef Name="unitId" />
+    </Key>
+    <Property Name="unitId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="unitName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="active" Type="Boolean" Nullable="false" />
+    <Property Name="entryBy" Type="Int32" Nullable="false" />
+    <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedBy" Type="Int32" />
+    <Property Name="updatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ItemMasters" Relationship="Self.FK_ItemMaster_UnitMaster" FromRole="UnitMaster" ToRole="ItemMaster" />
+    <Property Name="unitCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_ItemMaster_UnitMaster">
+    <End Role="UnitMaster" Type="Inventory_DflowModel.Unit_Master" Multiplicity="0..1" />
+    <End Role="ItemMaster" Type="Inventory_DflowModel.Item_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UnitMaster">
+        <PropertyRef Name="unitId" />
+      </Principal>
+      <Dependent Role="ItemMaster">
+        <PropertyRef Name="unitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Inventory_DflowEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Item_Master" EntityType="Inventory_DflowModel.Item_Master" />
+    <EntitySet Name="Unit_Master" EntityType="Inventory_DflowModel.Unit_Master" />
+    <AssociationSet Name="FK_ItemMaster_UnitMaster" Association="Self.FK_ItemMaster_UnitMaster">
+      <End Role="UnitMaster" EntitySet="Unit_Master" />
+      <End Role="ItemMaster" EntitySet="Item_Master" />
+    </AssociationSet>
+    <EntitySet Name="Customer_Master" EntityType="Inventory_DflowModel.Customer_Master" />
+    <EntitySet Name="Supplier_Master" EntityType="Inventory_DflowModel.Supplier_Master" />
+    <EntitySet Name="Designations" EntityType="Inventory_DflowModel.Designation" />
+    <EntitySet Name="PurchaseDetails" EntityType="Inventory_DflowModel.PurchaseDetail" />
+    <AssociationSet Name="FK_PurchaseDetail_ItemMaster" Association="Inventory_DflowModel.FK_PurchaseDetail_ItemMaster">
+      <End Role="Item_Master" EntitySet="Item_Master" />
+      <End Role="PurchaseDetail" EntitySet="PurchaseDetails" />
+    </AssociationSet>
+    <EntitySet Name="Employees" EntityType="Inventory_DflowModel.Employee" />
+    <AssociationSet Name="FK_Employee_Designation" Association="Inventory_DflowModel.FK_Employee_Designation">
+      <End Role="Designation" EntitySet="Designations" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <EntitySet Name="Employment_Status" EntityType="Inventory_DflowModel.Employment_Status" />
+    <EntitySet Name="Genders" EntityType="Inventory_DflowModel.Gender" />
+    <EntitySet Name="marital_Status" EntityType="Inventory_DflowModel.marital_Status" />
+    <EntitySet Name="Distributor_Master" EntityType="Inventory_DflowModel.Distributor_Master" />
+    <EntitySet Name="Vendor_Master" EntityType="Inventory_DflowModel.Vendor_Master" />
+    <EntitySet Name="PurchaseHeaders" EntityType="Inventory_DflowModel.PurchaseHeader" />
+    <AssociationSet Name="FK_PurchaseDetail_PurchaseHeader" Association="Inventory_DflowModel.FK_PurchaseDetail_PurchaseHeader">
+      <End Role="PurchaseHeader" EntitySet="PurchaseHeaders" />
+      <End Role="PurchaseDetail" EntitySet="PurchaseDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchaseHeader_VendorMaster" Association="Inventory_DflowModel.FK_PurchaseHeader_VendorMaster">
+      <End Role="Vendor_Master" EntitySet="Vendor_Master" />
+      <End Role="PurchaseHeader" EntitySet="PurchaseHeaders" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customer_Master">
+    <Key>
+      <PropertyRef Name="customerId" />
+    </Key>
+    <Property Name="customerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customerName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="pincode" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="officeNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="mobileNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="faxNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="emailId" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="gstNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="panNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="active" Type="Boolean" Nullable="false" />
+    <Property Name="entryBy" Type="Int32" Nullable="false" />
+    <Property Name="entryDate" Type="DateTime" Precision="3" />
+    <Property Name="updatedBy" Type="Int32" />
+    <Property Name="updatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Supplier_Master">
+    <Key>
+      <PropertyRef Name="supplierId" />
+    </Key>
+    <Property Name="supplierId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="supplierCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="supplierName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="pincode" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="officeNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="mobileNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="faxNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="emailId" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="gstNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="panNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="active" Type="Boolean" Nullable="false" />
+    <Property Name="entryBy" Type="Int32" Nullable="false" />
+    <Property Name="entryDate" Type="DateTime" Precision="3" />
+    <Property Name="updatedBy" Type="Int32" />
+    <Property Name="updatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Designation">
+    <Key>
+      <PropertyRef Name="designationId" />
+    </Key>
+    <Property Name="designationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="designationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="active" Type="Boolean" Nullable="false" />
+    <Property Name="entryBy" Type="Int32" Nullable="false" />
+    <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedBy" Type="Int32" />
+    <Property Name="updatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Employees" Relationship="Inventory_DflowModel.FK_Employee_Designation" FromRole="Designation" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="PurchaseDetail">
+    <Key>
+      <PropertyRef Name="purchaseDetailId" />
+    </Key>
+    <Property Name="purchaseDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="purhcaseId" Type="Int32" Nullable="false" />
+    <Property Name="itemId" Type="Int32" Nullable="false" />
+    <Property Name="unit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="rate" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="quantity" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="ItemMaster" Relationship="Inventory_DflowModel.FK_PurchaseDetail_ItemMaster" FromRole="PurchaseDetail" ToRole="Item_Master" />
+    <NavigationProperty Name="PurchaseHeader" Relationship="Inventory_DflowModel.FK_PurchaseDetail_PurchaseHeader" FromRole="PurchaseDetail" ToRole="PurchaseHeader" />
+  </EntityType>
+  <Association Name="FK_PurchaseDetail_ItemMaster">
+    <End Type="Inventory_DflowModel.Item_Master" Role="Item_Master" Multiplicity="1" />
+    <End Type="Inventory_DflowModel.PurchaseDetail" Role="PurchaseDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item_Master">
+        <PropertyRef Name="itemId" />
+      </Principal>
+      <Dependent Role="PurchaseDetail">
+        <PropertyRef Name="itemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="employeeId" />
+    </Key>
+    <Property Name="employeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="employeeCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="firstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="middleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="pincode" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="mobileNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="dateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="designationId" Type="Int32" />
+    <Property Name="hireDate" Type="DateTime" Precision="0" />
+    <Property Name="salary" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="maritalStatus" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="emailId" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="empStatus" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="active" Type="Boolean" Nullable="false" />
+    <Property Name="entryBy" Type="Int32" Nullable="false" />
+    <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedBy" Type="Int32" />
+    <Property Name="updatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Designation" Relationship="Inventory_DflowModel.FK_Employee_Designation" FromRole="Employee" ToRole="Designation" />
+  </EntityType>
+  <Association Name="FK_Employee_Designation">
+    <End Type="Inventory_DflowModel.Designation" Role="Designation" Multiplicity="0..1" />
+    <End Type="Inventory_DflowModel.Employee" Role="Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Designation">
+        <PropertyRef Name="designationId" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="designationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Employment_Status">
+    <Key>
+      <PropertyRef Name="empStatusCode" />
+      <PropertyRef Name="empStatusDesc" />
+      <PropertyRef Name="active" />
+    </Key>
+    <Property Name="empStatusCode" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="empStatusDesc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="active" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="genderCode" />
+      <PropertyRef Name="genderDescription" />
+    </Key>
+    <Property Name="genderCode" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="genderDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="marital_Status">
+    <Key>
+      <PropertyRef Name="maritalStatusCode" />
+      <PropertyRef Name="maritalStatusDesc" />
+    </Key>
+    <Property Name="maritalStatusCode" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="maritalStatusDesc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Distributor_Master">
+    <Key>
+      <PropertyRef Name="distributorId" />
+    </Key>
+    <Property Name="distributorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="distributorCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="distributorName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="pincode" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="officeNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="mobileNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="faxNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="emailId" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="gstNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="panNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="active" Type="Boolean" Nullable="false" />
+    <Property Name="entryBy" Type="Int32" Nullable="false" />
+    <Property Name="entryDate" Type="DateTime" Precision="3" />
+    <Property Name="updatedBy" Type="Int32" />
+    <Property Name="updatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Vendor_Master">
+    <Key>
+      <PropertyRef Name="vendorId" />
+    </Key>
+    <Property Name="vendorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="vendorCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="vendorName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="pincode" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="officeNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="mobileNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="faxNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="emailId" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="gstNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="panNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="active" Type="Boolean" Nullable="false" />
+    <Property Name="entryBy" Type="Int32" Nullable="false" />
+    <Property Name="entryDate" Type="DateTime" Precision="3" />
+    <Property Name="updatedBy" Type="Int32" />
+    <Property Name="updatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="PurchaseHeaders" Relationship="Inventory_DflowModel.FK_PurchaseHeader_VendorMaster" FromRole="Vendor_Master" ToRole="PurchaseHeader" />
+  </EntityType>
+  <EntityType Name="PurchaseHeader">
+    <Key>
+      <PropertyRef Name="purchaseId" />
+    </Key>
+    <Property Name="purchaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="poNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="purchaseDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="orderNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="orderDate" Type="DateTime" Precision="0" />
+    <Property Name="vendorId" Type="Int32" Nullable="false" />
+    <Property Name="totalQuantity" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="totalAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="entryBy" Type="Int32" Nullable="false" />
+    <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedBy" Type="Int32" />
+    <Property Name="updatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="PurchaseDetails" Relationship="Inventory_DflowModel.FK_PurchaseDetail_PurchaseHeader" FromRole="PurchaseHeader" ToRole="PurchaseDetail" />
+    <NavigationProperty Name="VendorMaster" Relationship="Inventory_DflowModel.FK_PurchaseHeader_VendorMaster" FromRole="PurchaseHeader" ToRole="Vendor_Master" />
+  </EntityType>
+  <Association Name="FK_PurchaseDetail_PurchaseHeader">
+    <End Type="Inventory_DflowModel.PurchaseHeader" Role="PurchaseHeader" Multiplicity="1" />
+    <End Type="Inventory_DflowModel.PurchaseDetail" Role="PurchaseDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PurchaseHeader">
+        <PropertyRef Name="purchaseId" />
+      </Principal>
+      <Dependent Role="PurchaseDetail">
+        <PropertyRef Name="purhcaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchaseHeader_VendorMaster">
+    <End Type="Inventory_DflowModel.Vendor_Master" Role="Vendor_Master" Multiplicity="1" />
+    <End Type="Inventory_DflowModel.PurchaseHeader" Role="PurchaseHeader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendor_Master">
+        <PropertyRef Name="vendorId" />
+      </Principal>
+      <Dependent Role="PurchaseHeader">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

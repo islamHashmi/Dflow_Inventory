@@ -100,6 +100,12 @@
     <Compile Include="ContentPage\UnitMaster.Designer.cs">
       <DependentUpon>UnitMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContentPage\VendorMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContentPage\VendorMaster.Designer.cs">
+      <DependentUpon>VendorMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContext\Customer_Master.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
@@ -151,11 +157,8 @@
     <Compile Include="DataContext\Unit_Master.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="DataContext\Vendor_Master.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AmountInWordHelper.cs" />
     <Compile Include="Helpers\CommanMethods.cs" />
@@ -198,6 +201,9 @@
     <EmbeddedResource Include="ContentPage\UnitMaster.resx">
       <DependentUpon>UnitMaster.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ContentPage\VendorMaster.resx">
+      <DependentUpon>VendorMaster.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MDIParent1.resx">
       <DependentUpon>MDIParent1.cs</DependentUpon>
     </EmbeddedResource>
@@ -234,9 +240,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Images\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="DataContext\dflowModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -248,6 +252,9 @@
       <DependentUpon>dflowModel.edmx</DependentUpon>
       <LastGenOutput>dflowModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Images\icon.ico" />
+    <Content Include="Images\logo.jpg" />
+    <Content Include="Images\logo_transparent.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

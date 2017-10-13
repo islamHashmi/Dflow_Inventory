@@ -159,12 +159,14 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.maritalStatus' does not have a
           <Property Name="purchaseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="poNumber" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="purchaseDate" Type="date" Nullable="false" />
-          <Property Name="supplierId" Type="int" Nullable="false" />
+          <Property Name="orderNumber" Type="varchar" MaxLength="20" />
+          <Property Name="orderDate" Type="date" />
+          <Property Name="vendorId" Type="int" Nullable="false" />
           <Property Name="totalQuantity" Type="decimal" Precision="10" Scale="2" />
           <Property Name="totalAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="entryBy" Type="int" Nullable="false" />
           <Property Name="entryDate" Type="datetime" Nullable="false" />
-          <Property Name="updateBy" Type="int" />
+          <Property Name="updatedBy" Type="int" />
           <Property Name="updatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="SupplierMaster">
@@ -200,6 +202,29 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.maritalStatus' does not have a
           <Property Name="active" Type="bit" Nullable="false" />
           <Property Name="entryBy" Type="int" Nullable="false" />
           <Property Name="entryDate" Type="datetime" Nullable="false" />
+          <Property Name="updatedBy" Type="int" />
+          <Property Name="updatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="VendorMaster">
+          <Key>
+            <PropertyRef Name="vendorId" />
+          </Key>
+          <Property Name="vendorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vendorCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="vendorName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="250" />
+          <Property Name="city" Type="varchar" MaxLength="100" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
+          <Property Name="pincode" Type="char" MaxLength="6" />
+          <Property Name="officeNo" Type="char" MaxLength="10" />
+          <Property Name="mobileNo" Type="char" MaxLength="10" />
+          <Property Name="faxNo" Type="char" MaxLength="10" />
+          <Property Name="emailId" Type="varchar" MaxLength="256" />
+          <Property Name="gstNo" Type="varchar" MaxLength="50" />
+          <Property Name="panNo" Type="varchar" MaxLength="50" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="entryBy" Type="int" Nullable="false" />
+          <Property Name="entryDate" Type="datetime" />
           <Property Name="updatedBy" Type="int" />
           <Property Name="updatedDate" Type="datetime" />
         </EntityType>
@@ -251,15 +276,15 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.maritalStatus' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PurchaseHeader_SupplierMaster">
-          <End Role="SupplierMaster" Type="Self.SupplierMaster" Multiplicity="1" />
+        <Association Name="FK_PurchaseHeader_VendorMaster">
+          <End Role="VendorMaster" Type="Self.VendorMaster" Multiplicity="1" />
           <End Role="PurchaseHeader" Type="Self.PurchaseHeader" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="SupplierMaster">
-              <PropertyRef Name="supplierId" />
+            <Principal Role="VendorMaster">
+              <PropertyRef Name="vendorId" />
             </Principal>
             <Dependent Role="PurchaseHeader">
-              <PropertyRef Name="supplierId" />
+              <PropertyRef Name="vendorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -273,6 +298,7 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.maritalStatus' does not have a
           <EntitySet Name="PurchaseHeader" EntityType="Self.PurchaseHeader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierMaster" EntityType="Self.SupplierMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnitMaster" EntityType="Self.UnitMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VendorMaster" EntityType="Self.VendorMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmploymentStatus" EntityType="Self.EmploymentStatus" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [EmploymentStatus].[empStatusCode] AS [empStatusCode], 
@@ -308,8 +334,8 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
             <End Role="PurchaseHeader" EntitySet="PurchaseHeader" />
             <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK_PurchaseHeader_SupplierMaster" Association="Self.FK_PurchaseHeader_SupplierMaster">
-            <End Role="SupplierMaster" EntitySet="SupplierMaster" />
+          <AssociationSet Name="FK_PurchaseHeader_VendorMaster" Association="Self.FK_PurchaseHeader_VendorMaster">
+            <End Role="VendorMaster" EntitySet="VendorMaster" />
             <End Role="PurchaseHeader" EntitySet="PurchaseHeader" />
           </AssociationSet>
         </EntityContainer>
@@ -373,18 +399,9 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
           <EntitySet Name="Supplier_Master" EntityType="Inventory_DflowModel.Supplier_Master" />
           <EntitySet Name="Designations" EntityType="Inventory_DflowModel.Designation" />
           <EntitySet Name="PurchaseDetails" EntityType="Inventory_DflowModel.PurchaseDetail" />
-          <EntitySet Name="PurchaseHeaders" EntityType="Inventory_DflowModel.PurchaseHeader" />
           <AssociationSet Name="FK_PurchaseDetail_ItemMaster" Association="Inventory_DflowModel.FK_PurchaseDetail_ItemMaster">
             <End Role="Item_Master" EntitySet="Item_Master" />
             <End Role="PurchaseDetail" EntitySet="PurchaseDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseDetail_PurchaseHeader" Association="Inventory_DflowModel.FK_PurchaseDetail_PurchaseHeader">
-            <End Role="PurchaseHeader" EntitySet="PurchaseHeaders" />
-            <End Role="PurchaseDetail" EntitySet="PurchaseDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseHeader_SupplierMaster" Association="Inventory_DflowModel.FK_PurchaseHeader_SupplierMaster">
-            <End Role="Supplier_Master" EntitySet="Supplier_Master" />
-            <End Role="PurchaseHeader" EntitySet="PurchaseHeaders" />
           </AssociationSet>
           <EntitySet Name="Employees" EntityType="Inventory_DflowModel.Employee" />
           <AssociationSet Name="FK_Employee_Designation" Association="Inventory_DflowModel.FK_Employee_Designation">
@@ -395,6 +412,16 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
           <EntitySet Name="Genders" EntityType="Inventory_DflowModel.Gender" />
           <EntitySet Name="marital_Status" EntityType="Inventory_DflowModel.marital_Status" />
           <EntitySet Name="Distributor_Master" EntityType="Inventory_DflowModel.Distributor_Master" />
+          <EntitySet Name="Vendor_Master" EntityType="Inventory_DflowModel.Vendor_Master" />
+          <EntitySet Name="PurchaseHeaders" EntityType="Inventory_DflowModel.PurchaseHeader" />
+          <AssociationSet Name="FK_PurchaseDetail_PurchaseHeader" Association="Inventory_DflowModel.FK_PurchaseDetail_PurchaseHeader">
+            <End Role="PurchaseHeader" EntitySet="PurchaseHeaders" />
+            <End Role="PurchaseDetail" EntitySet="PurchaseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseHeader_VendorMaster" Association="Inventory_DflowModel.FK_PurchaseHeader_VendorMaster">
+            <End Role="Vendor_Master" EntitySet="Vendor_Master" />
+            <End Role="PurchaseHeader" EntitySet="PurchaseHeaders" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer_Master">
           <Key>
@@ -441,7 +468,6 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
           <Property Name="entryDate" Type="DateTime" Precision="3" />
           <Property Name="updatedBy" Type="Int32" />
           <Property Name="updatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="PurchaseHeaders" Relationship="Inventory_DflowModel.FK_PurchaseHeader_SupplierMaster" FromRole="Supplier_Master" ToRole="PurchaseHeader" />
         </EntityType>
         <EntityType Name="Designation">
           <Key>
@@ -470,23 +496,6 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
           <NavigationProperty Name="ItemMaster" Relationship="Inventory_DflowModel.FK_PurchaseDetail_ItemMaster" FromRole="PurchaseDetail" ToRole="Item_Master" />
           <NavigationProperty Name="PurchaseHeader" Relationship="Inventory_DflowModel.FK_PurchaseDetail_PurchaseHeader" FromRole="PurchaseDetail" ToRole="PurchaseHeader" />
         </EntityType>
-        <EntityType Name="PurchaseHeader">
-          <Key>
-            <PropertyRef Name="purchaseId" />
-          </Key>
-          <Property Name="purchaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="poNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="purchaseDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="supplierId" Type="Int32" Nullable="false" />
-          <Property Name="totalQuantity" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="totalAmount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="entryBy" Type="Int32" Nullable="false" />
-          <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="updateBy" Type="Int32" />
-          <Property Name="updatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="PurchaseDetails" Relationship="Inventory_DflowModel.FK_PurchaseDetail_PurchaseHeader" FromRole="PurchaseHeader" ToRole="PurchaseDetail" />
-          <NavigationProperty Name="SupplierMaster" Relationship="Inventory_DflowModel.FK_PurchaseHeader_SupplierMaster" FromRole="PurchaseHeader" ToRole="Supplier_Master" />
-        </EntityType>
         <Association Name="FK_PurchaseDetail_ItemMaster">
           <End Type="Inventory_DflowModel.Item_Master" Role="Item_Master" Multiplicity="1" />
           <End Type="Inventory_DflowModel.PurchaseDetail" Role="PurchaseDetail" Multiplicity="*" />
@@ -496,30 +505,6 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
             </Principal>
             <Dependent Role="PurchaseDetail">
               <PropertyRef Name="itemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseDetail_PurchaseHeader">
-          <End Type="Inventory_DflowModel.PurchaseHeader" Role="PurchaseHeader" Multiplicity="1" />
-          <End Type="Inventory_DflowModel.PurchaseDetail" Role="PurchaseDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseHeader">
-              <PropertyRef Name="purchaseId" />
-            </Principal>
-            <Dependent Role="PurchaseDetail">
-              <PropertyRef Name="purhcaseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseHeader_SupplierMaster">
-          <End Type="Inventory_DflowModel.Supplier_Master" Role="Supplier_Master" Multiplicity="1" />
-          <End Type="Inventory_DflowModel.PurchaseHeader" Role="PurchaseHeader" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Supplier_Master">
-              <PropertyRef Name="supplierId" />
-            </Principal>
-            <Dependent Role="PurchaseHeader">
-              <PropertyRef Name="supplierId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -613,6 +598,73 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
           <Property Name="updatedBy" Type="Int32" />
           <Property Name="updatedDate" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="Vendor_Master">
+          <Key>
+            <PropertyRef Name="vendorId" />
+          </Key>
+          <Property Name="vendorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vendorCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="vendorName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pincode" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="officeNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="mobileNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="faxNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="emailId" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="gstNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="panNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="entryBy" Type="Int32" Nullable="false" />
+          <Property Name="entryDate" Type="DateTime" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <Property Name="updatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PurchaseHeaders" Relationship="Inventory_DflowModel.FK_PurchaseHeader_VendorMaster" FromRole="Vendor_Master" ToRole="PurchaseHeader" />
+        </EntityType>
+        <EntityType Name="PurchaseHeader">
+          <Key>
+            <PropertyRef Name="purchaseId" />
+          </Key>
+          <Property Name="purchaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="poNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="purchaseDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="orderNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="orderDate" Type="DateTime" Precision="0" />
+          <Property Name="vendorId" Type="Int32" Nullable="false" />
+          <Property Name="totalQuantity" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="totalAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="entryBy" Type="Int32" Nullable="false" />
+          <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <Property Name="updatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PurchaseDetails" Relationship="Inventory_DflowModel.FK_PurchaseDetail_PurchaseHeader" FromRole="PurchaseHeader" ToRole="PurchaseDetail" />
+          <NavigationProperty Name="VendorMaster" Relationship="Inventory_DflowModel.FK_PurchaseHeader_VendorMaster" FromRole="PurchaseHeader" ToRole="Vendor_Master" />
+        </EntityType>
+        <Association Name="FK_PurchaseDetail_PurchaseHeader">
+          <End Type="Inventory_DflowModel.PurchaseHeader" Role="PurchaseHeader" Multiplicity="1" />
+          <End Type="Inventory_DflowModel.PurchaseDetail" Role="PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseHeader">
+              <PropertyRef Name="purchaseId" />
+            </Principal>
+            <Dependent Role="PurchaseDetail">
+              <PropertyRef Name="purhcaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseHeader_VendorMaster">
+          <End Type="Inventory_DflowModel.Vendor_Master" Role="Vendor_Master" Multiplicity="1" />
+          <End Type="Inventory_DflowModel.PurchaseHeader" Role="PurchaseHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor_Master">
+              <PropertyRef Name="vendorId" />
+            </Principal>
+            <Dependent Role="PurchaseHeader">
+              <PropertyRef Name="vendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -725,22 +777,6 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseHeaders">
-            <EntityTypeMapping TypeName="Inventory_DflowModel.PurchaseHeader">
-              <MappingFragment StoreEntitySet="PurchaseHeader">
-                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
-                <ScalarProperty Name="updateBy" ColumnName="updateBy" />
-                <ScalarProperty Name="entryDate" ColumnName="entryDate" />
-                <ScalarProperty Name="entryBy" ColumnName="entryBy" />
-                <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
-                <ScalarProperty Name="totalQuantity" ColumnName="totalQuantity" />
-                <ScalarProperty Name="supplierId" ColumnName="supplierId" />
-                <ScalarProperty Name="purchaseDate" ColumnName="purchaseDate" />
-                <ScalarProperty Name="poNumber" ColumnName="poNumber" />
-                <ScalarProperty Name="purchaseId" ColumnName="purchaseId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="Inventory_DflowModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
@@ -816,6 +852,48 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
                 <ScalarProperty Name="distributorName" ColumnName="distributorName" />
                 <ScalarProperty Name="distributorCode" ColumnName="distributorCode" />
                 <ScalarProperty Name="distributorId" ColumnName="distributorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendor_Master">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.Vendor_Master">
+              <MappingFragment StoreEntitySet="VendorMaster">
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+                <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="panNo" ColumnName="panNo" />
+                <ScalarProperty Name="gstNo" ColumnName="gstNo" />
+                <ScalarProperty Name="emailId" ColumnName="emailId" />
+                <ScalarProperty Name="faxNo" ColumnName="faxNo" />
+                <ScalarProperty Name="mobileNo" ColumnName="mobileNo" />
+                <ScalarProperty Name="officeNo" ColumnName="officeNo" />
+                <ScalarProperty Name="pincode" ColumnName="pincode" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="vendorName" ColumnName="vendorName" />
+                <ScalarProperty Name="vendorCode" ColumnName="vendorCode" />
+                <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseHeaders">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.PurchaseHeader">
+              <MappingFragment StoreEntitySet="PurchaseHeader">
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+                <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+                <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+                <ScalarProperty Name="totalQuantity" ColumnName="totalQuantity" />
+                <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+                <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+                <ScalarProperty Name="orderNumber" ColumnName="orderNumber" />
+                <ScalarProperty Name="purchaseDate" ColumnName="purchaseDate" />
+                <ScalarProperty Name="poNumber" ColumnName="poNumber" />
+                <ScalarProperty Name="purchaseId" ColumnName="purchaseId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

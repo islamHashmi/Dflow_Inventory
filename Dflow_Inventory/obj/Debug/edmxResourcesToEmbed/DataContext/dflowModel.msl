@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Inventory_DflowModelStoreContainer" CdmEntityContainer="Inventory_DflowEntities">
+    <EntitySetMapping Name="Item_Master">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.Item_Master">
+        <MappingFragment StoreEntitySet="ItemMaster">
+          <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+          <ScalarProperty Name="itemCode" ColumnName="itemCode" />
+          <ScalarProperty Name="itemId" ColumnName="itemId" />
+          <ScalarProperty Name="itemName" ColumnName="itemName" />
+          <ScalarProperty Name="unitId" ColumnName="unitId" />
+          <ScalarProperty Name="sellingPrice" ColumnName="sellingPrice" />
+          <ScalarProperty Name="openingStock" ColumnName="openingStock" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+          <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Unit_Master">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.Unit_Master">
+        <MappingFragment StoreEntitySet="UnitMaster">
+          <ScalarProperty Name="unitCode" ColumnName="unitCode" />
+          <ScalarProperty Name="unitId" ColumnName="unitId" />
+          <ScalarProperty Name="unitName" ColumnName="unitName" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+          <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customer_Master">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.Customer_Master">
+        <MappingFragment StoreEntitySet="CustomerMaster">
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+          <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="panNo" ColumnName="panNo" />
+          <ScalarProperty Name="gstNo" ColumnName="gstNo" />
+          <ScalarProperty Name="emailId" ColumnName="emailId" />
+          <ScalarProperty Name="faxNo" ColumnName="faxNo" />
+          <ScalarProperty Name="mobileNo" ColumnName="mobileNo" />
+          <ScalarProperty Name="officeNo" ColumnName="officeNo" />
+          <ScalarProperty Name="pincode" ColumnName="pincode" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+          <ScalarProperty Name="customerCode" ColumnName="customerCode" />
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Supplier_Master">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.Supplier_Master">
+        <MappingFragment StoreEntitySet="SupplierMaster">
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+          <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="panNo" ColumnName="panNo" />
+          <ScalarProperty Name="gstNo" ColumnName="gstNo" />
+          <ScalarProperty Name="emailId" ColumnName="emailId" />
+          <ScalarProperty Name="faxNo" ColumnName="faxNo" />
+          <ScalarProperty Name="mobileNo" ColumnName="mobileNo" />
+          <ScalarProperty Name="officeNo" ColumnName="officeNo" />
+          <ScalarProperty Name="pincode" ColumnName="pincode" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="supplierName" ColumnName="supplierName" />
+          <ScalarProperty Name="supplierCode" ColumnName="supplierCode" />
+          <ScalarProperty Name="supplierId" ColumnName="supplierId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Designations">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.Designation">
+        <MappingFragment StoreEntitySet="Designation">
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+          <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="designationName" ColumnName="designationName" />
+          <ScalarProperty Name="designationId" ColumnName="designationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseDetails">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.PurchaseDetail">
+        <MappingFragment StoreEntitySet="PurchaseDetail">
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="rate" ColumnName="rate" />
+          <ScalarProperty Name="unit" ColumnName="unit" />
+          <ScalarProperty Name="itemId" ColumnName="itemId" />
+          <ScalarProperty Name="purhcaseId" ColumnName="purhcaseId" />
+          <ScalarProperty Name="purchaseDetailId" ColumnName="purchaseDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+          <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="empStatus" ColumnName="empStatus" />
+          <ScalarProperty Name="emailId" ColumnName="emailId" />
+          <ScalarProperty Name="maritalStatus" ColumnName="maritalStatus" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+          <ScalarProperty Name="hireDate" ColumnName="hireDate" />
+          <ScalarProperty Name="designationId" ColumnName="designationId" />
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+          <ScalarProperty Name="mobileNo" ColumnName="mobileNo" />
+          <ScalarProperty Name="pincode" ColumnName="pincode" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="middleName" ColumnName="middleName" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="employeeCode" ColumnName="employeeCode" />
+          <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employment_Status">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.Employment_Status">
+        <MappingFragment StoreEntitySet="EmploymentStatus">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="empStatusDesc" ColumnName="empStatusDesc" />
+          <ScalarProperty Name="empStatusCode" ColumnName="empStatusCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genders">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.Gender">
+        <MappingFragment StoreEntitySet="Gender">
+          <ScalarProperty Name="genderDescription" ColumnName="genderDescription" />
+          <ScalarProperty Name="genderCode" ColumnName="genderCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="marital_Status">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.marital_Status">
+        <MappingFragment StoreEntitySet="maritalStatus">
+          <ScalarProperty Name="maritalStatusDesc" ColumnName="maritalStatusDesc" />
+          <ScalarProperty Name="maritalStatusCode" ColumnName="maritalStatusCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Distributor_Master">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.Distributor_Master">
+        <MappingFragment StoreEntitySet="DistributorMaster">
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+          <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="panNo" ColumnName="panNo" />
+          <ScalarProperty Name="gstNo" ColumnName="gstNo" />
+          <ScalarProperty Name="emailId" ColumnName="emailId" />
+          <ScalarProperty Name="faxNo" ColumnName="faxNo" />
+          <ScalarProperty Name="mobileNo" ColumnName="mobileNo" />
+          <ScalarProperty Name="officeNo" ColumnName="officeNo" />
+          <ScalarProperty Name="pincode" ColumnName="pincode" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="distributorName" ColumnName="distributorName" />
+          <ScalarProperty Name="distributorCode" ColumnName="distributorCode" />
+          <ScalarProperty Name="distributorId" ColumnName="distributorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vendor_Master">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.Vendor_Master">
+        <MappingFragment StoreEntitySet="VendorMaster">
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+          <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="panNo" ColumnName="panNo" />
+          <ScalarProperty Name="gstNo" ColumnName="gstNo" />
+          <ScalarProperty Name="emailId" ColumnName="emailId" />
+          <ScalarProperty Name="faxNo" ColumnName="faxNo" />
+          <ScalarProperty Name="mobileNo" ColumnName="mobileNo" />
+          <ScalarProperty Name="officeNo" ColumnName="officeNo" />
+          <ScalarProperty Name="pincode" ColumnName="pincode" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="vendorName" ColumnName="vendorName" />
+          <ScalarProperty Name="vendorCode" ColumnName="vendorCode" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseHeaders">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.PurchaseHeader">
+        <MappingFragment StoreEntitySet="PurchaseHeader">
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+          <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+          <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+          <ScalarProperty Name="totalQuantity" ColumnName="totalQuantity" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+          <ScalarProperty Name="orderNumber" ColumnName="orderNumber" />
+          <ScalarProperty Name="purchaseDate" ColumnName="purchaseDate" />
+          <ScalarProperty Name="poNumber" ColumnName="poNumber" />
+          <ScalarProperty Name="purchaseId" ColumnName="purchaseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

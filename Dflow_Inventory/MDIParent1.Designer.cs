@@ -38,6 +38,7 @@
             this.unitsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.suppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.distributorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.designationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.employeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +55,7 @@
             this.userMasterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.distributorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vendorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -100,6 +101,7 @@
             this.masterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.itemsToolStripMenuItem,
             this.unitsToolStripMenuItem,
+            this.vendorToolStripMenuItem,
             this.suppliersToolStripMenuItem,
             this.customersToolStripMenuItem,
             this.distributorToolStripMenuItem,
@@ -136,6 +138,13 @@
             this.customersToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
             this.customersToolStripMenuItem.Text = "Customers";
             this.customersToolStripMenuItem.Click += new System.EventHandler(this.customersToolStripMenuItem_Click);
+            // 
+            // distributorToolStripMenuItem
+            // 
+            this.distributorToolStripMenuItem.Name = "distributorToolStripMenuItem";
+            this.distributorToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
+            this.distributorToolStripMenuItem.Text = "Distributor";
+            this.distributorToolStripMenuItem.Click += new System.EventHandler(this.distributorToolStripMenuItem_Click);
             // 
             // designationToolStripMenuItem
             // 
@@ -248,12 +257,12 @@
             this.logoutToolStripMenuItem.Size = new System.Drawing.Size(75, 23);
             this.logoutToolStripMenuItem.Text = "Logout";
             // 
-            // distributorToolStripMenuItem
+            // vendorToolStripMenuItem
             // 
-            this.distributorToolStripMenuItem.Name = "distributorToolStripMenuItem";
-            this.distributorToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
-            this.distributorToolStripMenuItem.Text = "Distributor";
-            this.distributorToolStripMenuItem.Click += new System.EventHandler(this.distributorToolStripMenuItem_Click);
+            this.vendorToolStripMenuItem.Name = "vendorToolStripMenuItem";
+            this.vendorToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
+            this.vendorToolStripMenuItem.Text = "Vendors";
+            this.vendorToolStripMenuItem.Click += new System.EventHandler(this.vendorToolStripMenuItem_Click);
             // 
             // MDIParent1
             // 
@@ -304,6 +313,7 @@
         private System.Windows.Forms.ToolStripMenuItem designationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem employeeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem distributorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vendorToolStripMenuItem;
     }
 }
 

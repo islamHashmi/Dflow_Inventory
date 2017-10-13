@@ -12,11 +12,16 @@ namespace Dflow_Inventory.DataContext
     using System;
     using System.Collections.Generic;
     
-    public partial class Supplier_Master
+    public partial class Vendor_Master
     {
-        public int supplierId { get; set; }
-        public string supplierCode { get; set; }
-        public string supplierName { get; set; }
+        public Vendor_Master()
+        {
+            this.PurchaseHeaders = new HashSet<PurchaseHeader>();
+        }
+    
+        public int vendorId { get; set; }
+        public string vendorCode { get; set; }
+        public string vendorName { get; set; }
         public string address { get; set; }
         public string city { get; set; }
         public string state { get; set; }
@@ -32,5 +37,7 @@ namespace Dflow_Inventory.DataContext
         public Nullable<System.DateTime> entryDate { get; set; }
         public Nullable<int> updatedBy { get; set; }
         public Nullable<System.DateTime> updatedDate { get; set; }
+    
+        public virtual ICollection<PurchaseHeader> PurchaseHeaders { get; set; }
     }
 }

@@ -123,5 +123,17 @@ namespace Dflow_Inventory
                 throw;
             }
         }
+
+        private void vendorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new VendorMaster());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
