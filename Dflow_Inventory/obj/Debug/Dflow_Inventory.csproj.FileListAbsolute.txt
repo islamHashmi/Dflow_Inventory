@@ -20,3 +20,9 @@ D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\De
 D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.pdb
 D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.ContentPage.VendorMaster.resources
 D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.csprojResolveAssemblyReference.cache
+D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.ContentPage.SalesInvoice.resources
+D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.Login.resources
+D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.ContentPage.UserMaster.resources
+D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.ContentPage.UserGroupMaster.resources
+D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.ContentPage.ExpenseMaster.resources
+D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.ContentPage.VoucherReceipt.resources

@@ -19,35 +19,55 @@ namespace Dflow_Inventory
             Short_Cut();
         }
 
-        private void Short_Cut()
+        private DataTable Create_DataTable()
         {
             DataTable dt = new DataTable();
 
-            dt.Columns.Add("Control", typeof(string));
-            dt.Columns.Add("Shortcut", typeof(string));
-            dt.Columns.Add("Control1", typeof(string));
-            dt.Columns.Add("Shortcut1", typeof(string));
+            dt.Columns.Add("control", typeof(string));
+            dt.Columns.Add("key", typeof(string));
 
-            DataRow row = dt.NewRow();
+            dt.Rows.Add("Delete", "[Delete]");
+            dt.Rows.Add("Edit", "[Enter]");
+            dt.Rows.Add("Save", "[Ctrl + S]");
+            dt.Rows.Add("Clear", "[Ctrl + C]");
+            dt.Rows.Add("Undo", "[Ctrl + Z]");
+            dt.Rows.Add("Redo", "[Ctrl + U]");
 
-            row["Control"] = "Delete";
-            row["Shortcut"] = "[Delete]";
-            row["Control1"] = "Edit";
-            row["Shortcut1"] = "[Enter]";
-
-            dt.Rows.Add(row);
-
-            dgvList.DataSource = dt;
-
-            Set_Column();
+            return dt;
         }
 
-        private void Set_Column()
+        private void Short_Cut()
         {
-            dgvList.Columns["Control"].HeaderText = "Control";
-            dgvList.Columns["Shortcut"].HeaderText = "Shortcut Key";
-            dgvList.Columns["Control1"].HeaderText = "Control";
-            dgvList.Columns["Shortcut1"].HeaderText = "Shortcut Key";
-        }
+            DataTable dt = Create_DataTable();
+
+            Label lbl = new Label();
+
+            int col = 0, row = 0;
+
+            foreach(DataRow dr in dt.Rows)
+            {
+                if (col == 3)
+                {
+                    col = 0;
+                    row++;
+                }
+
+                lbl = new Label();
+
+                lbl.Text = Convert.ToString(dr["control"]);
+
+                tableLayoutPanel1.Controls.Add(lbl, col, row);
+
+                col++;
+
+                lbl = new Label();
+
+                lbl.Text = Convert.ToString(dr["key"]);
+
+                tableLayoutPanel1.Controls.Add(lbl, col, row);
+
+                col++;
+            }            
+        }        
     }
 }

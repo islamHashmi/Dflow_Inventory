@@ -22,9 +22,21 @@ namespace Dflow_Inventory.ContentPage
         {
             InitializeComponent();
 
+            ComboBox();
             Autogenerate_CustomerCode();
-
             Get_Data();
+        }
+
+        private void ComboBox()
+        {
+            using (db = new Inventory_DflowEntities())
+            {
+                var type = db.customerTypes.ToList();
+
+                cmbType.DataSource = type;
+                cmbType.ValueMember = "typeCode";
+                cmbType.DisplayMember = "typeDescription";
+            }
         }
 
         private void Autogenerate_CustomerCode()
@@ -112,6 +124,7 @@ namespace Dflow_Inventory.ContentPage
                         customer.updatedDate = DateTime.Now;
                     }
 
+                    customer.registerType = Convert.ToString(cmbType.SelectedValue);
                     customer.customerName = TxtCustomerName.Text.Trim();
                     customer.address = TxtAddress.Text.Trim();
                     customer.city = TxtCity.Text.Trim();
@@ -324,6 +337,20 @@ namespace Dflow_Inventory.ContentPage
 
             var headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
             e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
+        }
+        
+        private void cmbType_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                string text = cmbType.GetItemText(cmbType.SelectedItem);
+
+                lblRegCode.Text = text + " Code";
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

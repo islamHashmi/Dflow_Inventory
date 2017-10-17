@@ -31,6 +31,8 @@ namespace Dflow_Inventory.DataContext
         public System.DateTime entryDate { get; set; }
         public Nullable<int> updatedBy { get; set; }
         public Nullable<System.DateTime> updatedDate { get; set; }
+        public string remark { get; set; }
+        public string finYear { get; set; }
     
         public virtual ICollection<PurchaseDetail> PurchaseDetails { get; set; }
         public virtual Vendor_Master VendorMaster { get; set; }

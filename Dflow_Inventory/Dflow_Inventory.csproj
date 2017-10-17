@@ -77,6 +77,12 @@
     <Compile Include="ContentPage\EmployeeMaster.Designer.cs">
       <DependentUpon>EmployeeMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContentPage\ExpenseMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContentPage\ExpenseMaster.Designer.cs">
+      <DependentUpon>ExpenseMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="ContentPage\ItemMaster.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,12 @@
     </Compile>
     <Compile Include="ContentPage\PurchaseOrder.Designer.cs">
       <DependentUpon>PurchaseOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContentPage\SalesInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContentPage\SalesInvoice.Designer.cs">
+      <DependentUpon>SalesInvoice.cs</DependentUpon>
     </Compile>
     <Compile Include="ContentPage\SupplierMaster.cs">
       <SubType>Form</SubType>
@@ -101,11 +113,32 @@
     <Compile Include="ContentPage\UnitMaster.Designer.cs">
       <DependentUpon>UnitMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContentPage\UserGroupMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContentPage\UserGroupMaster.Designer.cs">
+      <DependentUpon>UserGroupMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContentPage\UserMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContentPage\UserMaster.Designer.cs">
+      <DependentUpon>UserMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="ContentPage\VendorMaster.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ContentPage\VendorMaster.Designer.cs">
       <DependentUpon>VendorMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContentPage\VoucherReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContentPage\VoucherReceipt.Designer.cs">
+      <DependentUpon>VoucherReceipt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\customerType.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataContext\Customer_Master.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
@@ -137,13 +170,28 @@
     <Compile Include="DataContext\Employment_Status.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataContext\Expense_Master.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\FinancialYear.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataContext\Gender.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\InvoiceDetail.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\InvoiceHeader.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataContext\Item_Master.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataContext\marital_Status.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\PaymentMode.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataContext\PurchaseDetail.cs">
@@ -158,12 +206,27 @@
     <Compile Include="DataContext\Unit_Master.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataContext\User_Group.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\User_Master.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataContext\Vendor_Master.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\voucherHeader.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AmountInWordHelper.cs" />
     <Compile Include="Helpers\CommanMethods.cs" />
     <Compile Include="Helpers\SessionHelper.cs" />
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
     <Compile Include="MDIParent1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,11 +253,17 @@
     <EmbeddedResource Include="ContentPage\EmployeeMaster.resx">
       <DependentUpon>EmployeeMaster.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ContentPage\ExpenseMaster.resx">
+      <DependentUpon>ExpenseMaster.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ContentPage\ItemMaster.resx">
       <DependentUpon>ItemMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ContentPage\PurchaseOrder.resx">
       <DependentUpon>PurchaseOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContentPage\SalesInvoice.resx">
+      <DependentUpon>SalesInvoice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ContentPage\SupplierMaster.resx">
       <DependentUpon>SupplierMaster.cs</DependentUpon>
@@ -202,8 +271,20 @@
     <EmbeddedResource Include="ContentPage\UnitMaster.resx">
       <DependentUpon>UnitMaster.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ContentPage\UserGroupMaster.resx">
+      <DependentUpon>UserGroupMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContentPage\UserMaster.resx">
+      <DependentUpon>UserMaster.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ContentPage\VendorMaster.resx">
       <DependentUpon>VendorMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContentPage\VoucherReceipt.resx">
+      <DependentUpon>VoucherReceipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MDIParent1.resx">
       <DependentUpon>MDIParent1.cs</DependentUpon>
@@ -216,6 +297,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Shortcuts.resx">
       <DependentUpon>Shortcuts.cs</DependentUpon>

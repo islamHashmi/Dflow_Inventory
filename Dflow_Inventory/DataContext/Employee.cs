@@ -39,5 +39,6 @@ namespace Dflow_Inventory.DataContext
         public Nullable<System.DateTime> updatedDate { get; set; }
     
         public virtual Designation Designation { get; set; }
+        public virtual Gender Gender { get; set; }
     }
 }

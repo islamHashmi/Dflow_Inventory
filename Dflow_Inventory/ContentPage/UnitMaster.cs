@@ -220,9 +220,12 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else if (e.KeyCode == Keys.Delete)
                     {
+                        if (DialogResult.No == MessageBox.Show("Are you sure to delete this record ?", "Warning", MessageBoxButtons.YesNo))
+                            return;
+
                         int unitId = 0;
 
-                        int.TryParse(Convert.ToString(DgvList["unitId", DgvList.CurrentCell.RowIndex]), out unitId);
+                        int.TryParse(Convert.ToString(DgvList["unitId", DgvList.CurrentCell.RowIndex].Value), out unitId);
 
                         using (db = new Inventory_DflowEntities())
                         {
@@ -233,7 +236,11 @@ namespace Dflow_Inventory.ContentPage
                                 unit.active = false;
 
                                 db.SaveChanges();
+
+                                Get_Data();
                             }
+                            else
+                                MessageBox.Show("Cannot delete this record");
                         }
                     }
                 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Dflow_Inventory.Helpers
+﻿namespace Dflow_Inventory.Helpers
 {
     public static class SessionHelper
     {
@@ -12,6 +7,10 @@ namespace Dflow_Inventory.Helpers
         public static string UserName { get; set; }
 
         public static int UserGroupId { get; set; }
+
+        public static string ShortFinYear { get; set; }
+
+        public static string FinYear { get; set; }
 
     }
 }

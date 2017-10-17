@@ -33,10 +33,19 @@ namespace Dflow_Inventory.DataContext
         public DbSet<PurchaseDetail> PurchaseDetails { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Employment_Status> Employment_Status { get; set; }
-        public DbSet<Gender> Genders { get; set; }
-        public DbSet<marital_Status> marital_Status { get; set; }
         public DbSet<Distributor_Master> Distributor_Master { get; set; }
         public DbSet<Vendor_Master> Vendor_Master { get; set; }
         public DbSet<PurchaseHeader> PurchaseHeaders { get; set; }
+        public DbSet<customerType> customerTypes { get; set; }
+        public DbSet<Gender> Genders { get; set; }
+        public DbSet<marital_Status> marital_Status { get; set; }
+        public DbSet<InvoiceDetail> InvoiceDetails { get; set; }
+        public DbSet<InvoiceHeader> InvoiceHeaders { get; set; }
+        public DbSet<User_Group> User_Group { get; set; }
+        public DbSet<User_Master> User_Master { get; set; }
+        public DbSet<Expense_Master> Expense_Master { get; set; }
+        public DbSet<FinancialYear> FinancialYears { get; set; }
+        public DbSet<PaymentMode> PaymentModes { get; set; }
+        public DbSet<voucherHeader> voucherHeaders { get; set; }
     }
 }

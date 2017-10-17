@@ -10,6 +10,7 @@
             <PropertyRef Name="customerId" />
           </Key>
           <Property Name="customerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="registerType" Type="char" MaxLength="2" Nullable="false" />
           <Property Name="customerCode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="customerName" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="address" Type="varchar" MaxLength="250" />
@@ -27,6 +28,13 @@
           <Property Name="entryDate" Type="datetime" />
           <Property Name="updatedBy" Type="int" />
           <Property Name="updatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="customerType">
+          <Key>
+            <PropertyRef Name="typeCode" />
+          </Key>
+          <Property Name="typeCode" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="typeDescription" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="Designation">
           <Key>
@@ -103,15 +111,71 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
           <Property Name="empStatusDesc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="active" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Inventory_Dflow.dbo.Gender' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ExpenseMaster">
+          <Key>
+            <PropertyRef Name="expenseHeadId" />
+          </Key>
+          <Property Name="expenseHeadId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="expenseName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="entryBy" Type="int" Nullable="false" />
+          <Property Name="entryDate" Type="datetime" Nullable="false" />
+          <Property Name="updatedBy" Type="int" />
+          <Property Name="updatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="FinancialYear">
+          <Key>
+            <PropertyRef Name="finYear" />
+          </Key>
+          <Property Name="finYear" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="finYearDescription" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="startDate" Type="date" Nullable="false" />
+          <Property Name="endDate" Type="date" Nullable="false" />
+          <Property Name="entryBy" Type="int" Nullable="false" />
+          <Property Name="entryDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Gender">
           <Key>
             <PropertyRef Name="genderCode" />
-            <PropertyRef Name="genderDescription" />
           </Key>
           <Property Name="genderCode" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="genderDescription" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InvoiceDetail">
+          <Key>
+            <PropertyRef Name="invoiceDetailId" />
+          </Key>
+          <Property Name="invoiceDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="invoiceId" Type="int" Nullable="false" />
+          <Property Name="itemId" Type="int" Nullable="false" />
+          <Property Name="unit" Type="varchar" MaxLength="10" />
+          <Property Name="hsnCode" Type="varchar" MaxLength="50" />
+          <Property Name="rate" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="quantity" Type="decimal" Precision="10" Scale="0" />
+          <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="InvoiceHeader">
+          <Key>
+            <PropertyRef Name="invoiceId" />
+          </Key>
+          <Property Name="invoiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="invoiceNumber" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="invoiceDate" Type="date" Nullable="false" />
+          <Property Name="customerId" Type="int" Nullable="false" />
+          <Property Name="remark" Type="varchar" MaxLength="500" />
+          <Property Name="total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="discount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="taxableAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cgstPercent1" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="cgstAmount1" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="cgstPercent2" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="cgstAmount2" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="totalAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="finYear" Type="char" MaxLength="4" />
+          <Property Name="entryBy" Type="int" Nullable="false" />
+          <Property Name="entryDate" Type="datetime" Nullable="false" />
+          <Property Name="updatedBy" Type="int" />
+          <Property Name="updatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="ItemMaster">
           <Key>
@@ -130,15 +194,19 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.Gender' does not have a primar
           <Property Name="updatedBy" Type="int" />
           <Property Name="updatedDate" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Inventory_Dflow.dbo.maritalStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="maritalStatus">
           <Key>
             <PropertyRef Name="maritalStatusCode" />
-            <PropertyRef Name="maritalStatusDesc" />
           </Key>
           <Property Name="maritalStatusCode" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="maritalStatusDesc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaymentMode">
+          <Key>
+            <PropertyRef Name="paymentCode" />
+          </Key>
+          <Property Name="paymentCode" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="paymentDescription" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="PurchaseDetail">
           <Key>
@@ -164,6 +232,8 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.maritalStatus' does not have a
           <Property Name="vendorId" Type="int" Nullable="false" />
           <Property Name="totalQuantity" Type="decimal" Precision="10" Scale="2" />
           <Property Name="totalAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="remark" Type="varchar" MaxLength="500" />
+          <Property Name="finYear" Type="char" MaxLength="4" />
           <Property Name="entryBy" Type="int" Nullable="false" />
           <Property Name="entryDate" Type="datetime" Nullable="false" />
           <Property Name="updatedBy" Type="int" />
@@ -205,6 +275,36 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.maritalStatus' does not have a
           <Property Name="updatedBy" Type="int" />
           <Property Name="updatedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="userGroupId" />
+          </Key>
+          <Property Name="userGroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="groupName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="entryBy" Type="int" Nullable="false" />
+          <Property Name="entryDate" Type="datetime" Nullable="false" />
+          <Property Name="updatedBy" Type="int" />
+          <Property Name="updatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="mobileNumber" Type="char" MaxLength="10" />
+          <Property Name="emailId" Type="varchar" MaxLength="255" />
+          <Property Name="loginId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="loginKey" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="userGroupId" Type="int" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="entryBy" Type="int" Nullable="false" />
+          <Property Name="entryDate" Type="datetime" Nullable="false" />
+          <Property Name="lastlogin" Type="datetime" />
+          <Property Name="updatedBy" Type="int" />
+          <Property Name="updatedOn" Type="datetime" />
+        </EntityType>
         <EntityType Name="VendorMaster">
           <Key>
             <PropertyRef Name="vendorId" />
@@ -228,6 +328,26 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.maritalStatus' does not have a
           <Property Name="updatedBy" Type="int" />
           <Property Name="updatedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="voucherHeader">
+          <Key>
+            <PropertyRef Name="voucherId" />
+          </Key>
+          <Property Name="voucherId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="voucherNumber" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="voucherDate" Type="date" Nullable="false" />
+          <Property Name="invoiceNo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="paymentMode" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="bankName" Type="varchar" MaxLength="150" />
+          <Property Name="chequeNo" Type="char" MaxLength="6" />
+          <Property Name="chequeDate" Type="date" />
+          <Property Name="finYear" Type="char" MaxLength="4" />
+          <Property Name="entryBy" Type="int" Nullable="false" />
+          <Property Name="entryDate" Type="date" Nullable="false" />
+          <Property Name="updatedBy" Type="int" />
+          <Property Name="updatedDate" Type="date" />
+          <Property Name="narration" Type="varchar" MaxLength="500" />
+        </EntityType>
         <Association Name="FK_Employee_Designation">
           <End Role="Designation" Type="Self.Designation" Multiplicity="0..1" />
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
@@ -237,6 +357,30 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.maritalStatus' does not have a
             </Principal>
             <Dependent Role="Employee">
               <PropertyRef Name="designationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="genderCode" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="sex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceHeader_CustomerMaster">
+          <End Role="CustomerMaster" Type="Self.CustomerMaster" Multiplicity="1" />
+          <End Role="InvoiceHeader" Type="Self.InvoiceHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerMaster">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="InvoiceHeader">
+              <PropertyRef Name="customerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -288,17 +432,76 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.maritalStatus' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Table_1_InvoiceHeader">
+          <End Role="InvoiceHeader" Type="Self.InvoiceHeader" Multiplicity="1" />
+          <End Role="InvoiceDetail" Type="Self.InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceHeader">
+              <PropertyRef Name="invoiceId" />
+            </Principal>
+            <Dependent Role="InvoiceDetail">
+              <PropertyRef Name="invoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_1_ItemMaster">
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="1" />
+          <End Role="InvoiceDetail" Type="Self.InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMaster">
+              <PropertyRef Name="itemId" />
+            </Principal>
+            <Dependent Role="InvoiceDetail">
+              <PropertyRef Name="itemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_UserGroup">
+          <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGroup">
+              <PropertyRef Name="userGroupId" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="userGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_voucherHeader_PaymentMode">
+          <End Role="PaymentMode" Type="Self.PaymentMode" Multiplicity="1" />
+          <End Role="voucherHeader" Type="Self.voucherHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMode">
+              <PropertyRef Name="paymentCode" />
+            </Principal>
+            <Dependent Role="voucherHeader">
+              <PropertyRef Name="paymentMode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Inventory_DflowModelStoreContainer">
           <EntitySet Name="CustomerMaster" EntityType="Self.CustomerMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customerType" EntityType="Self.customerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DistributorMaster" EntityType="Self.DistributorMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExpenseMaster" EntityType="Self.ExpenseMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FinancialYear" EntityType="Self.FinancialYear" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceDetail" EntityType="Self.InvoiceDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceHeader" EntityType="Self.InvoiceHeader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemMaster" EntityType="Self.ItemMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="maritalStatus" EntityType="Self.maritalStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentMode" EntityType="Self.PaymentMode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseDetail" EntityType="Self.PurchaseDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseHeader" EntityType="Self.PurchaseHeader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierMaster" EntityType="Self.SupplierMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnitMaster" EntityType="Self.UnitMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VendorMaster" EntityType="Self.VendorMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="voucherHeader" EntityType="Self.voucherHeader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmploymentStatus" EntityType="Self.EmploymentStatus" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [EmploymentStatus].[empStatusCode] AS [empStatusCode], 
@@ -306,21 +509,17 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.maritalStatus' does not have a
 [EmploymentStatus].[active] AS [active]
 FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Gender" EntityType="Self.Gender" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[Gender].[genderCode] AS [genderCode], 
-[Gender].[genderDescription] AS [genderDescription]
-FROM [dbo].[Gender] AS [Gender]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="maritalStatus" EntityType="Self.maritalStatus" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[maritalStatus].[maritalStatusCode] AS [maritalStatusCode], 
-[maritalStatus].[maritalStatusDesc] AS [maritalStatusDesc]
-FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Employee_Designation" Association="Self.FK_Employee_Designation">
             <End Role="Designation" EntitySet="Designation" />
             <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Gender" Association="Self.FK_Employee_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceHeader_CustomerMaster" Association="Self.FK_InvoiceHeader_CustomerMaster">
+            <End Role="CustomerMaster" EntitySet="CustomerMaster" />
+            <End Role="InvoiceHeader" EntitySet="InvoiceHeader" />
           </AssociationSet>
           <AssociationSet Name="FK_ItemMaster_UnitMaster" Association="Self.FK_ItemMaster_UnitMaster">
             <End Role="UnitMaster" EntitySet="UnitMaster" />
@@ -337,6 +536,22 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
           <AssociationSet Name="FK_PurchaseHeader_VendorMaster" Association="Self.FK_PurchaseHeader_VendorMaster">
             <End Role="VendorMaster" EntitySet="VendorMaster" />
             <End Role="PurchaseHeader" EntitySet="PurchaseHeader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_1_InvoiceHeader" Association="Self.FK_Table_1_InvoiceHeader">
+            <End Role="InvoiceHeader" EntitySet="InvoiceHeader" />
+            <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_1_ItemMaster" Association="Self.FK_Table_1_ItemMaster">
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+            <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_UserGroup" Association="Self.FK_UserMaster_UserGroup">
+            <End Role="UserGroup" EntitySet="UserGroup" />
+            <End Role="UserMaster" EntitySet="UserMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_voucherHeader_PaymentMode" Association="Self.FK_voucherHeader_PaymentMode">
+            <End Role="PaymentMode" EntitySet="PaymentMode" />
+            <End Role="voucherHeader" EntitySet="voucherHeader" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -361,6 +576,7 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
           <Property Name="itemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="itemDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PurchaseDetails" Relationship="Inventory_DflowModel.FK_PurchaseDetail_ItemMaster" FromRole="Item_Master" ToRole="PurchaseDetail" />
+          <NavigationProperty Name="InvoiceDetails" Relationship="Inventory_DflowModel.FK_Table_1_ItemMaster" FromRole="Item_Master" ToRole="InvoiceDetail" />
         </EntityType>
         <EntityType Name="Unit_Master">
           <Key>
@@ -409,8 +625,6 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
             <End Role="Employee" EntitySet="Employees" />
           </AssociationSet>
           <EntitySet Name="Employment_Status" EntityType="Inventory_DflowModel.Employment_Status" />
-          <EntitySet Name="Genders" EntityType="Inventory_DflowModel.Gender" />
-          <EntitySet Name="marital_Status" EntityType="Inventory_DflowModel.marital_Status" />
           <EntitySet Name="Distributor_Master" EntityType="Inventory_DflowModel.Distributor_Master" />
           <EntitySet Name="Vendor_Master" EntityType="Inventory_DflowModel.Vendor_Master" />
           <EntitySet Name="PurchaseHeaders" EntityType="Inventory_DflowModel.PurchaseHeader" />
@@ -421,6 +635,41 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
           <AssociationSet Name="FK_PurchaseHeader_VendorMaster" Association="Inventory_DflowModel.FK_PurchaseHeader_VendorMaster">
             <End Role="Vendor_Master" EntitySet="Vendor_Master" />
             <End Role="PurchaseHeader" EntitySet="PurchaseHeaders" />
+          </AssociationSet>
+          <EntitySet Name="customerTypes" EntityType="Inventory_DflowModel.customerType" />
+          <EntitySet Name="Genders" EntityType="Inventory_DflowModel.Gender" />
+          <EntitySet Name="marital_Status" EntityType="Inventory_DflowModel.marital_Status" />
+          <EntitySet Name="InvoiceDetails" EntityType="Inventory_DflowModel.InvoiceDetail" />
+          <EntitySet Name="InvoiceHeaders" EntityType="Inventory_DflowModel.InvoiceHeader" />
+          <AssociationSet Name="FK_InvoiceHeader_CustomerMaster" Association="Inventory_DflowModel.FK_InvoiceHeader_CustomerMaster">
+            <End Role="Customer_Master" EntitySet="Customer_Master" />
+            <End Role="InvoiceHeader" EntitySet="InvoiceHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_1_InvoiceHeader" Association="Inventory_DflowModel.FK_Table_1_InvoiceHeader">
+            <End Role="InvoiceHeader" EntitySet="InvoiceHeaders" />
+            <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_1_ItemMaster" Association="Inventory_DflowModel.FK_Table_1_ItemMaster">
+            <End Role="Item_Master" EntitySet="Item_Master" />
+            <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
+          </AssociationSet>
+          <EntitySet Name="User_Group" EntityType="Inventory_DflowModel.User_Group" />
+          <EntitySet Name="User_Master" EntityType="Inventory_DflowModel.User_Master" />
+          <AssociationSet Name="FK_UserMaster_UserGroup" Association="Inventory_DflowModel.FK_UserMaster_UserGroup">
+            <End Role="UserGroup" EntitySet="User_Group" />
+            <End Role="UserMaster" EntitySet="User_Master" />
+          </AssociationSet>
+          <EntitySet Name="Expense_Master" EntityType="Inventory_DflowModel.Expense_Master" />
+          <EntitySet Name="FinancialYears" EntityType="Inventory_DflowModel.FinancialYear" />
+          <EntitySet Name="PaymentModes" EntityType="Inventory_DflowModel.PaymentMode" />
+          <AssociationSet Name="FK_Employee_Gender" Association="Inventory_DflowModel.FK_Employee_Gender">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <EntitySet Name="voucherHeaders" EntityType="Inventory_DflowModel.voucherHeader" />
+          <AssociationSet Name="FK_voucherHeader_PaymentMode" Association="Inventory_DflowModel.FK_voucherHeader_PaymentMode">
+            <End Role="PaymentMode" EntitySet="PaymentModes" />
+            <End Role="voucherHeader" EntitySet="voucherHeaders" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer_Master">
@@ -445,6 +694,8 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
           <Property Name="entryDate" Type="DateTime" Precision="3" />
           <Property Name="updatedBy" Type="Int32" />
           <Property Name="updatedDate" Type="DateTime" Precision="3" />
+          <Property Name="registerType" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="InvoiceHeaders" Relationship="Inventory_DflowModel.FK_InvoiceHeader_CustomerMaster" FromRole="Customer_Master" ToRole="InvoiceHeader" />
         </EntityType>
         <EntityType Name="Supplier_Master">
           <Key>
@@ -536,6 +787,7 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
           <Property Name="updatedBy" Type="Int32" />
           <Property Name="updatedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Designation" Relationship="Inventory_DflowModel.FK_Employee_Designation" FromRole="Employee" ToRole="Designation" />
+          <NavigationProperty Name="Gender" Relationship="Inventory_DflowModel.FK_Employee_Gender" FromRole="Employee" ToRole="Gender" />
         </EntityType>
         <Association Name="FK_Employee_Designation">
           <End Type="Inventory_DflowModel.Designation" Role="Designation" Multiplicity="0..1" />
@@ -558,22 +810,6 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
           <Property Name="empStatusCode" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="empStatusDesc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="active" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Gender">
-          <Key>
-            <PropertyRef Name="genderCode" />
-            <PropertyRef Name="genderDescription" />
-          </Key>
-          <Property Name="genderCode" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="genderDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="marital_Status">
-          <Key>
-            <PropertyRef Name="maritalStatusCode" />
-            <PropertyRef Name="maritalStatusDesc" />
-          </Key>
-          <Property Name="maritalStatusCode" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="maritalStatusDesc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Distributor_Master">
           <Key>
@@ -640,6 +876,8 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
           <Property Name="updatedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="PurchaseDetails" Relationship="Inventory_DflowModel.FK_PurchaseDetail_PurchaseHeader" FromRole="PurchaseHeader" ToRole="PurchaseDetail" />
           <NavigationProperty Name="VendorMaster" Relationship="Inventory_DflowModel.FK_PurchaseHeader_VendorMaster" FromRole="PurchaseHeader" ToRole="Vendor_Master" />
+          <Property Name="remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="finYear" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
         </EntityType>
         <Association Name="FK_PurchaseDetail_PurchaseHeader">
           <End Type="Inventory_DflowModel.PurchaseHeader" Role="PurchaseHeader" Multiplicity="1" />
@@ -662,6 +900,224 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
             </Principal>
             <Dependent Role="PurchaseHeader">
               <PropertyRef Name="vendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="customerType">
+          <Key>
+            <PropertyRef Name="typeCode" />
+          </Key>
+          <Property Name="typeCode" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="typeDescription" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="genderCode" />
+          </Key>
+          <Property Name="genderCode" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="genderDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employees" Relationship="Inventory_DflowModel.FK_Employee_Gender" FromRole="Gender" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="marital_Status">
+          <Key>
+            <PropertyRef Name="maritalStatusCode" />
+          </Key>
+          <Property Name="maritalStatusCode" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="maritalStatusDesc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="InvoiceDetail">
+          <Key>
+            <PropertyRef Name="invoiceDetailId" />
+          </Key>
+          <Property Name="invoiceDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="invoiceId" Type="Int32" Nullable="false" />
+          <Property Name="itemId" Type="Int32" Nullable="false" />
+          <Property Name="unit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="hsnCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="quantity" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="InvoiceHeader" Relationship="Inventory_DflowModel.FK_Table_1_InvoiceHeader" FromRole="InvoiceDetail" ToRole="InvoiceHeader" />
+          <NavigationProperty Name="ItemMaster" Relationship="Inventory_DflowModel.FK_Table_1_ItemMaster" FromRole="InvoiceDetail" ToRole="Item_Master" />
+        </EntityType>
+        <EntityType Name="InvoiceHeader">
+          <Key>
+            <PropertyRef Name="invoiceId" />
+          </Key>
+          <Property Name="invoiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="invoiceNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="invoiceDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="customerId" Type="Int32" Nullable="false" />
+          <Property Name="remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="discount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="taxableAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cgstPercent1" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="cgstAmount1" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="cgstPercent2" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="cgstAmount2" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="totalAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="entryBy" Type="Int32" Nullable="false" />
+          <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <Property Name="updatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CustomerMaster" Relationship="Inventory_DflowModel.FK_InvoiceHeader_CustomerMaster" FromRole="InvoiceHeader" ToRole="Customer_Master" />
+          <NavigationProperty Name="InvoiceDetails" Relationship="Inventory_DflowModel.FK_Table_1_InvoiceHeader" FromRole="InvoiceHeader" ToRole="InvoiceDetail" />
+          <Property Name="finYear" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_InvoiceHeader_CustomerMaster">
+          <End Type="Inventory_DflowModel.Customer_Master" Role="Customer_Master" Multiplicity="1" />
+          <End Type="Inventory_DflowModel.InvoiceHeader" Role="InvoiceHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer_Master">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="InvoiceHeader">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_1_InvoiceHeader">
+          <End Type="Inventory_DflowModel.InvoiceHeader" Role="InvoiceHeader" Multiplicity="1" />
+          <End Type="Inventory_DflowModel.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceHeader">
+              <PropertyRef Name="invoiceId" />
+            </Principal>
+            <Dependent Role="InvoiceDetail">
+              <PropertyRef Name="invoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_1_ItemMaster">
+          <End Type="Inventory_DflowModel.Item_Master" Role="Item_Master" Multiplicity="1" />
+          <End Type="Inventory_DflowModel.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item_Master">
+              <PropertyRef Name="itemId" />
+            </Principal>
+            <Dependent Role="InvoiceDetail">
+              <PropertyRef Name="itemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User_Group">
+          <Key>
+            <PropertyRef Name="userGroupId" />
+          </Key>
+          <Property Name="userGroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="groupName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="entryBy" Type="Int32" Nullable="false" />
+          <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <Property Name="updatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserMasters" Relationship="Inventory_DflowModel.FK_UserMaster_UserGroup" FromRole="UserGroup" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="User_Master">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="mobileNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="emailId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="loginId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="loginKey" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="userGroupId" Type="Int32" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="entryBy" Type="Int32" Nullable="false" />
+          <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="lastlogin" Type="DateTime" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <Property Name="updatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserGroup" Relationship="Inventory_DflowModel.FK_UserMaster_UserGroup" FromRole="UserMaster" ToRole="UserGroup" />
+        </EntityType>
+        <Association Name="FK_UserMaster_UserGroup">
+          <End Type="Inventory_DflowModel.User_Group" Role="UserGroup" Multiplicity="1" />
+          <End Type="Inventory_DflowModel.User_Master" Role="UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGroup">
+              <PropertyRef Name="userGroupId" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="userGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Expense_Master">
+          <Key>
+            <PropertyRef Name="expenseHeadId" />
+          </Key>
+          <Property Name="expenseHeadId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="expenseName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="entryBy" Type="Int32" Nullable="false" />
+          <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <Property Name="updatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="FinancialYear">
+          <Key>
+            <PropertyRef Name="finYear" />
+          </Key>
+          <Property Name="finYear" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="finYearDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="entryBy" Type="Int32" Nullable="false" />
+          <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="startDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="endDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="PaymentMode">
+          <Key>
+            <PropertyRef Name="paymentCode" />
+          </Key>
+          <Property Name="paymentCode" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="paymentDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="voucherHeaders" Relationship="Inventory_DflowModel.FK_voucherHeader_PaymentMode" FromRole="PaymentMode" ToRole="voucherHeader" />
+        </EntityType>
+        <Association Name="FK_Employee_Gender">
+          <End Type="Inventory_DflowModel.Gender" Role="Gender" Multiplicity="1" />
+          <End Type="Inventory_DflowModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="genderCode" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="sex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="voucherHeader">
+          <Key>
+            <PropertyRef Name="voucherId" />
+          </Key>
+          <Property Name="voucherId" Type="Int32" Nullable="false" />
+          <Property Name="voucherNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="voucherDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="invoiceNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="paymentMode" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="bankName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="chequeNo" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="chequeDate" Type="DateTime" Precision="0" />
+          <Property Name="entryBy" Type="Int32" Nullable="false" />
+          <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="updatedBy" Type="Int32" />
+          <Property Name="updatedDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="PaymentMode1" Relationship="Inventory_DflowModel.FK_voucherHeader_PaymentMode" FromRole="voucherHeader" ToRole="PaymentMode" />
+          <Property Name="finYear" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="narration" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_voucherHeader_PaymentMode">
+          <End Type="Inventory_DflowModel.PaymentMode" Role="PaymentMode" Multiplicity="1" />
+          <End Type="Inventory_DflowModel.voucherHeader" Role="voucherHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMode">
+              <PropertyRef Name="paymentCode" />
+            </Principal>
+            <Dependent Role="voucherHeader">
+              <PropertyRef Name="paymentMode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -706,6 +1162,7 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
           <EntitySetMapping Name="Customer_Master">
             <EntityTypeMapping TypeName="Inventory_DflowModel.Customer_Master">
               <MappingFragment StoreEntitySet="CustomerMaster">
+                <ScalarProperty Name="registerType" ColumnName="registerType" />
                 <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
                 <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
                 <ScalarProperty Name="entryDate" ColumnName="entryDate" />
@@ -815,22 +1272,6 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Genders">
-            <EntityTypeMapping TypeName="Inventory_DflowModel.Gender">
-              <MappingFragment StoreEntitySet="Gender">
-                <ScalarProperty Name="genderDescription" ColumnName="genderDescription" />
-                <ScalarProperty Name="genderCode" ColumnName="genderCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="marital_Status">
-            <EntityTypeMapping TypeName="Inventory_DflowModel.marital_Status">
-              <MappingFragment StoreEntitySet="maritalStatus">
-                <ScalarProperty Name="maritalStatusDesc" ColumnName="maritalStatusDesc" />
-                <ScalarProperty Name="maritalStatusCode" ColumnName="maritalStatusCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Distributor_Master">
             <EntityTypeMapping TypeName="Inventory_DflowModel.Distributor_Master">
               <MappingFragment StoreEntitySet="DistributorMaster">
@@ -882,6 +1323,8 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
           <EntitySetMapping Name="PurchaseHeaders">
             <EntityTypeMapping TypeName="Inventory_DflowModel.PurchaseHeader">
               <MappingFragment StoreEntitySet="PurchaseHeader">
+                <ScalarProperty Name="finYear" ColumnName="finYear" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
                 <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
                 <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
                 <ScalarProperty Name="entryDate" ColumnName="entryDate" />
@@ -894,6 +1337,154 @@ FROM [dbo].[maritalStatus] AS [maritalStatus]</DefiningQuery>
                 <ScalarProperty Name="purchaseDate" ColumnName="purchaseDate" />
                 <ScalarProperty Name="poNumber" ColumnName="poNumber" />
                 <ScalarProperty Name="purchaseId" ColumnName="purchaseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customerTypes">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.customerType">
+              <MappingFragment StoreEntitySet="customerType">
+                <ScalarProperty Name="typeDescription" ColumnName="typeDescription" />
+                <ScalarProperty Name="typeCode" ColumnName="typeCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="genderDescription" ColumnName="genderDescription" />
+                <ScalarProperty Name="genderCode" ColumnName="genderCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="marital_Status">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.marital_Status">
+              <MappingFragment StoreEntitySet="maritalStatus">
+                <ScalarProperty Name="maritalStatusDesc" ColumnName="maritalStatusDesc" />
+                <ScalarProperty Name="maritalStatusCode" ColumnName="maritalStatusCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceDetails">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.InvoiceDetail">
+              <MappingFragment StoreEntitySet="InvoiceDetail">
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="hsnCode" ColumnName="hsnCode" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+                <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
+                <ScalarProperty Name="invoiceDetailId" ColumnName="invoiceDetailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceHeaders">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.InvoiceHeader">
+              <MappingFragment StoreEntitySet="InvoiceHeader">
+                <ScalarProperty Name="finYear" ColumnName="finYear" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+                <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+                <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+                <ScalarProperty Name="cgstAmount2" ColumnName="cgstAmount2" />
+                <ScalarProperty Name="cgstPercent2" ColumnName="cgstPercent2" />
+                <ScalarProperty Name="cgstAmount1" ColumnName="cgstAmount1" />
+                <ScalarProperty Name="cgstPercent1" ColumnName="cgstPercent1" />
+                <ScalarProperty Name="taxableAmount" ColumnName="taxableAmount" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="invoiceDate" ColumnName="invoiceDate" />
+                <ScalarProperty Name="invoiceNumber" ColumnName="invoiceNumber" />
+                <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Group">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.User_Group">
+              <MappingFragment StoreEntitySet="UserGroup">
+                <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+                <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="groupName" ColumnName="groupName" />
+                <ScalarProperty Name="userGroupId" ColumnName="userGroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Master">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.User_Master">
+              <MappingFragment StoreEntitySet="UserMaster">
+                <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="lastlogin" ColumnName="lastlogin" />
+                <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+                <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="userGroupId" ColumnName="userGroupId" />
+                <ScalarProperty Name="loginKey" ColumnName="loginKey" />
+                <ScalarProperty Name="loginId" ColumnName="loginId" />
+                <ScalarProperty Name="emailId" ColumnName="emailId" />
+                <ScalarProperty Name="mobileNumber" ColumnName="mobileNumber" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Expense_Master">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.Expense_Master">
+              <MappingFragment StoreEntitySet="ExpenseMaster">
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+                <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="expenseName" ColumnName="expenseName" />
+                <ScalarProperty Name="expenseHeadId" ColumnName="expenseHeadId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinancialYears">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.FinancialYear">
+              <MappingFragment StoreEntitySet="FinancialYear">
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+                <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+                <ScalarProperty Name="finYearDescription" ColumnName="finYearDescription" />
+                <ScalarProperty Name="finYear" ColumnName="finYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentModes">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.PaymentMode">
+              <MappingFragment StoreEntitySet="PaymentMode">
+                <ScalarProperty Name="paymentDescription" ColumnName="paymentDescription" />
+                <ScalarProperty Name="paymentCode" ColumnName="paymentCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="voucherHeaders">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.voucherHeader">
+              <MappingFragment StoreEntitySet="voucherHeader">
+                <ScalarProperty Name="narration" ColumnName="narration" />
+                <ScalarProperty Name="finYear" ColumnName="finYear" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+                <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+                <ScalarProperty Name="chequeDate" ColumnName="chequeDate" />
+                <ScalarProperty Name="chequeNo" ColumnName="chequeNo" />
+                <ScalarProperty Name="bankName" ColumnName="bankName" />
+                <ScalarProperty Name="paymentMode" ColumnName="paymentMode" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="invoiceNo" ColumnName="invoiceNo" />
+                <ScalarProperty Name="voucherDate" ColumnName="voucherDate" />
+                <ScalarProperty Name="voucherNumber" ColumnName="voucherNumber" />
+                <ScalarProperty Name="voucherId" ColumnName="voucherId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

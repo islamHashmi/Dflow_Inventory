@@ -59,7 +59,7 @@ namespace Dflow_Inventory.ContentPage
                     {
                         foreach (var item in items)
                         {
-                            string name = item.itemCode + " - " + item.itemName;
+                            string name = item.itemName;
 
                             stringCollection.Add(name);
                         }
@@ -142,14 +142,14 @@ namespace Dflow_Inventory.ContentPage
 
                     string[] split = itemName.Split('-');
 
-                    string itemCode = split[0];
+                    string itemCode = itemName;
 
                     using (db = new Inventory_DflowEntities())
                     {
                         var item = (from m in db.Item_Master
                                     join b in db.Unit_Master on m.unitId equals b.unitId into unit
                                     from b in unit.DefaultIfEmpty()
-                                    where m.itemCode == itemCode
+                                    where m.itemName == itemCode
                                     select new
                                     {
                                         itemId = m.itemId,
@@ -167,6 +167,11 @@ namespace Dflow_Inventory.ContentPage
                         {
                             DgvItems["itemId", e.RowIndex].Value = item.itemId;
                             DgvItems["Col_Unit", e.RowIndex].Value = item.unitCode;
+                        }
+                        else
+                        {
+                            DgvItems["itemId", e.RowIndex].Value = DBNull.Value;
+                            DgvItems["Col_Unit", e.RowIndex].Value = DBNull.Value;
                         }
                     }
                 }
@@ -428,6 +433,8 @@ namespace Dflow_Inventory.ContentPage
                             ph.purchaseDate = (DateTime)CommanMethods.ConvertDate(dtpDate.Text);
                             ph.orderNumber = string.IsNullOrEmpty(TxtOrderNo.Text) ? null : TxtOrderNo.Text;
                             ph.orderDate = CommanMethods.ConvertDate(dtpOrderDate.Text);
+                            ph.remark = string.IsNullOrWhiteSpace(txtRemark.Text) ? null : txtRemark.Text;
+                            ph.finYear = string.IsNullOrEmpty(SessionHelper.FinYear) ? null : SessionHelper.FinYear;
 
                             int _vendorId = 0;
                             int.TryParse(lblVendorId.Text, out _vendorId);
@@ -454,7 +461,7 @@ namespace Dflow_Inventory.ContentPage
                                     {
                                         int _purchaseDetailId = 0;
 
-                                        int.TryParse(Convert.ToString(row.Cells["purchaseId"].Value), out _purchaseDetailId);
+                                        int.TryParse(Convert.ToString(row.Cells["purchaseDetailId"].Value), out _purchaseDetailId);
 
                                         if (_purchaseDetailId == 0)
                                         {
@@ -564,11 +571,13 @@ namespace Dflow_Inventory.ContentPage
             DgvList.Columns["totalAmount"].HeaderText = "Total Amt.";
             DgvList.Columns["totalAmount"].DisplayIndex = 6;
         }
-        
+
         private void CellContentClick(int ColumnIndex, int RowIndex)
         {
-            if (RowIndex > 0)
+            if (RowIndex >= 0)
             {
+                Clear_Controls();
+
                 using (db = new Inventory_DflowEntities())
                 {
                     int _id = 0;
@@ -589,7 +598,8 @@ namespace Dflow_Inventory.ContentPage
                                   vendorId = m.vendorId,
                                   vendorName = v.vendorName,
                                   totalQuantity = m.totalQuantity,
-                                  totalAmount = m.totalAmount
+                                  totalAmount = m.totalAmount,
+                                  remark = m.remark
                               }).SingleOrDefault();
 
                     var pd = (from m in db.PurchaseDetails
@@ -616,17 +626,26 @@ namespace Dflow_Inventory.ContentPage
                         TxtOrderNo.Text = ph.orderNumber;
                         dtpOrderDate.Text = ph.orderDate == null ? DateTime.Now.ToString("dd/MM/yyyy") : Convert.ToDateTime(ph.orderDate).ToString("dd/MM/yyyy");
                         TxtVendorName.Text = ph.vendorName;
+                        LstVendor.Hide();
                         lblVendorId.Text = Convert.ToString(ph.vendorId);
+                        txtRemark.Text = ph.remark;
 
                         if (pd != null)
                         {
-                            foreach(var item in pd)
+                            foreach (var item in pd)
                             {
-                                DgvItems.Rows.Add(item.Col_Item, item.Col_Unit, item.Col_Rate, item.Col_Quantity, item.Col_Amount, item.itemId, item.purchaseDetailId);
+                                DgvItems.Rows.Add(item.Col_Item,
+                                                item.Col_Unit,
+                                                item.Col_Rate,
+                                                item.Col_Quantity,
+                                                item.Col_Amount,
+                                                item.itemId,
+                                                item.purchaseDetailId);
                             }
                         }
                     }
                 }
+                tabControl1.SelectedIndex = 0;
             }
         }
 
@@ -635,6 +654,153 @@ namespace Dflow_Inventory.ContentPage
             try
             {
                 CellContentClick(e.ColumnIndex, e.RowIndex);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void DgvList_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (DgvList.CurrentCell != null)
+                {
+                    if (e.KeyCode == Keys.Enter)
+                    {
+                        CellContentClick(DgvList.CurrentCell.ColumnIndex, DgvList.CurrentCell.RowIndex);
+                    }
+                    else if (e.KeyCode == Keys.Delete)
+                    {
+                        if (DialogResult.No == MessageBox.Show("Are you sure to delete this record ?", "Warning", MessageBoxButtons.YesNo))
+                            return;
+
+                        int _id = 0;
+
+                        int.TryParse(Convert.ToString(DgvList["purchaseId", DgvList.CurrentCell.RowIndex].Value), out _id);
+
+                        using (TransactionScope scope = new TransactionScope())
+                        {
+                            try
+                            {
+                                using (db = new Inventory_DflowEntities())
+                                {
+                                    var ph = db.PurchaseHeaders.Where(m => m.purchaseId == _id).FirstOrDefault();
+                                    
+                                    if (ph != null)
+                                    {
+                                        db.PurchaseDetails.Where(m => m.purhcaseId == _id).ToList().ForEach(p => db.PurchaseDetails.Remove(p));
+
+                                        db.PurchaseHeaders.Remove(ph);
+                                    }
+
+                                    db.SaveChanges();
+
+                                    scope.Complete();
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                scope.Dispose();
+                                throw;
+                            }
+                        }
+
+                        Get_Data();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void DgvList_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var grid = sender as DataGridView;
+            var rowIdx = (e.RowIndex + 1).ToString();
+
+            var centerFormat = new StringFormat()
+            {
+                Alignment = StringAlignment.Center,
+
+                LineAlignment = StringAlignment.Center
+            };
+
+            Size textSize = TextRenderer.MeasureText(rowIdx, this.Font);
+
+            if (grid.RowHeadersWidth < textSize.Width + 40)
+            {
+                grid.RowHeadersWidth = textSize.Width + 40;
+            }
+
+            var headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
+            e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
+        }
+
+        private void DgvItems_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                using (db = new Inventory_DflowEntities())
+                {
+                    using (var scope = new TransactionScope())
+                    {
+                        try
+                        {
+                            int rowIndex = DgvItems.CurrentCell.RowIndex;
+
+                            int _purchaseDetailId = 0;
+
+                            int.TryParse(Convert.ToString(DgvItems["purchaseDetailId", rowIndex].Value), out _purchaseDetailId);
+
+                            DgvItems.Rows.RemoveAt(rowIndex);
+
+                            var pd = db.PurchaseDetails.FirstOrDefault(m => m.purchaseDetailId == _purchaseDetailId);
+
+                            if (pd != null)
+                            {
+                                db.PurchaseDetails.Remove(pd);
+
+                                db.SaveChanges();
+
+                                var totals = db.PurchaseDetails
+                                            .Where(m => m.purhcaseId == pd.purhcaseId)
+                                            .GroupBy(m => m.purhcaseId)
+                                            .Select(m => new
+                                            {
+                                                totalQty = m.Sum(x => x.quantity),
+                                                totalAmt = m.Sum(x => x.amount)
+                                            }).SingleOrDefault();
+
+                                if (pd != null)
+                                {
+                                    if (totals != null)
+                                    {
+                                       var ph = db.PurchaseHeaders.FirstOrDefault(x => x.purchaseId == pd.purhcaseId);
+
+                                        if (ph != null)
+                                        {
+                                            ph.totalQuantity = totals.totalQty;
+                                            ph.totalAmount = totals.totalAmt;
+                                        }
+
+                                        db.SaveChanges();
+                                    }
+                                }
+                            }
+
+                            scope.Complete();
+                        }
+                        catch (Exception)
+                        {
+                            scope.Dispose();
+                            throw;
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {

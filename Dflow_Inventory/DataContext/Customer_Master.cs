@@ -14,6 +14,11 @@ namespace Dflow_Inventory.DataContext
     
     public partial class Customer_Master
     {
+        public Customer_Master()
+        {
+            this.InvoiceHeaders = new HashSet<InvoiceHeader>();
+        }
+    
         public int customerId { get; set; }
         public string customerCode { get; set; }
         public string customerName { get; set; }
@@ -32,5 +37,8 @@ namespace Dflow_Inventory.DataContext
         public Nullable<System.DateTime> entryDate { get; set; }
         public Nullable<int> updatedBy { get; set; }
         public Nullable<System.DateTime> updatedDate { get; set; }
+        public string registerType { get; set; }
+    
+        public virtual ICollection<InvoiceHeader> InvoiceHeaders { get; set; }
     }
 }

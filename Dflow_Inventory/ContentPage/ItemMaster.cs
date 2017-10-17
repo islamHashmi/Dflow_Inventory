@@ -110,9 +110,17 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var units = db.Unit_Master.Where(m => m.active == true).ToList();
+                var units = db.Unit_Master
+                            .Select(m => new
+                            {
+                                unitName = m.unitName + " (" + m.unitCode + ")",
+                                unitId = m.unitId,
+                                active = m.active
+                            })
+                            .Where(m => m.active == true)
+                            .ToList();
 
-                units.Insert(0, new Unit_Master { unitName = "--- Select Unit ---", unitId = 0 });
+                units.Insert(0, new { unitName = "--- Select Unit ---", unitId = 0, active = true });
 
                 CmbUnit.DataSource = units;
                 CmbUnit.DisplayMember = "unitName";
@@ -194,7 +202,7 @@ namespace Dflow_Inventory.ContentPage
                                  openingStock = m.openingStock,
                                  active = m.active
                              }).ToList();
-                            
+
                 DgvList.DataSource = items;
 
                 Set_Column_Unit();
@@ -214,10 +222,10 @@ namespace Dflow_Inventory.ContentPage
             DgvList.Columns["itemName"].DisplayIndex = 1;
 
             DgvList.Columns["description"].HeaderText = "Description";
-            DgvList.Columns["description"].DisplayIndex = 2;
+            DgvList.Columns["description"].DisplayIndex = 3;
 
             DgvList.Columns["unitCode"].HeaderText = "Unit Code";
-            DgvList.Columns["unitCode"].DisplayIndex = 3;
+            DgvList.Columns["unitCode"].DisplayIndex = 2;
 
             DgvList.Columns["sellingPrice"].HeaderText = "Selling Price";
             DgvList.Columns["sellingPrice"].DisplayIndex = 4;
@@ -229,18 +237,21 @@ namespace Dflow_Inventory.ContentPage
         private void DgvList_KeyDown(object sender, KeyEventArgs e)
         {
             try
-            {                
-                if(DgvList.CurrentCell != null)
+            {
+                if (DgvList.CurrentCell != null)
                 {
                     if (e.KeyCode == Keys.Enter)
                     {
                         CellContentClick(DgvList.CurrentCell.ColumnIndex, DgvList.CurrentCell.RowIndex);
-                    }   
-                    else if(e.KeyCode == Keys.Delete)
+                    }
+                    else if (e.KeyCode == Keys.Delete)
                     {
+                        if (DialogResult.No == MessageBox.Show("Are you sure to delete this record ?", "Warning", MessageBoxButtons.YesNo))
+                            return;
+
                         int itemId = 0;
 
-                        int.TryParse(Convert.ToString(DgvList["itemId", DgvList.CurrentCell.RowIndex]), out itemId);
+                        int.TryParse(Convert.ToString(DgvList["itemId", DgvList.CurrentCell.RowIndex].Value), out itemId);
 
                         using (db = new Inventory_DflowEntities())
                         {
@@ -251,7 +262,11 @@ namespace Dflow_Inventory.ContentPage
                                 item.active = false;
 
                                 db.SaveChanges();
+
+                                Get_Data();
                             }
+                            else
+                                MessageBox.Show("Cannot delete this item.");
                         }
                     }
                 }

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Dflow_Inventory.DataContext;
+using Dflow_Inventory.Helpers;
 
 namespace Dflow_Inventory
 {
@@ -16,6 +18,23 @@ namespace Dflow_Inventory
         public MDIParent1()
         {
             InitializeComponent();
+
+            Get_StatusStrip();
+        }
+
+        private void Get_StatusStrip()
+        {
+            using (Inventory_DflowEntities db = new Inventory_DflowEntities())
+            {
+                var fy = db.FinancialYears.FirstOrDefault(m => m.finYear == SessionHelper.FinYear);
+
+                if (fy != null)
+                {
+                    toolStripFinYear.Text = "Financial year : " + fy.finYearDescription;
+                }
+            }
+
+            toolStripLoginUser.Text = "Logged In : " + SessionHelper.UserName;
         }
 
         private void Show_Form(Form frm)
@@ -129,6 +148,18 @@ namespace Dflow_Inventory
             try
             {
                 Show_Form(new VendorMaster());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void salesInvoiceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new SalesInvoice());
             }
             catch (Exception ex)
             {

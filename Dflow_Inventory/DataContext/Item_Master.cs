@@ -17,6 +17,7 @@ namespace Dflow_Inventory.DataContext
         public Item_Master()
         {
             this.PurchaseDetails = new HashSet<PurchaseDetail>();
+            this.InvoiceDetails = new HashSet<InvoiceDetail>();
         }
     
         public int itemId { get; set; }
@@ -34,5 +35,6 @@ namespace Dflow_Inventory.DataContext
     
         public virtual Unit_Master UnitMaster { get; set; }
         public virtual ICollection<PurchaseDetail> PurchaseDetails { get; set; }
+        public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
     }
 }

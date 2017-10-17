@@ -36,6 +36,7 @@
     <EntitySetMapping Name="Customer_Master">
       <EntityTypeMapping TypeName="Inventory_DflowModel.Customer_Master">
         <MappingFragment StoreEntitySet="CustomerMaster">
+          <ScalarProperty Name="registerType" ColumnName="registerType" />
           <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
           <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
           <ScalarProperty Name="entryDate" ColumnName="entryDate" />
@@ -145,22 +146,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Genders">
-      <EntityTypeMapping TypeName="Inventory_DflowModel.Gender">
-        <MappingFragment StoreEntitySet="Gender">
-          <ScalarProperty Name="genderDescription" ColumnName="genderDescription" />
-          <ScalarProperty Name="genderCode" ColumnName="genderCode" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="marital_Status">
-      <EntityTypeMapping TypeName="Inventory_DflowModel.marital_Status">
-        <MappingFragment StoreEntitySet="maritalStatus">
-          <ScalarProperty Name="maritalStatusDesc" ColumnName="maritalStatusDesc" />
-          <ScalarProperty Name="maritalStatusCode" ColumnName="maritalStatusCode" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Distributor_Master">
       <EntityTypeMapping TypeName="Inventory_DflowModel.Distributor_Master">
         <MappingFragment StoreEntitySet="DistributorMaster">
@@ -212,6 +197,8 @@
     <EntitySetMapping Name="PurchaseHeaders">
       <EntityTypeMapping TypeName="Inventory_DflowModel.PurchaseHeader">
         <MappingFragment StoreEntitySet="PurchaseHeader">
+          <ScalarProperty Name="finYear" ColumnName="finYear" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
           <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
           <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
           <ScalarProperty Name="entryDate" ColumnName="entryDate" />
@@ -224,6 +211,154 @@
           <ScalarProperty Name="purchaseDate" ColumnName="purchaseDate" />
           <ScalarProperty Name="poNumber" ColumnName="poNumber" />
           <ScalarProperty Name="purchaseId" ColumnName="purchaseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customerTypes">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.customerType">
+        <MappingFragment StoreEntitySet="customerType">
+          <ScalarProperty Name="typeDescription" ColumnName="typeDescription" />
+          <ScalarProperty Name="typeCode" ColumnName="typeCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genders">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.Gender">
+        <MappingFragment StoreEntitySet="Gender">
+          <ScalarProperty Name="genderDescription" ColumnName="genderDescription" />
+          <ScalarProperty Name="genderCode" ColumnName="genderCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="marital_Status">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.marital_Status">
+        <MappingFragment StoreEntitySet="maritalStatus">
+          <ScalarProperty Name="maritalStatusDesc" ColumnName="maritalStatusDesc" />
+          <ScalarProperty Name="maritalStatusCode" ColumnName="maritalStatusCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceDetails">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.InvoiceDetail">
+        <MappingFragment StoreEntitySet="InvoiceDetail">
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="rate" ColumnName="rate" />
+          <ScalarProperty Name="hsnCode" ColumnName="hsnCode" />
+          <ScalarProperty Name="unit" ColumnName="unit" />
+          <ScalarProperty Name="itemId" ColumnName="itemId" />
+          <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
+          <ScalarProperty Name="invoiceDetailId" ColumnName="invoiceDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceHeaders">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.InvoiceHeader">
+        <MappingFragment StoreEntitySet="InvoiceHeader">
+          <ScalarProperty Name="finYear" ColumnName="finYear" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+          <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+          <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+          <ScalarProperty Name="cgstAmount2" ColumnName="cgstAmount2" />
+          <ScalarProperty Name="cgstPercent2" ColumnName="cgstPercent2" />
+          <ScalarProperty Name="cgstAmount1" ColumnName="cgstAmount1" />
+          <ScalarProperty Name="cgstPercent1" ColumnName="cgstPercent1" />
+          <ScalarProperty Name="taxableAmount" ColumnName="taxableAmount" />
+          <ScalarProperty Name="discount" ColumnName="discount" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="invoiceDate" ColumnName="invoiceDate" />
+          <ScalarProperty Name="invoiceNumber" ColumnName="invoiceNumber" />
+          <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Group">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.User_Group">
+        <MappingFragment StoreEntitySet="UserGroup">
+          <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+          <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="groupName" ColumnName="groupName" />
+          <ScalarProperty Name="userGroupId" ColumnName="userGroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Master">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.User_Master">
+        <MappingFragment StoreEntitySet="UserMaster">
+          <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="lastlogin" ColumnName="lastlogin" />
+          <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+          <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="userGroupId" ColumnName="userGroupId" />
+          <ScalarProperty Name="loginKey" ColumnName="loginKey" />
+          <ScalarProperty Name="loginId" ColumnName="loginId" />
+          <ScalarProperty Name="emailId" ColumnName="emailId" />
+          <ScalarProperty Name="mobileNumber" ColumnName="mobileNumber" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Expense_Master">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.Expense_Master">
+        <MappingFragment StoreEntitySet="ExpenseMaster">
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+          <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="expenseName" ColumnName="expenseName" />
+          <ScalarProperty Name="expenseHeadId" ColumnName="expenseHeadId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FinancialYears">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.FinancialYear">
+        <MappingFragment StoreEntitySet="FinancialYear">
+          <ScalarProperty Name="endDate" ColumnName="endDate" />
+          <ScalarProperty Name="startDate" ColumnName="startDate" />
+          <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+          <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+          <ScalarProperty Name="finYearDescription" ColumnName="finYearDescription" />
+          <ScalarProperty Name="finYear" ColumnName="finYear" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentModes">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.PaymentMode">
+        <MappingFragment StoreEntitySet="PaymentMode">
+          <ScalarProperty Name="paymentDescription" ColumnName="paymentDescription" />
+          <ScalarProperty Name="paymentCode" ColumnName="paymentCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="voucherHeaders">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.voucherHeader">
+        <MappingFragment StoreEntitySet="voucherHeader">
+          <ScalarProperty Name="narration" ColumnName="narration" />
+          <ScalarProperty Name="finYear" ColumnName="finYear" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+          <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+          <ScalarProperty Name="chequeDate" ColumnName="chequeDate" />
+          <ScalarProperty Name="chequeNo" ColumnName="chequeNo" />
+          <ScalarProperty Name="bankName" ColumnName="bankName" />
+          <ScalarProperty Name="paymentMode" ColumnName="paymentMode" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="invoiceNo" ColumnName="invoiceNo" />
+          <ScalarProperty Name="voucherDate" ColumnName="voucherDate" />
+          <ScalarProperty Name="voucherNumber" ColumnName="voucherNumber" />
+          <ScalarProperty Name="voucherId" ColumnName="voucherId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
