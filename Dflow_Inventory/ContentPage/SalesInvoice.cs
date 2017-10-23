@@ -224,15 +224,15 @@ namespace Dflow_Inventory.ContentPage
 
             decimal _gstPercent1 = 0, _gstPercent2 = 0;
 
-            decimal.TryParse(TxtCGST1.Text, out _gstPercent1);
-            decimal.TryParse(TxtCGST2.Text, out _gstPercent2);
+            decimal.TryParse(TxtCGST.Text, out _gstPercent1);
+            decimal.TryParse(TxtSGST.Text, out _gstPercent2);
 
             _cgst1 = (_taxableAmt * _gstPercent1) / 100;
             _cgst2 = (_taxableAmt * _gstPercent2) / 100;
 
-            TxtCGST1Amt.Text = string.Format("{0:0.00}", _cgst1);
+            TxtCGSTAmt.Text = string.Format("{0:0.00}", _cgst1);
 
-            TxtCGST2Amt.Text = string.Format("{0:0.00}", _cgst2);
+            TxtSGSTAmt.Text = string.Format("{0:0.00}", _cgst2);
 
             _totalAmt = _taxableAmt + _cgst1 + _cgst2;
 
@@ -353,36 +353,7 @@ namespace Dflow_Inventory.ContentPage
                 throw;
             }
         }
-
-        private void TxtCustomerName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            try
-            {
-                if (!string.IsNullOrEmpty(TxtCustomerName.Text))
-                {
-                    using (db = new Inventory_DflowEntities())
-                    {
-                        int _customerId = 0;
-
-                        int.TryParse(lblCustomerId.Text, out _customerId);
-
-                        var customer = db.Customer_Master.FirstOrDefault(x => x.customerId == _customerId);
-
-                        if (customer == null)
-                        {
-                            TxtCustomerName.SelectAll();
-                            MessageBox.Show("'" + TxtCustomerName.Text + "' not found in vendor master", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            e.Cancel = true;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
+        
         private void Autogenerate_InvoiceNumber()
         {
             using (db = new Inventory_DflowEntities())
@@ -415,10 +386,10 @@ namespace Dflow_Inventory.ContentPage
                                     total = m.total,
                                     discount = m.discount,
                                     taxableAmt = m.taxableAmount,
-                                    cgstPercent1 = m.cgstPercent1,
-                                    cgstPercent2 = m.cgstPercent2,
-                                    cgstAmount1 = m.cgstAmount1,
-                                    cgstAmount2 = m.cgstAmount2,
+                                    cgstPercent = m.cgstPercent,
+                                    sgstPercent = m.sgstPercent,
+                                    cgstAmount = m.cgstAmount,
+                                    sgstAmount = m.sgstAmount,
                                     totalAmount = m.totalAmount
                                 }).ToList();
 
@@ -454,17 +425,17 @@ namespace Dflow_Inventory.ContentPage
             DgvList.Columns["taxableAmt"].HeaderText = "Taxable Rs.";
             DgvList.Columns["taxableAmt"].DisplayIndex = 6;
 
-            DgvList.Columns["cgstPercent1"].HeaderText = "Cgst %";
-            DgvList.Columns["cgstPercent1"].DisplayIndex = 7;
+            DgvList.Columns["cgstPercent"].HeaderText = "CGST %";
+            DgvList.Columns["cgstPercent"].DisplayIndex = 7;
 
-            DgvList.Columns["cgstAmount1"].HeaderText = "Cgst Rs.";
-            DgvList.Columns["cgstAmount1"].DisplayIndex = 8;
+            DgvList.Columns["cgstAmount"].HeaderText = "CGST Rs.";
+            DgvList.Columns["cgstAmount"].DisplayIndex = 8;
 
-            DgvList.Columns["cgstPercent2"].HeaderText = "Cgst %";
-            DgvList.Columns["cgstPercent2"].DisplayIndex = 9;
+            DgvList.Columns["sgstPercent"].HeaderText = "SGST %";
+            DgvList.Columns["sgstPercent"].DisplayIndex = 9;
 
-            DgvList.Columns["cgstAmount2"].HeaderText = "Cgst Rs.";
-            DgvList.Columns["cgstAmount2"].DisplayIndex = 10;
+            DgvList.Columns["sgstAmount"].HeaderText = "SGST Rs.";
+            DgvList.Columns["sgstAmount"].DisplayIndex = 10;
 
             DgvList.Columns["totalAmount"].HeaderText = "Total Amount";
             DgvList.Columns["totalAmount"].DisplayIndex = 11;
@@ -527,24 +498,24 @@ namespace Dflow_Inventory.ContentPage
 
                             ih.customerId = _customerId;
 
-                            decimal _total = 0, _discount = 0, _taxableAmt = 0, _cgstPercent1 = 0, _cgstPercent2 = 0, _cgstAmt1 = 0, _cgstAmt2 = 0, _totalAmt = 0;
+                            decimal _total = 0, _discount = 0, _taxableAmt = 0, _cgstPercent = 0, _sgstPercent = 0, _sgstAmt = 0, _cgstAmt = 0, _totalAmt = 0;
 
                             decimal.TryParse(Convert.ToString(TxtTotal.Text), out _total);
                             decimal.TryParse(Convert.ToString(TxtDiscount.Text), out _discount);
                             decimal.TryParse(Convert.ToString(TxtTaxableAmt.Text), out _taxableAmt);
-                            decimal.TryParse(Convert.ToString(TxtCGST1.Text), out _cgstPercent1);
-                            decimal.TryParse(Convert.ToString(TxtCGST2.Text), out _cgstPercent2);
-                            decimal.TryParse(Convert.ToString(TxtCGST1Amt.Text), out _cgstAmt1);
-                            decimal.TryParse(Convert.ToString(TxtCGST2Amt.Text), out _cgstAmt2);
+                            decimal.TryParse(Convert.ToString(TxtCGST.Text), out _cgstPercent);
+                            decimal.TryParse(Convert.ToString(TxtSGST.Text), out _sgstPercent);
+                            decimal.TryParse(Convert.ToString(TxtCGSTAmt.Text), out _sgstAmt);
+                            decimal.TryParse(Convert.ToString(TxtSGSTAmt.Text), out _cgstAmt);
                             decimal.TryParse(Convert.ToString(TxtTotalAmt.Text), out _totalAmt);
 
                             ih.total = _total == 0 ? null : (decimal?)_total;
                             ih.discount = _discount == 0 ? null : (decimal?)_discount;
                             ih.taxableAmount = _taxableAmt == 0 ? null : (decimal?)_taxableAmt;
-                            ih.cgstPercent1 = _cgstPercent1 == 0 ? null : (decimal?)_cgstPercent1;
-                            ih.cgstPercent2 = _cgstPercent2 == 0 ? null : (decimal?)_cgstPercent2;
-                            ih.cgstAmount1 = _cgstAmt1 == 0 ? null : (decimal?)_cgstAmt1;
-                            ih.cgstAmount2 = _cgstAmt2 == 0 ? null : (decimal?)_cgstAmt2;
+                            ih.cgstPercent = _cgstPercent == 0 ? null : (decimal?)_cgstPercent;
+                            ih.sgstPercent = _sgstPercent == 0 ? null : (decimal?)_sgstPercent;                            
+                            ih.cgstAmount = _cgstAmt == 0 ? null : (decimal?)_cgstAmt;
+                            ih.sgstAmount = _sgstAmt == 0 ? null : (decimal?)_sgstAmt;
                             ih.totalAmount = _totalAmt == 0 ? null : (decimal?)_totalAmt;
 
                             db.SaveChanges();
@@ -658,10 +629,10 @@ namespace Dflow_Inventory.ContentPage
                                   total = m.total,
                                   discount = m.discount,
                                   taxableAmt = m.taxableAmount,
-                                  cgstPercent1 = m.cgstPercent1,
-                                  cgstPercent2 = m.cgstPercent2,
-                                  cgstAmount1 = m.cgstAmount1,
-                                  cgstAmount2 = m.cgstAmount2,
+                                  cgstPercent = m.cgstPercent,
+                                  sgstPercent = m.sgstPercent,
+                                  cgstAmount = m.cgstAmount,
+                                  sgstAmount = m.sgstAmount,
                                   totalAmount = m.totalAmount
                               }).SingleOrDefault();
 
@@ -710,10 +681,10 @@ namespace Dflow_Inventory.ContentPage
                         TxtTotal.Text = Convert.ToString(ih.total);
                         TxtDiscount.Text = Convert.ToString(ih.discount);
                         TxtTaxableAmt.Text = Convert.ToString(ih.taxableAmt);
-                        TxtCGST1.Text = Convert.ToString(ih.cgstPercent1);
-                        TxtCGST2.Text = Convert.ToString(ih.cgstPercent2);
-                        TxtCGST1Amt.Text = Convert.ToString(ih.cgstAmount1);
-                        TxtCGST2Amt.Text = Convert.ToString(ih.cgstAmount2);
+                        TxtCGST.Text = Convert.ToString(ih.cgstPercent);
+                        TxtSGST.Text = Convert.ToString(ih.sgstPercent);
+                        TxtCGSTAmt.Text = Convert.ToString(ih.cgstAmount);
+                        TxtSGSTAmt.Text = Convert.ToString(ih.sgstAmount);
                         TxtTotalAmt.Text = Convert.ToString(ih.totalAmount);
                     }
                 }
@@ -811,31 +782,7 @@ namespace Dflow_Inventory.ContentPage
             var headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
             e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
         }
-
-        private void TxtCGST1_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                Calculate_Total_Amount();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
-        private void TxtCGST2_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                Calculate_Total_Amount();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
+        
         private void TxtDiscount_TextChanged(object sender, EventArgs e)
         {
             try
@@ -875,39 +822,7 @@ namespace Dflow_Inventory.ContentPage
                 throw;
             }
         }
-
-        private void TxtCGST1_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                decimal _gst = 0;
-
-                decimal.TryParse(TxtCGST1.Text, out _gst);
-
-                TxtCGST1.Text = string.Format("{0:0.00}", _gst);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
-        private void TxtCGST2_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                decimal _gst = 0;
-
-                decimal.TryParse(TxtCGST2.Text, out _gst);
-
-                TxtCGST2.Text = string.Format("{0:0.00}", _gst);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
+        
         private void DgvItems_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -944,25 +859,25 @@ namespace Dflow_Inventory.ContentPage
 
                                         if (ih != null)
                                         {
-                                            decimal _total = 0, _discount = 0, _taxableAmt = 0, _cgstPercent1 = 0, _cgstPercent2 = 0, _cgstAmt1 = 0,
-                                                    _cgstAmt2 = 0, _totalAmt = 0;
+                                            decimal _total = 0, _discount = 0, _taxableAmt = 0, _cgstPercent = 0, _sgstPercent = 0, _cgstAmt = 0,
+                                                    _sgstAmt = 0, _totalAmt = 0;
 
                                             decimal.TryParse(Convert.ToString(TxtTotal.Text), out _total);
                                             decimal.TryParse(Convert.ToString(TxtDiscount.Text), out _discount);
                                             decimal.TryParse(Convert.ToString(TxtTaxableAmt.Text), out _taxableAmt);
-                                            decimal.TryParse(Convert.ToString(TxtCGST1.Text), out _cgstPercent1);
-                                            decimal.TryParse(Convert.ToString(TxtCGST2.Text), out _cgstPercent2);
-                                            decimal.TryParse(Convert.ToString(TxtCGST1Amt.Text), out _cgstAmt1);
-                                            decimal.TryParse(Convert.ToString(TxtCGST2Amt.Text), out _cgstAmt2);
+                                            decimal.TryParse(Convert.ToString(TxtCGST.Text), out _cgstPercent);
+                                            decimal.TryParse(Convert.ToString(TxtSGST.Text), out _sgstPercent);
+                                            decimal.TryParse(Convert.ToString(TxtCGSTAmt.Text), out _cgstAmt);
+                                            decimal.TryParse(Convert.ToString(TxtSGSTAmt.Text), out _sgstAmt);
                                             decimal.TryParse(Convert.ToString(TxtTotalAmt.Text), out _totalAmt);
 
                                             ih.total = _total == 0 ? null : (decimal?)_total;
                                             ih.discount = _discount == 0 ? null : (decimal?)_discount;
                                             ih.taxableAmount = _taxableAmt == 0 ? null : (decimal?)_taxableAmt;
-                                            ih.cgstPercent1 = _cgstPercent1 == 0 ? null : (decimal?)_cgstPercent1;
-                                            ih.cgstPercent2 = _cgstPercent2 == 0 ? null : (decimal?)_cgstPercent2;
-                                            ih.cgstAmount1 = _cgstAmt1 == 0 ? null : (decimal?)_cgstAmt1;
-                                            ih.cgstAmount2 = _cgstAmt2 == 0 ? null : (decimal?)_cgstAmt2;
+                                            ih.cgstPercent = _cgstPercent == 0 ? null : (decimal?)_cgstPercent;
+                                            ih.sgstPercent = _sgstPercent == 0 ? null : (decimal?)_sgstPercent;
+                                            ih.cgstAmount = _cgstAmt == 0 ? null : (decimal?)_cgstAmt;
+                                            ih.sgstAmount = _sgstAmt == 0 ? null : (decimal?)_sgstAmt;
                                             ih.totalAmount = _totalAmt == 0 ? null : (decimal?)_totalAmt;
 
                                             db.SaveChanges();
@@ -980,6 +895,62 @@ namespace Dflow_Inventory.ContentPage
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void TxtCGST_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Calculate_Total_Amount();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void TxtCGST_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal _gst = 0;
+
+                decimal.TryParse(TxtSGST.Text, out _gst);
+
+                TxtSGST.Text = string.Format("{0:0.00}", _gst);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void TxtSGST_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Calculate_Total_Amount();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void TxtSGST_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal _gst = 0;
+
+                decimal.TryParse(TxtSGST.Text, out _gst);
+
+                TxtSGST.Text = string.Format("{0:0.00}", _gst);
             }
             catch (Exception ex)
             {

@@ -65,7 +65,7 @@ namespace Dflow_Inventory
 
                     SessionHelper.FinYear = finYear;                    
 
-                    MDIParent1 mdi = new MDIParent1();                    
+                    MasterPage mdi = new MasterPage();                    
                     mdi.WindowState = FormWindowState.Maximized;
                     mdi.Show();
 

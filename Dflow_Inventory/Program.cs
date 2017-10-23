@@ -11,7 +11,7 @@ namespace Dflow_Inventory
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new VoucherReceipt());
+            Application.Run(new Login());
         }
     }
 }

@@ -17,8 +17,7 @@ namespace Dflow_Inventory.DataContext
         public int voucherId { get; set; }
         public string voucherNumber { get; set; }
         public System.DateTime voucherDate { get; set; }
-        public string invoiceNo { get; set; }
-        public Nullable<decimal> amount { get; set; }
+        public decimal amount { get; set; }
         public string paymentMode { get; set; }
         public string bankName { get; set; }
         public string chequeNo { get; set; }
@@ -29,6 +28,10 @@ namespace Dflow_Inventory.DataContext
         public Nullable<System.DateTime> updatedDate { get; set; }
         public string finYear { get; set; }
         public string narration { get; set; }
+        public string voucherType { get; set; }
+        public Nullable<int> customerId { get; set; }
+        public Nullable<int> employeeId { get; set; }
+        public string name { get; set; }
     
         public virtual PaymentMode PaymentMode1 { get; set; }
     }

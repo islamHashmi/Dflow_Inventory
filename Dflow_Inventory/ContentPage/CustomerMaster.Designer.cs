@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.cmbType = new System.Windows.Forms.ComboBox();
@@ -118,7 +118,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage1.Size = new System.Drawing.Size(685, 461);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Add Supplier";
+            this.tabPage1.Text = "Add Customer";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // cmbType
@@ -172,7 +172,7 @@
             // 
             this.TxtPanNo.Location = new System.Drawing.Point(442, 344);
             this.TxtPanNo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.TxtPanNo.MaxLength = 50;
+            this.TxtPanNo.MaxLength = 10;
             this.TxtPanNo.Name = "TxtPanNo";
             this.TxtPanNo.Size = new System.Drawing.Size(156, 23);
             this.TxtPanNo.TabIndex = 13;
@@ -394,7 +394,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage2.Size = new System.Drawing.Size(685, 461);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "View Suppliers";
+            this.tabPage2.Text = "View Customers";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // Link_shorcut
@@ -414,14 +414,14 @@
             this.DgvList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.DgvList.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgvList.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvList.DefaultCellStyle = dataGridViewCellStyle1;
             this.DgvList.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.DgvList.Location = new System.Drawing.Point(3, 26);
             this.DgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);

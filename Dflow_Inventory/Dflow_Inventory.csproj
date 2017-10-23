@@ -53,6 +53,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContentPage\ApplicationParameter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContentPage\ApplicationParameter.Designer.cs">
+      <DependentUpon>ApplicationParameter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContentPage\ChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContentPage\ChangePassword.Designer.cs">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="ContentPage\CustomerMaster.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +100,12 @@
     </Compile>
     <Compile Include="ContentPage\ItemMaster.Designer.cs">
       <DependentUpon>ItemMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContentPage\Production.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContentPage\Production.Designer.cs">
+      <DependentUpon>Production.cs</DependentUpon>
     </Compile>
     <Compile Include="ContentPage\PurchaseOrder.cs">
       <SubType>Form</SubType>
@@ -131,11 +149,20 @@
     <Compile Include="ContentPage\VendorMaster.Designer.cs">
       <DependentUpon>VendorMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContentPage\VoucherPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContentPage\VoucherPayment.Designer.cs">
+      <DependentUpon>VoucherPayment.cs</DependentUpon>
+    </Compile>
     <Compile Include="ContentPage\VoucherReceipt.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ContentPage\VoucherReceipt.Designer.cs">
       <DependentUpon>VoucherReceipt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Application_Parameter.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataContext\customerType.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
@@ -227,11 +254,11 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="MDIParent1.cs">
+    <Compile Include="MasterPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MDIParent1.Designer.cs">
-      <DependentUpon>MDIParent1.cs</DependentUpon>
+    <Compile Include="MasterPage.Designer.cs">
+      <DependentUpon>MasterPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -241,6 +268,12 @@
     <Compile Include="Shortcuts.Designer.cs">
       <DependentUpon>Shortcuts.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ContentPage\ApplicationParameter.resx">
+      <DependentUpon>ApplicationParameter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContentPage\ChangePassword.resx">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ContentPage\CustomerMaster.resx">
       <DependentUpon>CustomerMaster.cs</DependentUpon>
     </EmbeddedResource>
@@ -258,6 +291,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ContentPage\ItemMaster.resx">
       <DependentUpon>ItemMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContentPage\Production.resx">
+      <DependentUpon>Production.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ContentPage\PurchaseOrder.resx">
       <DependentUpon>PurchaseOrder.cs</DependentUpon>
@@ -280,14 +316,17 @@
     <EmbeddedResource Include="ContentPage\VendorMaster.resx">
       <DependentUpon>VendorMaster.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ContentPage\VoucherPayment.resx">
+      <DependentUpon>VoucherPayment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ContentPage\VoucherReceipt.resx">
       <DependentUpon>VoucherReceipt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MDIParent1.resx">
-      <DependentUpon>MDIParent1.cs</DependentUpon>
+    <EmbeddedResource Include="MasterPage.resx">
+      <DependentUpon>MasterPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

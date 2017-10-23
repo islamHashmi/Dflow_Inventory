@@ -113,6 +113,7 @@
       <End Role="PaymentMode" EntitySet="PaymentModes" />
       <End Role="voucherHeader" EntitySet="voucherHeaders" />
     </AssociationSet>
+    <EntitySet Name="Application_Parameter" EntityType="Inventory_DflowModel.Application_Parameter" />
   </EntityContainer>
   <EntityType Name="Customer_Master">
     <Key>
@@ -394,10 +395,6 @@
     <Property Name="total" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="discount" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="taxableAmount" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="cgstPercent1" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="cgstAmount1" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="cgstPercent2" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="cgstAmount2" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="totalAmount" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="entryBy" Type="Int32" Nullable="false" />
     <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -406,6 +403,10 @@
     <NavigationProperty Name="CustomerMaster" Relationship="Inventory_DflowModel.FK_InvoiceHeader_CustomerMaster" FromRole="InvoiceHeader" ToRole="Customer_Master" />
     <NavigationProperty Name="InvoiceDetails" Relationship="Inventory_DflowModel.FK_Table_1_InvoiceHeader" FromRole="InvoiceHeader" ToRole="InvoiceDetail" />
     <Property Name="finYear" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="cgstPercent" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="cgstAmount" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="sgstPercent" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="sgstAmount" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
   <Association Name="FK_InvoiceHeader_CustomerMaster">
     <End Type="Inventory_DflowModel.Customer_Master" Role="Customer_Master" Multiplicity="1" />
@@ -537,8 +538,7 @@
     <Property Name="voucherId" Type="Int32" Nullable="false" />
     <Property Name="voucherNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="voucherDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="invoiceNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="paymentMode" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
     <Property Name="bankName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="chequeNo" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
@@ -550,6 +550,10 @@
     <NavigationProperty Name="PaymentMode1" Relationship="Inventory_DflowModel.FK_voucherHeader_PaymentMode" FromRole="voucherHeader" ToRole="PaymentMode" />
     <Property Name="finYear" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
     <Property Name="narration" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="voucherType" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="customerId" Type="Int32" />
+    <Property Name="employeeId" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_voucherHeader_PaymentMode">
     <End Type="Inventory_DflowModel.PaymentMode" Role="PaymentMode" Multiplicity="1" />
@@ -563,4 +567,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Application_Parameter">
+    <Key>
+      <PropertyRef Name="applicationParameterId" />
+    </Key>
+    <Property Name="applicationParameterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="companyName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="dealsIn" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="addressLine1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="addressLine2" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="mobileNo1" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="mobileNo2" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="emailAddress1" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="emailAddress2" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="panNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="hsnCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gstNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

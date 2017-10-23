@@ -1,4 +1,6 @@
 ﻿using Dflow_Inventory.ContentPage;
+using Dflow_Inventory.DataContext;
+using Dflow_Inventory.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,14 +10,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Dflow_Inventory.DataContext;
-using Dflow_Inventory.Helpers;
 
 namespace Dflow_Inventory
 {
-    public partial class MDIParent1 : Form
+    public partial class MasterPage : Form
     {
-        public MDIParent1()
+        public MasterPage()
         {
             InitializeComponent();
 
@@ -42,20 +42,11 @@ namespace Dflow_Inventory
             frm.Show();
         }
 
-        private void MDIParent1_FormClosing(object sender, FormClosingEventArgs e)
+        private void CloseAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
-        }
-
-        private void itemsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
+            foreach (Form childForm in MdiChildren)
             {
-                Show_Form(new ItemMaster());
-            }
-            catch (Exception ex)
-            {
-                throw;
+                childForm.Close();
             }
         }
 
@@ -71,11 +62,11 @@ namespace Dflow_Inventory
             }
         }
 
-        private void suppliersToolStripMenuItem_Click(object sender, EventArgs e)
+        private void itemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                Show_Form(new SupplierMaster());
+                Show_Form(new ItemMaster());
             }
             catch (Exception ex)
             {
@@ -95,55 +86,7 @@ namespace Dflow_Inventory
             }
         }
 
-        private void purchaseOrderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Show_Form(new PurchaseOrder());
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
-        private void designationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Show_Form(new DesignationMaster());
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
-        private void employeeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Show_Form(new EmployeeMaster());
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
-        private void distributorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Show_Form(new DistributorMaster());
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
-        private void vendorToolStripMenuItem_Click(object sender, EventArgs e)
+        private void vendorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -155,11 +98,119 @@ namespace Dflow_Inventory
             }
         }
 
-        private void salesInvoiceToolStripMenuItem_Click(object sender, EventArgs e)
+        private void designationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new DesignationMaster());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void employeesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new EmployeeMaster());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void expensesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new ExpenseMaster());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void purchaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new PurchaseOrder());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void salesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
                 Show_Form(new SalesInvoice());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void receiptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new VoucherReceipt());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void paymentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new VoucherReceipt());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void applicationParameterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new ApplicationParameter());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void userMasterToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new UserMaster());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void MasterPage_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                Application.Exit();
             }
             catch (Exception ex)
             {

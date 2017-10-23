@@ -71,6 +71,7 @@
             this.TxtPassword.Name = "TxtPassword";
             this.TxtPassword.Size = new System.Drawing.Size(165, 23);
             this.TxtPassword.TabIndex = 4;
+            this.TxtPassword.UseSystemPasswordChar = true;
             // 
             // label2
             // 

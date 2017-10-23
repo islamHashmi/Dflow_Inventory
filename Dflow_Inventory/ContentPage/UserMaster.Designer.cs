@@ -31,6 +31,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cmbUserGroup = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.TxtEmail = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.TxtMobile = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.TxtName = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.TxtConfirmPass = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.TxtPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.BtnCancel = new System.Windows.Forms.Button();
@@ -40,16 +50,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.Link_shorcut = new System.Windows.Forms.LinkLabel();
             this.DgvList = new System.Windows.Forms.DataGridView();
-            this.TxtConfirmPass = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.TxtName = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.TxtMobile = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.TxtEmail = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cmbUserGroup = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -97,6 +97,95 @@
             this.tabPage1.Text = "Add User";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // cmbUserGroup
+            // 
+            this.cmbUserGroup.FormattingEnabled = true;
+            this.cmbUserGroup.Location = new System.Drawing.Point(199, 127);
+            this.cmbUserGroup.Name = "cmbUserGroup";
+            this.cmbUserGroup.Size = new System.Drawing.Size(187, 26);
+            this.cmbUserGroup.TabIndex = 4;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(66, 130);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(73, 18);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "User Group";
+            // 
+            // TxtEmail
+            // 
+            this.TxtEmail.Location = new System.Drawing.Point(199, 222);
+            this.TxtEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TxtEmail.Name = "TxtEmail";
+            this.TxtEmail.Size = new System.Drawing.Size(367, 23);
+            this.TxtEmail.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(66, 225);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(51, 18);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Email Id";
+            // 
+            // TxtMobile
+            // 
+            this.TxtMobile.Location = new System.Drawing.Point(199, 191);
+            this.TxtMobile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TxtMobile.MaxLength = 10;
+            this.TxtMobile.Name = "TxtMobile";
+            this.TxtMobile.Size = new System.Drawing.Size(156, 23);
+            this.TxtMobile.TabIndex = 6;
+            this.TxtMobile.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtMobile_KeyPress);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(66, 194);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(68, 18);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Mobile No.";
+            // 
+            // TxtName
+            // 
+            this.TxtName.Location = new System.Drawing.Point(199, 160);
+            this.TxtName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TxtName.Name = "TxtName";
+            this.TxtName.Size = new System.Drawing.Size(314, 23);
+            this.TxtName.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(66, 163);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(40, 18);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Name";
+            // 
+            // TxtConfirmPass
+            // 
+            this.TxtConfirmPass.Location = new System.Drawing.Point(199, 96);
+            this.TxtConfirmPass.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TxtConfirmPass.Name = "TxtConfirmPass";
+            this.TxtConfirmPass.Size = new System.Drawing.Size(156, 23);
+            this.TxtConfirmPass.TabIndex = 3;
+            this.TxtConfirmPass.UseSystemPasswordChar = true;
+            this.TxtConfirmPass.Validating += new System.ComponentModel.CancelEventHandler(this.TxtConfirmPass_Validating);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(66, 99);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(107, 18);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Confirm Password";
+            // 
             // TxtPassword
             // 
             this.TxtPassword.Location = new System.Drawing.Point(199, 65);
@@ -104,6 +193,7 @@
             this.TxtPassword.Name = "TxtPassword";
             this.TxtPassword.Size = new System.Drawing.Size(156, 23);
             this.TxtPassword.TabIndex = 2;
+            this.TxtPassword.UseSystemPasswordChar = true;
             // 
             // label1
             // 
@@ -206,95 +296,9 @@
             this.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvList.Size = new System.Drawing.Size(648, 352);
             this.DgvList.TabIndex = 0;
+            this.DgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvList_CellDoubleClick);
             this.DgvList.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvList_RowPostPaint);
-            // 
-            // TxtConfirmPass
-            // 
-            this.TxtConfirmPass.Location = new System.Drawing.Point(199, 96);
-            this.TxtConfirmPass.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.TxtConfirmPass.Name = "TxtConfirmPass";
-            this.TxtConfirmPass.Size = new System.Drawing.Size(156, 23);
-            this.TxtConfirmPass.TabIndex = 3;
-            this.TxtConfirmPass.Validating += new System.ComponentModel.CancelEventHandler(this.TxtConfirmPass_Validating);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(66, 99);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 18);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Confirm Password";
-            // 
-            // TxtName
-            // 
-            this.TxtName.Location = new System.Drawing.Point(199, 160);
-            this.TxtName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.TxtName.Name = "TxtName";
-            this.TxtName.Size = new System.Drawing.Size(314, 23);
-            this.TxtName.TabIndex = 5;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(66, 163);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 18);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "Name";
-            // 
-            // TxtMobile
-            // 
-            this.TxtMobile.Location = new System.Drawing.Point(199, 191);
-            this.TxtMobile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.TxtMobile.MaxLength = 10;
-            this.TxtMobile.Name = "TxtMobile";
-            this.TxtMobile.Size = new System.Drawing.Size(156, 23);
-            this.TxtMobile.TabIndex = 6;
-            this.TxtMobile.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtMobile_KeyPress);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(66, 194);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(68, 18);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Mobile No.";
-            // 
-            // TxtEmail
-            // 
-            this.TxtEmail.Location = new System.Drawing.Point(199, 222);
-            this.TxtEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.TxtEmail.Name = "TxtEmail";
-            this.TxtEmail.Size = new System.Drawing.Size(367, 23);
-            this.TxtEmail.TabIndex = 7;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(66, 225);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(51, 18);
-            this.label6.TabIndex = 20;
-            this.label6.Text = "Email Id";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(66, 130);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(73, 18);
-            this.label7.TabIndex = 21;
-            this.label7.Text = "User Group";
-            // 
-            // cmbUserGroup
-            // 
-            this.cmbUserGroup.FormattingEnabled = true;
-            this.cmbUserGroup.Location = new System.Drawing.Point(199, 127);
-            this.cmbUserGroup.Name = "cmbUserGroup";
-            this.cmbUserGroup.Size = new System.Drawing.Size(187, 26);
-            this.cmbUserGroup.TabIndex = 4;
+            this.DgvList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvList_KeyDown);
             // 
             // UserMaster
             // 

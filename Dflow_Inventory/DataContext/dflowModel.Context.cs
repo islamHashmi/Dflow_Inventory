@@ -47,5 +47,6 @@ namespace Dflow_Inventory.DataContext
         public DbSet<FinancialYear> FinancialYears { get; set; }
         public DbSet<PaymentMode> PaymentModes { get; set; }
         public DbSet<voucherHeader> voucherHeaders { get; set; }
+        public DbSet<Application_Parameter> Application_Parameter { get; set; }
     }
 }

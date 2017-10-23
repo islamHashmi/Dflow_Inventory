@@ -5,6 +5,23 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Inventory_DflowModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ApplicationParameter">
+          <Key>
+            <PropertyRef Name="applicationParameterId" />
+          </Key>
+          <Property Name="applicationParameterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="companyName" Type="varchar" MaxLength="250" />
+          <Property Name="dealsIn" Type="varchar" MaxLength="250" />
+          <Property Name="addressLine1" Type="varchar" MaxLength="250" />
+          <Property Name="addressLine2" Type="varchar" MaxLength="250" />
+          <Property Name="mobileNo1" Type="char" MaxLength="10" />
+          <Property Name="mobileNo2" Type="char" MaxLength="10" />
+          <Property Name="emailAddress1" Type="varchar" MaxLength="256" />
+          <Property Name="emailAddress2" Type="varchar" MaxLength="256" />
+          <Property Name="panNumber" Type="char" MaxLength="10" />
+          <Property Name="hsnCode" Type="varchar" MaxLength="50" />
+          <Property Name="gstNumber" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="CustomerMaster">
           <Key>
             <PropertyRef Name="customerId" />
@@ -166,10 +183,10 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
           <Property Name="total" Type="decimal" Precision="18" Scale="2" />
           <Property Name="discount" Type="decimal" Precision="10" Scale="2" />
           <Property Name="taxableAmount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="cgstPercent1" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="cgstAmount1" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="cgstPercent2" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="cgstAmount2" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="cgstPercent" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="cgstAmount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="sgstPercent" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="sgstAmount" Type="decimal" Precision="10" Scale="2" />
           <Property Name="totalAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="finYear" Type="char" MaxLength="4" />
           <Property Name="entryBy" Type="int" Nullable="false" />
@@ -335,18 +352,21 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
           <Property Name="voucherId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="voucherNumber" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="voucherDate" Type="date" Nullable="false" />
-          <Property Name="invoiceNo" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="voucherType" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="customerId" Type="int" />
+          <Property Name="employeeId" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="250" />
+          <Property Name="amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="paymentMode" Type="char" MaxLength="2" Nullable="false" />
           <Property Name="bankName" Type="varchar" MaxLength="150" />
           <Property Name="chequeNo" Type="char" MaxLength="6" />
           <Property Name="chequeDate" Type="date" />
+          <Property Name="narration" Type="varchar" MaxLength="500" />
           <Property Name="finYear" Type="char" MaxLength="4" />
           <Property Name="entryBy" Type="int" Nullable="false" />
           <Property Name="entryDate" Type="date" Nullable="false" />
           <Property Name="updatedBy" Type="int" />
           <Property Name="updatedDate" Type="date" />
-          <Property Name="narration" Type="varchar" MaxLength="500" />
         </EntityType>
         <Association Name="FK_Employee_Designation">
           <End Role="Designation" Type="Self.Designation" Multiplicity="0..1" />
@@ -481,6 +501,7 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Inventory_DflowModelStoreContainer">
+          <EntitySet Name="ApplicationParameter" EntityType="Self.ApplicationParameter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerMaster" EntityType="Self.CustomerMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="customerType" EntityType="Self.customerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />
@@ -671,6 +692,7 @@ FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
             <End Role="PaymentMode" EntitySet="PaymentModes" />
             <End Role="voucherHeader" EntitySet="voucherHeaders" />
           </AssociationSet>
+          <EntitySet Name="Application_Parameter" EntityType="Inventory_DflowModel.Application_Parameter" />
         </EntityContainer>
         <EntityType Name="Customer_Master">
           <Key>
@@ -952,10 +974,6 @@ FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
           <Property Name="total" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="discount" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="taxableAmount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="cgstPercent1" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="cgstAmount1" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="cgstPercent2" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="cgstAmount2" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="totalAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="entryBy" Type="Int32" Nullable="false" />
           <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -964,6 +982,10 @@ FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
           <NavigationProperty Name="CustomerMaster" Relationship="Inventory_DflowModel.FK_InvoiceHeader_CustomerMaster" FromRole="InvoiceHeader" ToRole="Customer_Master" />
           <NavigationProperty Name="InvoiceDetails" Relationship="Inventory_DflowModel.FK_Table_1_InvoiceHeader" FromRole="InvoiceHeader" ToRole="InvoiceDetail" />
           <Property Name="finYear" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="cgstPercent" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="cgstAmount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="sgstPercent" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="sgstAmount" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
         <Association Name="FK_InvoiceHeader_CustomerMaster">
           <End Type="Inventory_DflowModel.Customer_Master" Role="Customer_Master" Multiplicity="1" />
@@ -1095,8 +1117,7 @@ FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
           <Property Name="voucherId" Type="Int32" Nullable="false" />
           <Property Name="voucherNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="voucherDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="invoiceNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="paymentMode" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
           <Property Name="bankName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="chequeNo" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
@@ -1108,6 +1129,10 @@ FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
           <NavigationProperty Name="PaymentMode1" Relationship="Inventory_DflowModel.FK_voucherHeader_PaymentMode" FromRole="voucherHeader" ToRole="PaymentMode" />
           <Property Name="finYear" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
           <Property Name="narration" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="voucherType" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="customerId" Type="Int32" />
+          <Property Name="employeeId" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_voucherHeader_PaymentMode">
           <End Type="Inventory_DflowModel.PaymentMode" Role="PaymentMode" Multiplicity="1" />
@@ -1121,6 +1146,23 @@ FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Application_Parameter">
+          <Key>
+            <PropertyRef Name="applicationParameterId" />
+          </Key>
+          <Property Name="applicationParameterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="companyName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="dealsIn" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="addressLine1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="addressLine2" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="mobileNo1" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="mobileNo2" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="emailAddress1" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="emailAddress2" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="panNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="hsnCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="gstNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1381,16 +1423,16 @@ FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
           <EntitySetMapping Name="InvoiceHeaders">
             <EntityTypeMapping TypeName="Inventory_DflowModel.InvoiceHeader">
               <MappingFragment StoreEntitySet="InvoiceHeader">
+                <ScalarProperty Name="sgstAmount" ColumnName="sgstAmount" />
+                <ScalarProperty Name="sgstPercent" ColumnName="sgstPercent" />
+                <ScalarProperty Name="cgstAmount" ColumnName="cgstAmount" />
+                <ScalarProperty Name="cgstPercent" ColumnName="cgstPercent" />
                 <ScalarProperty Name="finYear" ColumnName="finYear" />
                 <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
                 <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
                 <ScalarProperty Name="entryDate" ColumnName="entryDate" />
                 <ScalarProperty Name="entryBy" ColumnName="entryBy" />
                 <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
-                <ScalarProperty Name="cgstAmount2" ColumnName="cgstAmount2" />
-                <ScalarProperty Name="cgstPercent2" ColumnName="cgstPercent2" />
-                <ScalarProperty Name="cgstAmount1" ColumnName="cgstAmount1" />
-                <ScalarProperty Name="cgstPercent1" ColumnName="cgstPercent1" />
                 <ScalarProperty Name="taxableAmount" ColumnName="taxableAmount" />
                 <ScalarProperty Name="discount" ColumnName="discount" />
                 <ScalarProperty Name="total" ColumnName="total" />
@@ -1470,6 +1512,10 @@ FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
           <EntitySetMapping Name="voucherHeaders">
             <EntityTypeMapping TypeName="Inventory_DflowModel.voucherHeader">
               <MappingFragment StoreEntitySet="voucherHeader">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="voucherType" ColumnName="voucherType" />
                 <ScalarProperty Name="narration" ColumnName="narration" />
                 <ScalarProperty Name="finYear" ColumnName="finYear" />
                 <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
@@ -1481,10 +1527,27 @@ FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
                 <ScalarProperty Name="bankName" ColumnName="bankName" />
                 <ScalarProperty Name="paymentMode" ColumnName="paymentMode" />
                 <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="invoiceNo" ColumnName="invoiceNo" />
                 <ScalarProperty Name="voucherDate" ColumnName="voucherDate" />
                 <ScalarProperty Name="voucherNumber" ColumnName="voucherNumber" />
                 <ScalarProperty Name="voucherId" ColumnName="voucherId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Application_Parameter">
+            <EntityTypeMapping TypeName="Inventory_DflowModel.Application_Parameter">
+              <MappingFragment StoreEntitySet="ApplicationParameter">
+                <ScalarProperty Name="gstNumber" ColumnName="gstNumber" />
+                <ScalarProperty Name="hsnCode" ColumnName="hsnCode" />
+                <ScalarProperty Name="panNumber" ColumnName="panNumber" />
+                <ScalarProperty Name="emailAddress2" ColumnName="emailAddress2" />
+                <ScalarProperty Name="emailAddress1" ColumnName="emailAddress1" />
+                <ScalarProperty Name="mobileNo2" ColumnName="mobileNo2" />
+                <ScalarProperty Name="mobileNo1" ColumnName="mobileNo1" />
+                <ScalarProperty Name="addressLine2" ColumnName="addressLine2" />
+                <ScalarProperty Name="addressLine1" ColumnName="addressLine1" />
+                <ScalarProperty Name="dealsIn" ColumnName="dealsIn" />
+                <ScalarProperty Name="companyName" ColumnName="companyName" />
+                <ScalarProperty Name="applicationParameterId" ColumnName="applicationParameterId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

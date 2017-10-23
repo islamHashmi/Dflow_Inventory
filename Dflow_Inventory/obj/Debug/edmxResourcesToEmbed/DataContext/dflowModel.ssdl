@@ -1,5 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Inventory_DflowModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ApplicationParameter">
+    <Key>
+      <PropertyRef Name="applicationParameterId" />
+    </Key>
+    <Property Name="applicationParameterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="companyName" Type="varchar" MaxLength="250" />
+    <Property Name="dealsIn" Type="varchar" MaxLength="250" />
+    <Property Name="addressLine1" Type="varchar" MaxLength="250" />
+    <Property Name="addressLine2" Type="varchar" MaxLength="250" />
+    <Property Name="mobileNo1" Type="char" MaxLength="10" />
+    <Property Name="mobileNo2" Type="char" MaxLength="10" />
+    <Property Name="emailAddress1" Type="varchar" MaxLength="256" />
+    <Property Name="emailAddress2" Type="varchar" MaxLength="256" />
+    <Property Name="panNumber" Type="char" MaxLength="10" />
+    <Property Name="hsnCode" Type="varchar" MaxLength="50" />
+    <Property Name="gstNumber" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="CustomerMaster">
     <Key>
       <PropertyRef Name="customerId" />
@@ -161,10 +178,10 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
     <Property Name="total" Type="decimal" Precision="18" Scale="2" />
     <Property Name="discount" Type="decimal" Precision="10" Scale="2" />
     <Property Name="taxableAmount" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="cgstPercent1" Type="decimal" Precision="5" Scale="2" />
-    <Property Name="cgstAmount1" Type="decimal" Precision="10" Scale="2" />
-    <Property Name="cgstPercent2" Type="decimal" Precision="5" Scale="2" />
-    <Property Name="cgstAmount2" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="cgstPercent" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="cgstAmount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="sgstPercent" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="sgstAmount" Type="decimal" Precision="10" Scale="2" />
     <Property Name="totalAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="finYear" Type="char" MaxLength="4" />
     <Property Name="entryBy" Type="int" Nullable="false" />
@@ -330,18 +347,21 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
     <Property Name="voucherId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="voucherNumber" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="voucherDate" Type="date" Nullable="false" />
-    <Property Name="invoiceNo" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="voucherType" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="customerId" Type="int" />
+    <Property Name="employeeId" Type="int" />
+    <Property Name="name" Type="varchar" MaxLength="250" />
+    <Property Name="amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="paymentMode" Type="char" MaxLength="2" Nullable="false" />
     <Property Name="bankName" Type="varchar" MaxLength="150" />
     <Property Name="chequeNo" Type="char" MaxLength="6" />
     <Property Name="chequeDate" Type="date" />
+    <Property Name="narration" Type="varchar" MaxLength="500" />
     <Property Name="finYear" Type="char" MaxLength="4" />
     <Property Name="entryBy" Type="int" Nullable="false" />
     <Property Name="entryDate" Type="date" Nullable="false" />
     <Property Name="updatedBy" Type="int" />
     <Property Name="updatedDate" Type="date" />
-    <Property Name="narration" Type="varchar" MaxLength="500" />
   </EntityType>
   <Association Name="FK_Employee_Designation">
     <End Role="Designation" Type="Self.Designation" Multiplicity="0..1" />
@@ -476,6 +496,7 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="Inventory_DflowModelStoreContainer">
+    <EntitySet Name="ApplicationParameter" EntityType="Self.ApplicationParameter" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CustomerMaster" EntityType="Self.CustomerMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="customerType" EntityType="Self.customerType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />

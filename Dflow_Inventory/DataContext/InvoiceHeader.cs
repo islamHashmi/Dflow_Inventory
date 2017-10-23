@@ -27,16 +27,16 @@ namespace Dflow_Inventory.DataContext
         public Nullable<decimal> total { get; set; }
         public Nullable<decimal> discount { get; set; }
         public Nullable<decimal> taxableAmount { get; set; }
-        public Nullable<decimal> cgstPercent1 { get; set; }
-        public Nullable<decimal> cgstAmount1 { get; set; }
-        public Nullable<decimal> cgstPercent2 { get; set; }
-        public Nullable<decimal> cgstAmount2 { get; set; }
         public Nullable<decimal> totalAmount { get; set; }
         public int entryBy { get; set; }
         public System.DateTime entryDate { get; set; }
         public Nullable<int> updatedBy { get; set; }
         public Nullable<System.DateTime> updatedDate { get; set; }
         public string finYear { get; set; }
+        public Nullable<decimal> cgstPercent { get; set; }
+        public Nullable<decimal> cgstAmount { get; set; }
+        public Nullable<decimal> sgstPercent { get; set; }
+        public Nullable<decimal> sgstAmount { get; set; }
     
         public virtual Customer_Master CustomerMaster { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }

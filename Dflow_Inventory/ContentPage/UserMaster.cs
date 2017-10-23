@@ -48,7 +48,7 @@ namespace Dflow_Inventory.ContentPage
         {
             try
             {
-                if (!string.IsNullOrWhiteSpace(TxtLoginId.Text))
+                if (!string.IsNullOrWhiteSpace(TxtLoginId.Text) && _userId == 0)
                 {
                     using (db = new Inventory_DflowEntities())
                     {
@@ -59,7 +59,7 @@ namespace Dflow_Inventory.ContentPage
                             MessageBox.Show("Login Id already exists", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             e.Cancel = true;
                         }
-                    }                    
+                    }
                 }
             }
             catch (Exception ex)
@@ -104,7 +104,7 @@ namespace Dflow_Inventory.ContentPage
         {
             try
             {
-                if(string.IsNullOrWhiteSpace(TxtLoginId.Text))
+                if (string.IsNullOrWhiteSpace(TxtLoginId.Text))
                 {
                     MessageBox.Show("Login Id is mandatory.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     TxtLoginId.Focus();
@@ -150,12 +150,12 @@ namespace Dflow_Inventory.ContentPage
                         um.updatedOn = DateTime.Now;
                     }
 
-                    um.loginId = TxtLoginId.Text;
-                    um.loginKey = TxtPassword.Text;
+                    um.loginId = string.IsNullOrEmpty(TxtLoginId.Text) ? null : TxtLoginId.Text;
+                    um.loginKey = string.IsNullOrEmpty(TxtPassword.Text) ? null : TxtPassword.Text;
                     um.userGroupId = Convert.ToInt32(cmbUserGroup.SelectedValue);
-                    um.name = TxtName.Text;
-                    um.mobileNumber = TxtMobile.Text;
-                    um.emailId = TxtEmail.Text;
+                    um.name = string.IsNullOrEmpty(TxtName.Text) ? null : TxtName.Text;
+                    um.mobileNumber = string.IsNullOrEmpty(TxtMobile.Text) ? null : TxtMobile.Text;
+                    um.emailId = string.IsNullOrEmpty(TxtEmail.Text) ? null : TxtEmail.Text;
 
                     db.SaveChanges();
 
@@ -289,7 +289,7 @@ namespace Dflow_Inventory.ContentPage
                             TxtPassword.Text = um.loginKey;
                             TxtConfirmPass.Text = um.loginKey;
                             TxtName.Text = um.name;
-                            TxtMobile.Text = um.mobileNumber;
+                            TxtMobile.Text = um.mobileNumber.Trim();
                             TxtEmail.Text = um.emailId;
                             cmbUserGroup.SelectedValue = um.userGroupId;
                         }
@@ -342,6 +342,18 @@ namespace Dflow_Inventory.ContentPage
 
                                 db.SaveChanges();
                             }
+                        }
+                    }
+                    else if(e.KeyData ==(Keys.Shift | Keys.P))
+                    {
+                        int _id = 0;
+
+                        int.TryParse(Convert.ToString(DgvList["userId", DgvList.CurrentCell.RowIndex].Value), out _id);
+
+                        if(_id != 0)
+                        {
+                            ChangePassword frm = new ChangePassword(_id, Convert.ToString(DgvList["loginId", DgvList.CurrentCell.RowIndex].Value));
+                            frm.Show();
                         }
                     }
                 }

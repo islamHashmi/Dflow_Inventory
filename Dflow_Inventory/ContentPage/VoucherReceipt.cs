@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dflow_Inventory.DataContext;
 using System.Transactions;
@@ -98,28 +94,7 @@ namespace Dflow_Inventory.ContentPage
                 throw;
             }
         }
-
-        private void TxtInvoiceNo_Validating(object sender, CancelEventArgs e)
-        {
-            try
-            {
-                using (db = new Inventory_DflowEntities())
-                {
-                    var invoices = db.InvoiceHeaders.FirstOrDefault(m => m.invoiceNumber == TxtInvoiceNo.Text.Trim());
-
-                    if (invoices != null)
-                    {
-                        TxtCustomerName.Text = invoices.CustomerMaster.customerName;
-                        TxtAmount.Text = invoices.totalAmount.ToString();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
+        
         private void BtnSave_Click(object sender, EventArgs e)
         {
             try
@@ -147,14 +122,11 @@ namespace Dflow_Inventory.ContentPage
                                 vh.updatedBy = SessionHelper.UserId;
                                 vh.updatedDate = DateTime.Now;
                             }
-
-                            decimal _amount = 0;
-
-                            decimal.TryParse(TxtAmount.Text, out _amount);
+                            
+                            decimal.TryParse(TxtAmount.Text, out decimal _amount);
 
                             vh.voucherDate = (DateTime)CommanMethods.ConvertDate(DtpVoucherDate.Text);
-                            vh.invoiceNo = string.IsNullOrEmpty(TxtInvoiceNo.Text) ? null : TxtInvoiceNo.Text.Trim();
-                            vh.amount = _amount == 0 ? null : (decimal?)_amount;
+                            vh.amount = _amount;
                             vh.paymentMode = Convert.ToString(cmbPaymentMode.SelectedValue);
                             vh.bankName = string.IsNullOrEmpty(TxtBankName.Text) ? null : TxtBankName.Text;
                             vh.chequeNo = string.IsNullOrEmpty(TxtChqueNo.Text) ? null : TxtChqueNo.Text;
@@ -192,17 +164,18 @@ namespace Dflow_Inventory.ContentPage
         private void Clear_Fields()
         {
             Autogenerate_VoucherNumber();
+
             Clear_Date();
 
             _voucherId = 0;
 
-            TxtInvoiceNo.Text = string.Empty;
             TxtCustomerName.Text = string.Empty;
             TxtAmount.Text = string.Empty;
             cmbPaymentMode.SelectedIndex = 0;
             TxtNarration.Text = string.Empty;
             TxtBankName.Text = string.Empty;
             TxtChqueNo.Text = string.Empty;
+            lblCustomerId.Text = string.Empty;
         }
 
         private void Get_Data()
@@ -210,8 +183,8 @@ namespace Dflow_Inventory.ContentPage
             using (db = new Inventory_DflowEntities())
             {
                 var vouchers = (from a in db.voucherHeaders
-                                join b in db.InvoiceHeaders on a.invoiceNo equals b.invoiceNumber into inv
-                                from b in inv.DefaultIfEmpty()
+                                join b in db.Customer_Master on a.customerId equals b.customerId into cus
+                                from b in cus.DefaultIfEmpty()
                                 join c in db.PaymentModes on a.paymentMode equals c.paymentCode into pay
                                 from c in pay.DefaultIfEmpty()
                                 select new
@@ -219,8 +192,7 @@ namespace Dflow_Inventory.ContentPage
                                     voucherId = a.voucherId,
                                     voucherNumber = a.voucherNumber,
                                     voucherDate = a.voucherDate,
-                                    invoiceNumber = a.invoiceNo,
-                                    customer = b.CustomerMaster.customerName,
+                                    customer = b.customerName,
                                     amount = a.amount,
                                     paymentMode = c.paymentDescription,
                                     bankName = a.bankName,
@@ -243,9 +215,6 @@ namespace Dflow_Inventory.ContentPage
 
             DgvList.Columns["voucherDate"].HeaderText = "VOucher Date";
             DgvList.Columns["voucherDate"].DisplayIndex = 0;
-
-            DgvList.Columns["invoiceNumber"].HeaderText = "Invoice #";
-            DgvList.Columns["invoiceNumber"].DisplayIndex = 0;
 
             DgvList.Columns["customer"].HeaderText = "Customer Name";
             DgvList.Columns["customer"].DisplayIndex = 0;
@@ -277,18 +246,15 @@ namespace Dflow_Inventory.ContentPage
                 using (db = new Inventory_DflowEntities())
                 {
                     var voucher = (from a in db.voucherHeaders
-                                   join b in db.InvoiceHeaders on a.invoiceNo equals b.invoiceNumber into inv
-                                   from b in inv.DefaultIfEmpty()
-                                   join c in db.Customer_Master on b.customerId equals c.customerId into cust
-                                   from c in cust.DefaultIfEmpty()
+                                   join b in db.Customer_Master on a.customerId equals b.customerId into cus
+                                   from b in cus.DefaultIfEmpty()
                                    where a.voucherId == _id
                                    select new
                                    {
                                        voucherId = a.voucherId,
                                        voucherNo = a.voucherNumber,
                                        voucherDate = a.voucherDate,
-                                       invoiceNo = a.invoiceNo,
-                                       customer = c.customerName,
+                                       customer = b.customerName,
                                        amount = a.amount,
                                        paymentMode = a.paymentMode,
                                        bankName = a.bankName,
@@ -302,7 +268,6 @@ namespace Dflow_Inventory.ContentPage
                         _voucherId = voucher.voucherId;
                         TxtVoucherNo.Text = voucher.voucherNo;
                         DtpVoucherDate.Text = voucher.voucherDate.ToString("dd/MM/yyyy");
-                        TxtInvoiceNo.Text = voucher.invoiceNo;
                         TxtCustomerName.Text = voucher.customer;
                         TxtAmount.Text = voucher.amount.ToString();
                         cmbPaymentMode.SelectedValue = voucher.paymentMode;
@@ -365,5 +330,121 @@ namespace Dflow_Inventory.ContentPage
                 throw;
             }
         }
+
+        private void TxtCustomerName_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                using (db = new Inventory_DflowEntities())
+                {
+                    var Vendors = db.Customer_Master
+                                    .Select(m => new
+                                    {
+                                        vendorId = m.customerId,
+                                        vendorName = m.customerName,
+                                        active = m.active
+                                    })
+                                    .Where(m => m.active == true && m.vendorName.Contains(TxtCustomerName.Text.Trim()))
+                                    .ToList();
+
+                    if (Vendors != null)
+                    {
+                        LstCustomer.DataSource = Vendors;
+                        LstCustomer.DisplayMember = "vendorName";
+                        LstCustomer.ValueMember = "vendorId";
+                        LstCustomer.SelectedIndex = -1;
+                    }
+                }
+
+                LstCustomer_Show();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void LstCustomer_Show()
+        {
+            LstCustomer.Show();
+            LstCustomer.BringToFront();
+            LstCustomer.Location = new Point(TxtCustomerName.Location.X, TxtCustomerName.Location.Y + 25);
+            LstCustomer.Width = TxtCustomerName.Width;
+            LstCustomer.Height = 200;
+        }
+
+        private void TxtCustomerName_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Down)
+                {
+                    LstCustomer_Show();
+
+                    LstCustomer.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void LstCustomer_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    string referredById = LstCustomer.SelectedValue.ToString();
+
+                    TxtCustomerName.Text = LstCustomer.Text;
+
+                    lblCustomerId.Text = referredById;
+
+                    LstCustomer.Hide();
+
+                    TxtCustomerName.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void LstCustomer_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                string referredById = LstCustomer.SelectedValue.ToString();
+
+                TxtCustomerName.Text = LstCustomer.Text;
+
+                lblCustomerId.Text = referredById;
+
+                LstCustomer.Hide();
+
+                TxtCustomerName.Focus();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void LstCustomer_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                LstCustomer.Hide();
+                TxtCustomerName.Focus();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        
     }
 }

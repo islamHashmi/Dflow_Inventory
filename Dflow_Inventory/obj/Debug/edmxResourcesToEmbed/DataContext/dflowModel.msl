@@ -255,16 +255,16 @@
     <EntitySetMapping Name="InvoiceHeaders">
       <EntityTypeMapping TypeName="Inventory_DflowModel.InvoiceHeader">
         <MappingFragment StoreEntitySet="InvoiceHeader">
+          <ScalarProperty Name="sgstAmount" ColumnName="sgstAmount" />
+          <ScalarProperty Name="sgstPercent" ColumnName="sgstPercent" />
+          <ScalarProperty Name="cgstAmount" ColumnName="cgstAmount" />
+          <ScalarProperty Name="cgstPercent" ColumnName="cgstPercent" />
           <ScalarProperty Name="finYear" ColumnName="finYear" />
           <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
           <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
           <ScalarProperty Name="entryDate" ColumnName="entryDate" />
           <ScalarProperty Name="entryBy" ColumnName="entryBy" />
           <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
-          <ScalarProperty Name="cgstAmount2" ColumnName="cgstAmount2" />
-          <ScalarProperty Name="cgstPercent2" ColumnName="cgstPercent2" />
-          <ScalarProperty Name="cgstAmount1" ColumnName="cgstAmount1" />
-          <ScalarProperty Name="cgstPercent1" ColumnName="cgstPercent1" />
           <ScalarProperty Name="taxableAmount" ColumnName="taxableAmount" />
           <ScalarProperty Name="discount" ColumnName="discount" />
           <ScalarProperty Name="total" ColumnName="total" />
@@ -344,6 +344,10 @@
     <EntitySetMapping Name="voucherHeaders">
       <EntityTypeMapping TypeName="Inventory_DflowModel.voucherHeader">
         <MappingFragment StoreEntitySet="voucherHeader">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="voucherType" ColumnName="voucherType" />
           <ScalarProperty Name="narration" ColumnName="narration" />
           <ScalarProperty Name="finYear" ColumnName="finYear" />
           <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
@@ -355,10 +359,27 @@
           <ScalarProperty Name="bankName" ColumnName="bankName" />
           <ScalarProperty Name="paymentMode" ColumnName="paymentMode" />
           <ScalarProperty Name="amount" ColumnName="amount" />
-          <ScalarProperty Name="invoiceNo" ColumnName="invoiceNo" />
           <ScalarProperty Name="voucherDate" ColumnName="voucherDate" />
           <ScalarProperty Name="voucherNumber" ColumnName="voucherNumber" />
           <ScalarProperty Name="voucherId" ColumnName="voucherId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Application_Parameter">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.Application_Parameter">
+        <MappingFragment StoreEntitySet="ApplicationParameter">
+          <ScalarProperty Name="gstNumber" ColumnName="gstNumber" />
+          <ScalarProperty Name="hsnCode" ColumnName="hsnCode" />
+          <ScalarProperty Name="panNumber" ColumnName="panNumber" />
+          <ScalarProperty Name="emailAddress2" ColumnName="emailAddress2" />
+          <ScalarProperty Name="emailAddress1" ColumnName="emailAddress1" />
+          <ScalarProperty Name="mobileNo2" ColumnName="mobileNo2" />
+          <ScalarProperty Name="mobileNo1" ColumnName="mobileNo1" />
+          <ScalarProperty Name="addressLine2" ColumnName="addressLine2" />
+          <ScalarProperty Name="addressLine1" ColumnName="addressLine1" />
+          <ScalarProperty Name="dealsIn" ColumnName="dealsIn" />
+          <ScalarProperty Name="companyName" ColumnName="companyName" />
+          <ScalarProperty Name="applicationParameterId" ColumnName="applicationParameterId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

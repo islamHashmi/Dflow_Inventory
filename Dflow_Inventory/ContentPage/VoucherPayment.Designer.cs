@@ -1,6 +1,6 @@
 ﻿namespace Dflow_Inventory.ContentPage
 {
-    partial class VoucherReceipt
+    partial class VoucherPayment
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.lblCustomerId = new System.Windows.Forms.Label();
@@ -47,7 +47,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cmbPaymentMode = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.TxtCustomerName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.DtpVoucherDate = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
@@ -57,6 +56,10 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.Link_shorcut = new System.Windows.Forms.LinkLabel();
             this.DgvList = new System.Windows.Forms.DataGridView();
+            this.cmbExpenseHead = new System.Windows.Forms.ComboBox();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cmbEmployee = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.grpPayment.SuspendLayout();
@@ -75,11 +78,15 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(908, 369);
-            this.tabControl1.TabIndex = 3;
+            this.tabControl1.Size = new System.Drawing.Size(899, 435);
+            this.tabControl1.TabIndex = 4;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.cmbEmployee);
+            this.tabPage1.Controls.Add(this.txtName);
+            this.tabPage1.Controls.Add(this.label9);
+            this.tabPage1.Controls.Add(this.cmbExpenseHead);
             this.tabPage1.Controls.Add(this.lblCustomerId);
             this.tabPage1.Controls.Add(this.LstCustomer);
             this.tabPage1.Controls.Add(this.grpPayment);
@@ -90,7 +97,6 @@
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.cmbPaymentMode);
             this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.TxtCustomerName);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.DtpVoucherDate);
             this.tabPage1.Controls.Add(this.label2);
@@ -101,15 +107,15 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage1.Size = new System.Drawing.Size(900, 335);
+            this.tabPage1.Size = new System.Drawing.Size(891, 401);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Add Receipt";
+            this.tabPage1.Text = "Add Payment";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // lblCustomerId
             // 
             this.lblCustomerId.AutoSize = true;
-            this.lblCustomerId.Location = new System.Drawing.Point(671, 12);
+            this.lblCustomerId.Location = new System.Drawing.Point(734, 13);
             this.lblCustomerId.Name = "lblCustomerId";
             this.lblCustomerId.Size = new System.Drawing.Size(40, 18);
             this.lblCustomerId.TabIndex = 33;
@@ -120,14 +126,11 @@
             // 
             this.LstCustomer.FormattingEnabled = true;
             this.LstCustomer.ItemHeight = 18;
-            this.LstCustomer.Location = new System.Drawing.Point(717, 10);
+            this.LstCustomer.Location = new System.Drawing.Point(780, 11);
             this.LstCustomer.Name = "LstCustomer";
             this.LstCustomer.Size = new System.Drawing.Size(103, 22);
             this.LstCustomer.TabIndex = 32;
             this.LstCustomer.Visible = false;
-            this.LstCustomer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LstCustomer_MouseDoubleClick);
-            this.LstCustomer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LstCustomer_KeyDown);
-            this.LstCustomer.Leave += new System.EventHandler(this.LstCustomer_Leave);
             // 
             // grpPayment
             // 
@@ -137,7 +140,7 @@
             this.grpPayment.Controls.Add(this.TxtChqueNo);
             this.grpPayment.Controls.Add(this.label6);
             this.grpPayment.Controls.Add(this.TxtBankName);
-            this.grpPayment.Location = new System.Drawing.Point(36, 146);
+            this.grpPayment.Location = new System.Drawing.Point(35, 185);
             this.grpPayment.Name = "grpPayment";
             this.grpPayment.Size = new System.Drawing.Size(414, 121);
             this.grpPayment.TabIndex = 29;
@@ -153,7 +156,6 @@
             this.DtpChqDate.Name = "DtpChqDate";
             this.DtpChqDate.Size = new System.Drawing.Size(114, 23);
             this.DtpChqDate.TabIndex = 34;
-            this.DtpChqDate.ValueChanged += new System.EventHandler(this.DtpChqDate_ValueChanged);
             // 
             // label8
             // 
@@ -199,16 +201,16 @@
             // 
             // TxtNarration
             // 
-            this.TxtNarration.Location = new System.Drawing.Point(462, 85);
+            this.TxtNarration.Location = new System.Drawing.Point(472, 88);
             this.TxtNarration.Multiline = true;
             this.TxtNarration.Name = "TxtNarration";
-            this.TxtNarration.Size = new System.Drawing.Size(411, 139);
+            this.TxtNarration.Size = new System.Drawing.Size(391, 139);
             this.TxtNarration.TabIndex = 31;
             // 
             // lblNaration
             // 
             this.lblNaration.AutoSize = true;
-            this.lblNaration.Location = new System.Drawing.Point(464, 59);
+            this.lblNaration.Location = new System.Drawing.Point(469, 62);
             this.lblNaration.Name = "lblNaration";
             this.lblNaration.Size = new System.Drawing.Size(61, 18);
             this.lblNaration.TabIndex = 30;
@@ -219,27 +221,25 @@
             this.BtnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
             this.BtnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
             this.BtnSave.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSave.Location = new System.Drawing.Point(467, 237);
+            this.BtnSave.Location = new System.Drawing.Point(472, 258);
             this.BtnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(72, 30);
             this.BtnSave.TabIndex = 28;
             this.BtnSave.Text = "Save";
             this.BtnSave.UseVisualStyleBackColor = false;
-            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // TxtAmount
             // 
-            this.TxtAmount.Location = new System.Drawing.Point(155, 85);
+            this.TxtAmount.Location = new System.Drawing.Point(154, 124);
             this.TxtAmount.Name = "TxtAmount";
             this.TxtAmount.Size = new System.Drawing.Size(113, 23);
             this.TxtAmount.TabIndex = 27;
-            this.TxtAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtAmount_KeyPress);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(33, 88);
+            this.label5.Location = new System.Drawing.Point(32, 127);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 18);
             this.label5.TabIndex = 26;
@@ -248,44 +248,34 @@
             // cmbPaymentMode
             // 
             this.cmbPaymentMode.FormattingEnabled = true;
-            this.cmbPaymentMode.Location = new System.Drawing.Point(155, 114);
+            this.cmbPaymentMode.Location = new System.Drawing.Point(154, 153);
             this.cmbPaymentMode.Name = "cmbPaymentMode";
             this.cmbPaymentMode.Size = new System.Drawing.Size(165, 26);
             this.cmbPaymentMode.TabIndex = 25;
-            this.cmbPaymentMode.SelectionChangeCommitted += new System.EventHandler(this.cmbPaymentMode_SelectionChangeCommitted);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 117);
+            this.label3.Location = new System.Drawing.Point(32, 156);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 18);
             this.label3.TabIndex = 24;
             this.label3.Text = "Payment Mode";
             // 
-            // TxtCustomerName
-            // 
-            this.TxtCustomerName.Location = new System.Drawing.Point(155, 56);
-            this.TxtCustomerName.Name = "TxtCustomerName";
-            this.TxtCustomerName.Size = new System.Drawing.Size(288, 23);
-            this.TxtCustomerName.TabIndex = 23;
-            this.TxtCustomerName.TextChanged += new System.EventHandler(this.TxtCustomerName_TextChanged);
-            this.TxtCustomerName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtCustomerName_KeyDown);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(33, 59);
+            this.label4.Location = new System.Drawing.Point(32, 62);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 18);
+            this.label4.Size = new System.Drawing.Size(85, 18);
             this.label4.TabIndex = 22;
-            this.label4.Text = "Customer Name";
+            this.label4.Text = "Expense Head";
             // 
             // DtpVoucherDate
             // 
             this.DtpVoucherDate.CustomFormat = "dd/MM/yyyy";
             this.DtpVoucherDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DtpVoucherDate.Location = new System.Drawing.Point(339, 26);
+            this.DtpVoucherDate.Location = new System.Drawing.Point(338, 29);
             this.DtpVoucherDate.Name = "DtpVoucherDate";
             this.DtpVoucherDate.Size = new System.Drawing.Size(104, 23);
             this.DtpVoucherDate.TabIndex = 19;
@@ -293,7 +283,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(286, 30);
+            this.label2.Location = new System.Drawing.Point(298, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 18);
             this.label2.TabIndex = 18;
@@ -301,7 +291,7 @@
             // 
             // TxtVoucherNo
             // 
-            this.TxtVoucherNo.Location = new System.Drawing.Point(155, 27);
+            this.TxtVoucherNo.Location = new System.Drawing.Point(154, 30);
             this.TxtVoucherNo.Name = "TxtVoucherNo";
             this.TxtVoucherNo.ReadOnly = true;
             this.TxtVoucherNo.Size = new System.Drawing.Size(113, 23);
@@ -310,7 +300,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 30);
+            this.label1.Location = new System.Drawing.Point(32, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 18);
             this.label1.TabIndex = 16;
@@ -321,7 +311,7 @@
             this.BtnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(87)))), ((int)(((byte)(51)))));
             this.BtnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
             this.BtnCancel.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCancel.Location = new System.Drawing.Point(545, 237);
+            this.BtnCancel.Location = new System.Drawing.Point(550, 258);
             this.BtnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(78, 30);
@@ -337,16 +327,16 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(900, 335);
+            this.tabPage2.Size = new System.Drawing.Size(891, 401);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "View Receipts";
+            this.tabPage2.Text = "View Payments";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // Link_shorcut
             // 
             this.Link_shorcut.AutoSize = true;
             this.Link_shorcut.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Link_shorcut.Location = new System.Drawing.Point(805, 4);
+            this.Link_shorcut.Location = new System.Drawing.Point(796, 4);
             this.Link_shorcut.Name = "Link_shorcut";
             this.Link_shorcut.Size = new System.Drawing.Size(92, 18);
             this.Link_shorcut.TabIndex = 2;
@@ -359,34 +349,64 @@
             this.DgvList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.DgvList.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgvList.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvList.DefaultCellStyle = dataGridViewCellStyle1;
             this.DgvList.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.DgvList.Location = new System.Drawing.Point(3, 26);
             this.DgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DgvList.Name = "DgvList";
             this.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvList.Size = new System.Drawing.Size(894, 305);
+            this.DgvList.Size = new System.Drawing.Size(885, 371);
             this.DgvList.TabIndex = 0;
-            this.DgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvList_CellDoubleClick);
-            this.DgvList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvList_KeyDown);
             // 
-            // VoucherReceipt
+            // cmbExpenseHead
+            // 
+            this.cmbExpenseHead.FormattingEnabled = true;
+            this.cmbExpenseHead.Location = new System.Drawing.Point(154, 59);
+            this.cmbExpenseHead.Name = "cmbExpenseHead";
+            this.cmbExpenseHead.Size = new System.Drawing.Size(288, 26);
+            this.cmbExpenseHead.TabIndex = 34;
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(639, 8);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(89, 23);
+            this.txtName.TabIndex = 36;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(32, 94);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(60, 18);
+            this.label9.TabIndex = 35;
+            this.label9.Text = "Employee";
+            // 
+            // cmbEmployee
+            // 
+            this.cmbEmployee.FormattingEnabled = true;
+            this.cmbEmployee.Location = new System.Drawing.Point(154, 92);
+            this.cmbEmployee.Name = "cmbEmployee";
+            this.cmbEmployee.Size = new System.Drawing.Size(288, 26);
+            this.cmbEmployee.TabIndex = 37;
+            // 
+            // VoucherPayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(908, 369);
+            this.ClientSize = new System.Drawing.Size(899, 435);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "VoucherReceipt";
-            this.Text = "Receipt Voucher";
+            this.Name = "VoucherPayment";
+            this.Text = "Payment Voucher";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -403,20 +423,11 @@
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.DateTimePicker DtpVoucherDate;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox TxtVoucherNo;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button BtnCancel;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.LinkLabel Link_shorcut;
-        private System.Windows.Forms.DataGridView DgvList;
-        private System.Windows.Forms.ComboBox cmbPaymentMode;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox TxtCustomerName;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox TxtAmount;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cmbExpenseHead;
+        private System.Windows.Forms.Label lblCustomerId;
+        private System.Windows.Forms.ListBox LstCustomer;
         private System.Windows.Forms.GroupBox grpPayment;
         private System.Windows.Forms.DateTimePicker DtpChqDate;
         private System.Windows.Forms.Label label8;
@@ -427,7 +438,19 @@
         private System.Windows.Forms.TextBox TxtNarration;
         private System.Windows.Forms.Label lblNaration;
         private System.Windows.Forms.Button BtnSave;
-        private System.Windows.Forms.Label lblCustomerId;
-        private System.Windows.Forms.ListBox LstCustomer;
+        private System.Windows.Forms.TextBox TxtAmount;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cmbPaymentMode;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DateTimePicker DtpVoucherDate;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox TxtVoucherNo;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button BtnCancel;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.LinkLabel Link_shorcut;
+        private System.Windows.Forms.DataGridView DgvList;
+        private System.Windows.Forms.ComboBox cmbEmployee;
     }
 }

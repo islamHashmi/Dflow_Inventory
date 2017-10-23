@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
             this.TxtTotalAmt = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.TxtCGST2 = new System.Windows.Forms.TextBox();
+            this.TxtSGST = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.TxtCGST2Amt = new System.Windows.Forms.TextBox();
+            this.TxtSGSTAmt = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.TxtCGST1 = new System.Windows.Forms.TextBox();
+            this.TxtCGST = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.TxtCGST1Amt = new System.Windows.Forms.TextBox();
+            this.TxtCGSTAmt = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.TxtTaxableAmt = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -58,6 +58,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.DgvItems = new System.Windows.Forms.DataGridView();
+            this.Col_Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col_HSNCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col_Rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoiceDetailId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col_Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LstCustomer = new System.Windows.Forms.ListBox();
             this.TxtInvoiceNo = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -68,14 +76,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.Link_shorcut = new System.Windows.Forms.LinkLabel();
             this.DgvList = new System.Windows.Forms.DataGridView();
-            this.Col_Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_HSNCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoiceDetailId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -104,13 +104,13 @@
             this.tabPage1.Controls.Add(this.label12);
             this.tabPage1.Controls.Add(this.TxtTotalAmt);
             this.tabPage1.Controls.Add(this.label10);
-            this.tabPage1.Controls.Add(this.TxtCGST2);
+            this.tabPage1.Controls.Add(this.TxtSGST);
             this.tabPage1.Controls.Add(this.label11);
-            this.tabPage1.Controls.Add(this.TxtCGST2Amt);
+            this.tabPage1.Controls.Add(this.TxtSGSTAmt);
             this.tabPage1.Controls.Add(this.label9);
-            this.tabPage1.Controls.Add(this.TxtCGST1);
+            this.tabPage1.Controls.Add(this.TxtCGST);
             this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this.TxtCGST1Amt);
+            this.tabPage1.Controls.Add(this.TxtCGSTAmt);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.TxtTaxableAmt);
             this.tabPage1.Controls.Add(this.label6);
@@ -169,16 +169,16 @@
             this.label10.TabIndex = 39;
             this.label10.Text = "%";
             // 
-            // TxtCGST2
+            // TxtSGST
             // 
-            this.TxtCGST2.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtCGST2.Location = new System.Drawing.Point(578, 450);
-            this.TxtCGST2.Name = "TxtCGST2";
-            this.TxtCGST2.Size = new System.Drawing.Size(46, 25);
-            this.TxtCGST2.TabIndex = 14;
-            this.TxtCGST2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.TxtCGST2.TextChanged += new System.EventHandler(this.TxtCGST2_TextChanged);
-            this.TxtCGST2.Leave += new System.EventHandler(this.TxtCGST2_Leave);
+            this.TxtSGST.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtSGST.Location = new System.Drawing.Point(578, 450);
+            this.TxtSGST.Name = "TxtSGST";
+            this.TxtSGST.Size = new System.Drawing.Size(46, 25);
+            this.TxtSGST.TabIndex = 14;
+            this.TxtSGST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TxtSGST.TextChanged += new System.EventHandler(this.TxtSGST_TextChanged);
+            this.TxtSGST.Leave += new System.EventHandler(this.TxtSGST_Leave);
             // 
             // label11
             // 
@@ -186,19 +186,19 @@
             this.label11.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(486, 453);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(87, 21);
+            this.label11.Size = new System.Drawing.Size(85, 21);
             this.label11.TabIndex = 37;
-            this.label11.Text = "Add CGST";
+            this.label11.Text = "Add SGST";
             // 
-            // TxtCGST2Amt
+            // TxtSGSTAmt
             // 
-            this.TxtCGST2Amt.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtCGST2Amt.Location = new System.Drawing.Point(652, 450);
-            this.TxtCGST2Amt.Name = "TxtCGST2Amt";
-            this.TxtCGST2Amt.ReadOnly = true;
-            this.TxtCGST2Amt.Size = new System.Drawing.Size(146, 25);
-            this.TxtCGST2Amt.TabIndex = 36;
-            this.TxtCGST2Amt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TxtSGSTAmt.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtSGSTAmt.Location = new System.Drawing.Point(652, 450);
+            this.TxtSGSTAmt.Name = "TxtSGSTAmt";
+            this.TxtSGSTAmt.ReadOnly = true;
+            this.TxtSGSTAmt.Size = new System.Drawing.Size(146, 25);
+            this.TxtSGSTAmt.TabIndex = 36;
+            this.TxtSGSTAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label9
             // 
@@ -210,16 +210,16 @@
             this.label9.TabIndex = 35;
             this.label9.Text = "%";
             // 
-            // TxtCGST1
+            // TxtCGST
             // 
-            this.TxtCGST1.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtCGST1.Location = new System.Drawing.Point(578, 419);
-            this.TxtCGST1.Name = "TxtCGST1";
-            this.TxtCGST1.Size = new System.Drawing.Size(46, 25);
-            this.TxtCGST1.TabIndex = 11;
-            this.TxtCGST1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.TxtCGST1.TextChanged += new System.EventHandler(this.TxtCGST1_TextChanged);
-            this.TxtCGST1.Leave += new System.EventHandler(this.TxtCGST1_Leave);
+            this.TxtCGST.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtCGST.Location = new System.Drawing.Point(578, 419);
+            this.TxtCGST.Name = "TxtCGST";
+            this.TxtCGST.Size = new System.Drawing.Size(46, 25);
+            this.TxtCGST.TabIndex = 11;
+            this.TxtCGST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TxtCGST.TextChanged += new System.EventHandler(this.TxtCGST_TextChanged);
+            this.TxtCGST.Leave += new System.EventHandler(this.TxtCGST_Leave);
             // 
             // label8
             // 
@@ -231,15 +231,15 @@
             this.label8.TabIndex = 33;
             this.label8.Text = "Add CGST";
             // 
-            // TxtCGST1Amt
+            // TxtCGSTAmt
             // 
-            this.TxtCGST1Amt.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtCGST1Amt.Location = new System.Drawing.Point(652, 419);
-            this.TxtCGST1Amt.Name = "TxtCGST1Amt";
-            this.TxtCGST1Amt.ReadOnly = true;
-            this.TxtCGST1Amt.Size = new System.Drawing.Size(146, 25);
-            this.TxtCGST1Amt.TabIndex = 32;
-            this.TxtCGST1Amt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TxtCGSTAmt.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtCGSTAmt.Location = new System.Drawing.Point(652, 419);
+            this.TxtCGSTAmt.Name = "TxtCGSTAmt";
+            this.TxtCGSTAmt.ReadOnly = true;
+            this.TxtCGSTAmt.Size = new System.Drawing.Size(146, 25);
+            this.TxtCGSTAmt.TabIndex = 32;
+            this.TxtCGSTAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label7
             // 
@@ -392,6 +392,68 @@
             this.DgvItems.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvItems_RowPostPaint);
             this.DgvItems.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvItems_KeyDown);
             // 
+            // Col_Item
+            // 
+            this.Col_Item.Frozen = true;
+            this.Col_Item.HeaderText = "Item Name";
+            this.Col_Item.Name = "Col_Item";
+            this.Col_Item.Width = 270;
+            // 
+            // Col_HSNCode
+            // 
+            this.Col_HSNCode.HeaderText = "HSN Code";
+            this.Col_HSNCode.Name = "Col_HSNCode";
+            // 
+            // Col_Rate
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.Col_Rate.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Col_Rate.HeaderText = "Rate";
+            this.Col_Rate.Name = "Col_Rate";
+            this.Col_Rate.Width = 120;
+            // 
+            // Col_Quantity
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.Col_Quantity.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Col_Quantity.HeaderText = "Quantity";
+            this.Col_Quantity.Name = "Col_Quantity";
+            this.Col_Quantity.Width = 80;
+            // 
+            // Col_Amount
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.Col_Amount.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Col_Amount.HeaderText = "Amount";
+            this.Col_Amount.Name = "Col_Amount";
+            this.Col_Amount.Width = 150;
+            // 
+            // itemId
+            // 
+            this.itemId.HeaderText = "ItemId";
+            this.itemId.Name = "itemId";
+            this.itemId.Visible = false;
+            // 
+            // invoiceDetailId
+            // 
+            this.invoiceDetailId.HeaderText = "invoiceDetailId";
+            this.invoiceDetailId.Name = "invoiceDetailId";
+            this.invoiceDetailId.Visible = false;
+            // 
+            // Col_Unit
+            // 
+            this.Col_Unit.HeaderText = "Unit";
+            this.Col_Unit.Name = "Col_Unit";
+            this.Col_Unit.ReadOnly = true;
+            this.Col_Unit.Visible = false;
+            this.Col_Unit.Width = 80;
+            // 
             // LstCustomer
             // 
             this.LstCustomer.FormattingEnabled = true;
@@ -495,7 +557,7 @@
             // 
             // DgvList
             // 
-            this.DgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DgvList.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -518,68 +580,6 @@
             this.DgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvList_CellDoubleClick);
             this.DgvList.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvList_RowPostPaint);
             this.DgvList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvList_KeyDown);
-            // 
-            // Col_Item
-            // 
-            this.Col_Item.Frozen = true;
-            this.Col_Item.HeaderText = "Item Name";
-            this.Col_Item.Name = "Col_Item";
-            this.Col_Item.Width = 270;
-            // 
-            // Col_HSNCode
-            // 
-            this.Col_HSNCode.HeaderText = "HSN Code";
-            this.Col_HSNCode.Name = "Col_HSNCode";
-            // 
-            // Col_Rate
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.Col_Rate.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Col_Rate.HeaderText = "Rate";
-            this.Col_Rate.Name = "Col_Rate";
-            this.Col_Rate.Width = 120;
-            // 
-            // Col_Quantity
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.Col_Quantity.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Col_Quantity.HeaderText = "Quantity";
-            this.Col_Quantity.Name = "Col_Quantity";
-            this.Col_Quantity.Width = 80;
-            // 
-            // Col_Amount
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.Col_Amount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Col_Amount.HeaderText = "Amount";
-            this.Col_Amount.Name = "Col_Amount";
-            this.Col_Amount.Width = 150;
-            // 
-            // itemId
-            // 
-            this.itemId.HeaderText = "ItemId";
-            this.itemId.Name = "itemId";
-            this.itemId.Visible = false;
-            // 
-            // invoiceDetailId
-            // 
-            this.invoiceDetailId.HeaderText = "invoiceDetailId";
-            this.invoiceDetailId.Name = "invoiceDetailId";
-            this.invoiceDetailId.Visible = false;
-            // 
-            // Col_Unit
-            // 
-            this.Col_Unit.HeaderText = "Unit";
-            this.Col_Unit.Name = "Col_Unit";
-            this.Col_Unit.ReadOnly = true;
-            this.Col_Unit.Visible = false;
-            this.Col_Unit.Width = 80;
             // 
             // SalesInvoice
             // 
@@ -627,13 +627,13 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox TxtTotalAmt;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox TxtCGST2;
+        private System.Windows.Forms.TextBox TxtSGST;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox TxtCGST2Amt;
+        private System.Windows.Forms.TextBox TxtSGSTAmt;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox TxtCGST1;
+        private System.Windows.Forms.TextBox TxtCGST;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox TxtCGST1Amt;
+        private System.Windows.Forms.TextBox TxtCGSTAmt;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox TxtTaxableAmt;
         private System.Windows.Forms.Label label6;
