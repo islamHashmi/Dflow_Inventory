@@ -554,6 +554,7 @@
     <Property Name="customerId" Type="Int32" />
     <Property Name="employeeId" Type="Int32" />
     <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="expenseId" Type="Int32" />
   </EntityType>
   <Association Name="FK_voucherHeader_PaymentMode">
     <End Type="Inventory_DflowModel.PaymentMode" Role="PaymentMode" Multiplicity="1" />

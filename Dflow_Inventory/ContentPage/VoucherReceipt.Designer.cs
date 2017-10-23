@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.lblCustomerId = new System.Windows.Forms.Label();
@@ -45,7 +45,7 @@
             this.BtnSave = new System.Windows.Forms.Button();
             this.TxtAmount = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.cmbPaymentMode = new System.Windows.Forms.ComboBox();
+            this.CmbPaymentMode = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TxtCustomerName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -88,7 +88,7 @@
             this.tabPage1.Controls.Add(this.BtnSave);
             this.tabPage1.Controls.Add(this.TxtAmount);
             this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.cmbPaymentMode);
+            this.tabPage1.Controls.Add(this.CmbPaymentMode);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.TxtCustomerName);
             this.tabPage1.Controls.Add(this.label4);
@@ -245,14 +245,14 @@
             this.label5.TabIndex = 26;
             this.label5.Text = "Amount";
             // 
-            // cmbPaymentMode
+            // CmbPaymentMode
             // 
-            this.cmbPaymentMode.FormattingEnabled = true;
-            this.cmbPaymentMode.Location = new System.Drawing.Point(155, 114);
-            this.cmbPaymentMode.Name = "cmbPaymentMode";
-            this.cmbPaymentMode.Size = new System.Drawing.Size(165, 26);
-            this.cmbPaymentMode.TabIndex = 25;
-            this.cmbPaymentMode.SelectionChangeCommitted += new System.EventHandler(this.cmbPaymentMode_SelectionChangeCommitted);
+            this.CmbPaymentMode.FormattingEnabled = true;
+            this.CmbPaymentMode.Location = new System.Drawing.Point(155, 114);
+            this.CmbPaymentMode.Name = "CmbPaymentMode";
+            this.CmbPaymentMode.Size = new System.Drawing.Size(165, 26);
+            this.CmbPaymentMode.TabIndex = 25;
+            this.CmbPaymentMode.SelectionChangeCommitted += new System.EventHandler(this.CmbPaymentMode_SelectionChangeCommitted);
             // 
             // label3
             // 
@@ -359,14 +359,14 @@
             this.DgvList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.DgvList.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgvList.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvList.DefaultCellStyle = dataGridViewCellStyle2;
             this.DgvList.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.DgvList.Location = new System.Drawing.Point(3, 26);
             this.DgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -411,7 +411,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.LinkLabel Link_shorcut;
         private System.Windows.Forms.DataGridView DgvList;
-        private System.Windows.Forms.ComboBox cmbPaymentMode;
+        private System.Windows.Forms.ComboBox CmbPaymentMode;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox TxtCustomerName;
         private System.Windows.Forms.Label label4;

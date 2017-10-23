@@ -22,10 +22,7 @@ namespace Dflow_Inventory.ContentPage
             Autogenerate_VoucherNumber();
 
             Clear_Date();
-
-            lblNaration.Location = new Point(52, 174);
-            TxtNarration.Location = new Point(174, 172);
-
+            
             grpPayment.Visible = false;
 
             ComboBox();
@@ -58,23 +55,33 @@ namespace Dflow_Inventory.ContentPage
             {
                 var paymentModes = db.PaymentModes.Select(m => new { paymentCode = m.paymentCode, paymentDescription = m.paymentDescription }).ToList();
 
-                cmbPaymentMode.DataSource = paymentModes;
-                cmbPaymentMode.DisplayMember = "paymentDescription";
-                cmbPaymentMode.ValueMember = "paymentCode";
+                CmbPaymentMode.DataSource = paymentModes;
+                CmbPaymentMode.DisplayMember = "paymentDescription";
+                CmbPaymentMode.ValueMember = "paymentCode";
             }
         }
 
         private void TxtAmount_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-                e.Handled = true;
+            try
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+                    e.Handled = true;
+
+                if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+                    e.Handled = true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
-        private void cmbPaymentMode_SelectionChangeCommitted(object sender, EventArgs e)
+        private void CmbPaymentMode_SelectionChangeCommitted(object sender, EventArgs e)
         {
             try
             {
-                if (Convert.ToString(cmbPaymentMode.SelectedValue) == "CQ")
+                if (Convert.ToString(CmbPaymentMode.SelectedValue) == "CQ")
                 {
                     lblNaration.Location = new Point(52, 302);
                     TxtNarration.Location = new Point(174, 299);
@@ -99,6 +106,20 @@ namespace Dflow_Inventory.ContentPage
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(TxtCustomerName.Text))
+                {
+                    MessageBox.Show("Customer name is mandatory.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    TxtCustomerName.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(TxtAmount.Text))
+                {
+                    MessageBox.Show("Amount is mandatory.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    TxtAmount.Focus();
+                    return;
+                }
+
                 using (db = new Inventory_DflowEntities())
                 {
                     using (var scope = new TransactionScope())
@@ -124,10 +145,14 @@ namespace Dflow_Inventory.ContentPage
                             }
                             
                             decimal.TryParse(TxtAmount.Text, out decimal _amount);
+                            int.TryParse(lblCustomerId.Text, out int _customerId);
 
+                            vh.voucherType = "R";
+                            vh.customerId = _customerId == 0 ? null : (int?)_customerId;
+                            vh.name = string.IsNullOrWhiteSpace(TxtCustomerName.Text) ? null : TxtCustomerName.Text.Trim();
                             vh.voucherDate = (DateTime)CommanMethods.ConvertDate(DtpVoucherDate.Text);
                             vh.amount = _amount;
-                            vh.paymentMode = Convert.ToString(cmbPaymentMode.SelectedValue);
+                            vh.paymentMode = Convert.ToString(CmbPaymentMode.SelectedValue);
                             vh.bankName = string.IsNullOrEmpty(TxtBankName.Text) ? null : TxtBankName.Text;
                             vh.chequeNo = string.IsNullOrEmpty(TxtChqueNo.Text) ? null : TxtChqueNo.Text;
                             vh.chequeDate = CommanMethods.ConvertDate(DtpChqDate.Text);
@@ -171,7 +196,7 @@ namespace Dflow_Inventory.ContentPage
 
             TxtCustomerName.Text = string.Empty;
             TxtAmount.Text = string.Empty;
-            cmbPaymentMode.SelectedIndex = 0;
+            CmbPaymentMode.SelectedIndex = 0;
             TxtNarration.Text = string.Empty;
             TxtBankName.Text = string.Empty;
             TxtChqueNo.Text = string.Empty;
@@ -187,6 +212,7 @@ namespace Dflow_Inventory.ContentPage
                                 from b in cus.DefaultIfEmpty()
                                 join c in db.PaymentModes on a.paymentMode equals c.paymentCode into pay
                                 from c in pay.DefaultIfEmpty()
+                                where a.voucherType == "R"
                                 select new
                                 {
                                     voucherId = a.voucherId,
@@ -213,26 +239,26 @@ namespace Dflow_Inventory.ContentPage
             DgvList.Columns["voucherNumber"].HeaderText = "Voucher #";
             DgvList.Columns["voucherNumber"].DisplayIndex = 0;
 
-            DgvList.Columns["voucherDate"].HeaderText = "VOucher Date";
-            DgvList.Columns["voucherDate"].DisplayIndex = 0;
+            DgvList.Columns["voucherDate"].HeaderText = "Voucher Date";
+            DgvList.Columns["voucherDate"].DisplayIndex = 1;
 
             DgvList.Columns["customer"].HeaderText = "Customer Name";
-            DgvList.Columns["customer"].DisplayIndex = 0;
+            DgvList.Columns["customer"].DisplayIndex = 2;
 
             DgvList.Columns["amount"].HeaderText = "Amount";
-            DgvList.Columns["amount"].DisplayIndex = 0;
+            DgvList.Columns["amount"].DisplayIndex = 3;
 
             DgvList.Columns["paymentMode"].HeaderText = "payment Mode";
-            DgvList.Columns["paymentMode"].DisplayIndex = 0;
+            DgvList.Columns["paymentMode"].DisplayIndex = 4;
 
             DgvList.Columns["bankName"].HeaderText = "Bank Name";
-            DgvList.Columns["bankName"].DisplayIndex = 0;
+            DgvList.Columns["bankName"].DisplayIndex = 5;
 
             DgvList.Columns["chqNumber"].HeaderText = "Cheque No.";
-            DgvList.Columns["chqNumber"].DisplayIndex = 0;
+            DgvList.Columns["chqNumber"].DisplayIndex = 6;
 
             DgvList.Columns["chqDate"].HeaderText = "Cheque Date";
-            DgvList.Columns["chqDate"].DisplayIndex = 0;
+            DgvList.Columns["chqDate"].DisplayIndex = 7;
         }
 
         private void CellContentClick(int ColumnIndex, int RowIndex)
@@ -270,13 +296,13 @@ namespace Dflow_Inventory.ContentPage
                         DtpVoucherDate.Text = voucher.voucherDate.ToString("dd/MM/yyyy");
                         TxtCustomerName.Text = voucher.customer;
                         TxtAmount.Text = voucher.amount.ToString();
-                        cmbPaymentMode.SelectedValue = voucher.paymentMode;
+                        CmbPaymentMode.SelectedValue = voucher.paymentMode;
                         TxtBankName.Text = voucher.bankName;
                         TxtChqueNo.Text = voucher.chqNumber;
                         DtpChqDate.Text = voucher.chqDate == null ? string.Empty : Convert.ToDateTime(voucher.chqDate).ToString("dd/MM/yyyy");
                         TxtNarration.Text = voucher.narration;
 
-                        cmbPaymentMode_SelectionChangeCommitted(null, null);
+                        CmbPaymentMode_SelectionChangeCommitted(null, null);
                     }
 
                     tabControl1.SelectedIndex = 0;

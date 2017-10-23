@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Dflow_Inventory.DataContext;
 using Dflow_Inventory.Helpers;
 using System.Data.Entity.Validation;
+using System.Drawing;
 
 namespace Dflow_Inventory
 {
@@ -35,12 +36,14 @@ namespace Dflow_Inventory
                 if (string.IsNullOrWhiteSpace(TxtLoginId.Text))
                 {
                     MessageBox.Show("Login Id is mandatory.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    TxtLoginId.Focus();
                     return;
                 }
 
                 if (string.IsNullOrWhiteSpace(TxtPassword.Text))
                 {
                     MessageBox.Show("Password is mandatory.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    TxtPassword.Focus();
                     return;
                 }
 
@@ -71,10 +74,6 @@ namespace Dflow_Inventory
 
                     this.Hide();
                 }
-            }
-            catch(DbEntityValidationException ed)
-            {
-                throw;
             }
             catch (Exception ex)
             {
@@ -133,6 +132,30 @@ namespace Dflow_Inventory
                 }
 
                 return _shortFinYear;
+            }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            try
+            {
+                ControlPaint.DrawBorder(e.Graphics, this.panel1.ClientRectangle, Color.FromArgb(63, 162, 204), ButtonBorderStyle.Solid);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            try
+            {
+                ControlPaint.DrawBorder(e.Graphics, this.panel1.ClientRectangle, Color.FromArgb(63, 162, 204), ButtonBorderStyle.Solid);
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
     }

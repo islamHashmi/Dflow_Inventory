@@ -2,13 +2,7 @@
 using Dflow_Inventory.DataContext;
 using Dflow_Inventory.Helpers;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Dflow_Inventory
@@ -41,16 +35,8 @@ namespace Dflow_Inventory
         {
             frm.Show();
         }
-
-        private void CloseAllToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (Form childForm in MdiChildren)
-            {
-                childForm.Close();
-            }
-        }
-
-        private void unitsToolStripMenuItem_Click(object sender, EventArgs e)
+        
+        private void UnitsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -62,7 +48,7 @@ namespace Dflow_Inventory
             }
         }
 
-        private void itemsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -74,7 +60,7 @@ namespace Dflow_Inventory
             }
         }
 
-        private void customersToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CustomersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -86,7 +72,7 @@ namespace Dflow_Inventory
             }
         }
 
-        private void vendorsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void VendorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -98,7 +84,7 @@ namespace Dflow_Inventory
             }
         }
 
-        private void designationsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DesignationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -110,7 +96,7 @@ namespace Dflow_Inventory
             }
         }
 
-        private void employeesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EmployeesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -122,7 +108,7 @@ namespace Dflow_Inventory
             }
         }
 
-        private void expensesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExpensesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -134,7 +120,7 @@ namespace Dflow_Inventory
             }
         }
 
-        private void purchaseToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PurchaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -146,7 +132,7 @@ namespace Dflow_Inventory
             }
         }
 
-        private void salesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SalesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -158,7 +144,7 @@ namespace Dflow_Inventory
             }
         }
 
-        private void receiptToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ReceiptToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -170,11 +156,11 @@ namespace Dflow_Inventory
             }
         }
 
-        private void paymentToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PaymentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                Show_Form(new VoucherReceipt());
+                Show_Form(new VoucherPayment());
             }
             catch (Exception ex)
             {
@@ -182,7 +168,7 @@ namespace Dflow_Inventory
             }
         }
 
-        private void applicationParameterToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ApplicationParameterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -194,7 +180,7 @@ namespace Dflow_Inventory
             }
         }
 
-        private void userMasterToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void UserMasterToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             try
             {
@@ -215,6 +201,14 @@ namespace Dflow_Inventory
             catch (Exception ex)
             {
                 throw;
+            }
+        }
+
+        private void CloseAllToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            foreach (Form childForm in MdiChildren)
+            {
+                childForm.Close();
             }
         }
     }

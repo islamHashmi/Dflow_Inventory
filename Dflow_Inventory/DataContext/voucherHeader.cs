@@ -32,6 +32,7 @@ namespace Dflow_Inventory.DataContext
         public Nullable<int> customerId { get; set; }
         public Nullable<int> employeeId { get; set; }
         public string name { get; set; }
+        public Nullable<int> expenseId { get; set; }
     
         public virtual PaymentMode PaymentMode1 { get; set; }
     }

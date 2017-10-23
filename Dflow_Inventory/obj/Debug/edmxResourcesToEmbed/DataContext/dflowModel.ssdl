@@ -350,6 +350,7 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
     <Property Name="voucherType" Type="char" MaxLength="1" Nullable="false" />
     <Property Name="customerId" Type="int" />
     <Property Name="employeeId" Type="int" />
+    <Property Name="expenseId" Type="int" />
     <Property Name="name" Type="varchar" MaxLength="250" />
     <Property Name="amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="paymentMode" Type="char" MaxLength="2" Nullable="false" />

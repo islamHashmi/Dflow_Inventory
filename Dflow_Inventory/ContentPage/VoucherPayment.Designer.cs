@@ -45,7 +45,7 @@
             this.BtnSave = new System.Windows.Forms.Button();
             this.TxtAmount = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.cmbPaymentMode = new System.Windows.Forms.ComboBox();
+            this.CmbPaymentMode = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.DtpVoucherDate = new System.Windows.Forms.DateTimePicker();
@@ -60,6 +60,7 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.cmbEmployee = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.grpPayment.SuspendLayout();
@@ -83,6 +84,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label10);
             this.tabPage1.Controls.Add(this.cmbEmployee);
             this.tabPage1.Controls.Add(this.txtName);
             this.tabPage1.Controls.Add(this.label9);
@@ -95,7 +97,7 @@
             this.tabPage1.Controls.Add(this.BtnSave);
             this.tabPage1.Controls.Add(this.TxtAmount);
             this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.cmbPaymentMode);
+            this.tabPage1.Controls.Add(this.CmbPaymentMode);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.DtpVoucherDate);
@@ -115,7 +117,7 @@
             // lblCustomerId
             // 
             this.lblCustomerId.AutoSize = true;
-            this.lblCustomerId.Location = new System.Drawing.Point(734, 13);
+            this.lblCustomerId.Location = new System.Drawing.Point(736, 9);
             this.lblCustomerId.Name = "lblCustomerId";
             this.lblCustomerId.Size = new System.Drawing.Size(40, 18);
             this.lblCustomerId.TabIndex = 33;
@@ -126,7 +128,7 @@
             // 
             this.LstCustomer.FormattingEnabled = true;
             this.LstCustomer.ItemHeight = 18;
-            this.LstCustomer.Location = new System.Drawing.Point(780, 11);
+            this.LstCustomer.Location = new System.Drawing.Point(782, 7);
             this.LstCustomer.Name = "LstCustomer";
             this.LstCustomer.Size = new System.Drawing.Size(103, 22);
             this.LstCustomer.TabIndex = 32;
@@ -140,7 +142,7 @@
             this.grpPayment.Controls.Add(this.TxtChqueNo);
             this.grpPayment.Controls.Add(this.label6);
             this.grpPayment.Controls.Add(this.TxtBankName);
-            this.grpPayment.Location = new System.Drawing.Point(35, 185);
+            this.grpPayment.Location = new System.Drawing.Point(35, 223);
             this.grpPayment.Name = "grpPayment";
             this.grpPayment.Size = new System.Drawing.Size(414, 121);
             this.grpPayment.TabIndex = 29;
@@ -156,6 +158,7 @@
             this.DtpChqDate.Name = "DtpChqDate";
             this.DtpChqDate.Size = new System.Drawing.Size(114, 23);
             this.DtpChqDate.TabIndex = 34;
+            this.DtpChqDate.ValueChanged += new System.EventHandler(this.DtpChqDate_ValueChanged);
             // 
             // label8
             // 
@@ -228,35 +231,38 @@
             this.BtnSave.TabIndex = 28;
             this.BtnSave.Text = "Save";
             this.BtnSave.UseVisualStyleBackColor = false;
+            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // TxtAmount
             // 
-            this.TxtAmount.Location = new System.Drawing.Point(154, 124);
+            this.TxtAmount.Location = new System.Drawing.Point(154, 153);
             this.TxtAmount.Name = "TxtAmount";
             this.TxtAmount.Size = new System.Drawing.Size(113, 23);
             this.TxtAmount.TabIndex = 27;
+            this.TxtAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtAmount_KeyPress);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(32, 127);
+            this.label5.Location = new System.Drawing.Point(32, 156);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 18);
             this.label5.TabIndex = 26;
             this.label5.Text = "Amount";
             // 
-            // cmbPaymentMode
+            // CmbPaymentMode
             // 
-            this.cmbPaymentMode.FormattingEnabled = true;
-            this.cmbPaymentMode.Location = new System.Drawing.Point(154, 153);
-            this.cmbPaymentMode.Name = "cmbPaymentMode";
-            this.cmbPaymentMode.Size = new System.Drawing.Size(165, 26);
-            this.cmbPaymentMode.TabIndex = 25;
+            this.CmbPaymentMode.FormattingEnabled = true;
+            this.CmbPaymentMode.Location = new System.Drawing.Point(154, 182);
+            this.CmbPaymentMode.Name = "CmbPaymentMode";
+            this.CmbPaymentMode.Size = new System.Drawing.Size(165, 26);
+            this.CmbPaymentMode.TabIndex = 25;
+            this.CmbPaymentMode.SelectionChangeCommitted += new System.EventHandler(this.CmbPaymentMode_SelectionChangeCommitted);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(32, 156);
+            this.label3.Location = new System.Drawing.Point(32, 185);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 18);
             this.label3.TabIndex = 24;
@@ -283,7 +289,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(298, 33);
+            this.label2.Location = new System.Drawing.Point(285, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 18);
             this.label2.TabIndex = 18;
@@ -318,6 +324,7 @@
             this.BtnCancel.TabIndex = 15;
             this.BtnCancel.Text = "Cancel";
             this.BtnCancel.UseVisualStyleBackColor = false;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // tabPage2
             // 
@@ -364,6 +371,8 @@
             this.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvList.Size = new System.Drawing.Size(885, 371);
             this.DgvList.TabIndex = 0;
+            this.DgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvList_CellDoubleClick);
+            this.DgvList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvList_KeyDown);
             // 
             // cmbExpenseHead
             // 
@@ -375,9 +384,9 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(639, 8);
+            this.txtName.Location = new System.Drawing.Point(154, 124);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(89, 23);
+            this.txtName.Size = new System.Drawing.Size(288, 23);
             this.txtName.TabIndex = 36;
             // 
             // label9
@@ -396,6 +405,15 @@
             this.cmbEmployee.Name = "cmbEmployee";
             this.cmbEmployee.Size = new System.Drawing.Size(288, 26);
             this.cmbEmployee.TabIndex = 37;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(32, 127);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(40, 18);
+            this.label10.TabIndex = 38;
+            this.label10.Text = "Name";
             // 
             // VoucherPayment
             // 
@@ -440,7 +458,7 @@
         private System.Windows.Forms.Button BtnSave;
         private System.Windows.Forms.TextBox TxtAmount;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cmbPaymentMode;
+        private System.Windows.Forms.ComboBox CmbPaymentMode;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker DtpVoucherDate;
@@ -452,5 +470,6 @@
         private System.Windows.Forms.LinkLabel Link_shorcut;
         private System.Windows.Forms.DataGridView DgvList;
         private System.Windows.Forms.ComboBox cmbEmployee;
+        private System.Windows.Forms.Label label10;
     }
 }

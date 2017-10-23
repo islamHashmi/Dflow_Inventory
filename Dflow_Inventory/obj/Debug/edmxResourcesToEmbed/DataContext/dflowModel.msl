@@ -344,6 +344,7 @@
     <EntitySetMapping Name="voucherHeaders">
       <EntityTypeMapping TypeName="Inventory_DflowModel.voucherHeader">
         <MappingFragment StoreEntitySet="voucherHeader">
+          <ScalarProperty Name="expenseId" ColumnName="expenseId" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="employeeId" ColumnName="employeeId" />
           <ScalarProperty Name="customerId" ColumnName="customerId" />
