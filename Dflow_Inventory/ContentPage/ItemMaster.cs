@@ -4,6 +4,7 @@ using Dflow_Inventory.DataContext;
 using System.Linq;
 using Dflow_Inventory.Helpers;
 using System.Drawing;
+using System.Transactions;
 
 namespace Dflow_Inventory.ContentPage
 {
@@ -35,45 +36,86 @@ namespace Dflow_Inventory.ContentPage
                     MessageBox.Show("Item Name is mandatory.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
-                using (db = new Inventory_DflowEntities())
+                using (var scope = new TransactionScope())
                 {
-                    Item_Master item = new Item_Master();
-
-                    if (_itemId == 0)
+                    try
                     {
-                        db.Item_Master.Add(item);
+                        using (db = new Inventory_DflowEntities())
+                        {
+                            Item_Master item = new Item_Master();
 
-                        item.itemCode = TxtItemCode.Text.Trim();
-                        item.entryBy = SessionHelper.UserId;
-                        item.entryDate = DateTime.Now;
-                        item.active = true;
+                            decimal.TryParse(TxtPrice.Text, out decimal _sellingPrice);
+                            decimal.TryParse(TxtOpeningStk.Text, out decimal _openStock);
+
+                            if (_itemId == 0)
+                            {
+                                db.Item_Master.Add(item);
+
+                                item.itemCode = TxtItemCode.Text.Trim();
+                                item.entryBy = SessionHelper.UserId;
+                                item.entryDate = DateTime.Now;
+                                item.active = true;
+                                item.currentStock = _openStock == 0 ? null : (decimal?)_openStock;
+                            }
+                            else
+                            {
+                                item = db.Item_Master.FirstOrDefault(m => m.itemId == _itemId && m.active == true);
+
+                                item.updatedBy = SessionHelper.UserId;
+                                item.updatedDate = DateTime.Now;
+                            }
+
+                            item.itemName = TxtItemName.Text;
+                            item.itemDescription = string.IsNullOrWhiteSpace(TxtDescription.Text) ? null : TxtDescription.Text;
+                            item.unitId = Convert.ToString(CmbUnit.SelectedValue) == "0" ? null : (int?)Convert.ToInt32(CmbUnit.SelectedValue);
+                            item.sellingPrice = _sellingPrice == 0 ? null : (decimal?)_sellingPrice;
+                            item.openingStock = _openStock == 0 ? null : (decimal?)_openStock;
+
+                            db.SaveChanges();
+
+                            int _id = item.itemId;
+
+                            if (_openStock != 0)
+                            {
+                                Stock stock = new Stock();
+
+                                var stk = db.Stocks
+                                            .Where(m => m.itemId == _itemId && m.stockType == "O")
+                                            .OrderByDescending(m => m.stockId)
+                                            .FirstOrDefault();
+
+                                if (stk == null)
+                                {
+                                    stock.stockDate = DateTime.Today;
+                                    stock.invoiceId = null;
+                                    stock.purchaseId = null;
+                                    stock.itemId = _id;
+                                    stock.stockType = "O";
+                                    stock.openingStock = _openStock == 0 ? null : (decimal?)_openStock;
+                                    stock.quantity = null;
+                                    stock.closingStock = _openStock == 0 ? null : (decimal?)_openStock;
+                                    stock.remark = "Opening Stock : " + Convert.ToString(_openStock);
+                                    stock.entryBy = SessionHelper.UserId;
+                                    stock.entryDate = DateTime.Now;
+
+                                    db.Stocks.Add(stock);
+
+                                    db.SaveChanges();
+                                }
+                            }
+                            scope.Complete();
+                        }
                     }
-                    else
+                    catch (Exception)
                     {
-                        item = db.Item_Master.FirstOrDefault(m => m.itemId == _itemId && m.active == true);
-
-                        item.updatedBy = SessionHelper.UserId;
-                        item.updatedDate = DateTime.Now;
+                        scope.Dispose();
+                        throw;
                     }
-
-                    decimal _sellingPrice = 0, _openStock = 0;
-
-                    decimal.TryParse(TxtPrice.Text, out _sellingPrice);
-                    decimal.TryParse(TxtOpeningStk.Text, out _openStock);
-
-                    item.itemName = TxtItemName.Text;
-                    item.itemDescription = string.IsNullOrWhiteSpace(TxtDescription.Text) ? null : TxtDescription.Text;
-                    item.unitId = Convert.ToString(CmbUnit.SelectedValue) == "0" ? null : (int?)Convert.ToInt32(CmbUnit.SelectedValue);
-                    item.sellingPrice = _sellingPrice == 0 ? null : (decimal?)_sellingPrice;
-                    item.openingStock = _openStock == 0 ? null : (decimal?)_openStock;
-
-                    db.SaveChanges();
-
-                    Clear_Controls();
-
-                    Get_Data();
                 }
+
+                Clear_Controls();
+
+                Get_Data();
             }
             catch (Exception ex)
             {
@@ -88,6 +130,8 @@ namespace Dflow_Inventory.ContentPage
             TxtOpeningStk.Text = string.Empty;
             TxtPrice.Text = string.Empty;
             CmbUnit.SelectedValue = 0;
+
+            TxtOpeningStk.ReadOnly = false;
 
             _itemId = 0;
 
@@ -149,6 +193,8 @@ namespace Dflow_Inventory.ContentPage
                         TxtPrice.Text = Convert.ToString(item.sellingPrice);
                         TxtOpeningStk.Text = Convert.ToString(item.openingStock);
                         CmbUnit.SelectedValue = item.unitId ?? 0;
+
+                        TxtOpeningStk.ReadOnly = true;
                     }
                 }
 

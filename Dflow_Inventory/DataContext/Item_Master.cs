@@ -18,6 +18,7 @@ namespace Dflow_Inventory.DataContext
         {
             this.PurchaseDetails = new HashSet<PurchaseDetail>();
             this.InvoiceDetails = new HashSet<InvoiceDetail>();
+            this.Stocks = new HashSet<Stock>();
         }
     
         public int itemId { get; set; }
@@ -32,9 +33,11 @@ namespace Dflow_Inventory.DataContext
         public Nullable<System.DateTime> updatedDate { get; set; }
         public string itemCode { get; set; }
         public string itemDescription { get; set; }
+        public Nullable<decimal> currentStock { get; set; }
     
         public virtual Unit_Master UnitMaster { get; set; }
         public virtual ICollection<PurchaseDetail> PurchaseDetails { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
+        public virtual ICollection<Stock> Stocks { get; set; }
     }
 }

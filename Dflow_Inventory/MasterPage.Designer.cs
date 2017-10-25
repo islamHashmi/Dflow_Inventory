@@ -51,6 +51,8 @@
             this.toolStripFinYear = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripLoginUser = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stockRegisterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +65,7 @@
             this.purchaseToolStripMenuItem,
             this.salesToolStripMenuItem,
             this.voucherToolStripMenuItem,
+            this.reportsToolStripMenuItem,
             this.securityToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -225,6 +228,21 @@
             this.toolStripLoginUser.Size = new System.Drawing.Size(118, 17);
             this.toolStripLoginUser.Text = "toolStripStatusLabel1";
             // 
+            // reportsToolStripMenuItem
+            // 
+            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stockRegisterToolStripMenuItem});
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(74, 27);
+            this.reportsToolStripMenuItem.Text = "Reports";
+            // 
+            // stockRegisterToolStripMenuItem
+            // 
+            this.stockRegisterToolStripMenuItem.Name = "stockRegisterToolStripMenuItem";
+            this.stockRegisterToolStripMenuItem.Size = new System.Drawing.Size(170, 28);
+            this.stockRegisterToolStripMenuItem.Text = "StockRegister";
+            this.stockRegisterToolStripMenuItem.Click += new System.EventHandler(this.stockRegisterToolStripMenuItem_Click);
+            // 
             // MasterPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -270,6 +288,8 @@
         private System.Windows.Forms.ToolStripMenuItem securityToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem applicationParameterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem applicationParameterToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stockRegisterToolStripMenuItem;
     }
 }
 

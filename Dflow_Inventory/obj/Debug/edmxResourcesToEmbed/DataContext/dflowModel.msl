@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Item_Master">
       <EntityTypeMapping TypeName="Inventory_DflowModel.Item_Master">
         <MappingFragment StoreEntitySet="ItemMaster">
+          <ScalarProperty Name="currentStock" ColumnName="currentStock" />
           <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
           <ScalarProperty Name="itemCode" ColumnName="itemCode" />
           <ScalarProperty Name="itemId" ColumnName="itemId" />
@@ -384,5 +385,49 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_Stock_InsertUpdate" FunctionName="Inventory_DflowModel.Store.sp_Stock_InsertUpdate" />
+    <EntitySetMapping Name="Stocks">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.Stock">
+        <MappingFragment StoreEntitySet="Stock">
+          <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+          <ScalarProperty Name="entryBy" ColumnName="entryBy" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="closingStock" ColumnName="closingStock" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="openingStock" ColumnName="openingStock" />
+          <ScalarProperty Name="stockType" ColumnName="stockType" />
+          <ScalarProperty Name="itemId" ColumnName="itemId" />
+          <ScalarProperty Name="purchaseId" ColumnName="purchaseId" />
+          <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
+          <ScalarProperty Name="stockDate" ColumnName="stockDate" />
+          <ScalarProperty Name="stockId" ColumnName="stockId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StockTypes">
+      <EntityTypeMapping TypeName="Inventory_DflowModel.StockType">
+        <MappingFragment StoreEntitySet="StockType">
+          <ScalarProperty Name="stockTypeDescription" ColumnName="stockTypeDescription" />
+          <ScalarProperty Name="stockTypeCode" ColumnName="stockTypeCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_Stock_Report" FunctionName="Inventory_DflowModel.Store.sp_Stock_Report">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Inventory_DflowModel.sp_Stock_Report_Result">
+          <ScalarProperty Name="stockId" ColumnName="stockId" />
+          <ScalarProperty Name="stockDate" ColumnName="stockDate" />
+          <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
+          <ScalarProperty Name="purchaseId" ColumnName="purchaseId" />
+          <ScalarProperty Name="itemCode" ColumnName="itemCode" />
+          <ScalarProperty Name="itemName" ColumnName="itemName" />
+          <ScalarProperty Name="stockTypeDescription" ColumnName="stockTypeDescription" />
+          <ScalarProperty Name="openingStock" ColumnName="openingStock" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="closingStock" ColumnName="closingStock" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

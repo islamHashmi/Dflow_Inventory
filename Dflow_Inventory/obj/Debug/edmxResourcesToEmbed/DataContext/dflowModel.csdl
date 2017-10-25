@@ -19,6 +19,8 @@
     <Property Name="itemDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="PurchaseDetails" Relationship="Inventory_DflowModel.FK_PurchaseDetail_ItemMaster" FromRole="Item_Master" ToRole="PurchaseDetail" />
     <NavigationProperty Name="InvoiceDetails" Relationship="Inventory_DflowModel.FK_Table_1_ItemMaster" FromRole="Item_Master" ToRole="InvoiceDetail" />
+    <Property Name="currentStock" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Stocks" Relationship="Inventory_DflowModel.FK_Stock_ItemMaster" FromRole="Item_Master" ToRole="Stock" />
   </EntityType>
   <EntityType Name="Unit_Master">
     <Key>
@@ -114,6 +116,31 @@
       <End Role="voucherHeader" EntitySet="voucherHeaders" />
     </AssociationSet>
     <EntitySet Name="Application_Parameter" EntityType="Inventory_DflowModel.Application_Parameter" />
+    <FunctionImport Name="sp_Stock_InsertUpdate">
+      <Parameter Name="stockDate" Mode="In" Type="DateTime" />
+      <Parameter Name="itemId" Mode="In" Type="Int32" />
+      <Parameter Name="stockType" Mode="In" Type="String" />
+      <Parameter Name="quantity" Mode="In" Type="Decimal" />
+      <Parameter Name="invoiceId" Mode="In" Type="Int32" />
+      <Parameter Name="purchaseId" Mode="In" Type="Int32" />
+      <Parameter Name="cmdType" Mode="In" Type="String" />
+      <Parameter Name="entryBy" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Stocks" EntityType="Inventory_DflowModel.Stock" />
+    <EntitySet Name="StockTypes" EntityType="Inventory_DflowModel.StockType" />
+    <AssociationSet Name="FK_Stock_ItemMaster" Association="Inventory_DflowModel.FK_Stock_ItemMaster">
+      <End Role="Item_Master" EntitySet="Item_Master" />
+      <End Role="Stock" EntitySet="Stocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Stock_StockType" Association="Inventory_DflowModel.FK_Stock_StockType">
+      <End Role="StockType" EntitySet="StockTypes" />
+      <End Role="Stock" EntitySet="Stocks" />
+    </AssociationSet>
+    <FunctionImport Name="sp_Stock_Report" ReturnType="Collection(Inventory_DflowModel.sp_Stock_Report_Result)">
+      <Parameter Name="itemId" Mode="In" Type="Int32" />
+      <Parameter Name="startDate" Mode="In" Type="DateTime" />
+      <Parameter Name="endDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Customer_Master">
     <Key>
@@ -585,4 +612,68 @@
     <Property Name="hsnCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="gstNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="Stock">
+    <Key>
+      <PropertyRef Name="stockId" />
+    </Key>
+    <Property Name="stockId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="stockDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="invoiceId" Type="Int32" />
+    <Property Name="purchaseId" Type="Int32" />
+    <Property Name="itemId" Type="Int32" Nullable="false" />
+    <Property Name="stockType" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="openingStock" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="quantity" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="closingStock" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="entryBy" Type="Int32" Nullable="false" />
+    <Property Name="entryDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ItemMaster" Relationship="Inventory_DflowModel.FK_Stock_ItemMaster" FromRole="Stock" ToRole="Item_Master" />
+    <NavigationProperty Name="StockType1" Relationship="Inventory_DflowModel.FK_Stock_StockType" FromRole="Stock" ToRole="StockType" />
+  </EntityType>
+  <EntityType Name="StockType">
+    <Key>
+      <PropertyRef Name="stockTypeCode" />
+    </Key>
+    <Property Name="stockTypeCode" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="stockTypeDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Stocks" Relationship="Inventory_DflowModel.FK_Stock_StockType" FromRole="StockType" ToRole="Stock" />
+  </EntityType>
+  <Association Name="FK_Stock_ItemMaster">
+    <End Type="Inventory_DflowModel.Item_Master" Role="Item_Master" Multiplicity="1" />
+    <End Type="Inventory_DflowModel.Stock" Role="Stock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item_Master">
+        <PropertyRef Name="itemId" />
+      </Principal>
+      <Dependent Role="Stock">
+        <PropertyRef Name="itemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Stock_StockType">
+    <End Type="Inventory_DflowModel.StockType" Role="StockType" Multiplicity="1" />
+    <End Type="Inventory_DflowModel.Stock" Role="Stock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StockType">
+        <PropertyRef Name="stockTypeCode" />
+      </Principal>
+      <Dependent Role="Stock">
+        <PropertyRef Name="stockType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="sp_Stock_Report_Result">
+    <Property Type="Int64" Name="stockId" Nullable="false" />
+    <Property Type="DateTime" Name="stockDate" Nullable="false" />
+    <Property Type="Int32" Name="invoiceId" Nullable="true" />
+    <Property Type="Int32" Name="purchaseId" Nullable="true" />
+    <Property Type="String" Name="itemCode" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="itemName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="stockTypeDescription" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="openingStock" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="quantity" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="closingStock" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="remark" Nullable="true" MaxLength="500" />
+  </ComplexType>
 </Schema>

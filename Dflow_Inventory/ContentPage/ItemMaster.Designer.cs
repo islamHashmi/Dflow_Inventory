@@ -48,6 +48,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.Link_shorcut = new System.Windows.Forms.LinkLabel();
             this.DgvList = new System.Windows.Forms.DataGridView();
+            this.label7 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -65,11 +66,12 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(636, 447);
+            this.tabControl1.Size = new System.Drawing.Size(650, 447);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.TxtDescription);
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.BtnCancel);
@@ -88,7 +90,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage1.Size = new System.Drawing.Size(628, 413);
+            this.tabPage1.Size = new System.Drawing.Size(642, 413);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Add Item";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -276,11 +278,21 @@
             this.DgvList.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvList_RowPostPaint);
             this.DgvList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvList_KeyDown);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label7.Location = new System.Drawing.Point(363, 269);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(266, 18);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "(Opening stock can only be inserted only once)";
+            // 
             // ItemMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(636, 447);
+            this.ClientSize = new System.Drawing.Size(650, 447);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -317,5 +329,6 @@
         private System.Windows.Forms.LinkLabel Link_shorcut;
         private System.Windows.Forms.TextBox TxtDescription;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }

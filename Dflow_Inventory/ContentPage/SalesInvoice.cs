@@ -513,7 +513,7 @@ namespace Dflow_Inventory.ContentPage
                             ih.discount = _discount == 0 ? null : (decimal?)_discount;
                             ih.taxableAmount = _taxableAmt == 0 ? null : (decimal?)_taxableAmt;
                             ih.cgstPercent = _cgstPercent == 0 ? null : (decimal?)_cgstPercent;
-                            ih.sgstPercent = _sgstPercent == 0 ? null : (decimal?)_sgstPercent;                            
+                            ih.sgstPercent = _sgstPercent == 0 ? null : (decimal?)_sgstPercent;
                             ih.cgstAmount = _cgstAmt == 0 ? null : (decimal?)_cgstAmt;
                             ih.sgstAmount = _sgstAmt == 0 ? null : (decimal?)_sgstAmt;
                             ih.totalAmount = _totalAmt == 0 ? null : (decimal?)_totalAmt;

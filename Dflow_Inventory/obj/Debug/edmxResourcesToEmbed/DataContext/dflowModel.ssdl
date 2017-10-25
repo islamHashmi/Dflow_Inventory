@@ -200,6 +200,7 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
     <Property Name="unitId" Type="int" />
     <Property Name="sellingPrice" Type="decimal" Precision="10" Scale="2" />
     <Property Name="openingStock" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="currentStock" Type="decimal" Precision="18" Scale="2" />
     <Property Name="active" Type="bit" Nullable="false" />
     <Property Name="entryBy" Type="int" Nullable="false" />
     <Property Name="entryDate" Type="datetime" Nullable="false" />
@@ -250,6 +251,30 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
     <Property Name="entryDate" Type="datetime" Nullable="false" />
     <Property Name="updatedBy" Type="int" />
     <Property Name="updatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Stock">
+    <Key>
+      <PropertyRef Name="stockId" />
+    </Key>
+    <Property Name="stockId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="stockDate" Type="date" Nullable="false" />
+    <Property Name="invoiceId" Type="int" />
+    <Property Name="purchaseId" Type="int" />
+    <Property Name="itemId" Type="int" Nullable="false" />
+    <Property Name="stockType" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="openingStock" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="quantity" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="closingStock" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="remark" Type="varchar" MaxLength="500" />
+    <Property Name="entryBy" Type="int" Nullable="false" />
+    <Property Name="entryDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StockType">
+    <Key>
+      <PropertyRef Name="stockTypeCode" />
+    </Key>
+    <Property Name="stockTypeCode" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="stockTypeDescription" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="SupplierMaster">
     <Key>
@@ -448,6 +473,30 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Stock_ItemMaster">
+    <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="1" />
+    <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItemMaster">
+        <PropertyRef Name="itemId" />
+      </Principal>
+      <Dependent Role="Stock">
+        <PropertyRef Name="itemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Stock_StockType">
+    <End Role="StockType" Type="Self.StockType" Multiplicity="1" />
+    <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StockType">
+        <PropertyRef Name="stockTypeCode" />
+      </Principal>
+      <Dependent Role="Stock">
+        <PropertyRef Name="stockType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Table_1_InvoiceHeader">
     <End Role="InvoiceHeader" Type="Self.InvoiceHeader" Multiplicity="1" />
     <End Role="InvoiceDetail" Type="Self.InvoiceDetail" Multiplicity="*" />
@@ -496,6 +545,21 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="sp_Stock_InsertUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="stockDate" Type="date" Mode="In" />
+    <Parameter Name="itemId" Type="int" Mode="In" />
+    <Parameter Name="stockType" Type="char" Mode="In" />
+    <Parameter Name="quantity" Type="decimal" Mode="In" />
+    <Parameter Name="invoiceId" Type="int" Mode="In" />
+    <Parameter Name="purchaseId" Type="int" Mode="In" />
+    <Parameter Name="cmdType" Type="char" Mode="In" />
+    <Parameter Name="entryBy" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Stock_Report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="itemId" Type="int" Mode="In" />
+    <Parameter Name="startDate" Type="date" Mode="In" />
+    <Parameter Name="endDate" Type="date" Mode="In" />
+  </Function>
   <EntityContainer Name="Inventory_DflowModelStoreContainer">
     <EntitySet Name="ApplicationParameter" EntityType="Self.ApplicationParameter" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CustomerMaster" EntityType="Self.CustomerMaster" Schema="dbo" store:Type="Tables" />
@@ -513,6 +577,8 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
     <EntitySet Name="PaymentMode" EntityType="Self.PaymentMode" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PurchaseDetail" EntityType="Self.PurchaseDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PurchaseHeader" EntityType="Self.PurchaseHeader" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StockType" EntityType="Self.StockType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SupplierMaster" EntityType="Self.SupplierMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UnitMaster" EntityType="Self.UnitMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="dbo" store:Type="Tables" />
@@ -553,6 +619,14 @@ FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
     <AssociationSet Name="FK_PurchaseHeader_VendorMaster" Association="Self.FK_PurchaseHeader_VendorMaster">
       <End Role="VendorMaster" EntitySet="VendorMaster" />
       <End Role="PurchaseHeader" EntitySet="PurchaseHeader" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Stock_ItemMaster" Association="Self.FK_Stock_ItemMaster">
+      <End Role="ItemMaster" EntitySet="ItemMaster" />
+      <End Role="Stock" EntitySet="Stock" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Stock_StockType" Association="Self.FK_Stock_StockType">
+      <End Role="StockType" EntitySet="StockType" />
+      <End Role="Stock" EntitySet="Stock" />
     </AssociationSet>
     <AssociationSet Name="FK_Table_1_InvoiceHeader" Association="Self.FK_Table_1_InvoiceHeader">
       <End Role="InvoiceHeader" EntitySet="InvoiceHeader" />

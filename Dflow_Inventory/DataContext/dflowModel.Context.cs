@@ -12,6 +12,9 @@ namespace Dflow_Inventory.DataContext
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     
     public partial class Inventory_DflowEntities : DbContext
     {
@@ -48,5 +51,61 @@ namespace Dflow_Inventory.DataContext
         public DbSet<PaymentMode> PaymentModes { get; set; }
         public DbSet<voucherHeader> voucherHeaders { get; set; }
         public DbSet<Application_Parameter> Application_Parameter { get; set; }
+        public DbSet<Stock> Stocks { get; set; }
+        public DbSet<StockType> StockTypes { get; set; }
+    
+        public virtual int sp_Stock_InsertUpdate(Nullable<System.DateTime> stockDate, Nullable<int> itemId, string stockType, Nullable<decimal> quantity, Nullable<int> invoiceId, Nullable<int> purchaseId, string cmdType, Nullable<int> entryBy)
+        {
+            var stockDateParameter = stockDate.HasValue ?
+                new ObjectParameter("stockDate", stockDate) :
+                new ObjectParameter("stockDate", typeof(System.DateTime));
+    
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("itemId", itemId) :
+                new ObjectParameter("itemId", typeof(int));
+    
+            var stockTypeParameter = stockType != null ?
+                new ObjectParameter("stockType", stockType) :
+                new ObjectParameter("stockType", typeof(string));
+    
+            var quantityParameter = quantity.HasValue ?
+                new ObjectParameter("quantity", quantity) :
+                new ObjectParameter("quantity", typeof(decimal));
+    
+            var invoiceIdParameter = invoiceId.HasValue ?
+                new ObjectParameter("invoiceId", invoiceId) :
+                new ObjectParameter("invoiceId", typeof(int));
+    
+            var purchaseIdParameter = purchaseId.HasValue ?
+                new ObjectParameter("purchaseId", purchaseId) :
+                new ObjectParameter("purchaseId", typeof(int));
+    
+            var cmdTypeParameter = cmdType != null ?
+                new ObjectParameter("cmdType", cmdType) :
+                new ObjectParameter("cmdType", typeof(string));
+    
+            var entryByParameter = entryBy.HasValue ?
+                new ObjectParameter("entryBy", entryBy) :
+                new ObjectParameter("entryBy", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Stock_InsertUpdate", stockDateParameter, itemIdParameter, stockTypeParameter, quantityParameter, invoiceIdParameter, purchaseIdParameter, cmdTypeParameter, entryByParameter);
+        }
+    
+        public virtual ObjectResult<sp_Stock_Report_Result> sp_Stock_Report(Nullable<int> itemId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("itemId", itemId) :
+                new ObjectParameter("itemId", typeof(int));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("startDate", startDate) :
+                new ObjectParameter("startDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("endDate", endDate) :
+                new ObjectParameter("endDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Stock_Report_Result>("sp_Stock_Report", itemIdParameter, startDateParameter, endDateParameter);
+        }
     }
 }

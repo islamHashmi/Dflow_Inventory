@@ -211,5 +211,17 @@ namespace Dflow_Inventory
                 childForm.Close();
             }
         }
+
+        private void stockRegisterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new StockReport());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
