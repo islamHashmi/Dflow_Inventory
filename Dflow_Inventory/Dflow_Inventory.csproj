@@ -431,9 +431,25 @@
       <DependentUpon>dflowModel.edmx</DependentUpon>
       <LastGenOutput>dflowModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Images\customer-icon.png" />
+    <Content Include="Images\designation-icon.png" />
+    <Content Include="Images\employee-icon.png" />
+    <Content Include="Images\expense-icon.png" />
     <Content Include="Images\icon.ico" />
+    <Content Include="Images\item-icon.png" />
     <Content Include="Images\logo.jpg" />
     <Content Include="Images\logo_transparent.png" />
+    <None Include="Resources\unit-icon.png" />
+    <None Include="Resources\customer-icon.png" />
+    <None Include="Resources\vendor-icon.png" />
+    <None Include="Resources\designation-icon.png" />
+    <None Include="Resources\employee-icon.png" />
+    <None Include="Resources\expense-icon.png" />
+    <None Include="Resources\item-icon.png" />
+    <None Include="Resources\item-icon1.png" />
+    <None Include="Resources\item-icon2.png" />
+    <Content Include="Images\unit-icon.png" />
+    <Content Include="Images\vendor-icon.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

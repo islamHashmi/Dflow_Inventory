@@ -19,13 +19,16 @@ namespace Dflow_Inventory.ContentPage
         private int _userId;
         private string _loginId;
 
+        public int UserId { get => _userId; set => _userId = value; }
+        public string LoginId { get => _loginId; set => _loginId = value; }
+
         public ChangePassword(int userId, string loginId)
         {
             InitializeComponent();
 
-            _userId = userId;
-            _loginId = loginId;
-        }
+            UserId = userId;
+            LoginId = loginId;
+        }        
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
@@ -51,7 +54,7 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    var user = db.User_Master.FirstOrDefault(m => m.userId == _userId && m.loginId == _loginId);
+                    var user = db.User_Master.FirstOrDefault(m => m.userId == UserId && m.loginId == LoginId);
 
                     if(user == null)
                     {
@@ -78,7 +81,7 @@ namespace Dflow_Inventory.ContentPage
 
         private void ChangePassword_Load(object sender, EventArgs e)
         {
-            TxtLoginId.Text = _loginId;
+            TxtLoginId.Text = LoginId;
         }
     }
 }

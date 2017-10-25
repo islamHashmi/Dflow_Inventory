@@ -35,6 +35,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lblTotalAmount = new System.Windows.Forms.Label();
             this.txtRemark = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dtpOrderDate = new System.Windows.Forms.DateTimePicker();
@@ -87,6 +88,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lblTotalAmount);
             this.tabPage1.Controls.Add(this.txtRemark);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.dtpOrderDate);
@@ -113,13 +115,23 @@
             this.tabPage1.Text = "Add Purchase Order";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // lblTotalAmount
+            // 
+            this.lblTotalAmount.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalAmount.Location = new System.Drawing.Point(637, 378);
+            this.lblTotalAmount.Name = "lblTotalAmount";
+            this.lblTotalAmount.Size = new System.Drawing.Size(142, 27);
+            this.lblTotalAmount.TabIndex = 26;
+            this.lblTotalAmount.Text = "0.00";
+            this.lblTotalAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // txtRemark
             // 
             this.txtRemark.Location = new System.Drawing.Point(145, 95);
             this.txtRemark.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtRemark.Name = "txtRemark";
             this.txtRemark.Size = new System.Drawing.Size(643, 23);
-            this.txtRemark.TabIndex = 25;
+            this.txtRemark.TabIndex = 6;
             // 
             // label4
             // 
@@ -199,7 +211,7 @@
             this.groupBox1.Location = new System.Drawing.Point(36, 136);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(755, 241);
-            this.groupBox1.TabIndex = 17;
+            this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Item List";
             // 
@@ -229,10 +241,12 @@
             this.DgvItems.Name = "DgvItems";
             this.DgvItems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.DgvItems.Size = new System.Drawing.Size(749, 219);
-            this.DgvItems.TabIndex = 6;
+            this.DgvItems.TabIndex = 8;
             this.DgvItems.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvItems_CellEndEdit);
+            this.DgvItems.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DgvItems_CellValidating);
             this.DgvItems.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DgvItems_EditingControlShowing);
             this.DgvItems.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvItems_RowPostPaint);
+            this.DgvItems.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.DgvItems_RowValidating);
             this.DgvItems.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvItems_KeyDown);
             // 
             // Col_Item
@@ -335,7 +349,7 @@
             this.BtnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(78, 30);
-            this.BtnCancel.TabIndex = 8;
+            this.BtnCancel.TabIndex = 10;
             this.BtnCancel.Text = "Cancel";
             this.BtnCancel.UseVisualStyleBackColor = false;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
@@ -349,7 +363,7 @@
             this.BtnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(72, 30);
-            this.BtnSave.TabIndex = 7;
+            this.BtnSave.TabIndex = 9;
             this.BtnSave.Text = "Save";
             this.BtnSave.UseVisualStyleBackColor = false;
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -477,5 +491,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn purchaseDetailId;
         private System.Windows.Forms.TextBox txtRemark;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblTotalAmount;
     }
 }

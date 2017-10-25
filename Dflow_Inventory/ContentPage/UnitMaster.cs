@@ -15,6 +15,8 @@ namespace Dflow_Inventory.ContentPage
 
         private int _unitId = 0;
 
+        public int UnitId { get => _unitId; set => _unitId = value; }
+
         public UnitMaster()
         {
             InitializeComponent();
@@ -35,7 +37,7 @@ namespace Dflow_Inventory.ContentPage
                 {
                     Unit_Master unit = new Unit_Master();
 
-                    if (_unitId == 0)
+                    if (UnitId == 0)
                     {
                         db = new Inventory_DflowEntities();
 
@@ -47,7 +49,7 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else
                     {
-                        unit = db.Unit_Master.FirstOrDefault(m => m.unitId == _unitId && m.active == true);
+                        unit = db.Unit_Master.FirstOrDefault(m => m.unitId == UnitId && m.active == true);
 
                         unit.updatedBy = SessionHelper.UserId;
                         unit.updatedDate = DateTime.Now;
@@ -85,14 +87,13 @@ namespace Dflow_Inventory.ContentPage
         {
             try
             {
-                db = new Inventory_DflowEntities();
-
-                var unit = db.Unit_Master.FirstOrDefault(x => x.unitName.ToLower() == TxtUnitName.Text.Trim().ToLower());
-
-                if (unit != null)
+                using (db = new Inventory_DflowEntities())
                 {
-                    e.Cancel = true;
-                    MessageBox.Show("Unit Name already exists.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (db.Unit_Master.FirstOrDefault(x => x.unitName.ToLower() == TxtUnitName.Text.Trim().ToLower()) != null)
+                    {
+                        e.Cancel = true;
+                        MessageBox.Show(text: "Unit Name already exists.", caption: "Information", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information);
+                    }
                 }
             }
             catch (Exception ex)
@@ -128,9 +129,7 @@ namespace Dflow_Inventory.ContentPage
         {
             if (rowIndex >= 0)
             {
-                int unitId = 0;
-
-                int.TryParse(Convert.ToString(DgvList["unitId", rowIndex].Value), out unitId);
+                int.TryParse(s: Convert.ToString(DgvList["unitId", rowIndex].Value), result: out int unitId);
 
                 using (db = new Inventory_DflowEntities())
                 {
@@ -138,7 +137,7 @@ namespace Dflow_Inventory.ContentPage
 
                     if (unit != null)
                     {
-                        _unitId = unit.unitId;
+                        UnitId = unit.unitId;
                         TxtUnitCode.Text = unit.unitCode;
                         TxtUnitName.Text = unit.unitName;
                     }
@@ -150,14 +149,14 @@ namespace Dflow_Inventory.ContentPage
         {
             TxtUnitName.Text = string.Empty;
             TxtUnitCode.Text = string.Empty;
-            _unitId = 0;
+            UnitId = 0;
         }
 
         private void Get_Data()
         {
             using (db = new Inventory_DflowEntities())
             {
-                var units = db.Unit_Master
+                DgvList.DataSource = db.Unit_Master
                         .Select(m =>
                         new
                         {
@@ -168,8 +167,6 @@ namespace Dflow_Inventory.ContentPage
                         })
                         .Where(m => m.active == true)
                         .ToList();
-
-                DgvList.DataSource = units;
 
                 Set_Column_Unit();
             }
@@ -222,25 +219,25 @@ namespace Dflow_Inventory.ContentPage
                     {
                         if (DialogResult.No == MessageBox.Show("Are you sure to delete this record ?", "Warning", MessageBoxButtons.YesNo))
                             return;
-
-                        int unitId = 0;
-
-                        int.TryParse(Convert.ToString(DgvList["unitId", DgvList.CurrentCell.RowIndex].Value), out unitId);
+                        
+                        int.TryParse(s: Convert.ToString(value: DgvList["unitId", DgvList.CurrentCell.RowIndex].Value), result: out int unitId);
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            var unit = db.Unit_Master.FirstOrDefault(x => x.unitId == unitId);
-
-                            if (unit != null)
+                            if (db.Unit_Master.FirstOrDefault(x => x.unitId == unitId) != null)
                             {
-                                unit.active = false;
+                                db.Unit_Master.FirstOrDefault(x => x.unitId == unitId).active = false;
+                                db.Unit_Master.FirstOrDefault(x => x.unitId == unitId).updatedBy = SessionHelper.UserId;
+                                db.Unit_Master.FirstOrDefault(x => x.unitId == unitId).updatedDate = DateTime.Now;
 
                                 db.SaveChanges();
 
                                 Get_Data();
                             }
                             else
+                            {
                                 MessageBox.Show("Cannot delete this record");
+                            }
                         }
                     }
                 }

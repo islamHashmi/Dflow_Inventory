@@ -1,13 +1,10 @@
 ﻿using Dflow_Inventory.DataContext;
 using Dflow_Inventory.Helpers;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Dflow_Inventory.ContentPage
@@ -17,6 +14,8 @@ namespace Dflow_Inventory.ContentPage
         private Inventory_DflowEntities db;
 
         private int _distributorId = 0;
+
+        public int DistributorId { get => _distributorId; set => _distributorId = value; }
 
         public DistributorMaster()
         {
@@ -30,13 +29,9 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var distributorCode = db.Distributor_Master.Max(m => m.distributorCode);
+                int.TryParse(db.Distributor_Master.Max(m => m.distributorCode), out int _distributorCode);
 
-                int _distributorCode = 0;
-
-                int.TryParse(distributorCode, out _distributorCode);
-
-                TxtDistributorCode.Text = string.Format("{0}", _distributorCode + 1);
+                TxtDistributorCode.Text = $"{_distributorCode + 1}";
             }
         }
 
@@ -46,9 +41,7 @@ namespace Dflow_Inventory.ContentPage
             {
                 if (!string.IsNullOrWhiteSpace(TxtEmailId.Text))
                 {
-                    bool flag = CommanMethods.Validate_Email(TxtEmailId.Text.Trim());
-
-                    if (!flag)
+                    if (!(bool)CommanMethods.Validate_Email(TxtEmailId.Text.Trim()))
                     {
                         MessageBox.Show("Invalid Email Id.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         e.Cancel = true;
@@ -63,7 +56,7 @@ namespace Dflow_Inventory.ContentPage
 
         private void Clear_Controls()
         {
-            _distributorId = 0;
+            DistributorId = 0;
 
             Autogenerate_DistributorCode();
 
@@ -94,7 +87,7 @@ namespace Dflow_Inventory.ContentPage
                 {
                     Distributor_Master distributor = new Distributor_Master();
 
-                    if (_distributorId == 0)
+                    if (DistributorId == 0)
                     {
                         db.Distributor_Master.Add(distributor);
 
@@ -105,7 +98,7 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else
                     {
-                        distributor = db.Distributor_Master.FirstOrDefault(m => m.distributorId == _distributorId && m.active == true);
+                        distributor = db.Distributor_Master.FirstOrDefault(m => m.distributorId == DistributorId && m.active == true);
 
                         distributor.updatedBy = SessionHelper.UserId;
                         distributor.updatedDate = DateTime.Now;
@@ -152,9 +145,7 @@ namespace Dflow_Inventory.ContentPage
         {
             if (rowIndex >= 0)
             {
-                int distributorId = 0;
-
-                int.TryParse(Convert.ToString(DgvList["distributorId", rowIndex].Value), out distributorId);
+                int.TryParse(Convert.ToString(DgvList["distributorId", rowIndex].Value), out int distributorId);
 
                 using (db = new Inventory_DflowEntities())
                 {
@@ -162,7 +153,7 @@ namespace Dflow_Inventory.ContentPage
 
                     if (sm != null)
                     {
-                        _distributorId = sm.distributorId;
+                        DistributorId = sm.distributorId;
                         TxtDistributorCode.Text = sm.distributorCode;
                         TxtDistributorName.Text = sm.distributorName;
                         TxtAddress.Text = sm.address;
@@ -206,17 +197,13 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else if (e.KeyCode == Keys.Delete)
                     {
-                        int distributorId = 0;
-
-                        int.TryParse(Convert.ToString(DgvList["supplierId", DgvList.CurrentCell.RowIndex]), out distributorId);
+                        int.TryParse(Convert.ToString(DgvList["supplierId", DgvList.CurrentCell.RowIndex]), out int distributorId);
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            var distributor = db.Distributor_Master.FirstOrDefault(x => x.distributorId == distributorId);
-
-                            if (distributor != null)
+                            if (db.Distributor_Master.FirstOrDefault(x => x.distributorId == distributorId) != null)
                             {
-                                distributor.active = false;
+                                db.Distributor_Master.FirstOrDefault(x => x.distributorId == distributorId).active = false;
 
                                 db.SaveChanges();
                             }
@@ -234,7 +221,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var suppliers = db.Distributor_Master
+                DgvList.DataSource = db.Distributor_Master
                                 .Select(m => new
                                 {
                                     distributorId = m.distributorId,
@@ -252,9 +239,6 @@ namespace Dflow_Inventory.ContentPage
                                     panNo = m.panNo,
                                     active = m.active
                                 }).Where(m => m.active == true).ToList();
-
-
-                DgvList.DataSource = suppliers;
 
                 Set_Column_Distributor();
             }

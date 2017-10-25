@@ -1,13 +1,10 @@
 ﻿using Dflow_Inventory.DataContext;
 using Dflow_Inventory.Helpers;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Dflow_Inventory.ContentPage
@@ -17,6 +14,8 @@ namespace Dflow_Inventory.ContentPage
         private Inventory_DflowEntities db;
 
         private int _expenseHeadId = 0;
+
+        public int ExpenseHeadId { get => _expenseHeadId; set => _expenseHeadId = value; }
 
         public ExpenseMaster()
         {
@@ -33,9 +32,7 @@ namespace Dflow_Inventory.ContentPage
                 {
                     using (db = new Inventory_DflowEntities())
                     {
-                        var user = db.Expense_Master.FirstOrDefault(m => m.expenseName == TxtExpenseName.Text.Trim());
-
-                        if (user != null)
+                        if (db.Expense_Master.FirstOrDefault(m => m.expenseName == TxtExpenseName.Text.Trim()) != null)
                         {
                             MessageBox.Show("Expense Name already exists", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             e.Cancel = true;
@@ -64,7 +61,7 @@ namespace Dflow_Inventory.ContentPage
                 {
                     Expense_Master em = new Expense_Master();
 
-                    if (_expenseHeadId == 0)
+                    if (ExpenseHeadId == 0)
                     {
                         db.Expense_Master.Add(em);
                         em.entryBy = SessionHelper.UserId;
@@ -73,7 +70,7 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else
                     {
-                        em = db.Expense_Master.FirstOrDefault(m => m.expenseHeadId == _expenseHeadId);
+                        em = db.Expense_Master.FirstOrDefault(m => m.expenseHeadId == ExpenseHeadId);
                         em.updatedBy = SessionHelper.UserId;
                         em.updatedDate = DateTime.Now;
                     }
@@ -109,23 +106,21 @@ namespace Dflow_Inventory.ContentPage
         {
             TxtExpenseName.Text = string.Empty;
 
-            _expenseHeadId = 0;
+            ExpenseHeadId = 0;
         }
 
         private void Get_Data()
         {
             using (db = new Inventory_DflowEntities())
             {
-                var expenses = (from a in db.Expense_Master
-                                where a.active == true
-                                select new
-                                {
-                                    expenseHeadId = a.expenseHeadId,
-                                    expenseName = a.expenseName,
-                                    active = a.active
-                                }).ToList();
-
-                DgvList.DataSource = expenses;
+                DgvList.DataSource = (from a in db.Expense_Master
+                                      where a.active == true
+                                      select new
+                                      {
+                                          expenseHeadId = a.expenseHeadId,
+                                          expenseName = a.expenseName,
+                                          active = a.active
+                                      }).ToList();
 
                 Set_Column();
             }
@@ -169,9 +164,7 @@ namespace Dflow_Inventory.ContentPage
             {
                 Clear_Controls();
 
-                int _id = 0;
-
-                int.TryParse(Convert.ToString(DgvList["expenseHeadId", RowIndex].Value), out _id);
+                int.TryParse(s: Convert.ToString(DgvList["expenseHeadId", RowIndex].Value), result: out int _id);
 
                 if (_id != 0)
                 {
@@ -181,7 +174,7 @@ namespace Dflow_Inventory.ContentPage
 
                         if (expense != null)
                         {
-                            _expenseHeadId = expense.expenseHeadId;
+                            ExpenseHeadId = expense.expenseHeadId;
                             TxtExpenseName.Text = expense.expenseName;
                         }
                     }
@@ -216,10 +209,8 @@ namespace Dflow_Inventory.ContentPage
                     {
                         if (DialogResult.No == MessageBox.Show("Are you sure to delete this record ? ", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                             return;
-
-                        int _id = 0;
-
-                        int.TryParse(Convert.ToString(DgvList["expenseHeadId", DgvList.CurrentCell.RowIndex].Value), out _id);
+                        
+                        int.TryParse(Convert.ToString(DgvList["expenseHeadId", DgvList.CurrentCell.RowIndex].Value), out int _id);
 
                         using (db = new Inventory_DflowEntities())
                         {

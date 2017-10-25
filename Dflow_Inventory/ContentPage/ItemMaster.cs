@@ -14,6 +14,8 @@ namespace Dflow_Inventory.ContentPage
 
         private int _itemId = 0;
 
+        public int ItemId { get => _itemId; set => _itemId = value; }
+
         public ItemMaster()
         {
             InitializeComponent();
@@ -47,7 +49,7 @@ namespace Dflow_Inventory.ContentPage
                             decimal.TryParse(TxtPrice.Text, out decimal _sellingPrice);
                             decimal.TryParse(TxtOpeningStk.Text, out decimal _openStock);
 
-                            if (_itemId == 0)
+                            if (ItemId == 0)
                             {
                                 db.Item_Master.Add(item);
 
@@ -59,7 +61,7 @@ namespace Dflow_Inventory.ContentPage
                             }
                             else
                             {
-                                item = db.Item_Master.FirstOrDefault(m => m.itemId == _itemId && m.active == true);
+                                item = db.Item_Master.FirstOrDefault(m => m.itemId == ItemId && m.active == true);
 
                                 item.updatedBy = SessionHelper.UserId;
                                 item.updatedDate = DateTime.Now;
@@ -80,7 +82,7 @@ namespace Dflow_Inventory.ContentPage
                                 Stock stock = new Stock();
 
                                 var stk = db.Stocks
-                                            .Where(m => m.itemId == _itemId && m.stockType == "O")
+                                            .Where(m => m.itemId == ItemId && m.stockType == "O")
                                             .OrderByDescending(m => m.stockId)
                                             .FirstOrDefault();
 
@@ -133,7 +135,7 @@ namespace Dflow_Inventory.ContentPage
 
             TxtOpeningStk.ReadOnly = false;
 
-            _itemId = 0;
+            ItemId = 0;
 
             Autogenerate_ItemCode();
         }
@@ -176,9 +178,7 @@ namespace Dflow_Inventory.ContentPage
         {
             if (rowIndex >= 0)
             {
-                int itemId = 0;
-
-                int.TryParse(Convert.ToString(DgvList["itemId", rowIndex].Value), out itemId);
+                int.TryParse(Convert.ToString(DgvList["itemId", rowIndex].Value), out int itemId);
 
                 using (db = new Inventory_DflowEntities())
                 {
@@ -186,7 +186,7 @@ namespace Dflow_Inventory.ContentPage
 
                     if (item != null)
                     {
-                        _itemId = item.itemId;
+                        ItemId = item.itemId;
                         TxtItemCode.Text = item.itemCode;
                         TxtItemName.Text = item.itemName;
                         TxtDescription.Text = item.itemDescription;
@@ -218,13 +218,9 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var itemCode = db.Item_Master.Max(m => m.itemCode);
+                int.TryParse(db.Item_Master.Max(m => m.itemCode), out int _itemCode);
 
-                int _itemCode = 0;
-
-                int.TryParse(itemCode, out _itemCode);
-
-                TxtItemCode.Text = string.Format("{0}", _itemCode + 1);
+                TxtItemCode.Text = $"{_itemCode + 1}";
             }
         }
 
@@ -232,24 +228,22 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var items = (from m in db.Item_Master
-                             join b in db.Unit_Master on m.unitId equals b.unitId into unit
-                             from b in unit.DefaultIfEmpty()
-                             where m.active == true
-                             select new
-                             {
-                                 itemId = m.itemId,
-                                 itemCode = m.itemCode,
-                                 itemName = m.itemName,
-                                 description = m.itemDescription,
-                                 unitId = m.unitId == null ? 0 : m.unitId,
-                                 unitCode = b.unitCode,
-                                 sellingPrice = m.sellingPrice,
-                                 openingStock = m.openingStock,
-                                 active = m.active
-                             }).ToList();
-
-                DgvList.DataSource = items;
+                DgvList.DataSource = (from m in db.Item_Master
+                                      join b in db.Unit_Master on m.unitId equals b.unitId into unit
+                                      from b in unit.DefaultIfEmpty()
+                                      where m.active == true
+                                      select new
+                                      {
+                                          itemId = m.itemId,
+                                          itemCode = m.itemCode,
+                                          itemName = m.itemName,
+                                          description = m.itemDescription,
+                                          unitId = m.unitId == null ? 0 : m.unitId,
+                                          unitCode = b.unitCode,
+                                          sellingPrice = m.sellingPrice,
+                                          openingStock = m.openingStock,
+                                          active = m.active
+                                      }).ToList();
 
                 Set_Column_Unit();
             }
@@ -295,24 +289,23 @@ namespace Dflow_Inventory.ContentPage
                         if (DialogResult.No == MessageBox.Show("Are you sure to delete this record ?", "Warning", MessageBoxButtons.YesNo))
                             return;
 
-                        int itemId = 0;
 
-                        int.TryParse(Convert.ToString(DgvList["itemId", DgvList.CurrentCell.RowIndex].Value), out itemId);
+                        int.TryParse(s: Convert.ToString(DgvList["itemId", DgvList.CurrentCell.RowIndex].Value), result: out int itemId);
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            var item = db.Item_Master.FirstOrDefault(x => x.itemId == itemId);
-
-                            if (item != null)
+                            if (db.Item_Master.FirstOrDefault(x => x.itemId == itemId) != null)
                             {
-                                item.active = false;
+                                db.Item_Master.FirstOrDefault(x => x.itemId == itemId).active = false;
 
                                 db.SaveChanges();
 
                                 Get_Data();
                             }
                             else
+                            {
                                 MessageBox.Show("Cannot delete this item.");
+                            }
                         }
                     }
                 }
@@ -351,10 +344,14 @@ namespace Dflow_Inventory.ContentPage
             try
             {
                 if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+                {
                     e.Handled = true;
+                }
 
                 if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+                {
                     e.Handled = true;
+                }
             }
             catch (Exception ex)
             {
@@ -367,7 +364,9 @@ namespace Dflow_Inventory.ContentPage
             try
             {
                 if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                {
                     e.Handled = true;
+                }
             }
             catch (Exception ex)
             {

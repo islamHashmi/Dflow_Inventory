@@ -31,15 +31,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.TxtQuantity = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbItemName = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.BtnSave = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.Link_shorcut = new System.Windows.Forms.LinkLabel();
             this.DgvList = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmbItemName = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.TxtQuantity = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -77,6 +77,39 @@
             this.tabPage1.Text = "Add Production";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // TxtQuantity
+            // 
+            this.TxtQuantity.Location = new System.Drawing.Point(164, 65);
+            this.TxtQuantity.Name = "TxtQuantity";
+            this.TxtQuantity.Size = new System.Drawing.Size(140, 23);
+            this.TxtQuantity.TabIndex = 19;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(41, 68);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 18);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Quantity";
+            // 
+            // cmbItemName
+            // 
+            this.cmbItemName.FormattingEnabled = true;
+            this.cmbItemName.Location = new System.Drawing.Point(164, 32);
+            this.cmbItemName.Name = "cmbItemName";
+            this.cmbItemName.Size = new System.Drawing.Size(291, 26);
+            this.cmbItemName.TabIndex = 17;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(41, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 18);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Item Name";
+            // 
             // BtnCancel
             // 
             this.BtnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(87)))), ((int)(((byte)(51)))));
@@ -111,7 +144,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(744, 280);
+            this.tabPage2.Size = new System.Drawing.Size(510, 280);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "View Productions";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -120,7 +153,7 @@
             // 
             this.Link_shorcut.AutoSize = true;
             this.Link_shorcut.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Link_shorcut.Location = new System.Drawing.Point(649, 4);
+            this.Link_shorcut.Location = new System.Drawing.Point(415, 4);
             this.Link_shorcut.Name = "Link_shorcut";
             this.Link_shorcut.Size = new System.Drawing.Size(92, 18);
             this.Link_shorcut.TabIndex = 2;
@@ -146,41 +179,8 @@
             this.DgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DgvList.Name = "DgvList";
             this.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvList.Size = new System.Drawing.Size(738, 248);
+            this.DgvList.Size = new System.Drawing.Size(504, 248);
             this.DgvList.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 18);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Item Name";
-            // 
-            // cmbItemName
-            // 
-            this.cmbItemName.FormattingEnabled = true;
-            this.cmbItemName.Location = new System.Drawing.Point(164, 32);
-            this.cmbItemName.Name = "cmbItemName";
-            this.cmbItemName.Size = new System.Drawing.Size(291, 26);
-            this.cmbItemName.TabIndex = 17;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(41, 68);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 18);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "Quantity";
-            // 
-            // TxtQuantity
-            // 
-            this.TxtQuantity.Location = new System.Drawing.Point(164, 65);
-            this.TxtQuantity.Name = "TxtQuantity";
-            this.TxtQuantity.Size = new System.Drawing.Size(140, 23);
-            this.TxtQuantity.TabIndex = 19;
             // 
             // Production
             // 

@@ -66,10 +66,8 @@ namespace Dflow_Inventory.ContentPage
 
                     var data = db.sp_Stock_Report(_itemId, _startDate, _endDate).ToList();
 
-                    string path = Path.Combine(ConfigurationManager.AppSettings["reportPath"], "StockReport.rdlc");
-
                     reportViewer1.LocalReport.DataSources.Clear();
-                    reportViewer1.LocalReport.ReportPath = path;
+                    reportViewer1.LocalReport.ReportPath = Path.Combine(ConfigurationManager.AppSettings["reportPath"], "StockReport.rdlc");
                     ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
                     reportViewer1.LocalReport.DataSources.Add(reportDataSource);
 

@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Dflow_Inventory.Helpers
 {
     public static class AmountInWordHelper
     {
-        public static string ones(string Number)
+        public static string Ones(string Number)
         {
-            int _Number = Convert.ToInt32(Number);
             String name = "";
-            switch (_Number)
+            switch (Convert.ToInt32(Number))
             {
                 case 1:
                     name = "One";
@@ -44,11 +40,10 @@ namespace Dflow_Inventory.Helpers
             return name;
         }
 
-        public static string tens(string Number)
+        public static string Tens(string Number)
         {
-            int _Number = Convert.ToInt32(Number);
             String name = null;
-            switch (_Number)
+            switch (Convert.ToInt32(Number))
             {
                 case 10:
                     name = "Ten";
@@ -105,9 +100,9 @@ namespace Dflow_Inventory.Helpers
                     name = "Ninety";
                     break;
                 default:
-                    if (_Number > 0)
+                    if (Convert.ToInt32(Number) > 0)
                     {
-                        name = tens(Number.Substring(0, 1) + "0") + " " + ones(Number.Substring(1));
+                        name = Tens(Number.Substring(0, 1) + "0") + " " + Ones(Number.Substring(1));
                     }
                     break;
             }
@@ -134,11 +129,11 @@ namespace Dflow_Inventory.Helpers
                     {
                         case 1:
 
-                            word = ones(Number);
+                            word = Ones(Number);
                             isDone = true;
                             break;
                         case 2:
-                            word = tens(Number);
+                            word = Tens(Number);
                             isDone = true;
                             break;
                         case 3:
@@ -185,11 +180,11 @@ namespace Dflow_Inventory.Helpers
                         }
                     }
  
-                    if (word.Trim().Equals(place.Trim())) word = "";
+                    if ("".Trim().Equals(place.Trim())) word = "";
                 }
             }
             catch { }
-            return word.Trim();
+            return "".Trim();
         }
 
         public static string ConvertToWords(string numb)
@@ -210,7 +205,7 @@ namespace Dflow_Inventory.Helpers
                         pointStr = ConvertDecimals(points);
                     }
                 }
-                val = String.Format("{0} {1}{2} {3}", ConvertWholeNumber(wholeNo).Trim(), andStr, pointStr, endStr);
+                val = $"{ConvertWholeNumber(wholeNo).Trim()} {andStr}{pointStr} {endStr}";
             }
             catch { }
             return val;
@@ -219,6 +214,7 @@ namespace Dflow_Inventory.Helpers
         public static string ConvertDecimals(string number)
         {
             String cd = "", digit = "", engOne = "";
+
             for (int i = 0; i < number.Length; i++)
             {
                 digit = number[i].ToString();
@@ -226,10 +222,11 @@ namespace Dflow_Inventory.Helpers
                 if (digit.Equals("0"))
                     engOne = "Zero";
                 else
-                    engOne = ones(digit);
+                    engOne = Ones(digit);
 
                 cd += " " + engOne;
             }
+
             return cd;
         }  
     }

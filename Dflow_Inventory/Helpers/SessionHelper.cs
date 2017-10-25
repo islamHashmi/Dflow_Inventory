@@ -12,5 +12,7 @@
 
         public static string FinYear { get; set; }
 
+        public static string HsnCode { get; set; }
+        
     }
 }

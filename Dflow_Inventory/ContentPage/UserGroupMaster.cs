@@ -18,6 +18,8 @@ namespace Dflow_Inventory.ContentPage
 
         private int _userGroupId = 0;
 
+        public int UserGroupId { get => _userGroupId; set => _userGroupId = value; }
+
         public UserGroupMaster()
         {
             InitializeComponent();
@@ -33,11 +35,9 @@ namespace Dflow_Inventory.ContentPage
                 {
                     using (db = new Inventory_DflowEntities())
                     {
-                        var grp = db.User_Group.FirstOrDefault(m => m.groupName == TxtGroupName.Text.Trim());
-
-                        if (grp != null)
+                        if (db.User_Group.FirstOrDefault(m => m.groupName == TxtGroupName.Text.Trim()) != null)
                         {
-                            MessageBox.Show("Group Name already exists.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(text: "Group Name already exists.", caption: "Warning", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
                             e.Cancel = true;
                         }
                     }
@@ -64,7 +64,7 @@ namespace Dflow_Inventory.ContentPage
                 {
                     User_Group grp = new User_Group();
 
-                    if (_userGroupId == 0)
+                    if (UserGroupId == 0)
                     {
                         db.User_Group.Add(grp);
                         grp.entryBy = SessionHelper.UserGroupId;
@@ -73,7 +73,7 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else
                     {
-                        grp = db.User_Group.FirstOrDefault(m => m.userGroupId == _userGroupId);
+                        grp = db.User_Group.FirstOrDefault(m => m.userGroupId == UserGroupId);
                         grp.updatedBy = SessionHelper.UserId;
                         grp.updatedOn = DateTime.Now;
                     }
@@ -109,14 +109,14 @@ namespace Dflow_Inventory.ContentPage
         {
             TxtGroupName.Text = string.Empty;
 
-            _userGroupId = 0;
+            UserGroupId = 0;
         }
 
         private void Get_Data()
         {
             using (db = new Inventory_DflowEntities())
             {
-                var grps = db.User_Group
+                DgvList.DataSource = db.User_Group
                            .Select(m => new
                            {
                                userGroupId = m.userGroupId,
@@ -124,8 +124,6 @@ namespace Dflow_Inventory.ContentPage
                                active = m.active
                            }).Where(m => m.active == true)
                            .ToList();
-
-                DgvList.DataSource = grps;
 
                 Set_Column();
             }
@@ -169,9 +167,7 @@ namespace Dflow_Inventory.ContentPage
             {
                 Clear_Controls();
 
-                int _id = 0;
-
-                int.TryParse(Convert.ToString(DgvList["userGroupId", RowIndex].Value), out _id);
+                int.TryParse(Convert.ToString(DgvList["userGroupId", RowIndex].Value), out int _id);
 
                 if (_id != 0)
                 {
@@ -181,7 +177,7 @@ namespace Dflow_Inventory.ContentPage
 
                         if (ug != null)
                         {
-                            _userGroupId = ug.userGroupId;
+                            UserGroupId = ug.userGroupId;
                             TxtGroupName.Text = ug.groupName;
                         }
                     }
@@ -216,20 +212,16 @@ namespace Dflow_Inventory.ContentPage
                     {
                         if (DialogResult.No == MessageBox.Show("Are you sure to delete this record ? ", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                             return;
-
-                        int _id = 0;
-
-                        int.TryParse(Convert.ToString(DgvList["userGroupId", DgvList.CurrentCell.RowIndex].Value), out _id);
+                        
+                        int.TryParse(Convert.ToString(DgvList["userGroupId", DgvList.CurrentCell.RowIndex].Value), out int _id);
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            var ug = db.User_Group.FirstOrDefault(m => m.userGroupId == _id);
-
-                            if (ug != null)
+                            if (db.User_Group.FirstOrDefault(m => m.userGroupId == _id) != null)
                             {
-                                ug.active = false;
-                                ug.updatedBy = SessionHelper.UserId;
-                                ug.updatedOn = DateTime.Now;
+                                db.User_Group.FirstOrDefault(m => m.userGroupId == _id).active = false;
+                                db.User_Group.FirstOrDefault(m => m.userGroupId == _id).updatedBy = SessionHelper.UserId;
+                                db.User_Group.FirstOrDefault(m => m.userGroupId == _id).updatedOn = DateTime.Now;
 
                                 db.SaveChanges();
                             }

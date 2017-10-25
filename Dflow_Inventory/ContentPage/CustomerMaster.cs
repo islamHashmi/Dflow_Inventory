@@ -18,6 +18,8 @@ namespace Dflow_Inventory.ContentPage
 
         private int _customerId = 0;
 
+        public int CustomerId { get => _customerId; set => _customerId = value; }
+
         public CustomerMaster()
         {
             InitializeComponent();
@@ -31,9 +33,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var type = db.customerTypes.ToList();
-
-                cmbType.DataSource = type;
+                cmbType.DataSource = db.customerTypes.ToList();
                 cmbType.ValueMember = "typeCode";
                 cmbType.DisplayMember = "typeDescription";
             }
@@ -43,11 +43,9 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var customerCode = db.Customer_Master.Max(m => m.customerCode);
-
                 int _customerCode = 0;
 
-                int.TryParse(customerCode, out _customerCode);
+                int.TryParse(db.Customer_Master.Max(m => m.customerCode), out _customerCode);
 
                 TxtCustomerCode.Text = string.Format("{0}", _customerCode + 1);
             }
@@ -59,9 +57,7 @@ namespace Dflow_Inventory.ContentPage
             {
                 if (!string.IsNullOrWhiteSpace(TxtEmailId.Text))
                 {
-                    bool flag = CommanMethods.Validate_Email(TxtEmailId.Text.Trim());
-
-                    if (!flag)
+                    if (!(bool)CommanMethods.Validate_Email(TxtEmailId.Text.Trim()))
                     {
                         MessageBox.Show("Invalid Email Id.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         e.Cancel = true;
@@ -76,7 +72,7 @@ namespace Dflow_Inventory.ContentPage
 
         private void Clear_Controls()
         {
-            _customerId = 0;
+            CustomerId = 0;
 
             Autogenerate_CustomerCode();
 
@@ -107,7 +103,7 @@ namespace Dflow_Inventory.ContentPage
                 {
                     Customer_Master customer = new Customer_Master();
 
-                    if (_customerId == 0)
+                    if (CustomerId == 0)
                     {
                         db.Customer_Master.Add(customer);
 
@@ -118,7 +114,7 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else
                     {
-                        customer = db.Customer_Master.FirstOrDefault(m => m.customerId == _customerId && m.active == true);
+                        customer = db.Customer_Master.FirstOrDefault(m => m.customerId == CustomerId && m.active == true);
 
                         customer.updatedBy = SessionHelper.UserId;
                         customer.updatedDate = DateTime.Now;
@@ -176,7 +172,7 @@ namespace Dflow_Inventory.ContentPage
 
                     if (sm != null)
                     {
-                        _customerId = sm.customerId;
+                        CustomerId = sm.customerId;
                         TxtCustomerCode.Text = sm.customerCode;
                         TxtCustomerName.Text = sm.customerName;
                         TxtAddress.Text = sm.address;
@@ -220,17 +216,13 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else if (e.KeyCode == Keys.Delete)
                     {
-                        int customerId = 0;
-
-                        int.TryParse(Convert.ToString(DgvList["supplierId", DgvList.CurrentCell.RowIndex]), out customerId);
+                        int.TryParse(Convert.ToString(value: DgvList["supplierId", DgvList.CurrentCell.RowIndex]), result: out int customerId);
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            var customer = db.Customer_Master.FirstOrDefault(x => x.customerId == customerId);
-
-                            if (customer != null)
+                            if (db.Customer_Master.FirstOrDefault(x => x.customerId == customerId) != null)
                             {
-                                customer.active = false;
+                                db.Customer_Master.FirstOrDefault(x => x.customerId == customerId).active = false;
 
                                 db.SaveChanges();
                             }
@@ -248,7 +240,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var suppliers = db.Customer_Master
+                DgvList.DataSource = db.Customer_Master
                                 .Select(m => new
                                 {
                                     customerId = m.customerId,
@@ -266,9 +258,6 @@ namespace Dflow_Inventory.ContentPage
                                     panNo = m.panNo,
                                     active = m.active
                                 }).Where(m => m.active == true).ToList();
-
-
-                DgvList.DataSource = suppliers;
 
                 Set_Column_Unit();
             }

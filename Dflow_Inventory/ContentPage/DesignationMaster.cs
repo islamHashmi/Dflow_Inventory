@@ -27,13 +27,13 @@ namespace Dflow_Inventory.ContentPage
         private void TxtDesignation_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(TxtDesignation.Text))
+            {
                 return;
+            }
 
             using (db = new Inventory_DflowEntities())
             {
-                var designation = db.Designations.FirstOrDefault(m => m.designationName == TxtDesignation.Text.Trim());
-
-                if (designation != null)
+                if (db.Designations.FirstOrDefault(m => m.designationName == TxtDesignation.Text.Trim()) != null)
                 {
                     e.Cancel = true;
                     MessageBox.Show("Designation Name already exists.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -110,7 +110,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var units = db.Designations
+                DgvList.DataSource = db.Designations
                         .Select(m =>
                         new
                         {
@@ -120,8 +120,6 @@ namespace Dflow_Inventory.ContentPage
                         })
                         .Where(m => m.active == true)
                         .ToList();
-
-                DgvList.DataSource = units;
 
                 Set_Column_Unit();
             }
@@ -163,9 +161,7 @@ namespace Dflow_Inventory.ContentPage
         {
             if (rowIndex >= 0)
             {
-                int designationId = 0;
-
-                int.TryParse(Convert.ToString(DgvList["designationId", rowIndex].Value), out designationId);
+                int.TryParse(Convert.ToString(DgvList["designationId", rowIndex].Value), out int designationId);
 
                 using (db = new Inventory_DflowEntities())
                 {
@@ -207,17 +203,13 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else if (e.KeyCode == Keys.Delete)
                     {
-                        int designationId = 0;
-
-                        int.TryParse(Convert.ToString(DgvList["designationId", DgvList.CurrentCell.RowIndex]), out designationId);
+                        int.TryParse(Convert.ToString(DgvList["designationId", DgvList.CurrentCell.RowIndex].Value), out int designationId);
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            var designation = db.Designations.FirstOrDefault(x => x.designationId == designationId);
-
-                            if (designation != null)
+                            if (db.Designations.FirstOrDefault(x => x.designationId == designationId) != null)
                             {
-                                designation.active = false;
+                                db.Designations.FirstOrDefault(x => x.designationId == designationId).active = false;
 
                                 db.SaveChanges();
                             }

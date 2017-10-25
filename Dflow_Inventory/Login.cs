@@ -64,6 +64,11 @@ namespace Dflow_Inventory
 
                     db.SaveChanges();
 
+                    if (db.Application_Parameter.FirstOrDefault() != null)
+                    {
+                        SessionHelper.HsnCode = db.Application_Parameter.FirstOrDefault().hsnCode;
+                    }
+
                     string finYear = Get_FinancialYear();
 
                     SessionHelper.FinYear = finYear;                    

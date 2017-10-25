@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Dflow_Inventory
@@ -39,9 +33,7 @@ namespace Dflow_Inventory
         private void Short_Cut()
         {
             DataTable dt = Create_DataTable();
-
-            Label lbl = new Label();
-
+            
             int col = 0, row = 0;
 
             foreach(DataRow dr in dt.Rows)
@@ -51,20 +43,16 @@ namespace Dflow_Inventory
                     col = 0;
                     row++;
                 }
+                
+                new Label().Text = Convert.ToString(dr["control"]);
 
-                lbl = new Label();
-
-                lbl.Text = Convert.ToString(dr["control"]);
-
-                tableLayoutPanel1.Controls.Add(lbl, col, row);
+                tableLayoutPanel1.Controls.Add(new Label(), col, row);
 
                 col++;
+                
+                new Label().Text = Convert.ToString(dr["key"]);
 
-                lbl = new Label();
-
-                lbl.Text = Convert.ToString(dr["key"]);
-
-                tableLayoutPanel1.Controls.Add(lbl, col, row);
+                tableLayoutPanel1.Controls.Add(new Label(), col, row);
 
                 col++;
             }            

@@ -15,6 +15,8 @@ namespace Dflow_Inventory.ContentPage
 
         private int _employeeId = 0;
 
+        public int EmployeeId { get => _employeeId; set => _employeeId = value; }
+
         public EmployeeMaster()
         {
             InitializeComponent();
@@ -30,29 +32,21 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var gender = db.Genders.ToList();
-
-                CmbSex.DataSource = gender;
+                CmbSex.DataSource = db.Genders.ToList();
                 CmbSex.ValueMember = "genderCode";
                 CmbSex.DisplayMember = "genderDescription";
 
-                var marital = db.marital_Status.ToList();
-
-                CmbMaritalStatus.DataSource = marital;
+                CmbMaritalStatus.DataSource = db.marital_Status.ToList();
                 CmbMaritalStatus.ValueMember = "maritalStatusCode";
                 CmbMaritalStatus.DisplayMember = "maritalStatusDesc";
 
-                var empStatus = db.Employment_Status.ToList();
-
-                CmbEmpStatus.DataSource = empStatus;
+                CmbEmpStatus.DataSource = db.Employment_Status.ToList();
                 CmbEmpStatus.ValueMember = "empStatusCode";
                 CmbEmpStatus.DisplayMember = "empStatusDesc";
 
-                var designation = db.Designations.Distinct().ToList();
+                db.Designations.Distinct().ToList().Insert(0, new Designation { designationId = 0, designationName = "--- Select Designation ---" });
 
-                designation.Insert(0, new Designation { designationId = 0, designationName = "--- Select Designation ---" });
-
-                CmbDesignation.DataSource = designation;
+                CmbDesignation.DataSource = db.Designations.Distinct().ToList();
                 CmbDesignation.ValueMember = "designationId";
                 CmbDesignation.DisplayMember = "designationName";
             }
@@ -62,13 +56,9 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var employeeCode = db.Employees.Max(m => m.employeeCode);
+                int.TryParse(db.Employees.Max(m => m.employeeCode), out int _employeeCode);
 
-                int _employeeCode = 0;
-
-                int.TryParse(employeeCode, out _employeeCode);
-
-                TxtEmpCode.Text = string.Format("{0}", _employeeCode + 1);
+                TxtEmpCode.Text = $"{_employeeCode + 1}";
             }
         }
 
@@ -78,9 +68,7 @@ namespace Dflow_Inventory.ContentPage
             {
                 if (!string.IsNullOrWhiteSpace(TxtEmailId.Text))
                 {
-                    bool flag = CommanMethods.Validate_Email(TxtEmailId.Text.Trim());
-
-                    if (!flag)
+                    if (!(bool)CommanMethods.Validate_Email(TxtEmailId.Text.Trim()))
                     {
                         MessageBox.Show("Invalid Email Id.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         e.Cancel = true;
@@ -101,7 +89,7 @@ namespace Dflow_Inventory.ContentPage
 
         private void Clear_Controls()
         {
-            _employeeId = 0;
+            EmployeeId = 0;
 
             Autogenerate_CustomerCode();
 
@@ -144,7 +132,7 @@ namespace Dflow_Inventory.ContentPage
                 {
                     Employee emp = new Employee();
 
-                    if (_employeeId == 0)
+                    if (EmployeeId == 0)
                     {
                         db.Employees.Add(emp);
 
@@ -155,7 +143,7 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else
                     {
-                        emp = db.Employees.FirstOrDefault(m => m.employeeId == _employeeId && m.active == true);
+                        emp = db.Employees.FirstOrDefault(m => m.employeeId == EmployeeId && m.active == true);
 
                         emp.updatedBy = SessionHelper.UserId;
                         emp.updatedDate = DateTime.Now;
@@ -211,9 +199,7 @@ namespace Dflow_Inventory.ContentPage
         {
             if (rowIndex >= 0)
             {
-                int employeeId = 0;
-
-                int.TryParse(Convert.ToString(DgvList["employeeId", rowIndex].Value), out employeeId);
+                int.TryParse(Convert.ToString(DgvList["employeeId", rowIndex].Value), out int employeeId);
 
                 using (db = new Inventory_DflowEntities())
                 {
@@ -221,7 +207,7 @@ namespace Dflow_Inventory.ContentPage
 
                     if (sm != null)
                     {
-                        _employeeId = sm.employeeId;
+                        EmployeeId = sm.employeeId;
                         TxtEmpCode.Text = sm.employeeCode;
                         TxtFirstName.Text = sm.firstName;
                         TxtMiddleName.Text = sm.middleName;
@@ -270,17 +256,13 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else if (e.KeyCode == Keys.Delete)
                     {
-                        int employeeId = 0;
-
-                        int.TryParse(Convert.ToString(DgvList["employeeId", DgvList.CurrentCell.RowIndex]), out employeeId);
+                        int.TryParse(s: Convert.ToString(DgvList["employeeId", DgvList.CurrentCell.RowIndex]), result: out int employeeId);
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            var emp = db.Employees.FirstOrDefault(x => x.employeeId == employeeId);
-
-                            if (emp != null)
+                            if (db.Employees.FirstOrDefault(x => x.employeeId == employeeId) != null)
                             {
-                                emp.active = false;
+                                db.Employees.FirstOrDefault(x => x.employeeId == employeeId).active = false;
 
                                 db.SaveChanges();
                             }
@@ -298,41 +280,38 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-
-                var emp = (from e in db.Employees
-                           join d in db.Designations on e.designationId equals d.designationId into des
-                           from d in des.DefaultIfEmpty()
-                           join g in db.Genders on e.sex equals g.genderCode into gm
-                           from g in gm.DefaultIfEmpty()
-                           join m in db.marital_Status on e.maritalStatus equals m.maritalStatusCode into ms
-                           from m in ms.DefaultIfEmpty()
-                           join em in db.Employment_Status on e.empStatus equals em.empStatusCode into ems
-                           from em in ems.DefaultIfEmpty()
-                           where e.active == true
-                           select new
-                           {
-                               employeeId = e.employeeId,
-                               employeeCode = e.employeeCode,
-                               firstName = e.firstName,
-                               middleName = e.middleName,
-                               lastName = e.lastName,
-                               address = e.address,
-                               city = e.city,
-                               state = e.state,
-                               pincode = e.pincode,
-                               mobileNo = e.mobileNo,
-                               emailId = e.emailId,
-                               salary = e.salary,
-                               sex = g.genderDescription,
-                               designation = d.designationName,
-                               maritalStatus = m.maritalStatusDesc,
-                               empStatus = em.empStatusDesc,
-                               dateOfBirth = e.dateOfBirth,
-                               hireDate = e.hireDate,
-                               active = e.active
-                           }).ToList();
-                
-                DgvList.DataSource = emp;
+                DgvList.DataSource = (from e in db.Employees
+                                      join d in db.Designations on e.designationId equals d.designationId into des
+                                      from d in des.DefaultIfEmpty()
+                                      join g in db.Genders on e.sex equals g.genderCode into gm
+                                      from g in gm.DefaultIfEmpty()
+                                      join m in db.marital_Status on e.maritalStatus equals m.maritalStatusCode into ms
+                                      from m in ms.DefaultIfEmpty()
+                                      join em in db.Employment_Status on e.empStatus equals em.empStatusCode into ems
+                                      from em in ems.DefaultIfEmpty()
+                                      where e.active == true
+                                      select new
+                                      {
+                                          employeeId = e.employeeId,
+                                          employeeCode = e.employeeCode,
+                                          firstName = e.firstName,
+                                          middleName = e.middleName,
+                                          lastName = e.lastName,
+                                          address = e.address,
+                                          city = e.city,
+                                          state = e.state,
+                                          pincode = e.pincode,
+                                          mobileNo = e.mobileNo,
+                                          emailId = e.emailId,
+                                          salary = e.salary,
+                                          sex = g.genderDescription,
+                                          designation = d.designationName,
+                                          maritalStatus = m.maritalStatusDesc,
+                                          empStatus = em.empStatusDesc,
+                                          dateOfBirth = e.dateOfBirth,
+                                          hireDate = e.hireDate,
+                                          active = e.active
+                                      }).ToList();
 
                 Set_Column_Employee();
             }
@@ -434,10 +413,14 @@ namespace Dflow_Inventory.ContentPage
             try
             {
                 if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+                {
                     e.Handled = true;
+                }
 
                 if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+                {
                     e.Handled = true;
+                }
             }
             catch (Exception ex)
             {

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dflow_Inventory.DataContext;
 using Dflow_Inventory.Helpers;
@@ -18,6 +13,8 @@ namespace Dflow_Inventory.ContentPage
         private Inventory_DflowEntities db;
 
         private int _voucherId = 0;
+
+        public int VoucherId { get => _voucherId; set => _voucherId = value; }
 
         public VoucherPayment()
         {
@@ -79,13 +76,9 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var voucherNumber = db.voucherHeaders.Max(m => m.voucherNumber);
+                int.TryParse(db.voucherHeaders.Max(m => m.voucherNumber), out int _voucherNo);
 
-                int _voucherNo = 0;
-
-                int.TryParse(voucherNumber, out _voucherNo);
-
-                TxtVoucherNo.Text = string.Format("{0}", _voucherNo + 1);
+                TxtVoucherNo.Text = $"{_voucherNo + 1}";
             }
         }
 
@@ -101,7 +94,7 @@ namespace Dflow_Inventory.ContentPage
 
             Clear_Date();
 
-            _voucherId = 0;
+            VoucherId = 0;
 
             txtName.Text = string.Empty;
             TxtAmount.Text = string.Empty;
@@ -130,16 +123,16 @@ namespace Dflow_Inventory.ContentPage
         {
             try
             {
-                if(string.IsNullOrWhiteSpace(txtName.Text) && cmbEmployee.SelectedIndex==0)
+                if (string.IsNullOrWhiteSpace(txtName.Text) && cmbEmployee.SelectedIndex == 0)
                 {
-                    MessageBox.Show("Please select employee or enter name.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(text: "Please select employee or enter name.", caption: "Warning", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Exclamation);
                     cmbEmployee.Focus();
                     return;
                 }
 
-                if(string.IsNullOrWhiteSpace(TxtAmount.Text))
+                if (string.IsNullOrWhiteSpace(TxtAmount.Text))
                 {
-                    MessageBox.Show("Amount is mandatory.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(text: "Amount is mandatory.", caption: "Warning", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Exclamation);
                     TxtAmount.Focus();
                     return;
                 }
@@ -152,7 +145,7 @@ namespace Dflow_Inventory.ContentPage
                         {
                             voucherHeader vh = new voucherHeader();
 
-                            if (_voucherId == 0)
+                            if (VoucherId == 0)
                             {
                                 db.voucherHeaders.Add(vh);
 
@@ -162,7 +155,7 @@ namespace Dflow_Inventory.ContentPage
                             }
                             else
                             {
-                                vh = db.voucherHeaders.FirstOrDefault(m => m.voucherId == _voucherId);
+                                vh = db.voucherHeaders.FirstOrDefault(m => m.voucherId == VoucherId);
 
                                 vh.updatedBy = SessionHelper.UserId;
                                 vh.updatedDate = DateTime.Now;
@@ -209,30 +202,28 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var vouchers = (from a in db.voucherHeaders
-                                join b in db.Expense_Master on a.expenseId equals b.expenseHeadId into exp
-                                from b in exp.DefaultIfEmpty()
-                                join e in db.Employees on a.employeeId equals e.employeeId into emp
-                                from e in emp.DefaultIfEmpty()
-                                join c in db.PaymentModes on a.paymentMode equals c.paymentCode into pay
-                                from c in pay.DefaultIfEmpty()
-                                where a.voucherType == "P"
-                                select new
-                                {
-                                    voucherId = a.voucherId,
-                                    voucherNumber = a.voucherNumber,
-                                    voucherDate = a.voucherDate,
-                                    expenseName = b.expenseName,
-                                    employeeName = e.firstName + " " + e.middleName + " " + e.lastName,
-                                    name = a.name,
-                                    amount = a.amount,
-                                    paymentMode = c.paymentDescription,
-                                    bankName = a.bankName,
-                                    chqNumber = a.chequeNo,
-                                    chqDate = a.chequeDate
-                                }).ToList();
-
-                DgvList.DataSource = vouchers;
+                DgvList.DataSource = (from a in db.voucherHeaders
+                                      join b in db.Expense_Master on a.expenseId equals b.expenseHeadId into exp
+                                      from b in exp.DefaultIfEmpty()
+                                      join e in db.Employees on a.employeeId equals e.employeeId into emp
+                                      from e in emp.DefaultIfEmpty()
+                                      join c in db.PaymentModes on a.paymentMode equals c.paymentCode into pay
+                                      from c in pay.DefaultIfEmpty()
+                                      where a.voucherType == "P"
+                                      select new
+                                      {
+                                          voucherId = a.voucherId,
+                                          voucherNumber = a.voucherNumber,
+                                          voucherDate = a.voucherDate,
+                                          expenseName = b.expenseName,
+                                          employeeName = e.firstName + " " + e.middleName + " " + e.lastName,
+                                          name = a.name,
+                                          amount = a.amount,
+                                          paymentMode = c.paymentDescription,
+                                          bankName = a.bankName,
+                                          chqNumber = a.chequeNo,
+                                          chqDate = a.chequeDate
+                                      }).ToList();
 
                 Set_Column();
             }
@@ -277,9 +268,7 @@ namespace Dflow_Inventory.ContentPage
         {
             if (RowIndex >= 0)
             {
-                int _id = 0;
-
-                int.TryParse(Convert.ToString(DgvList["voucherId", RowIndex].Value), out _id);
+                int.TryParse(Convert.ToString(DgvList["voucherId", RowIndex].Value), out int _id);
 
                 using (db = new Inventory_DflowEntities())
                 {
@@ -303,7 +292,7 @@ namespace Dflow_Inventory.ContentPage
 
                     if (voucher != null)
                     {
-                        _voucherId = voucher.voucherId;
+                        VoucherId = voucher.voucherId;
                         TxtVoucherNo.Text = voucher.voucherNo;
                         DtpVoucherDate.Text = voucher.voucherDate.ToString("dd/MM/yyyy");
                         txtName.Text = voucher.customer;
@@ -349,16 +338,12 @@ namespace Dflow_Inventory.ContentPage
                         if (DialogResult.No == MessageBox.Show("Are sure to delete this record ? ", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                             return;
 
-                        int _id = 0;
-
-                        int.TryParse(Convert.ToString(DgvList["voucherId", DgvList.CurrentCell.RowIndex].Value), out _id);
+                        int.TryParse(s: Convert.ToString(DgvList["voucherId", DgvList.CurrentCell.RowIndex].Value), result: out int _id);
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            var voucher = db.voucherHeaders.FirstOrDefault(m => m.voucherId == _id);
-
-                            if (voucher != null)
-                                db.voucherHeaders.Remove(voucher);
+                            if (db.voucherHeaders.FirstOrDefault(m => m.voucherId == _id) != null)
+                                db.voucherHeaders.Remove(db.voucherHeaders.FirstOrDefault(m => m.voucherId == _id));
                         }
                     }
                 }
@@ -374,10 +359,14 @@ namespace Dflow_Inventory.ContentPage
             try
             {
                 if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+                {
                     e.Handled = true;
+                }
 
                 if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+                {
                     e.Handled = true;
+                }
             }
             catch (Exception ex)
             {

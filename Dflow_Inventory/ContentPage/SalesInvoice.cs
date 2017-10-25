@@ -15,6 +15,8 @@ namespace Dflow_Inventory.ContentPage
 
         private int _invoiceId = 0;
 
+        public int InvoiceId { get => _invoiceId; set => _invoiceId = value; }
+
         public SalesInvoice()
         {
             InitializeComponent();
@@ -54,11 +56,9 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    var items = db.Item_Master.Where(x => x.active == true);
-
-                    if (items != null)
+                    if (db.Item_Master.Where(x => x.active == true) != null)
                     {
-                        foreach (var item in items)
+                        foreach (var item in db.Item_Master.Where(x => x.active == true))
                         {
                             string name = item.itemName;
 
@@ -71,9 +71,7 @@ namespace Dflow_Inventory.ContentPage
                     }
                 }
 
-                TextBox txtItemName = e.Control as TextBox;
-
-                if (txtItemName != null)
+                if (e.Control is TextBox txtItemName)
                 {
                     txtItemName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                     txtItemName.AutoCompleteCustomSource = stringCollection;
@@ -86,9 +84,7 @@ namespace Dflow_Inventory.ContentPage
 
             if (DgvItems.CurrentCell.ColumnIndex == 2)
             {
-                TextBox tb = e.Control as TextBox;
-
-                if (tb != null)
+                if (e.Control is TextBox tb)
                 {
                     tb.AutoCompleteMode = AutoCompleteMode.None;
                     tb.KeyPress += new KeyPressEventHandler(Column_Decimal_KeyPress);
@@ -97,9 +93,7 @@ namespace Dflow_Inventory.ContentPage
 
             if (DgvItems.CurrentCell.ColumnIndex == 3)
             {
-                TextBox tb = e.Control as TextBox;
-
-                if (tb != null)
+                if (e.Control is TextBox tb)
                 {
                     tb.AutoCompleteMode = AutoCompleteMode.None;
                     tb.KeyPress += new KeyPressEventHandler(Column_Integer_KeyPress);
@@ -108,9 +102,7 @@ namespace Dflow_Inventory.ContentPage
 
             if (DgvItems.CurrentCell.ColumnIndex == 4)
             {
-                TextBox tb = e.Control as TextBox;
-
-                if (tb != null)
+                if (e.Control is TextBox tb)
                 {
                     tb.AutoCompleteMode = AutoCompleteMode.None;
                     tb.KeyPress += new KeyPressEventHandler(Column_Decimal_KeyPress);
@@ -121,16 +113,22 @@ namespace Dflow_Inventory.ContentPage
         private void Column_Integer_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
                 e.Handled = true;
+            }
         }
 
         private void Column_Decimal_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
                 e.Handled = true;
+            }
 
             if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
                 e.Handled = true;
+            }
         }
 
         private void DgvItems_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -140,8 +138,6 @@ namespace Dflow_Inventory.ContentPage
                 if (e.ColumnIndex == 0)
                 {
                     string itemName = Convert.ToString(DgvItems[e.ColumnIndex, e.RowIndex].Value);
-
-                    string[] split = itemName.Split('-');
 
                     string itemCode = itemName;
 
@@ -168,11 +164,13 @@ namespace Dflow_Inventory.ContentPage
                         {
                             DgvItems["itemId", e.RowIndex].Value = item.itemId;
                             DgvItems["Col_Unit", e.RowIndex].Value = item.unitCode;
+                            DgvItems["Col_HSNCode", e.RowIndex].Value = SessionHelper.HsnCode;
                         }
                         else
                         {
                             DgvItems["itemId", e.RowIndex].Value = DBNull.Value;
                             DgvItems["Col_Unit", e.RowIndex].Value = DBNull.Value;
+                            DgvItems["Col_HSNCode", e.RowIndex].Value = DBNull.Value;
                         }
                     }
                 }
@@ -187,40 +185,38 @@ namespace Dflow_Inventory.ContentPage
 
         private void Calculate_Amount(int ColumnIndex, int RowIndex)
         {
-            decimal _rate = 0, _quantity = 0, _amount = 0;
-
-            decimal.TryParse(Convert.ToString(DgvItems["Col_Rate", RowIndex].Value), out _rate);
-            decimal.TryParse(Convert.ToString(DgvItems["Col_Quantity", RowIndex].Value), out _quantity);
-            decimal.TryParse(Convert.ToString(DgvItems["Col_Amount", RowIndex].Value), out _amount);
+            decimal.TryParse(Convert.ToString(value: DgvItems["Col_Rate", RowIndex].Value), result: out decimal _rate);
+            decimal.TryParse(Convert.ToString(value: DgvItems["Col_Quantity", RowIndex].Value), result: out decimal _quantity);
+            decimal.TryParse(Convert.ToString(value: DgvItems["Col_Amount", RowIndex].Value), result: out decimal _amount);
 
             _amount = _rate * _quantity;
 
-            DgvItems["Col_Rate", RowIndex].Value = string.Format("{0:0.00}", _rate);
-            DgvItems["Col_Amount", RowIndex].Value = string.Format("{0:0.00}", _amount);
+            DgvItems["Col_Rate", RowIndex].Value = $"{_rate:0.00}";
+            DgvItems["Col_Amount", RowIndex].Value = $"{_amount:0.00}";
 
             Calculate_Total_Amount();
         }
 
         private void Calculate_Total_Amount()
         {
-            decimal _amount = 0, _totalAmount = 0;
+            decimal _totalAmount = 0;
 
             foreach (DataGridViewRow row in DgvItems.Rows)
             {
-                decimal.TryParse(Convert.ToString(row.Cells["Col_Amount"].Value), out _amount);
+                decimal.TryParse(Convert.ToString(value: row.Cells["Col_Amount"].Value), result: out decimal _amount);
 
                 _totalAmount += _amount;
             }
 
-            TxtTotal.Text = string.Format("{0:0.00}", _totalAmount);
+            TxtTotal.Text = $"{_totalAmount:0.00}";
 
-            decimal _discount = 0, _taxableAmt = 0, _cgst1 = 0, _cgst2 = 0, _totalAmt = 0;
+            decimal _taxableAmt = 0, _cgst1 = 0, _sgst2 = 0, _totalAmt = 0;
 
-            decimal.TryParse(TxtDiscount.Text, out _discount);
+            decimal.TryParse(TxtDiscount.Text, out decimal _discount);
 
             _taxableAmt = _totalAmount - _discount;
 
-            TxtTaxableAmt.Text = string.Format("{0:0.00}", _taxableAmt);
+            TxtTaxableAmt.Text = $"{_taxableAmt:0.00}";
 
             decimal _gstPercent1 = 0, _gstPercent2 = 0;
 
@@ -228,15 +224,15 @@ namespace Dflow_Inventory.ContentPage
             decimal.TryParse(TxtSGST.Text, out _gstPercent2);
 
             _cgst1 = (_taxableAmt * _gstPercent1) / 100;
-            _cgst2 = (_taxableAmt * _gstPercent2) / 100;
+            _sgst2 = (_taxableAmt * _gstPercent2) / 100;
 
-            TxtCGSTAmt.Text = string.Format("{0:0.00}", _cgst1);
+            TxtCGSTAmt.Text = $"{_cgst1:0.00}";
 
-            TxtSGSTAmt.Text = string.Format("{0:0.00}", _cgst2);
+            TxtSGSTAmt.Text = $"{_sgst2:0.00}";
 
-            _totalAmt = _taxableAmt + _cgst1 + _cgst2;
+            _totalAmt = _taxableAmt + _cgst1 + _sgst2;
 
-            TxtTotalAmt.Text = string.Format("{0:0.00}", _totalAmt);
+            TxtTotalAmt.Text = $"{_totalAmt:0.00}";
         }
 
         private void TxtCustomerName_TextChanged(object sender, EventArgs e)
@@ -245,7 +241,17 @@ namespace Dflow_Inventory.ContentPage
             {
                 using (db = new Inventory_DflowEntities())
                 {
-                    var Vendors = db.Customer_Master
+                    if (db.Customer_Master
+                                    .Select(m => new
+                                    {
+                                        vendorId = m.customerId,
+                                        vendorName = m.customerName,
+                                        active = m.active
+                                    })
+                                    .Where(m => m.active == true && m.vendorName.Contains(TxtCustomerName.Text.Trim()))
+                                    .ToList() != null)
+                    {
+                        LstCustomer.DataSource = db.Customer_Master
                                     .Select(m => new
                                     {
                                         vendorId = m.customerId,
@@ -254,10 +260,6 @@ namespace Dflow_Inventory.ContentPage
                                     })
                                     .Where(m => m.active == true && m.vendorName.Contains(TxtCustomerName.Text.Trim()))
                                     .ToList();
-
-                    if (Vendors != null)
-                    {
-                        LstCustomer.DataSource = Vendors;
                         LstCustomer.DisplayMember = "vendorName";
                         LstCustomer.ValueMember = "vendorId";
                         LstCustomer.SelectedIndex = -1;
@@ -353,18 +355,14 @@ namespace Dflow_Inventory.ContentPage
                 throw;
             }
         }
-        
+
         private void Autogenerate_InvoiceNumber()
         {
             using (db = new Inventory_DflowEntities())
             {
-                var invoiceNumber = db.InvoiceHeaders.Max(m => m.invoiceNumber);
+                int.TryParse(db.InvoiceHeaders.Max(m => m.invoiceNumber), out int _invoiceNumber);
 
-                int _invoiceNumber = 0;
-
-                int.TryParse(invoiceNumber, out _invoiceNumber);
-
-                TxtInvoiceNo.Text = string.Format("{0}", _invoiceNumber + 1);
+                TxtInvoiceNo.Text = $"{_invoiceNumber + 1}";
             }
         }
 
@@ -372,28 +370,26 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var invoices = (from m in db.InvoiceHeaders
-                                join v in db.Customer_Master on m.customerId equals v.customerId into ven
-                                from v in ven.DefaultIfEmpty()
-                                select new
-                                {
-                                    invoiceId = m.invoiceId,
-                                    invoiceNumber = m.invoiceNumber,
-                                    invoiceDate = m.invoiceDate,
-                                    customerId = m.customerId,
-                                    customerName = v.customerName,
-                                    remark = m.remark,
-                                    total = m.total,
-                                    discount = m.discount,
-                                    taxableAmt = m.taxableAmount,
-                                    cgstPercent = m.cgstPercent,
-                                    sgstPercent = m.sgstPercent,
-                                    cgstAmount = m.cgstAmount,
-                                    sgstAmount = m.sgstAmount,
-                                    totalAmount = m.totalAmount
-                                }).ToList();
-
-                DgvList.DataSource = invoices;
+                DgvList.DataSource = (from m in db.InvoiceHeaders
+                                      join v in db.Customer_Master on m.customerId equals v.customerId into ven
+                                      from v in ven.DefaultIfEmpty()
+                                      select new
+                                      {
+                                          invoiceId = m.invoiceId,
+                                          invoiceNumber = m.invoiceNumber,
+                                          invoiceDate = m.invoiceDate,
+                                          customerId = m.customerId,
+                                          customerName = v.customerName,
+                                          remark = m.remark,
+                                          total = m.total,
+                                          discount = m.discount,
+                                          taxableAmt = m.taxableAmount,
+                                          cgstPercent = m.cgstPercent,
+                                          sgstPercent = m.sgstPercent,
+                                          cgstAmount = m.cgstAmount,
+                                          sgstAmount = m.sgstAmount,
+                                          totalAmount = m.totalAmount
+                                      }).ToList();
 
                 Set_Column_Purchase();
             }
@@ -443,9 +439,19 @@ namespace Dflow_Inventory.ContentPage
 
         private void Clear_Controls()
         {
-            _invoiceId = 0;
+            InvoiceId = 0;
 
             Autogenerate_InvoiceNumber();
+
+            TxtTotal.Text = string.Empty;
+            TxtDiscount.Text = string.Empty;
+            TxtTaxableAmt.Text = string.Empty;
+            TxtCGST.Text = string.Empty;
+            TxtCGSTAmt.Text = string.Empty;
+            TxtSGST.Text = string.Empty;
+            TxtSGSTAmt.Text = string.Empty;
+            TxtTotalAmt.Text = string.Empty;
+            txtRemark.Text = string.Empty;
 
             TxtCustomerName.Text = string.Empty;
             LstCustomer.Hide();
@@ -473,7 +479,7 @@ namespace Dflow_Inventory.ContentPage
                         {
                             InvoiceHeader ih = new InvoiceHeader();
 
-                            if (_invoiceId == 0)
+                            if (InvoiceId == 0)
                             {
                                 db.InvoiceHeaders.Add(ih);
 
@@ -483,7 +489,7 @@ namespace Dflow_Inventory.ContentPage
                             }
                             else
                             {
-                                ih = db.InvoiceHeaders.FirstOrDefault(m => m.invoiceId == _invoiceId);
+                                ih = db.InvoiceHeaders.FirstOrDefault(m => m.invoiceId == InvoiceId);
 
                                 ih.updatedBy = SessionHelper.UserId;
                                 ih.updatedDate = DateTime.Now;
@@ -493,21 +499,18 @@ namespace Dflow_Inventory.ContentPage
                             ih.remark = string.IsNullOrWhiteSpace(txtRemark.Text) ? null : txtRemark.Text;
                             ih.finYear = string.IsNullOrEmpty(SessionHelper.FinYear) ? null : SessionHelper.FinYear;
 
-                            int _customerId = 0;
-                            int.TryParse(lblCustomerId.Text, out _customerId);
+                            int.TryParse(lblCustomerId.Text, out int _customerId);
 
                             ih.customerId = _customerId;
 
-                            decimal _total = 0, _discount = 0, _taxableAmt = 0, _cgstPercent = 0, _sgstPercent = 0, _sgstAmt = 0, _cgstAmt = 0, _totalAmt = 0;
-
-                            decimal.TryParse(Convert.ToString(TxtTotal.Text), out _total);
-                            decimal.TryParse(Convert.ToString(TxtDiscount.Text), out _discount);
-                            decimal.TryParse(Convert.ToString(TxtTaxableAmt.Text), out _taxableAmt);
-                            decimal.TryParse(Convert.ToString(TxtCGST.Text), out _cgstPercent);
-                            decimal.TryParse(Convert.ToString(TxtSGST.Text), out _sgstPercent);
-                            decimal.TryParse(Convert.ToString(TxtCGSTAmt.Text), out _sgstAmt);
-                            decimal.TryParse(Convert.ToString(TxtSGSTAmt.Text), out _cgstAmt);
-                            decimal.TryParse(Convert.ToString(TxtTotalAmt.Text), out _totalAmt);
+                            decimal.TryParse(Convert.ToString(TxtTotal.Text), out decimal _total);
+                            decimal.TryParse(Convert.ToString(TxtDiscount.Text), out decimal _discount);
+                            decimal.TryParse(Convert.ToString(TxtTaxableAmt.Text), out decimal _taxableAmt);
+                            decimal.TryParse(Convert.ToString(TxtCGST.Text), out decimal _cgstPercent);
+                            decimal.TryParse(Convert.ToString(TxtSGST.Text), out decimal _sgstPercent);
+                            decimal.TryParse(Convert.ToString(TxtCGSTAmt.Text), out decimal _sgstAmt);
+                            decimal.TryParse(Convert.ToString(TxtSGSTAmt.Text), out decimal _cgstAmt);
+                            decimal.TryParse(Convert.ToString(TxtTotalAmt.Text), out decimal _totalAmt);
 
                             ih.total = _total == 0 ? null : (decimal?)_total;
                             ih.discount = _discount == 0 ? null : (decimal?)_discount;
@@ -530,30 +533,28 @@ namespace Dflow_Inventory.ContentPage
                                 {
                                     id = new InvoiceDetail();
 
-                                    int _itemId = 0;
-
-                                    int.TryParse(Convert.ToString(row.Cells["itemId"].Value), out _itemId);
+                                    int.TryParse(Convert.ToString(row.Cells["itemId"].Value), out int _itemId);
 
                                     if (_itemId > 0)
                                     {
-                                        int _invoiceDetailId = 0;
+                                        string cmdType = string.Empty;
 
-                                        int.TryParse(Convert.ToString(row.Cells["invoiceDetailId"].Value), out _invoiceDetailId);
+                                        int.TryParse(Convert.ToString(value: row.Cells["invoiceDetailId"].Value), result: out int _invoiceDetailId);
 
                                         if (_invoiceDetailId == 0)
                                         {
                                             db.InvoiceDetails.Add(id);
+                                            cmdType = "I";
                                         }
                                         else
                                         {
                                             id = db.InvoiceDetails.FirstOrDefault(x => x.invoiceDetailId == _invoiceDetailId);
+                                            cmdType = "U";
                                         }
 
-                                        decimal _rate = 0, _quantity = 0, _amount = 0;
-
-                                        decimal.TryParse(Convert.ToString(row.Cells["Col_Rate"].Value), out _rate);
-                                        decimal.TryParse(Convert.ToString(row.Cells["Col_Quantity"].Value), out _quantity);
-                                        decimal.TryParse(Convert.ToString(row.Cells["Col_Amount"].Value), out _amount);
+                                        decimal.TryParse(Convert.ToString(row.Cells["Col_Rate"].Value), out decimal _rate);
+                                        decimal.TryParse(Convert.ToString(row.Cells["Col_Quantity"].Value), out decimal _quantity);
+                                        decimal.TryParse(Convert.ToString(row.Cells["Col_Amount"].Value), out decimal _amount);
 
                                         id.invoiceId = _id;
                                         id.itemId = _itemId;
@@ -564,6 +565,8 @@ namespace Dflow_Inventory.ContentPage
                                         id.rate = _rate == 0 ? null : (decimal?)_rate;
                                         id.quantity = _quantity == 0 ? null : (decimal?)_quantity;
                                         id.amount = _amount == 0 ? null : (decimal?)_amount;
+
+                                        db.sp_Stock_InsertUpdate(CommanMethods.ConvertDate(dtpDate.Text), _itemId, "S", _quantity == 0 ? null : (decimal?)_quantity, _id, null, cmdType, SessionHelper.UserId);
                                     }
                                 }
 
@@ -610,9 +613,7 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    int _id = 0;
-
-                    int.TryParse(Convert.ToString(DgvList["invoiceId", RowIndex].Value), out _id);
+                    int.TryParse(Convert.ToString(DgvList["invoiceId", RowIndex].Value), out int _id);
 
                     var ih = (from m in db.InvoiceHeaders
                               join v in db.Customer_Master on m.customerId equals v.customerId into ven
@@ -655,7 +656,7 @@ namespace Dflow_Inventory.ContentPage
 
                     if (ih != null)
                     {
-                        _invoiceId = ih.invoiceId;
+                        InvoiceId = ih.invoiceId;
                         TxtInvoiceNo.Text = ih.invoiceNumber;
                         dtpDate.Text = ih.invoiceDate.ToString("dd/MM/yyyy");
                         TxtCustomerName.Text = ih.customerName;
@@ -688,6 +689,7 @@ namespace Dflow_Inventory.ContentPage
                         TxtTotalAmt.Text = Convert.ToString(ih.totalAmount);
                     }
                 }
+
                 tabControl1.SelectedIndex = 0;
             }
         }
@@ -718,10 +720,8 @@ namespace Dflow_Inventory.ContentPage
                     {
                         if (DialogResult.No == MessageBox.Show("Are you sure to delete this record ?", "Warning", MessageBoxButtons.YesNo))
                             return;
-
-                        int _id = 0;
-
-                        int.TryParse(Convert.ToString(DgvList["invoiceId", DgvList.CurrentCell.RowIndex].Value), out _id);
+                        
+                        int.TryParse(Convert.ToString(DgvList["invoiceId", DgvList.CurrentCell.RowIndex].Value), out int _id);
 
                         using (TransactionScope scope = new TransactionScope())
                         {
@@ -729,13 +729,11 @@ namespace Dflow_Inventory.ContentPage
                             {
                                 using (db = new Inventory_DflowEntities())
                                 {
-                                    var ih = db.InvoiceHeaders.Where(m => m.invoiceId == _id).FirstOrDefault();
-
-                                    if (ih != null)
+                                    if (db.InvoiceHeaders.Where(m => m.invoiceId == _id).FirstOrDefault() != null)
                                     {
                                         db.InvoiceDetails.Where(m => m.invoiceId == _id).ToList().ForEach(p => db.InvoiceDetails.Remove(p));
 
-                                        db.InvoiceHeaders.Remove(ih);
+                                        db.InvoiceHeaders.Remove(db.InvoiceHeaders.Where(m => m.invoiceId == _id).FirstOrDefault());
                                     }
 
                                     db.SaveChanges();
@@ -782,7 +780,7 @@ namespace Dflow_Inventory.ContentPage
             var headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
             e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
         }
-        
+
         private void TxtDiscount_TextChanged(object sender, EventArgs e)
         {
             try
@@ -794,35 +792,21 @@ namespace Dflow_Inventory.ContentPage
                 throw;
             }
         }
-
-        private void DgvItems_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
+        
         private void TxtDiscount_Leave(object sender, EventArgs e)
         {
             try
             {
-                decimal _discount = 0;
+                decimal.TryParse(TxtDiscount.Text, out decimal _discount);
 
-                decimal.TryParse(TxtDiscount.Text, out _discount);
-
-                TxtDiscount.Text = string.Format("{0:0.00}", _discount);
+                TxtDiscount.Text = $"{_discount:0.00}";
             }
             catch (Exception ex)
             {
                 throw;
             }
         }
-        
+
         private void DgvItems_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -837,39 +821,31 @@ namespace Dflow_Inventory.ContentPage
                             {
                                 try
                                 {
-                                    int rowIndex = DgvItems.CurrentCell.RowIndex;
+                                    int.TryParse(Convert.ToString(DgvItems["invoiceDetailId", DgvItems.CurrentCell.RowIndex].Value), out int _invoiceDetailId);
 
-                                    int _invoiceDetailId = 0;
-
-                                    int.TryParse(Convert.ToString(DgvItems["invoiceDetailId", rowIndex].Value), out _invoiceDetailId);
-
-                                    DgvItems.Rows.RemoveAt(rowIndex);
+                                    DgvItems.Rows.RemoveAt(DgvItems.CurrentCell.RowIndex);
 
                                     Calculate_Total_Amount();
 
-                                    var id = db.InvoiceDetails.FirstOrDefault(m => m.invoiceDetailId == _invoiceDetailId);
 
-                                    if (id != null)
+                                    if (db.InvoiceDetails.FirstOrDefault(m => m.invoiceDetailId == _invoiceDetailId) != null)
                                     {
-                                        db.InvoiceDetails.Remove(id);
+                                        db.InvoiceDetails.Remove(db.InvoiceDetails.FirstOrDefault(m => m.invoiceDetailId == _invoiceDetailId));
 
                                         db.SaveChanges();
 
-                                        var ih = db.InvoiceHeaders.FirstOrDefault(x => x.invoiceId == id.invoiceId);
+                                        var ih = db.InvoiceHeaders.FirstOrDefault(x => x.invoiceId == db.InvoiceDetails.FirstOrDefault(m => m.invoiceDetailId == _invoiceDetailId).invoiceId);
 
                                         if (ih != null)
                                         {
-                                            decimal _total = 0, _discount = 0, _taxableAmt = 0, _cgstPercent = 0, _sgstPercent = 0, _cgstAmt = 0,
-                                                    _sgstAmt = 0, _totalAmt = 0;
-
-                                            decimal.TryParse(Convert.ToString(TxtTotal.Text), out _total);
-                                            decimal.TryParse(Convert.ToString(TxtDiscount.Text), out _discount);
-                                            decimal.TryParse(Convert.ToString(TxtTaxableAmt.Text), out _taxableAmt);
-                                            decimal.TryParse(Convert.ToString(TxtCGST.Text), out _cgstPercent);
-                                            decimal.TryParse(Convert.ToString(TxtSGST.Text), out _sgstPercent);
-                                            decimal.TryParse(Convert.ToString(TxtCGSTAmt.Text), out _cgstAmt);
-                                            decimal.TryParse(Convert.ToString(TxtSGSTAmt.Text), out _sgstAmt);
-                                            decimal.TryParse(Convert.ToString(TxtTotalAmt.Text), out _totalAmt);
+                                            decimal.TryParse(Convert.ToString(TxtTotal.Text), out decimal _total);
+                                            decimal.TryParse(Convert.ToString(TxtDiscount.Text), out decimal _discount);
+                                            decimal.TryParse(Convert.ToString(TxtTaxableAmt.Text), out decimal _taxableAmt);
+                                            decimal.TryParse(Convert.ToString(TxtCGST.Text), out decimal _cgstPercent);
+                                            decimal.TryParse(Convert.ToString(TxtSGST.Text), out decimal _sgstPercent);
+                                            decimal.TryParse(Convert.ToString(TxtCGSTAmt.Text), out decimal _cgstAmt);
+                                            decimal.TryParse(Convert.ToString(TxtSGSTAmt.Text), out decimal _sgstAmt);
+                                            decimal.TryParse(Convert.ToString(TxtTotalAmt.Text), out decimal _totalAmt);
 
                                             ih.total = _total == 0 ? null : (decimal?)_total;
                                             ih.discount = _discount == 0 ? null : (decimal?)_discount;
@@ -918,11 +894,9 @@ namespace Dflow_Inventory.ContentPage
         {
             try
             {
-                decimal _gst = 0;
+                decimal.TryParse(TxtCGST.Text, out decimal _gst);
 
-                decimal.TryParse(TxtSGST.Text, out _gst);
-
-                TxtSGST.Text = string.Format("{0:0.00}", _gst);
+                TxtCGST.Text = $"{_gst:0.00}";
             }
             catch (Exception ex)
             {
@@ -946,11 +920,112 @@ namespace Dflow_Inventory.ContentPage
         {
             try
             {
-                decimal _gst = 0;
+                decimal.TryParse(TxtSGST.Text, out decimal _gst);
 
-                decimal.TryParse(TxtSGST.Text, out _gst);
+                TxtSGST.Text = $"{_gst:0.00}";
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
-                TxtSGST.Text = string.Format("{0:0.00}", _gst);
+        private void TxtCustomerName_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Down)
+                {
+                    LstCustomer_Show();
+
+                    LstCustomer.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void DgvItems_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            try
+            {
+                if (e.ColumnIndex == 0)
+                {
+                    if (Convert.ToString(e.FormattedValue) != string.Empty)
+                    {
+                        foreach (DataGridViewRow row in DgvItems.Rows)
+                        {
+                            if (Convert.ToString(row.Cells["Col_Item"].Value) == Convert.ToString(e.FormattedValue) && row.Index != e.RowIndex)
+                            {
+                                MessageBox.Show("Duplicate Item Name : " + Convert.ToString(e.FormattedValue), "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                e.Cancel = true;
+                                return;
+                            }
+                        }
+
+                        using (db = new Inventory_DflowEntities())
+                        {
+                            if (db.Item_Master.FirstOrDefault(m => m.itemName == Convert.ToString(e.FormattedValue)) == null)
+                            {
+                                MessageBox.Show("Not found in master Item Name : " + Convert.ToString(e.FormattedValue), "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                e.Cancel = true;
+                            }
+                        }
+                    }
+                }
+
+                if (e.ColumnIndex == 3)
+                {
+                    int.TryParse(Convert.ToString(DgvItems["ItemId", e.RowIndex].Value), out int _itemId);
+                    decimal.TryParse(Convert.ToString(e.FormattedValue), out decimal _quantity);
+
+                    using (db = new Inventory_DflowEntities())
+                    {
+                        if (db.Item_Master.FirstOrDefault(m => m.itemId == _itemId) != null)
+                        {
+                            if (db.Item_Master.FirstOrDefault(m => m.itemId == _itemId).currentStock < _quantity)
+                            {
+                                MessageBox.Show("Entered quantity (" + _quantity + ") exceeds stock quantity (" + db.Item_Master.FirstOrDefault(m => m.itemId == _itemId).currentStock + ")", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                e.Cancel = true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void DgvItems_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Convert.ToString(DgvItems["Col_Item", e.RowIndex].Value)))
+                {
+                    decimal.TryParse(s: Convert.ToString(DgvItems["Col_Rate", e.RowIndex].Value), result: out decimal rate);
+                    decimal.TryParse(s: Convert.ToString(DgvItems["Col_Quantity", e.RowIndex].Value), result: out decimal quantity);
+                    decimal.TryParse(s: Convert.ToString(DgvItems["Col_Amount", e.RowIndex].Value), result: out decimal amount);
+
+                    if (rate <= 0)
+                    {
+                        MessageBox.Show(text: "Rate is empty for Item :" + DgvItems["Col_Item", e.RowIndex].Value, caption: "Information", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information);
+                        e.Cancel = true;
+                    }
+                    else if (quantity <= 0)
+                    {
+                        MessageBox.Show(text: "Quantity is empty for Item :" + DgvItems["Col_Item", e.RowIndex].Value, caption: "Information", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information);
+                        e.Cancel = true;
+                    }
+                    else if (amount <= 0)
+                    {
+                        MessageBox.Show(text: "Amount is empty for Item :" + DgvItems["Col_Item", e.RowIndex].Value, caption: "Information", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information);
+                        e.Cancel = true;
+                    }
+                }
             }
             catch (Exception ex)
             {

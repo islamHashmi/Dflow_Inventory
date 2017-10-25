@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
@@ -95,7 +95,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(850, 560);
+            this.tabControl1.Size = new System.Drawing.Size(868, 526);
             this.tabControl1.TabIndex = 3;
             // 
             // tabPage1
@@ -134,7 +134,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage1.Size = new System.Drawing.Size(842, 526);
+            this.tabPage1.Size = new System.Drawing.Size(860, 492);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Add Invoice";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -143,7 +143,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(535, 484);
+            this.label12.Location = new System.Drawing.Point(535, 451);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(111, 21);
             this.label12.TabIndex = 41;
@@ -152,7 +152,7 @@
             // TxtTotalAmt
             // 
             this.TxtTotalAmt.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtTotalAmt.Location = new System.Drawing.Point(652, 481);
+            this.TxtTotalAmt.Location = new System.Drawing.Point(652, 448);
             this.TxtTotalAmt.Name = "TxtTotalAmt";
             this.TxtTotalAmt.ReadOnly = true;
             this.TxtTotalAmt.Size = new System.Drawing.Size(146, 25);
@@ -163,7 +163,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(625, 453);
+            this.label10.Location = new System.Drawing.Point(625, 420);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(21, 21);
             this.label10.TabIndex = 39;
@@ -172,7 +172,7 @@
             // TxtSGST
             // 
             this.TxtSGST.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtSGST.Location = new System.Drawing.Point(578, 450);
+            this.TxtSGST.Location = new System.Drawing.Point(578, 417);
             this.TxtSGST.Name = "TxtSGST";
             this.TxtSGST.Size = new System.Drawing.Size(46, 25);
             this.TxtSGST.TabIndex = 14;
@@ -184,7 +184,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(486, 453);
+            this.label11.Location = new System.Drawing.Point(486, 420);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(85, 21);
             this.label11.TabIndex = 37;
@@ -193,7 +193,7 @@
             // TxtSGSTAmt
             // 
             this.TxtSGSTAmt.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtSGSTAmt.Location = new System.Drawing.Point(652, 450);
+            this.TxtSGSTAmt.Location = new System.Drawing.Point(652, 417);
             this.TxtSGSTAmt.Name = "TxtSGSTAmt";
             this.TxtSGSTAmt.ReadOnly = true;
             this.TxtSGSTAmt.Size = new System.Drawing.Size(146, 25);
@@ -204,7 +204,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(625, 422);
+            this.label9.Location = new System.Drawing.Point(625, 389);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(21, 21);
             this.label9.TabIndex = 35;
@@ -213,7 +213,7 @@
             // TxtCGST
             // 
             this.TxtCGST.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtCGST.Location = new System.Drawing.Point(578, 419);
+            this.TxtCGST.Location = new System.Drawing.Point(578, 386);
             this.TxtCGST.Name = "TxtCGST";
             this.TxtCGST.Size = new System.Drawing.Size(46, 25);
             this.TxtCGST.TabIndex = 11;
@@ -225,7 +225,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(486, 422);
+            this.label8.Location = new System.Drawing.Point(486, 389);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(87, 21);
             this.label8.TabIndex = 33;
@@ -234,7 +234,7 @@
             // TxtCGSTAmt
             // 
             this.TxtCGSTAmt.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtCGSTAmt.Location = new System.Drawing.Point(652, 419);
+            this.TxtCGSTAmt.Location = new System.Drawing.Point(652, 386);
             this.TxtCGSTAmt.Name = "TxtCGSTAmt";
             this.TxtCGSTAmt.ReadOnly = true;
             this.TxtCGSTAmt.Size = new System.Drawing.Size(146, 25);
@@ -245,7 +245,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(517, 391);
+            this.label7.Location = new System.Drawing.Point(517, 358);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(129, 21);
             this.label7.TabIndex = 31;
@@ -254,7 +254,7 @@
             // TxtTaxableAmt
             // 
             this.TxtTaxableAmt.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtTaxableAmt.Location = new System.Drawing.Point(652, 388);
+            this.TxtTaxableAmt.Location = new System.Drawing.Point(652, 355);
             this.TxtTaxableAmt.Name = "TxtTaxableAmt";
             this.TxtTaxableAmt.ReadOnly = true;
             this.TxtTaxableAmt.Size = new System.Drawing.Size(146, 25);
@@ -265,7 +265,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(540, 360);
+            this.label6.Location = new System.Drawing.Point(540, 327);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(106, 21);
             this.label6.TabIndex = 29;
@@ -274,7 +274,7 @@
             // TxtDiscount
             // 
             this.TxtDiscount.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtDiscount.Location = new System.Drawing.Point(652, 357);
+            this.TxtDiscount.Location = new System.Drawing.Point(652, 324);
             this.TxtDiscount.Name = "TxtDiscount";
             this.TxtDiscount.Size = new System.Drawing.Size(146, 25);
             this.TxtDiscount.TabIndex = 9;
@@ -286,7 +286,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(598, 328);
+            this.label5.Location = new System.Drawing.Point(598, 295);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 21);
             this.label5.TabIndex = 27;
@@ -295,7 +295,7 @@
             // TxtTotal
             // 
             this.TxtTotal.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtTotal.Location = new System.Drawing.Point(652, 326);
+            this.TxtTotal.Location = new System.Drawing.Point(652, 293);
             this.TxtTotal.Name = "TxtTotal";
             this.TxtTotal.ReadOnly = true;
             this.TxtTotal.Size = new System.Drawing.Size(146, 25);
@@ -304,7 +304,7 @@
             // 
             // txtRemark
             // 
-            this.txtRemark.Location = new System.Drawing.Point(39, 352);
+            this.txtRemark.Location = new System.Drawing.Point(39, 319);
             this.txtRemark.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtRemark.Multiline = true;
             this.txtRemark.Name = "txtRemark";
@@ -314,7 +314,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(36, 330);
+            this.label4.Location = new System.Drawing.Point(36, 297);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 18);
             this.label4.TabIndex = 24;
@@ -323,7 +323,7 @@
             // lblCustomerId
             // 
             this.lblCustomerId.AutoSize = true;
-            this.lblCustomerId.Location = new System.Drawing.Point(660, 9);
+            this.lblCustomerId.Location = new System.Drawing.Point(814, 30);
             this.lblCustomerId.Name = "lblCustomerId";
             this.lblCustomerId.Size = new System.Drawing.Size(40, 18);
             this.lblCustomerId.TabIndex = 20;
@@ -334,7 +334,7 @@
             // 
             this.dtpDate.CustomFormat = "dd/MM/yyyy";
             this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDate.Location = new System.Drawing.Point(316, 18);
+            this.dtpDate.Location = new System.Drawing.Point(260, 17);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(107, 23);
             this.dtpDate.TabIndex = 2;
@@ -342,7 +342,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(267, 22);
+            this.label1.Location = new System.Drawing.Point(220, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 18);
             this.label1.TabIndex = 18;
@@ -351,7 +351,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.DgvItems);
-            this.groupBox1.Location = new System.Drawing.Point(36, 79);
+            this.groupBox1.Location = new System.Drawing.Point(36, 46);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(776, 241);
             this.groupBox1.TabIndex = 6;
@@ -372,14 +372,14 @@
             this.itemId,
             this.invoiceDetailId,
             this.Col_Unit});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgvItems.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvItems.DefaultCellStyle = dataGridViewCellStyle9;
             this.DgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DgvItems.Location = new System.Drawing.Point(3, 19);
             this.DgvItems.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -388,8 +388,10 @@
             this.DgvItems.Size = new System.Drawing.Size(770, 219);
             this.DgvItems.TabIndex = 6;
             this.DgvItems.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvItems_CellEndEdit);
+            this.DgvItems.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DgvItems_CellValidating);
             this.DgvItems.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DgvItems_EditingControlShowing);
             this.DgvItems.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvItems_RowPostPaint);
+            this.DgvItems.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.DgvItems_RowValidating);
             this.DgvItems.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvItems_KeyDown);
             // 
             // Col_Item
@@ -406,30 +408,30 @@
             // 
             // Col_Rate
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.Col_Rate.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.Col_Rate.DefaultCellStyle = dataGridViewCellStyle6;
             this.Col_Rate.HeaderText = "Rate";
             this.Col_Rate.Name = "Col_Rate";
             this.Col_Rate.Width = 120;
             // 
             // Col_Quantity
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.Col_Quantity.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.Col_Quantity.DefaultCellStyle = dataGridViewCellStyle7;
             this.Col_Quantity.HeaderText = "Quantity";
             this.Col_Quantity.Name = "Col_Quantity";
             this.Col_Quantity.Width = 80;
             // 
             // Col_Amount
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.Col_Amount.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.Col_Amount.DefaultCellStyle = dataGridViewCellStyle8;
             this.Col_Amount.HeaderText = "Amount";
             this.Col_Amount.Name = "Col_Amount";
             this.Col_Amount.Width = 150;
@@ -458,9 +460,9 @@
             // 
             this.LstCustomer.FormattingEnabled = true;
             this.LstCustomer.ItemHeight = 18;
-            this.LstCustomer.Location = new System.Drawing.Point(706, 7);
+            this.LstCustomer.Location = new System.Drawing.Point(810, 5);
             this.LstCustomer.Name = "LstCustomer";
-            this.LstCustomer.Size = new System.Drawing.Size(103, 22);
+            this.LstCustomer.Size = new System.Drawing.Size(47, 22);
             this.LstCustomer.TabIndex = 16;
             this.LstCustomer.Visible = false;
             this.LstCustomer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LstCustomer_KeyDown);
@@ -469,7 +471,7 @@
             // 
             // TxtInvoiceNo
             // 
-            this.TxtInvoiceNo.Location = new System.Drawing.Point(145, 19);
+            this.TxtInvoiceNo.Location = new System.Drawing.Point(109, 19);
             this.TxtInvoiceNo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TxtInvoiceNo.Name = "TxtInvoiceNo";
             this.TxtInvoiceNo.ReadOnly = true;
@@ -490,7 +492,7 @@
             this.BtnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(87)))), ((int)(((byte)(51)))));
             this.BtnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
             this.BtnCancel.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCancel.Location = new System.Drawing.Point(117, 479);
+            this.BtnCancel.Location = new System.Drawing.Point(117, 446);
             this.BtnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(78, 30);
@@ -504,7 +506,7 @@
             this.BtnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
             this.BtnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
             this.BtnSave.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSave.Location = new System.Drawing.Point(39, 479);
+            this.BtnSave.Location = new System.Drawing.Point(39, 446);
             this.BtnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(72, 30);
@@ -515,17 +517,18 @@
             // 
             // TxtCustomerName
             // 
-            this.TxtCustomerName.Location = new System.Drawing.Point(145, 50);
+            this.TxtCustomerName.Location = new System.Drawing.Point(476, 19);
             this.TxtCustomerName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TxtCustomerName.Name = "TxtCustomerName";
-            this.TxtCustomerName.Size = new System.Drawing.Size(278, 23);
+            this.TxtCustomerName.Size = new System.Drawing.Size(333, 23);
             this.TxtCustomerName.TabIndex = 5;
             this.TxtCustomerName.TextChanged += new System.EventHandler(this.TxtCustomerName_TextChanged);
+            this.TxtCustomerName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtCustomerName_KeyDown_1);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 53);
+            this.label2.Location = new System.Drawing.Point(373, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 18);
             this.label2.TabIndex = 2;
@@ -560,14 +563,14 @@
             this.DgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DgvList.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgvList.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvList.DefaultCellStyle = dataGridViewCellStyle10;
             this.DgvList.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.DgvList.Location = new System.Drawing.Point(3, 26);
             this.DgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -585,7 +588,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(850, 560);
+            this.ClientSize = new System.Drawing.Size(868, 526);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);

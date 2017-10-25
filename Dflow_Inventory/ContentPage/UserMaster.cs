@@ -15,6 +15,8 @@ namespace Dflow_Inventory.ContentPage
 
         private int _userId = 0;
 
+        public int UserId { get => _userId; set => _userId = value; }
+
         public UserMaster()
         {
             InitializeComponent();
@@ -33,8 +35,7 @@ namespace Dflow_Inventory.ContentPage
                                 userGroupId = m.userGroupId,
                                 groupName = m.groupName,
                                 active = m.active
-                            }).Where(m => m.active == true)
-                            .ToList();
+                            }).Where(m => m.active == true).ToList();
 
                 groups.Insert(0, new { userGroupId = 0, groupName = "--- Select Group Name ---", active = true });
 
@@ -48,13 +49,11 @@ namespace Dflow_Inventory.ContentPage
         {
             try
             {
-                if (!string.IsNullOrWhiteSpace(TxtLoginId.Text) && _userId == 0)
+                if (!string.IsNullOrWhiteSpace(TxtLoginId.Text) && UserId == 0)
                 {
                     using (db = new Inventory_DflowEntities())
                     {
-                        var user = db.User_Master.FirstOrDefault(m => m.loginId == TxtLoginId.Text.Trim());
-
-                        if (user != null)
+                        if (db.User_Master.FirstOrDefault(m => m.loginId == TxtLoginId.Text.Trim()) != null)
                         {
                             MessageBox.Show("Login Id already exists", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             e.Cancel = true;
@@ -76,7 +75,7 @@ namespace Dflow_Inventory.ContentPage
                 {
                     if (TxtConfirmPass.Text.Trim() != TxtPassword.Text.Trim())
                     {
-                        MessageBox.Show("Both passwords do not match.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(text: "Both passwords do not match.", caption: "Warning", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Warning);
                         e.Cancel = true;
                     }
                 }
@@ -92,7 +91,9 @@ namespace Dflow_Inventory.ContentPage
             try
             {
                 if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                {
                     e.Handled = true;
+                }
             }
             catch (Exception ex)
             {
@@ -106,28 +107,28 @@ namespace Dflow_Inventory.ContentPage
             {
                 if (string.IsNullOrWhiteSpace(TxtLoginId.Text))
                 {
-                    MessageBox.Show("Login Id is mandatory.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show(text: "Login Id is mandatory.", caption: "Warning", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Asterisk);
                     TxtLoginId.Focus();
                     return;
                 }
 
                 if (string.IsNullOrWhiteSpace(TxtPassword.Text))
                 {
-                    MessageBox.Show("Password is mandatory.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show(text: "Password is mandatory.", caption: "Warning", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Asterisk);
                     TxtPassword.Focus();
                     return;
                 }
 
                 if (string.IsNullOrWhiteSpace(TxtName.Text))
                 {
-                    MessageBox.Show("Name is mandatory.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show(text: "Name is mandatory.", caption: "Warning", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Asterisk);
                     TxtName.Focus();
                     return;
                 }
 
                 if (cmbUserGroup.SelectedIndex <= 0)
                 {
-                    MessageBox.Show("Select User Group.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show(text: "Select User Group.", caption: "Warning", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Asterisk);
                     cmbUserGroup.Focus();
                     return;
                 }
@@ -136,7 +137,7 @@ namespace Dflow_Inventory.ContentPage
                 {
                     User_Master um = new User_Master();
 
-                    if (_userId == 0)
+                    if (UserId == 0)
                     {
                         db.User_Master.Add(um);
                         um.entryBy = SessionHelper.UserId;
@@ -145,7 +146,7 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else
                     {
-                        um = db.User_Master.FirstOrDefault(m => m.userId == _userId);
+                        um = db.User_Master.FirstOrDefault(m => m.userId == UserId);
                         um.updatedBy = SessionHelper.UserId;
                         um.updatedOn = DateTime.Now;
                     }
@@ -192,30 +193,28 @@ namespace Dflow_Inventory.ContentPage
             TxtMobile.Text = string.Empty;
             TxtEmail.Text = string.Empty;
 
-            _userId = 0;
+            UserId = 0;
         }
 
         private void Get_Data()
         {
             using (db = new Inventory_DflowEntities())
             {
-                var users = (from a in db.User_Master
-                             join b in db.User_Group on a.userGroupId equals b.userGroupId into grp
-                             from b in grp.DefaultIfEmpty()
-                             where a.active == true
-                             select new
-                             {
-                                 userId = a.userId,
-                                 loginId = a.loginId,
-                                 name = a.name,
-                                 mobile = a.mobileNumber,
-                                 emailId = a.emailId,
-                                 userGroupId = a.userGroupId,
-                                 userGroup = b.groupName,
-                                 active = a.active
-                             }).ToList();
-
-                DgvList.DataSource = users;
+                DgvList.DataSource = (from a in db.User_Master
+                                      join b in db.User_Group on a.userGroupId equals b.userGroupId into grp
+                                      from b in grp.DefaultIfEmpty()
+                                      where a.active == true
+                                      select new
+                                      {
+                                          userId = a.userId,
+                                          loginId = a.loginId,
+                                          name = a.name,
+                                          mobile = a.mobileNumber,
+                                          emailId = a.emailId,
+                                          userGroupId = a.userGroupId,
+                                          userGroup = b.groupName,
+                                          active = a.active
+                                      }).ToList();
 
                 Set_Column();
             }
@@ -271,10 +270,8 @@ namespace Dflow_Inventory.ContentPage
             if (RowIndex >= 0)
             {
                 Clear_Controls();
-
-                int _id = 0;
-
-                int.TryParse(Convert.ToString(DgvList["userId", RowIndex].Value), out _id);
+                
+                int.TryParse(Convert.ToString(DgvList["userId", RowIndex].Value), out int _id);
 
                 if (_id != 0)
                 {
@@ -284,7 +281,7 @@ namespace Dflow_Inventory.ContentPage
 
                         if (um != null)
                         {
-                            _userId = um.userId;
+                            UserId = um.userId;
                             TxtLoginId.Text = um.loginId;
                             TxtPassword.Text = um.loginKey;
                             TxtConfirmPass.Text = um.loginKey;
@@ -295,6 +292,7 @@ namespace Dflow_Inventory.ContentPage
                         }
                     }
                 }
+
                 tabControl1.SelectedIndex = 0;
             }
         }
@@ -325,20 +323,16 @@ namespace Dflow_Inventory.ContentPage
                     {
                         if (DialogResult.No == MessageBox.Show("Are you sure to delete this record ? ", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                             return;
-
-                        int _id = 0;
-
-                        int.TryParse(Convert.ToString(DgvList["userId", DgvList.CurrentCell.RowIndex].Value), out _id);
+                        
+                        int.TryParse(s: Convert.ToString(DgvList["userId", DgvList.CurrentCell.RowIndex].Value), result: out int _id);
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            var um = db.User_Master.FirstOrDefault(m => m.userId == _id);
-
-                            if (um != null)
+                            if (db.User_Master.FirstOrDefault(m => m.userId == _id) != null)
                             {
-                                um.active = false;
-                                um.updatedBy = SessionHelper.UserId;
-                                um.updatedOn = DateTime.Now;
+                                db.User_Master.FirstOrDefault(m => m.userId == _id).active = false;
+                                db.User_Master.FirstOrDefault(m => m.userId == _id).updatedBy = SessionHelper.UserId;
+                                db.User_Master.FirstOrDefault(m => m.userId == _id).updatedOn = DateTime.Now;
 
                                 db.SaveChanges();
                             }
@@ -346,11 +340,9 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else if(e.KeyData ==(Keys.Shift | Keys.P))
                     {
-                        int _id = 0;
+                        int.TryParse(s: Convert.ToString(DgvList["userId", DgvList.CurrentCell.RowIndex].Value), result: out int _id);
 
-                        int.TryParse(Convert.ToString(DgvList["userId", DgvList.CurrentCell.RowIndex].Value), out _id);
-
-                        if(_id != 0)
+                        if (_id != 0)
                         {
                             ChangePassword frm = new ChangePassword(_id, Convert.ToString(DgvList["loginId", DgvList.CurrentCell.RowIndex].Value));
                             frm.Show();

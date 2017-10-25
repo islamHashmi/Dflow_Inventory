@@ -33,7 +33,24 @@ namespace Dflow_Inventory
 
         private void Show_Form(Form frm)
         {
-            frm.Show();
+            bool _isFormOpen = false;
+
+            FormCollection fc = Application.OpenForms;
+
+            foreach (Form _frm in fc)
+            {
+                if(_frm.Text == frm.Text)
+                {
+                    _isFormOpen = true;
+                    _frm.BringToFront();
+                }
+            }
+
+            if(!_isFormOpen)
+            {
+                frm.StartPosition = FormStartPosition.CenterScreen;
+                frm.Show();
+            }            
         }
         
         private void UnitsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -212,11 +229,33 @@ namespace Dflow_Inventory
             }
         }
 
-        private void stockRegisterToolStripMenuItem_Click(object sender, EventArgs e)
+        private void StockRegisterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
                 Show_Form(new StockReport());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void LogOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SessionHelper.FinYear = string.Empty;
+                SessionHelper.HsnCode = string.Empty;
+                SessionHelper.ShortFinYear = string.Empty;
+                SessionHelper.UserGroupId = 0;
+                SessionHelper.UserId = 0;
+                SessionHelper.UserName = string.Empty;
+
+                this.Hide();
+
+                Login frm = new Login();
+                frm.Show();
             }
             catch (Exception ex)
             {
