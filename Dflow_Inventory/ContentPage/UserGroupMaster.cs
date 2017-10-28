@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dflow_Inventory.DataContext;
 using Dflow_Inventory.Helpers;
@@ -104,7 +101,7 @@ namespace Dflow_Inventory.ContentPage
                 throw;
             }
         }
-
+        
         private void Clear_Controls()
         {
             TxtGroupName.Text = string.Empty;

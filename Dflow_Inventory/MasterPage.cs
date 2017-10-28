@@ -262,5 +262,41 @@ namespace Dflow_Inventory
                 throw;
             }
         }
+
+        private void salesReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new SalesReport());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void purchaseReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new PurchaseReport());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void dailyReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new DailyReport());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

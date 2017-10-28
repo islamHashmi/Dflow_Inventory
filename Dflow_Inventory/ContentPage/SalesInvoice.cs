@@ -520,6 +520,7 @@ namespace Dflow_Inventory.ContentPage
                             ih.cgstAmount = _cgstAmt == 0 ? null : (decimal?)_cgstAmt;
                             ih.sgstAmount = _sgstAmt == 0 ? null : (decimal?)_sgstAmt;
                             ih.totalAmount = _totalAmt == 0 ? null : (decimal?)_totalAmt;
+                            ih.amountInWords = AmountInWordHelper.ChangeToWords(_totalAmt.ToString());
 
                             db.SaveChanges();
 
@@ -716,11 +717,23 @@ namespace Dflow_Inventory.ContentPage
                     {
                         CellContentClick(DgvList.CurrentCell.ColumnIndex, DgvList.CurrentCell.RowIndex);
                     }
+                    else if (e.KeyData == (Keys.Control | Keys.P))
+                    {
+                        int.TryParse(Convert.ToString(DgvList["invoiceId", DgvList.CurrentCell.RowIndex].Value), out int _id);
+
+                        if (_id != 0)
+                        {
+                            InvoicePrint frm = new InvoicePrint(_id);
+
+                            frm.ShowDialog();
+                        }
+
+                    }
                     else if (e.KeyCode == Keys.Delete)
                     {
                         if (DialogResult.No == MessageBox.Show("Are you sure to delete this record ?", "Warning", MessageBoxButtons.YesNo))
                             return;
-                        
+
                         int.TryParse(Convert.ToString(DgvList["invoiceId", DgvList.CurrentCell.RowIndex].Value), out int _id);
 
                         using (TransactionScope scope = new TransactionScope())
@@ -792,7 +805,7 @@ namespace Dflow_Inventory.ContentPage
                 throw;
             }
         }
-        
+
         private void TxtDiscount_Leave(object sender, EventArgs e)
         {
             try
@@ -953,7 +966,9 @@ namespace Dflow_Inventory.ContentPage
             {
                 if (e.ColumnIndex == 0)
                 {
-                    if (Convert.ToString(e.FormattedValue) != string.Empty)
+                    string itemName = Convert.ToString(e.FormattedValue);
+
+                    if (itemName != string.Empty)
                     {
                         foreach (DataGridViewRow row in DgvItems.Rows)
                         {
@@ -967,7 +982,7 @@ namespace Dflow_Inventory.ContentPage
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            if (db.Item_Master.FirstOrDefault(m => m.itemName == Convert.ToString(e.FormattedValue)) == null)
+                            if (db.Item_Master.FirstOrDefault(m => m.itemName == itemName) == null)
                             {
                                 MessageBox.Show("Not found in master Item Name : " + Convert.ToString(e.FormattedValue), "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 e.Cancel = true;

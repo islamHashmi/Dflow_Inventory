@@ -37,6 +37,7 @@ namespace Dflow_Inventory.DataContext
         public Nullable<decimal> cgstAmount { get; set; }
         public Nullable<decimal> sgstPercent { get; set; }
         public Nullable<decimal> sgstAmount { get; set; }
+        public string amountInWords { get; set; }
     
         public virtual Customer_Master CustomerMaster { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }

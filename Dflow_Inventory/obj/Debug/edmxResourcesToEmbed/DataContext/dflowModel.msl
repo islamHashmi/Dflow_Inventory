@@ -256,6 +256,7 @@
     <EntitySetMapping Name="InvoiceHeaders">
       <EntityTypeMapping TypeName="Inventory_DflowModel.InvoiceHeader">
         <MappingFragment StoreEntitySet="InvoiceHeader">
+          <ScalarProperty Name="amountInWords" ColumnName="amountInWords" />
           <ScalarProperty Name="sgstAmount" ColumnName="sgstAmount" />
           <ScalarProperty Name="sgstPercent" ColumnName="sgstPercent" />
           <ScalarProperty Name="cgstAmount" ColumnName="cgstAmount" />
@@ -412,9 +413,64 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="sp_Stock_Report" FunctionName="Inventory_DflowModel.Store.sp_Stock_Report">
+    <FunctionImportMapping FunctionImportName="sp_invoice_print" FunctionName="Inventory_DflowModel.Store.sp_invoice_print">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="Inventory_DflowModel.sp_Stock_Report_Result">
+        <ComplexTypeMapping TypeName="Inventory_DflowModel.sp_invoice_print_Result">
+          <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
+          <ScalarProperty Name="invoiceNumber" ColumnName="invoiceNumber" />
+          <ScalarProperty Name="invoiceDate" ColumnName="invoiceDate" />
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+          <ScalarProperty Name="customerAddress" ColumnName="customerAddress" />
+          <ScalarProperty Name="customerGST" ColumnName="customerGST" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="discount" ColumnName="discount" />
+          <ScalarProperty Name="taxableAmount" ColumnName="taxableAmount" />
+          <ScalarProperty Name="cgstPercent" ColumnName="cgstPercent" />
+          <ScalarProperty Name="cgstAmount" ColumnName="cgstAmount" />
+          <ScalarProperty Name="sgstPercent" ColumnName="sgstPercent" />
+          <ScalarProperty Name="sgstAmount" ColumnName="sgstAmount" />
+          <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+          <ScalarProperty Name="amountInWords" ColumnName="amountInWords" />
+          <ScalarProperty Name="itemName" ColumnName="itemName" />
+          <ScalarProperty Name="unit" ColumnName="unit" />
+          <ScalarProperty Name="hsnCode" ColumnName="hsnCode" />
+          <ScalarProperty Name="rate" ColumnName="rate" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="companyName" ColumnName="companyName" />
+          <ScalarProperty Name="dealsIn" ColumnName="dealsIn" />
+          <ScalarProperty Name="addressLine1" ColumnName="addressLine1" />
+          <ScalarProperty Name="addressLine2" ColumnName="addressLine2" />
+          <ScalarProperty Name="mobileNo1" ColumnName="mobileNo1" />
+          <ScalarProperty Name="mobileNo2" ColumnName="mobileNo2" />
+          <ScalarProperty Name="emailAddress1" ColumnName="emailAddress1" />
+          <ScalarProperty Name="emailAddress2" ColumnName="emailAddress2" />
+          <ScalarProperty Name="panNumber" ColumnName="panNumber" />
+          <ScalarProperty Name="gstNumber" ColumnName="gstNumber" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Report_Header" FunctionName="Inventory_DflowModel.Store.sp_Report_Header">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Inventory_DflowModel.sp_Report_Header_Result">
+          <ScalarProperty Name="companyName" ColumnName="companyName" />
+          <ScalarProperty Name="dealsIn" ColumnName="dealsIn" />
+          <ScalarProperty Name="addressLine1" ColumnName="addressLine1" />
+          <ScalarProperty Name="addressLine2" ColumnName="addressLine2" />
+          <ScalarProperty Name="mobileNo1" ColumnName="mobileNo1" />
+          <ScalarProperty Name="mobileNo2" ColumnName="mobileNo2" />
+          <ScalarProperty Name="emailAddress1" ColumnName="emailAddress1" />
+          <ScalarProperty Name="emailAddress2" ColumnName="emailAddress2" />
+          <ScalarProperty Name="panNumber" ColumnName="panNumber" />
+          <ScalarProperty Name="hsnCode" ColumnName="hsnCode" />
+          <ScalarProperty Name="gstNumber" ColumnName="gstNumber" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Stock_Report_Detail" FunctionName="Inventory_DflowModel.Store.sp_Stock_Report_Detail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Inventory_DflowModel.sp_Stock_Report_Detail_Result">
           <ScalarProperty Name="stockId" ColumnName="stockId" />
           <ScalarProperty Name="stockDate" ColumnName="stockDate" />
           <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
@@ -426,6 +482,107 @@
           <ScalarProperty Name="quantity" ColumnName="quantity" />
           <ScalarProperty Name="closingStock" ColumnName="closingStock" />
           <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="narration" ColumnName="narration" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Stock_Report_Summary" FunctionName="Inventory_DflowModel.Store.sp_Stock_Report_Summary">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Inventory_DflowModel.sp_Stock_Report_Summary_Result">
+          <ScalarProperty Name="itemId" ColumnName="itemId" />
+          <ScalarProperty Name="itemCode" ColumnName="itemCode" />
+          <ScalarProperty Name="itemName" ColumnName="itemName" />
+          <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+          <ScalarProperty Name="sellingPrice" ColumnName="sellingPrice" />
+          <ScalarProperty Name="openingStock" ColumnName="openingStock" />
+          <ScalarProperty Name="currentStock" ColumnName="currentStock" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_invoice_report_detail" FunctionName="Inventory_DflowModel.Store.sp_invoice_report_detail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Inventory_DflowModel.sp_invoice_report_detail_Result">
+          <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
+          <ScalarProperty Name="invoiceNumber" ColumnName="invoiceNumber" />
+          <ScalarProperty Name="invoiceDate" ColumnName="invoiceDate" />
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="discount" ColumnName="discount" />
+          <ScalarProperty Name="taxableAmount" ColumnName="taxableAmount" />
+          <ScalarProperty Name="cgstPercent" ColumnName="cgstPercent" />
+          <ScalarProperty Name="cgstAmount" ColumnName="cgstAmount" />
+          <ScalarProperty Name="sgstPercent" ColumnName="sgstPercent" />
+          <ScalarProperty Name="sgstAmount" ColumnName="sgstAmount" />
+          <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="itemName" ColumnName="itemName" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="rate" ColumnName="rate" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_invoice_report_summary" FunctionName="Inventory_DflowModel.Store.sp_invoice_report_summary">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Inventory_DflowModel.sp_invoice_report_summary_Result">
+          <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
+          <ScalarProperty Name="invoiceNumber" ColumnName="invoiceNumber" />
+          <ScalarProperty Name="invoiceDate" ColumnName="invoiceDate" />
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="discount" ColumnName="discount" />
+          <ScalarProperty Name="taxableAmount" ColumnName="taxableAmount" />
+          <ScalarProperty Name="cgstPercent" ColumnName="cgstPercent" />
+          <ScalarProperty Name="cgstAmount" ColumnName="cgstAmount" />
+          <ScalarProperty Name="sgstPercent" ColumnName="sgstPercent" />
+          <ScalarProperty Name="sgstAmount" ColumnName="sgstAmount" />
+          <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_purchase_report_detail" FunctionName="Inventory_DflowModel.Store.sp_purchase_report_detail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Inventory_DflowModel.sp_purchase_report_detail_Result">
+          <ScalarProperty Name="purchaseId" ColumnName="purchaseId" />
+          <ScalarProperty Name="poNumber" ColumnName="poNumber" />
+          <ScalarProperty Name="purchaseDate" ColumnName="purchaseDate" />
+          <ScalarProperty Name="orderNumber" ColumnName="orderNumber" />
+          <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+          <ScalarProperty Name="vendorName" ColumnName="vendorName" />
+          <ScalarProperty Name="totalQuantity" ColumnName="totalQuantity" />
+          <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="itemName" ColumnName="itemName" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="rate" ColumnName="rate" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_purchase_report_summary" FunctionName="Inventory_DflowModel.Store.sp_purchase_report_summary">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Inventory_DflowModel.sp_purchase_report_summary_Result">
+          <ScalarProperty Name="purchaseId" ColumnName="purchaseId" />
+          <ScalarProperty Name="poNumber" ColumnName="poNumber" />
+          <ScalarProperty Name="purchaseDate" ColumnName="purchaseDate" />
+          <ScalarProperty Name="orderNumber" ColumnName="orderNumber" />
+          <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+          <ScalarProperty Name="vendorName" ColumnName="vendorName" />
+          <ScalarProperty Name="totalQuantity" ColumnName="totalQuantity" />
+          <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Daily_Report" FunctionName="Inventory_DflowModel.Store.sp_Daily_Report">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Inventory_DflowModel.sp_Daily_Report_Result">
+          <ScalarProperty Name="invoiceDate" ColumnName="invoiceDate" />
+          <ScalarProperty Name="saleAmt" ColumnName="saleAmt" />
+          <ScalarProperty Name="purchaseAmt" ColumnName="purchaseAmt" />
+          <ScalarProperty Name="receiptAmt" ColumnName="receiptAmt" />
+          <ScalarProperty Name="paidAmt" ColumnName="paidAmt" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

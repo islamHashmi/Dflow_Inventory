@@ -91,8 +91,26 @@ namespace Dflow_Inventory.DataContext
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Stock_InsertUpdate", stockDateParameter, itemIdParameter, stockTypeParameter, quantityParameter, invoiceIdParameter, purchaseIdParameter, cmdTypeParameter, entryByParameter);
         }
     
-        public virtual ObjectResult<sp_Stock_Report_Result> sp_Stock_Report(Nullable<int> itemId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        public virtual ObjectResult<sp_invoice_print_Result> sp_invoice_print(Nullable<int> invoiceId)
         {
+            var invoiceIdParameter = invoiceId.HasValue ?
+                new ObjectParameter("invoiceId", invoiceId) :
+                new ObjectParameter("invoiceId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_invoice_print_Result>("sp_invoice_print", invoiceIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_Report_Header_Result> sp_Report_Header()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Report_Header_Result>("sp_Report_Header");
+        }
+    
+        public virtual ObjectResult<sp_Stock_Report_Detail_Result> sp_Stock_Report_Detail(string finYear, Nullable<int> itemId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var finYearParameter = finYear != null ?
+                new ObjectParameter("finYear", finYear) :
+                new ObjectParameter("finYear", typeof(string));
+    
             var itemIdParameter = itemId.HasValue ?
                 new ObjectParameter("itemId", itemId) :
                 new ObjectParameter("itemId", typeof(int));
@@ -105,7 +123,93 @@ namespace Dflow_Inventory.DataContext
                 new ObjectParameter("endDate", endDate) :
                 new ObjectParameter("endDate", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Stock_Report_Result>("sp_Stock_Report", itemIdParameter, startDateParameter, endDateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Stock_Report_Detail_Result>("sp_Stock_Report_Detail", finYearParameter, itemIdParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<sp_Stock_Report_Summary_Result> sp_Stock_Report_Summary()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Stock_Report_Summary_Result>("sp_Stock_Report_Summary");
+        }
+    
+        public virtual ObjectResult<sp_invoice_report_detail_Result> sp_invoice_report_detail(string finYear, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var finYearParameter = finYear != null ?
+                new ObjectParameter("finYear", finYear) :
+                new ObjectParameter("finYear", typeof(string));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("startDate", startDate) :
+                new ObjectParameter("startDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("endDate", endDate) :
+                new ObjectParameter("endDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_invoice_report_detail_Result>("sp_invoice_report_detail", finYearParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<sp_invoice_report_summary_Result> sp_invoice_report_summary(string finYear, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var finYearParameter = finYear != null ?
+                new ObjectParameter("finYear", finYear) :
+                new ObjectParameter("finYear", typeof(string));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("startDate", startDate) :
+                new ObjectParameter("startDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("endDate", endDate) :
+                new ObjectParameter("endDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_invoice_report_summary_Result>("sp_invoice_report_summary", finYearParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<sp_purchase_report_detail_Result> sp_purchase_report_detail(string finYear, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var finYearParameter = finYear != null ?
+                new ObjectParameter("finYear", finYear) :
+                new ObjectParameter("finYear", typeof(string));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("startDate", startDate) :
+                new ObjectParameter("startDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("endDate", endDate) :
+                new ObjectParameter("endDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_purchase_report_detail_Result>("sp_purchase_report_detail", finYearParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<sp_purchase_report_summary_Result> sp_purchase_report_summary(string finYear, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var finYearParameter = finYear != null ?
+                new ObjectParameter("finYear", finYear) :
+                new ObjectParameter("finYear", typeof(string));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("startDate", startDate) :
+                new ObjectParameter("startDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("endDate", endDate) :
+                new ObjectParameter("endDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_purchase_report_summary_Result>("sp_purchase_report_summary", finYearParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<sp_Daily_Report_Result> sp_Daily_Report(Nullable<System.DateTime> reportDate, string finYear)
+        {
+            var reportDateParameter = reportDate.HasValue ?
+                new ObjectParameter("reportDate", reportDate) :
+                new ObjectParameter("reportDate", typeof(System.DateTime));
+    
+            var finYearParameter = finYear != null ?
+                new ObjectParameter("finYear", finYear) :
+                new ObjectParameter("finYear", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Daily_Report_Result>("sp_Daily_Report", reportDateParameter, finYearParameter);
         }
     }
 }

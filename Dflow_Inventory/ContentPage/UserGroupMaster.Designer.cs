@@ -55,7 +55,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(504, 324);
+            this.tabControl1.Size = new System.Drawing.Size(520, 331);
             this.tabControl1.TabIndex = 3;
             // 
             // tabPage1
@@ -68,7 +68,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage1.Size = new System.Drawing.Size(496, 290);
+            this.tabPage1.Size = new System.Drawing.Size(512, 297);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Add User Group";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -78,7 +78,7 @@
             this.BtnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(87)))), ((int)(((byte)(51)))));
             this.BtnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
             this.BtnCancel.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCancel.Location = new System.Drawing.Point(232, 102);
+            this.BtnCancel.Location = new System.Drawing.Point(232, 99);
             this.BtnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(78, 30);
@@ -92,7 +92,7 @@
             this.BtnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
             this.BtnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
             this.BtnSave.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSave.Location = new System.Drawing.Point(154, 102);
+            this.BtnSave.Location = new System.Drawing.Point(154, 99);
             this.BtnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(72, 30);
@@ -103,7 +103,7 @@
             // 
             // TxtGroupName
             // 
-            this.TxtGroupName.Location = new System.Drawing.Point(154, 33);
+            this.TxtGroupName.Location = new System.Drawing.Point(154, 31);
             this.TxtGroupName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TxtGroupName.Name = "TxtGroupName";
             this.TxtGroupName.Size = new System.Drawing.Size(305, 23);
@@ -127,7 +127,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(496, 290);
+            this.tabPage2.Size = new System.Drawing.Size(512, 297);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "View Users Group";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -136,7 +136,7 @@
             // 
             this.Link_shorcut.AutoSize = true;
             this.Link_shorcut.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Link_shorcut.Location = new System.Drawing.Point(401, 4);
+            this.Link_shorcut.Location = new System.Drawing.Point(417, 4);
             this.Link_shorcut.Name = "Link_shorcut";
             this.Link_shorcut.Size = new System.Drawing.Size(92, 18);
             this.Link_shorcut.TabIndex = 1;
@@ -163,7 +163,7 @@
             this.DgvList.ReadOnly = true;
             this.DgvList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvList.Size = new System.Drawing.Size(490, 260);
+            this.DgvList.Size = new System.Drawing.Size(506, 267);
             this.DgvList.TabIndex = 0;
             this.DgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvList_CellDoubleClick);
             this.DgvList.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvList_RowPostPaint);
@@ -173,7 +173,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(504, 324);
+            this.ClientSize = new System.Drawing.Size(520, 331);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);

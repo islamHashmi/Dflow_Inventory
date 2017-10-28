@@ -136,10 +136,40 @@
       <End Role="StockType" EntitySet="StockTypes" />
       <End Role="Stock" EntitySet="Stocks" />
     </AssociationSet>
-    <FunctionImport Name="sp_Stock_Report" ReturnType="Collection(Inventory_DflowModel.sp_Stock_Report_Result)">
+    <FunctionImport Name="sp_invoice_print" ReturnType="Collection(Inventory_DflowModel.sp_invoice_print_Result)">
+      <Parameter Name="invoiceId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Report_Header" ReturnType="Collection(Inventory_DflowModel.sp_Report_Header_Result)" />
+    <FunctionImport Name="sp_Stock_Report_Detail" ReturnType="Collection(Inventory_DflowModel.sp_Stock_Report_Detail_Result)">
+      <Parameter Name="finYear" Mode="In" Type="String" />
       <Parameter Name="itemId" Mode="In" Type="Int32" />
       <Parameter Name="startDate" Mode="In" Type="DateTime" />
       <Parameter Name="endDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Stock_Report_Summary" ReturnType="Collection(Inventory_DflowModel.sp_Stock_Report_Summary_Result)" />
+    <FunctionImport Name="sp_invoice_report_detail" ReturnType="Collection(Inventory_DflowModel.sp_invoice_report_detail_Result)">
+      <Parameter Name="finYear" Mode="In" Type="String" />
+      <Parameter Name="startDate" Mode="In" Type="DateTime" />
+      <Parameter Name="endDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_invoice_report_summary" ReturnType="Collection(Inventory_DflowModel.sp_invoice_report_summary_Result)">
+      <Parameter Name="finYear" Mode="In" Type="String" />
+      <Parameter Name="startDate" Mode="In" Type="DateTime" />
+      <Parameter Name="endDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_purchase_report_detail" ReturnType="Collection(Inventory_DflowModel.sp_purchase_report_detail_Result)">
+      <Parameter Name="finYear" Mode="In" Type="String" />
+      <Parameter Name="startDate" Mode="In" Type="DateTime" />
+      <Parameter Name="endDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_purchase_report_summary" ReturnType="Collection(Inventory_DflowModel.sp_purchase_report_summary_Result)">
+      <Parameter Name="finYear" Mode="In" Type="String" />
+      <Parameter Name="startDate" Mode="In" Type="DateTime" />
+      <Parameter Name="endDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Daily_Report" ReturnType="Collection(Inventory_DflowModel.sp_Daily_Report_Result)">
+      <Parameter Name="reportDate" Mode="In" Type="DateTime" />
+      <Parameter Name="finYear" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
   <EntityType Name="Customer_Master">
@@ -434,6 +464,7 @@
     <Property Name="cgstAmount" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="sgstPercent" Type="Decimal" Precision="5" Scale="2" />
     <Property Name="sgstAmount" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="amountInWords" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_InvoiceHeader_CustomerMaster">
     <End Type="Inventory_DflowModel.Customer_Master" Role="Customer_Master" Multiplicity="1" />
@@ -675,5 +706,142 @@
     <Property Type="Decimal" Name="quantity" Nullable="true" Precision="18" Scale="2" />
     <Property Type="Decimal" Name="closingStock" Nullable="true" Precision="18" Scale="2" />
     <Property Type="String" Name="remark" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="sp_invoice_print_Result">
+    <Property Type="Int32" Name="invoiceId" Nullable="false" />
+    <Property Type="String" Name="invoiceNumber" Nullable="false" MaxLength="10" />
+    <Property Type="DateTime" Name="invoiceDate" Nullable="false" />
+    <Property Type="String" Name="customerName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="customerAddress" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="customerGST" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="remark" Nullable="true" MaxLength="500" />
+    <Property Type="Decimal" Name="total" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="discount" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="taxableAmount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="cgstPercent" Nullable="true" Precision="5" Scale="2" />
+    <Property Type="Decimal" Name="cgstAmount" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="sgstPercent" Nullable="true" Precision="5" Scale="2" />
+    <Property Type="Decimal" Name="sgstAmount" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="totalAmount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="amountInWords" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="itemName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="unit" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="hsnCode" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="rate" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="quantity" Nullable="true" Precision="10" Scale="0" />
+    <Property Type="Decimal" Name="amount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="companyName" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="dealsIn" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="addressLine1" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="addressLine2" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="mobileNo1" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="mobileNo2" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="emailAddress1" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="emailAddress2" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="panNumber" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="gstNumber" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_Report_Header_Result">
+    <Property Type="String" Name="companyName" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="dealsIn" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="addressLine1" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="addressLine2" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="mobileNo1" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="mobileNo2" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="emailAddress1" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="emailAddress2" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="panNumber" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="hsnCode" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="gstNumber" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_Stock_Report_Detail_Result">
+    <Property Type="Int64" Name="stockId" Nullable="false" />
+    <Property Type="DateTime" Name="stockDate" Nullable="false" />
+    <Property Type="Int32" Name="invoiceId" Nullable="true" />
+    <Property Type="Int32" Name="purchaseId" Nullable="true" />
+    <Property Type="String" Name="itemCode" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="itemName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="stockTypeDescription" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="openingStock" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="quantity" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="closingStock" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="narration" Nullable="true" MaxLength="21" />
+  </ComplexType>
+  <ComplexType Name="sp_Stock_Report_Summary_Result">
+    <Property Type="Int32" Name="itemId" Nullable="false" />
+    <Property Type="String" Name="itemCode" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="itemName" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="itemDescription" Nullable="true" MaxLength="300" />
+    <Property Type="Decimal" Name="sellingPrice" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="openingStock" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="currentStock" Nullable="true" Precision="18" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="sp_invoice_report_detail_Result">
+    <Property Type="Int32" Name="invoiceId" Nullable="false" />
+    <Property Type="String" Name="invoiceNumber" Nullable="false" MaxLength="10" />
+    <Property Type="DateTime" Name="invoiceDate" Nullable="false" />
+    <Property Type="String" Name="customerName" Nullable="true" MaxLength="200" />
+    <Property Type="Decimal" Name="total" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="discount" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="taxableAmount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="cgstPercent" Nullable="true" Precision="5" Scale="2" />
+    <Property Type="Decimal" Name="cgstAmount" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="sgstPercent" Nullable="true" Precision="5" Scale="2" />
+    <Property Type="Decimal" Name="sgstAmount" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="totalAmount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="itemName" Nullable="true" MaxLength="200" />
+    <Property Type="Decimal" Name="quantity" Nullable="true" Precision="10" Scale="0" />
+    <Property Type="Decimal" Name="rate" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="amount" Nullable="true" Precision="18" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="sp_invoice_report_summary_Result">
+    <Property Type="Int32" Name="invoiceId" Nullable="false" />
+    <Property Type="String" Name="invoiceNumber" Nullable="false" MaxLength="10" />
+    <Property Type="DateTime" Name="invoiceDate" Nullable="false" />
+    <Property Type="String" Name="customerName" Nullable="true" MaxLength="200" />
+    <Property Type="Decimal" Name="total" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="discount" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="taxableAmount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="cgstPercent" Nullable="true" Precision="5" Scale="2" />
+    <Property Type="Decimal" Name="cgstAmount" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="sgstPercent" Nullable="true" Precision="5" Scale="2" />
+    <Property Type="Decimal" Name="sgstAmount" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="totalAmount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="remark" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="sp_purchase_report_detail_Result">
+    <Property Type="Int32" Name="purchaseId" Nullable="false" />
+    <Property Type="String" Name="poNumber" Nullable="false" MaxLength="10" />
+    <Property Type="DateTime" Name="purchaseDate" Nullable="false" />
+    <Property Type="String" Name="orderNumber" Nullable="true" MaxLength="20" />
+    <Property Type="DateTime" Name="orderDate" Nullable="true" />
+    <Property Type="String" Name="vendorName" Nullable="true" MaxLength="200" />
+    <Property Type="Decimal" Name="totalQuantity" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="totalAmount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="itemName" Nullable="true" MaxLength="200" />
+    <Property Type="Decimal" Name="quantity" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="rate" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="amount" Nullable="true" Precision="18" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="sp_purchase_report_summary_Result">
+    <Property Type="Int32" Name="purchaseId" Nullable="false" />
+    <Property Type="String" Name="poNumber" Nullable="false" MaxLength="10" />
+    <Property Type="DateTime" Name="purchaseDate" Nullable="false" />
+    <Property Type="String" Name="orderNumber" Nullable="true" MaxLength="20" />
+    <Property Type="DateTime" Name="orderDate" Nullable="true" />
+    <Property Type="String" Name="vendorName" Nullable="true" MaxLength="200" />
+    <Property Type="Decimal" Name="totalQuantity" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="totalAmount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="remark" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="sp_Daily_Report_Result">
+    <Property Type="DateTime" Name="invoiceDate" Nullable="false" />
+    <Property Type="Decimal" Name="saleAmt" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="purchaseAmt" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="receiptAmt" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="paidAmt" Nullable="true" Precision="38" Scale="2" />
   </ComplexType>
 </Schema>

@@ -183,6 +183,7 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
     <Property Name="sgstPercent" Type="decimal" Precision="5" Scale="2" />
     <Property Name="sgstAmount" Type="decimal" Precision="10" Scale="2" />
     <Property Name="totalAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="amountInWords" Type="varchar" MaxLength="500" />
     <Property Name="finYear" Type="char" MaxLength="4" />
     <Property Name="entryBy" Type="int" Nullable="false" />
     <Property Name="entryDate" Type="datetime" Nullable="false" />
@@ -545,6 +546,34 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="sp_Daily_Report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="reportDate" Type="date" Mode="In" />
+    <Parameter Name="finYear" Type="char" Mode="In" />
+  </Function>
+  <Function Name="sp_invoice_print" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="invoiceId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_invoice_report_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="finYear" Type="char" Mode="In" />
+    <Parameter Name="startDate" Type="date" Mode="In" />
+    <Parameter Name="endDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_invoice_report_summary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="finYear" Type="char" Mode="In" />
+    <Parameter Name="startDate" Type="date" Mode="In" />
+    <Parameter Name="endDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_purchase_report_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="finYear" Type="char" Mode="In" />
+    <Parameter Name="startDate" Type="date" Mode="In" />
+    <Parameter Name="endDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_purchase_report_summary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="finYear" Type="char" Mode="In" />
+    <Parameter Name="startDate" Type="date" Mode="In" />
+    <Parameter Name="endDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_Report_Header" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_Stock_InsertUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="stockDate" Type="date" Mode="In" />
     <Parameter Name="itemId" Type="int" Mode="In" />
@@ -555,11 +584,13 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
     <Parameter Name="cmdType" Type="char" Mode="In" />
     <Parameter Name="entryBy" Type="int" Mode="In" />
   </Function>
-  <Function Name="sp_Stock_Report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="sp_Stock_Report_Detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="finYear" Type="char" Mode="In" />
     <Parameter Name="itemId" Type="int" Mode="In" />
     <Parameter Name="startDate" Type="date" Mode="In" />
     <Parameter Name="endDate" Type="date" Mode="In" />
   </Function>
+  <Function Name="sp_Stock_Report_Summary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="Inventory_DflowModelStoreContainer">
     <EntitySet Name="ApplicationParameter" EntityType="Self.ApplicationParameter" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CustomerMaster" EntityType="Self.CustomerMaster" Schema="dbo" store:Type="Tables" />

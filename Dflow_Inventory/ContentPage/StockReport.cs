@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Dflow_Inventory.DataSets;
 using System.IO;
 using System.Configuration;
 using Microsoft.Reporting.WinForms;
 using Dflow_Inventory.DataContext;
 using Dflow_Inventory.Helpers;
-using System.Diagnostics;
 
 namespace Dflow_Inventory.ContentPage
 {
@@ -54,7 +47,7 @@ namespace Dflow_Inventory.ContentPage
             }
         }
 
-        private void btnView_Click(object sender, EventArgs e)
+        private void BtnView_Click(object sender, EventArgs e)
         {
             try
             {
@@ -64,16 +57,43 @@ namespace Dflow_Inventory.ContentPage
                     DateTime? _endDate = dtpEndDate.Checked ? (DateTime?)dtpEndDate.Value : null;
                     int? _itemId = cmbItemName.SelectedIndex == 0 ? null : (int?)Convert.ToInt32(cmbItemName.SelectedValue);
 
-                    var data = db.sp_Stock_Report(_itemId, _startDate, _endDate).ToList();
+                    var header = db.sp_Report_Header().ToList();
 
                     reportViewer1.LocalReport.DataSources.Clear();
-                    reportViewer1.LocalReport.ReportPath = Path.Combine(ConfigurationManager.AppSettings["reportPath"], "StockReport.rdlc");
-                    ReportDataSource reportDataSource = new ReportDataSource("DataSet1", data);
-                    reportViewer1.LocalReport.DataSources.Add(reportDataSource);
+
+                    reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("dsReportHeader", header));
+
+                    if (chkDetail.Checked)
+                    {
+                        var data = db.sp_Stock_Report_Detail(SessionHelper.FinYear, _itemId, _startDate, _endDate).ToList();
+
+                        reportViewer1.LocalReport.ReportPath = Path.Combine(ConfigurationManager.AppSettings["reportPath"], "StockReport_Detail.rdlc");
+                        reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", data));
+                    }
+                    else
+                    {
+                        var summary = db.sp_Stock_Report_Summary().ToList();
+
+                        reportViewer1.LocalReport.ReportPath = Path.Combine(ConfigurationManager.AppSettings["reportPath"], "StockReport_Summary.rdlc");
+                        reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("dsStock_Summary", summary));
+                    }
 
                     reportViewer1.LocalReport.Refresh();
                     reportViewer1.RefreshReport();
                 }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void ChkDetail_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                dtpStartDate.Enabled = chkDetail.Checked;
+                dtpEndDate.Enabled = chkDetail.Checked;
             }
             catch (Exception ex)
             {

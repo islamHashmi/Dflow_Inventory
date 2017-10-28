@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsDailyReport" targetNamespace="http://tempuri.org/dsDailyReport.xsd" xmlns:mstns="http://tempuri.org/dsDailyReport.xsd" xmlns="http://tempuri.org/dsDailyReport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsDailyReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsDailyReport" msprop:Generator_UserDSName="dsDailyReport">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dsDailyReport" msprop:Generator_TableClassName="dsDailyReportDataTable" msprop:Generator_TableVarName="tabledsDailyReport" msprop:Generator_TablePropName="_dsDailyReport" msprop:Generator_RowDeletingName="dsDailyReportRowDeleting" msprop:Generator_RowChangingName="dsDailyReportRowChanging" msprop:Generator_RowEvHandlerName="dsDailyReportRowChangeEventHandler" msprop:Generator_RowDeletedName="dsDailyReportRowDeleted" msprop:Generator_UserTableName="dsDailyReport" msprop:Generator_RowChangedName="dsDailyReportRowChanged" msprop:Generator_RowEvArgName="dsDailyReportRowChangeEvent" msprop:Generator_RowClassName="dsDailyReportRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="saleAmt" msprop:Generator_ColumnVarNameInTable="columnsaleAmt" msprop:Generator_ColumnPropNameInRow="saleAmt" msprop:Generator_ColumnPropNameInTable="saleAmtColumn" msprop:Generator_UserColumnName="saleAmt" type="xs:string" minOccurs="0" />
+              <xs:element name="purchaseAmt" msprop:Generator_ColumnVarNameInTable="columnpurchaseAmt" msprop:Generator_ColumnPropNameInRow="purchaseAmt" msprop:Generator_ColumnPropNameInTable="purchaseAmtColumn" msprop:Generator_UserColumnName="purchaseAmt" type="xs:string" minOccurs="0" />
+              <xs:element name="receiptAmt" msprop:Generator_ColumnVarNameInTable="columnreceiptAmt" msprop:Generator_ColumnPropNameInRow="receiptAmt" msprop:Generator_ColumnPropNameInTable="receiptAmtColumn" msprop:Generator_UserColumnName="receiptAmt" type="xs:string" minOccurs="0" />
+              <xs:element name="paidAmt" msprop:Generator_ColumnVarNameInTable="columnpaidAmt" msprop:Generator_ColumnPropNameInRow="paidAmt" msprop:Generator_ColumnPropNameInTable="paidAmtColumn" msprop:Generator_UserColumnName="paidAmt" type="xs:string" minOccurs="0" />
+              <xs:element name="invoiceDate" msprop:Generator_ColumnVarNameInTable="columninvoiceDate" msprop:Generator_ColumnPropNameInRow="invoiceDate" msprop:Generator_ColumnPropNameInTable="invoiceDateColumn" msprop:Generator_UserColumnName="invoiceDate" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
