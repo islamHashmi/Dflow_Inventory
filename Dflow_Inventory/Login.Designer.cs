@@ -70,7 +70,6 @@
             this.TxtLoginId.Name = "TxtLoginId";
             this.TxtLoginId.Size = new System.Drawing.Size(165, 23);
             this.TxtLoginId.TabIndex = 2;
-            this.TxtLoginId.Text = "admin";
             // 
             // TxtPassword
             // 
@@ -78,7 +77,6 @@
             this.TxtPassword.Name = "TxtPassword";
             this.TxtPassword.Size = new System.Drawing.Size(165, 23);
             this.TxtPassword.TabIndex = 4;
-            this.TxtPassword.Text = "123";
             this.TxtPassword.UseSystemPasswordChar = true;
             // 
             // label2
