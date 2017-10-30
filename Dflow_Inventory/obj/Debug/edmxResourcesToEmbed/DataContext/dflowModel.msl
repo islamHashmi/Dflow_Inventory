@@ -586,5 +586,23 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_voucher_report" FunctionName="Inventory_DflowModel.Store.sp_voucher_report">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Inventory_DflowModel.sp_voucher_report_Result">
+          <ScalarProperty Name="voucherId" ColumnName="voucherId" />
+          <ScalarProperty Name="voucherNumber" ColumnName="voucherNumber" />
+          <ScalarProperty Name="voucherDate" ColumnName="voucherDate" />
+          <ScalarProperty Name="voucherType" ColumnName="voucherType" />
+          <ScalarProperty Name="expenseName" ColumnName="expenseName" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="paymentDescription" ColumnName="paymentDescription" />
+          <ScalarProperty Name="bankName" ColumnName="bankName" />
+          <ScalarProperty Name="chequeNo" ColumnName="chequeNo" />
+          <ScalarProperty Name="chequeDate" ColumnName="chequeDate" />
+          <ScalarProperty Name="narration" ColumnName="narration" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

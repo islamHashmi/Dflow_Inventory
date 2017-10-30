@@ -136,3 +136,5 @@ D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\De
 D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.csproj.CoreCompileInputs.cache
 D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.exe
 D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.pdb
+D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.csprojResolveAssemblyReference.cache
+D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.ContentPage.VoucherReport.resources

@@ -230,6 +230,12 @@
     <Compile Include="ContentPage\VoucherReceipt.Designer.cs">
       <DependentUpon>VoucherReceipt.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContentPage\VoucherReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContentPage\VoucherReport.Designer.cs">
+      <DependentUpon>VoucherReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContext\Application_Parameter.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
@@ -324,6 +330,9 @@
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataContext\sp_Stock_Report_Summary_Result.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\sp_voucher_report_Result.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataContext\Stock.cs">
@@ -472,6 +481,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ContentPage\VoucherReceipt.resx">
       <DependentUpon>VoucherReceipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContentPage\VoucherReport.resx">
+      <DependentUpon>VoucherReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

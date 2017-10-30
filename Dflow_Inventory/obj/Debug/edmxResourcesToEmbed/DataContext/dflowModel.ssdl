@@ -591,6 +591,14 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
     <Parameter Name="endDate" Type="date" Mode="In" />
   </Function>
   <Function Name="sp_Stock_Report_Summary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_voucher_report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="finYear" Type="char" Mode="In" />
+    <Parameter Name="voucherType" Type="char" Mode="In" />
+    <Parameter Name="employeeId" Type="int" Mode="In" />
+    <Parameter Name="customerId" Type="int" Mode="In" />
+    <Parameter Name="startDate" Type="date" Mode="In" />
+    <Parameter Name="endDate" Type="date" Mode="In" />
+  </Function>
   <EntityContainer Name="Inventory_DflowModelStoreContainer">
     <EntitySet Name="ApplicationParameter" EntityType="Self.ApplicationParameter" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CustomerMaster" EntityType="Self.CustomerMaster" Schema="dbo" store:Type="Tables" />

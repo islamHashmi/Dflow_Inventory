@@ -211,5 +211,34 @@ namespace Dflow_Inventory.DataContext
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Daily_Report_Result>("sp_Daily_Report", reportDateParameter, finYearParameter);
         }
+    
+        public virtual ObjectResult<sp_voucher_report_Result> sp_voucher_report(string finYear, string voucherType, Nullable<int> employeeId, Nullable<int> customerId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var finYearParameter = finYear != null ?
+                new ObjectParameter("finYear", finYear) :
+                new ObjectParameter("finYear", typeof(string));
+    
+            var voucherTypeParameter = voucherType != null ?
+                new ObjectParameter("voucherType", voucherType) :
+                new ObjectParameter("voucherType", typeof(string));
+    
+            var employeeIdParameter = employeeId.HasValue ?
+                new ObjectParameter("employeeId", employeeId) :
+                new ObjectParameter("employeeId", typeof(int));
+    
+            var customerIdParameter = customerId.HasValue ?
+                new ObjectParameter("customerId", customerId) :
+                new ObjectParameter("customerId", typeof(int));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("startDate", startDate) :
+                new ObjectParameter("startDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("endDate", endDate) :
+                new ObjectParameter("endDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_voucher_report_Result>("sp_voucher_report", finYearParameter, voucherTypeParameter, employeeIdParameter, customerIdParameter, startDateParameter, endDateParameter);
+        }
     }
 }
