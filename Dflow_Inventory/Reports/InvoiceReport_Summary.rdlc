@@ -1129,7 +1129,7 @@
         </TablixRowHierarchy>
         <DataSetName>dsInvoice_Summary</DataSetName>
         <Height>0.75in</Height>
-        <Width>10.40625in</Width>
+        <Width>10.40627in</Width>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1140,7 +1140,7 @@
     <Height>0.80208in</Height>
     <Style />
   </Body>
-  <Width>10.40625in</Width>
+  <Width>10.40627in</Width>
   <Page>
     <PageHeader>
       <Height>1.78125in</Height>
@@ -1384,7 +1384,7 @@
                     <TextRun>
                       <Value>SALES REPORT (SUMMARY)</Value>
                       <Style>
-                        <FontSize>14pt</FontSize>
+                        <FontSize>13pt</FontSize>
                         <FontWeight>SemiBold</FontWeight>
                       </Style>
                     </TextRun>

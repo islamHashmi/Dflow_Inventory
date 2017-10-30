@@ -298,5 +298,17 @@ namespace Dflow_Inventory
                 throw;
             }
         }
+
+        private void voucherReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new VoucherReport());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

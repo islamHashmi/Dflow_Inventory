@@ -1438,7 +1438,7 @@
                     <TextRun>
                       <Value>SALES REPORT (DETAIL)</Value>
                       <Style>
-                        <FontSize>14pt</FontSize>
+                        <FontSize>13pt</FontSize>
                         <FontWeight>SemiBold</FontWeight>
                       </Style>
                     </TextRun>

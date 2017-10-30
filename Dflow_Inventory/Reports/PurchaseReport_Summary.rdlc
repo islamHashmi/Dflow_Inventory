@@ -403,7 +403,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -909,7 +908,7 @@
                     <TextRun>
                       <Value>PURCHASE REPORT (SUMMARY)</Value>
                       <Style>
-                        <FontSize>14pt</FontSize>
+                        <FontSize>13pt</FontSize>
                         <FontWeight>SemiBold</FontWeight>
                       </Style>
                     </TextRun>

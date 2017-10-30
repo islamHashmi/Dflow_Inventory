@@ -389,6 +389,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsStockReport.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DataSets\dsVoucherReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsVoucherReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\AmountInWordHelper.cs" />
     <Compile Include="Helpers\CommanMethods.cs" />
     <Compile Include="Helpers\SessionHelper.cs" />
@@ -509,6 +514,7 @@
     <EmbeddedResource Include="Reports\PurchaseReport_Summary.rdlc" />
     <EmbeddedResource Include="Reports\StockReport_Detail.rdlc" />
     <EmbeddedResource Include="Reports\StockReport_Summary.rdlc" />
+    <EmbeddedResource Include="Reports\VoucherReport.rdlc" />
     <EmbeddedResource Include="Shortcuts.resx">
       <DependentUpon>Shortcuts.cs</DependentUpon>
     </EmbeddedResource>
@@ -584,6 +590,17 @@
     </None>
     <None Include="DataSets\dsStockReport.xss">
       <DependentUpon>dsStockReport.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\dsVoucherReport.xsc">
+      <DependentUpon>dsVoucherReport.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\dsVoucherReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsVoucherReport.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSets\dsVoucherReport.xss">
+      <DependentUpon>dsVoucherReport.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Dflow_Inventory.DataSets.dsInvoice.datasource" />

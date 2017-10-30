@@ -45,6 +45,7 @@
             this.receiptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dailyReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stockRegisterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,7 +58,7 @@
             this.toolStripFinYear = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripLoginUser = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.dailyReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.voucherReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -191,10 +192,18 @@
             this.dailyReportToolStripMenuItem,
             this.stockRegisterToolStripMenuItem,
             this.salesReportToolStripMenuItem,
-            this.purchaseReportToolStripMenuItem});
+            this.purchaseReportToolStripMenuItem,
+            this.voucherReportToolStripMenuItem});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(74, 27);
             this.reportsToolStripMenuItem.Text = "Reports";
+            // 
+            // dailyReportToolStripMenuItem
+            // 
+            this.dailyReportToolStripMenuItem.Name = "dailyReportToolStripMenuItem";
+            this.dailyReportToolStripMenuItem.Size = new System.Drawing.Size(188, 28);
+            this.dailyReportToolStripMenuItem.Text = "Daily Report";
+            this.dailyReportToolStripMenuItem.Click += new System.EventHandler(this.dailyReportToolStripMenuItem_Click);
             // 
             // stockRegisterToolStripMenuItem
             // 
@@ -280,12 +289,12 @@
             this.toolStripLoginUser.Size = new System.Drawing.Size(118, 17);
             this.toolStripLoginUser.Text = "toolStripStatusLabel1";
             // 
-            // dailyReportToolStripMenuItem
+            // voucherReportToolStripMenuItem
             // 
-            this.dailyReportToolStripMenuItem.Name = "dailyReportToolStripMenuItem";
-            this.dailyReportToolStripMenuItem.Size = new System.Drawing.Size(188, 28);
-            this.dailyReportToolStripMenuItem.Text = "Daily Report";
-            this.dailyReportToolStripMenuItem.Click += new System.EventHandler(this.dailyReportToolStripMenuItem_Click);
+            this.voucherReportToolStripMenuItem.Name = "voucherReportToolStripMenuItem";
+            this.voucherReportToolStripMenuItem.Size = new System.Drawing.Size(188, 28);
+            this.voucherReportToolStripMenuItem.Text = "Voucher Report";
+            this.voucherReportToolStripMenuItem.Click += new System.EventHandler(this.voucherReportToolStripMenuItem_Click);
             // 
             // MasterPage
             // 
@@ -339,6 +348,7 @@
         private System.Windows.Forms.ToolStripMenuItem salesReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem purchaseReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dailyReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem voucherReportToolStripMenuItem;
     }
 }
 
