@@ -28,67 +28,45 @@ namespace Dflow_Inventory.DataContext
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Item_Master> Item_Master { get; set; }
-        public DbSet<Unit_Master> Unit_Master { get; set; }
-        public DbSet<Customer_Master> Customer_Master { get; set; }
-        public DbSet<Supplier_Master> Supplier_Master { get; set; }
-        public DbSet<Designation> Designations { get; set; }
-        public DbSet<PurchaseDetail> PurchaseDetails { get; set; }
-        public DbSet<Employee> Employees { get; set; }
-        public DbSet<Employment_Status> Employment_Status { get; set; }
-        public DbSet<Distributor_Master> Distributor_Master { get; set; }
-        public DbSet<Vendor_Master> Vendor_Master { get; set; }
-        public DbSet<PurchaseHeader> PurchaseHeaders { get; set; }
+        public DbSet<ApplicationParameter> ApplicationParameters { get; set; }
+        public DbSet<CustomerMaster> CustomerMasters { get; set; }
         public DbSet<customerType> customerTypes { get; set; }
+        public DbSet<Designation> Designations { get; set; }
+        public DbSet<DistributorMaster> DistributorMasters { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<ExpenseMaster> ExpenseMasters { get; set; }
+        public DbSet<FinancialYear> FinancialYears { get; set; }
         public DbSet<Gender> Genders { get; set; }
-        public DbSet<marital_Status> marital_Status { get; set; }
         public DbSet<InvoiceDetail> InvoiceDetails { get; set; }
         public DbSet<InvoiceHeader> InvoiceHeaders { get; set; }
-        public DbSet<User_Group> User_Group { get; set; }
-        public DbSet<User_Master> User_Master { get; set; }
-        public DbSet<Expense_Master> Expense_Master { get; set; }
-        public DbSet<FinancialYear> FinancialYears { get; set; }
+        public DbSet<ItemMaster> ItemMasters { get; set; }
+        public DbSet<maritalStatu> maritalStatus { get; set; }
         public DbSet<PaymentMode> PaymentModes { get; set; }
-        public DbSet<voucherHeader> voucherHeaders { get; set; }
-        public DbSet<Application_Parameter> Application_Parameter { get; set; }
+        public DbSet<productionDetail> productionDetails { get; set; }
+        public DbSet<productionHeader> productionHeaders { get; set; }
+        public DbSet<PurchaseDetail> PurchaseDetails { get; set; }
+        public DbSet<PurchaseHeader> PurchaseHeaders { get; set; }
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<StockType> StockTypes { get; set; }
+        public DbSet<SupplierMaster> SupplierMasters { get; set; }
+        public DbSet<UnitMaster> UnitMasters { get; set; }
+        public DbSet<UserGroup> UserGroups { get; set; }
+        public DbSet<UserMaster> UserMasters { get; set; }
+        public DbSet<VendorMaster> VendorMasters { get; set; }
+        public DbSet<voucherHeader> voucherHeaders { get; set; }
+        public DbSet<EmploymentStatu> EmploymentStatus { get; set; }
     
-        public virtual int sp_Stock_InsertUpdate(Nullable<System.DateTime> stockDate, Nullable<int> itemId, string stockType, Nullable<decimal> quantity, Nullable<int> invoiceId, Nullable<int> purchaseId, string cmdType, Nullable<int> entryBy)
+        public virtual ObjectResult<sp_Daily_Report_Result> sp_Daily_Report(Nullable<System.DateTime> reportDate, string finYear)
         {
-            var stockDateParameter = stockDate.HasValue ?
-                new ObjectParameter("stockDate", stockDate) :
-                new ObjectParameter("stockDate", typeof(System.DateTime));
+            var reportDateParameter = reportDate.HasValue ?
+                new ObjectParameter("reportDate", reportDate) :
+                new ObjectParameter("reportDate", typeof(System.DateTime));
     
-            var itemIdParameter = itemId.HasValue ?
-                new ObjectParameter("itemId", itemId) :
-                new ObjectParameter("itemId", typeof(int));
+            var finYearParameter = finYear != null ?
+                new ObjectParameter("finYear", finYear) :
+                new ObjectParameter("finYear", typeof(string));
     
-            var stockTypeParameter = stockType != null ?
-                new ObjectParameter("stockType", stockType) :
-                new ObjectParameter("stockType", typeof(string));
-    
-            var quantityParameter = quantity.HasValue ?
-                new ObjectParameter("quantity", quantity) :
-                new ObjectParameter("quantity", typeof(decimal));
-    
-            var invoiceIdParameter = invoiceId.HasValue ?
-                new ObjectParameter("invoiceId", invoiceId) :
-                new ObjectParameter("invoiceId", typeof(int));
-    
-            var purchaseIdParameter = purchaseId.HasValue ?
-                new ObjectParameter("purchaseId", purchaseId) :
-                new ObjectParameter("purchaseId", typeof(int));
-    
-            var cmdTypeParameter = cmdType != null ?
-                new ObjectParameter("cmdType", cmdType) :
-                new ObjectParameter("cmdType", typeof(string));
-    
-            var entryByParameter = entryBy.HasValue ?
-                new ObjectParameter("entryBy", entryBy) :
-                new ObjectParameter("entryBy", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Stock_InsertUpdate", stockDateParameter, itemIdParameter, stockTypeParameter, quantityParameter, invoiceIdParameter, purchaseIdParameter, cmdTypeParameter, entryByParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Daily_Report_Result>("sp_Daily_Report", reportDateParameter, finYearParameter);
         }
     
         public virtual ObjectResult<sp_invoice_print_Result> sp_invoice_print(Nullable<int> invoiceId)
@@ -98,37 +76,6 @@ namespace Dflow_Inventory.DataContext
                 new ObjectParameter("invoiceId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_invoice_print_Result>("sp_invoice_print", invoiceIdParameter);
-        }
-    
-        public virtual ObjectResult<sp_Report_Header_Result> sp_Report_Header()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Report_Header_Result>("sp_Report_Header");
-        }
-    
-        public virtual ObjectResult<sp_Stock_Report_Detail_Result> sp_Stock_Report_Detail(string finYear, Nullable<int> itemId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
-        {
-            var finYearParameter = finYear != null ?
-                new ObjectParameter("finYear", finYear) :
-                new ObjectParameter("finYear", typeof(string));
-    
-            var itemIdParameter = itemId.HasValue ?
-                new ObjectParameter("itemId", itemId) :
-                new ObjectParameter("itemId", typeof(int));
-    
-            var startDateParameter = startDate.HasValue ?
-                new ObjectParameter("startDate", startDate) :
-                new ObjectParameter("startDate", typeof(System.DateTime));
-    
-            var endDateParameter = endDate.HasValue ?
-                new ObjectParameter("endDate", endDate) :
-                new ObjectParameter("endDate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Stock_Report_Detail_Result>("sp_Stock_Report_Detail", finYearParameter, itemIdParameter, startDateParameter, endDateParameter);
-        }
-    
-        public virtual ObjectResult<sp_Stock_Report_Summary_Result> sp_Stock_Report_Summary()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Stock_Report_Summary_Result>("sp_Stock_Report_Summary");
         }
     
         public virtual ObjectResult<sp_invoice_report_detail_Result> sp_invoice_report_detail(string finYear, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
@@ -199,17 +146,76 @@ namespace Dflow_Inventory.DataContext
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_purchase_report_summary_Result>("sp_purchase_report_summary", finYearParameter, startDateParameter, endDateParameter);
         }
     
-        public virtual ObjectResult<sp_Daily_Report_Result> sp_Daily_Report(Nullable<System.DateTime> reportDate, string finYear)
+        public virtual ObjectResult<sp_Report_Header_Result> sp_Report_Header()
         {
-            var reportDateParameter = reportDate.HasValue ?
-                new ObjectParameter("reportDate", reportDate) :
-                new ObjectParameter("reportDate", typeof(System.DateTime));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Report_Header_Result>("sp_Report_Header");
+        }
     
+        public virtual int sp_Stock_InsertUpdate(Nullable<System.DateTime> stockDate, Nullable<int> itemId, string stockType, Nullable<decimal> quantity, Nullable<long> invoiceId, Nullable<long> purchaseId, Nullable<long> productionId, string cmdType, Nullable<int> entryBy)
+        {
+            var stockDateParameter = stockDate.HasValue ?
+                new ObjectParameter("stockDate", stockDate) :
+                new ObjectParameter("stockDate", typeof(System.DateTime));
+    
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("itemId", itemId) :
+                new ObjectParameter("itemId", typeof(int));
+    
+            var stockTypeParameter = stockType != null ?
+                new ObjectParameter("stockType", stockType) :
+                new ObjectParameter("stockType", typeof(string));
+    
+            var quantityParameter = quantity.HasValue ?
+                new ObjectParameter("quantity", quantity) :
+                new ObjectParameter("quantity", typeof(decimal));
+    
+            var invoiceIdParameter = invoiceId.HasValue ?
+                new ObjectParameter("invoiceId", invoiceId) :
+                new ObjectParameter("invoiceId", typeof(long));
+    
+            var purchaseIdParameter = purchaseId.HasValue ?
+                new ObjectParameter("purchaseId", purchaseId) :
+                new ObjectParameter("purchaseId", typeof(long));
+    
+            var productionIdParameter = productionId.HasValue ?
+                new ObjectParameter("productionId", productionId) :
+                new ObjectParameter("productionId", typeof(long));
+    
+            var cmdTypeParameter = cmdType != null ?
+                new ObjectParameter("cmdType", cmdType) :
+                new ObjectParameter("cmdType", typeof(string));
+    
+            var entryByParameter = entryBy.HasValue ?
+                new ObjectParameter("entryBy", entryBy) :
+                new ObjectParameter("entryBy", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Stock_InsertUpdate", stockDateParameter, itemIdParameter, stockTypeParameter, quantityParameter, invoiceIdParameter, purchaseIdParameter, productionIdParameter, cmdTypeParameter, entryByParameter);
+        }
+    
+        public virtual ObjectResult<sp_Stock_Report_Detail_Result> sp_Stock_Report_Detail(string finYear, Nullable<int> itemId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
             var finYearParameter = finYear != null ?
                 new ObjectParameter("finYear", finYear) :
                 new ObjectParameter("finYear", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Daily_Report_Result>("sp_Daily_Report", reportDateParameter, finYearParameter);
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("itemId", itemId) :
+                new ObjectParameter("itemId", typeof(int));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("startDate", startDate) :
+                new ObjectParameter("startDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("endDate", endDate) :
+                new ObjectParameter("endDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Stock_Report_Detail_Result>("sp_Stock_Report_Detail", finYearParameter, itemIdParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<sp_Stock_Report_Summary_Result> sp_Stock_Report_Summary()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Stock_Report_Summary_Result>("sp_Stock_Report_Summary");
         }
     
         public virtual ObjectResult<sp_voucher_report_Result> sp_voucher_report(string finYear, string voucherType, Nullable<int> employeeId, Nullable<int> customerId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)

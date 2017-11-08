@@ -27,14 +27,14 @@ namespace Dflow_Inventory.DataContext
         public int vendorId { get; set; }
         public Nullable<decimal> totalQuantity { get; set; }
         public Nullable<decimal> totalAmount { get; set; }
+        public string remark { get; set; }
+        public string finYear { get; set; }
         public int entryBy { get; set; }
         public System.DateTime entryDate { get; set; }
         public Nullable<int> updatedBy { get; set; }
         public Nullable<System.DateTime> updatedDate { get; set; }
-        public string remark { get; set; }
-        public string finYear { get; set; }
     
         public virtual ICollection<PurchaseDetail> PurchaseDetails { get; set; }
-        public virtual Vendor_Master VendorMaster { get; set; }
+        public virtual VendorMaster VendorMaster { get; set; }
     }
 }

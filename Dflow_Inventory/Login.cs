@@ -25,7 +25,7 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -49,7 +49,7 @@ namespace Dflow_Inventory
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    var login = db.User_Master.FirstOrDefault(m => m.loginId == TxtLoginId.Text.Trim() && m.loginKey == TxtPassword.Text.Trim());
+                    var login = db.UserMasters.FirstOrDefault(m => m.loginId == TxtLoginId.Text.Trim() && m.loginKey == TxtPassword.Text.Trim());
 
                     if (login == null)
                     {
@@ -64,9 +64,9 @@ namespace Dflow_Inventory
 
                     db.SaveChanges();
 
-                    if (db.Application_Parameter.FirstOrDefault() != null)
+                    if (db.ApplicationParameters.FirstOrDefault() != null)
                     {
-                        SessionHelper.HsnCode = db.Application_Parameter.FirstOrDefault().hsnCode;
+                        SessionHelper.HsnCode = db.ApplicationParameters.FirstOrDefault().hsnCode;
                     }
 
                     string finYear = Get_FinancialYear();
@@ -82,7 +82,7 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -148,7 +148,7 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -160,7 +160,7 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
     }

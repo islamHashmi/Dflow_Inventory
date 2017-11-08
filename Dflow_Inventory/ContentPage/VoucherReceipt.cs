@@ -75,7 +75,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -85,22 +85,16 @@ namespace Dflow_Inventory.ContentPage
             {
                 if (Convert.ToString(CmbPaymentMode.SelectedValue) == "CQ")
                 {
-                    lblNaration.Location = new Point(52, 302);
-                    TxtNarration.Location = new Point(174, 299);
-
                     grpPayment.Visible = true;
                 }
                 else
                 {
-                    lblNaration.Location = new Point(52, 174);
-                    TxtNarration.Location = new Point(174, 172);
-
                     grpPayment.Visible = false;
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
         
@@ -169,17 +163,17 @@ namespace Dflow_Inventory.ContentPage
 
                             scope.Complete();
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
                             scope.Dispose();
-                            throw;
+                            MessageBox.Show(ex.Message);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -210,7 +204,7 @@ namespace Dflow_Inventory.ContentPage
             using (db = new Inventory_DflowEntities())
             {
                 DgvList.DataSource = (from a in db.voucherHeaders
-                                      join b in db.Customer_Master on a.customerId equals b.customerId into cus
+                                      join b in db.CustomerMasters on a.customerId equals b.customerId into cus
                                       from b in cus.DefaultIfEmpty()
                                       join c in db.PaymentModes on a.paymentMode equals c.paymentCode into pay
                                       from c in pay.DefaultIfEmpty()
@@ -270,7 +264,7 @@ namespace Dflow_Inventory.ContentPage
                 using (db = new Inventory_DflowEntities())
                 {
                     var voucher = (from a in db.voucherHeaders
-                                   join b in db.Customer_Master on a.customerId equals b.customerId into cus
+                                   join b in db.CustomerMasters on a.customerId equals b.customerId into cus
                                    from b in cus.DefaultIfEmpty()
                                    where a.voucherId == _id
                                    select new
@@ -316,7 +310,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -347,7 +341,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -357,7 +351,7 @@ namespace Dflow_Inventory.ContentPage
             {
                 using (db = new Inventory_DflowEntities())
                 {
-                    var Vendors = db.Customer_Master
+                    var Vendors = db.CustomerMasters
                                     .Select(m => new
                                     {
                                         vendorId = m.customerId,
@@ -379,7 +373,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -405,7 +399,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -428,7 +422,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -448,7 +442,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -461,7 +455,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
         

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.cmbUserGroup = new System.Windows.Forms.ComboBox();
@@ -48,7 +48,6 @@
             this.TxtLoginId = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.Link_shorcut = new System.Windows.Forms.LinkLabel();
             this.DgvList = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -252,7 +251,6 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.Link_shorcut);
             this.tabPage2.Controls.Add(this.DgvList);
             this.tabPage2.Location = new System.Drawing.Point(4, 30);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -263,38 +261,27 @@
             this.tabPage2.Text = "View Users";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // Link_shorcut
-            // 
-            this.Link_shorcut.AutoSize = true;
-            this.Link_shorcut.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Link_shorcut.Location = new System.Drawing.Point(559, 4);
-            this.Link_shorcut.Name = "Link_shorcut";
-            this.Link_shorcut.Size = new System.Drawing.Size(92, 18);
-            this.Link_shorcut.TabIndex = 1;
-            this.Link_shorcut.TabStop = true;
-            this.Link_shorcut.Text = "Show Shortcuts";
-            // 
             // DgvList
             // 
             this.DgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DgvList.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgvList.DefaultCellStyle = dataGridViewCellStyle4;
-            this.DgvList.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.DgvList.Location = new System.Drawing.Point(3, 26);
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Gill Sans MT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvList.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DgvList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DgvList.Location = new System.Drawing.Point(3, 4);
             this.DgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DgvList.Name = "DgvList";
             this.DgvList.ReadOnly = true;
             this.DgvList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvList.Size = new System.Drawing.Size(648, 352);
+            this.DgvList.Size = new System.Drawing.Size(648, 374);
             this.DgvList.TabIndex = 0;
             this.DgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvList_CellDoubleClick);
             this.DgvList.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvList_RowPostPaint);
@@ -314,7 +301,6 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvList)).EndInit();
             this.ResumeLayout(false);
 
@@ -341,7 +327,6 @@
         private System.Windows.Forms.TextBox TxtLoginId;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.LinkLabel Link_shorcut;
         private System.Windows.Forms.DataGridView DgvList;
     }
 }

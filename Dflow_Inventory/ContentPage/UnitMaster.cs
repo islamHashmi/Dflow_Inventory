@@ -35,13 +35,13 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    Unit_Master unit = new Unit_Master();
+                    DataContext.UnitMaster unit = new DataContext.UnitMaster();
 
                     if (UnitId == 0)
                     {
                         db = new Inventory_DflowEntities();
 
-                        db.Unit_Master.Add(unit);
+                        db.UnitMasters.Add(unit);
 
                         unit.entryBy = SessionHelper.UserId;
                         unit.entryDate = DateTime.Now;
@@ -49,7 +49,7 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else
                     {
-                        unit = db.Unit_Master.FirstOrDefault(m => m.unitId == UnitId && m.active == true);
+                        unit = db.UnitMasters.FirstOrDefault(m => m.unitId == UnitId && m.active == true);
 
                         unit.updatedBy = SessionHelper.UserId;
                         unit.updatedDate = DateTime.Now;
@@ -67,7 +67,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -79,7 +79,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -89,7 +89,7 @@ namespace Dflow_Inventory.ContentPage
             {
                 using (db = new Inventory_DflowEntities())
                 {
-                    if (db.Unit_Master.FirstOrDefault(x => x.unitName.ToLower() == TxtUnitName.Text.Trim().ToLower()) != null)
+                    if (db.UnitMasters.FirstOrDefault(x => x.unitName.ToLower() == TxtUnitName.Text.Trim().ToLower()) != null)
                     {
                         e.Cancel = true;
                         MessageBox.Show(text: "Unit Name already exists.", caption: "Information", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information);
@@ -98,7 +98,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -133,7 +133,7 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    var unit = db.Unit_Master.FirstOrDefault(x => x.unitId == unitId);
+                    var unit = db.UnitMasters.FirstOrDefault(x => x.unitId == unitId);
 
                     if (unit != null)
                     {
@@ -156,7 +156,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                DgvList.DataSource = db.Unit_Master
+                DgvList.DataSource = db.UnitMasters
                         .Select(m =>
                         new
                         {
@@ -201,7 +201,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -224,11 +224,11 @@ namespace Dflow_Inventory.ContentPage
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            if (db.Unit_Master.FirstOrDefault(x => x.unitId == unitId) != null)
+                            if (db.UnitMasters.FirstOrDefault(x => x.unitId == unitId) != null)
                             {
-                                db.Unit_Master.FirstOrDefault(x => x.unitId == unitId).active = false;
-                                db.Unit_Master.FirstOrDefault(x => x.unitId == unitId).updatedBy = SessionHelper.UserId;
-                                db.Unit_Master.FirstOrDefault(x => x.unitId == unitId).updatedDate = DateTime.Now;
+                                db.UnitMasters.FirstOrDefault(x => x.unitId == unitId).active = false;
+                                db.UnitMasters.FirstOrDefault(x => x.unitId == unitId).updatedBy = SessionHelper.UserId;
+                                db.UnitMasters.FirstOrDefault(x => x.unitId == unitId).updatedDate = DateTime.Now;
 
                                 db.SaveChanges();
 
@@ -244,7 +244,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
     }

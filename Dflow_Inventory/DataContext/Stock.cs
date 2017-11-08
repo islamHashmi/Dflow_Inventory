@@ -16,8 +16,9 @@ namespace Dflow_Inventory.DataContext
     {
         public long stockId { get; set; }
         public System.DateTime stockDate { get; set; }
-        public Nullable<int> invoiceId { get; set; }
-        public Nullable<int> purchaseId { get; set; }
+        public Nullable<long> invoiceId { get; set; }
+        public Nullable<long> purchaseId { get; set; }
+        public Nullable<long> productionId { get; set; }
         public int itemId { get; set; }
         public string stockType { get; set; }
         public Nullable<decimal> openingStock { get; set; }
@@ -27,7 +28,7 @@ namespace Dflow_Inventory.DataContext
         public int entryBy { get; set; }
         public System.DateTime entryDate { get; set; }
     
-        public virtual Item_Master ItemMaster { get; set; }
+        public virtual ItemMaster ItemMaster { get; set; }
         public virtual StockType StockType1 { get; set; }
     }
 }

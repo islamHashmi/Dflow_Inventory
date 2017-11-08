@@ -4,45 +4,49 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="92d3f08cb58d40b788a9021cd9ef6f47" Name="Diagram1">
-        <EntityTypeShape EntityType="Inventory_DflowModel.Item_Master" Width="1.5" PointX="2.25" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.Unit_Master" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+      <Diagram DiagramId="c4bd526a47544b6e9affc236c382877f" Name="Diagram1">
+        <EntityTypeShape EntityType="Inventory_DflowModel.ApplicationParameter" Width="1.5" PointX="2.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.CustomerMaster" Width="1.5" PointX="0.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.customerType" Width="1.5" PointX="13.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.Designation" Width="1.5" PointX="10.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.DistributorMaster" Width="1.5" PointX="15.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.Employee" Width="1.5" PointX="13" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.ExpenseMaster" Width="1.5" PointX="5.75" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.FinancialYear" Width="1.5" PointX="15.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.Gender" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.InvoiceDetail" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.InvoiceHeader" Width="1.5" PointX="3" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.ItemMaster" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.maritalStatu" Width="1.5" PointX="15.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.PaymentMode" Width="1.5" PointX="10.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.productionDetail" Width="1.5" PointX="8.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.productionHeader" Width="1.5" PointX="6" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.PurchaseDetail" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.PurchaseHeader" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.Stock" Width="1.5" PointX="8.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.StockType" Width="1.5" PointX="6" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.SupplierMaster" Width="1.5" PointX="15.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.UnitMaster" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.UserGroup" Width="1.5" PointX="8.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.UserMaster" Width="1.5" PointX="11" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.VendorMaster" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.voucherHeader" Width="1.5" PointX="13" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Inventory_DflowModel.EmploymentStatu" Width="1.5" PointX="17.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_InvoiceHeader_CustomerMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_Employee_Designation" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_Employee_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_Table_1_InvoiceHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_Table_1_ItemMaster" ManuallyRouted="false" />
         <AssociationConnector Association="Inventory_DflowModel.FK_ItemMaster_UnitMaster" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.Customer_Master" Width="1.5" PointX="4" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.Supplier_Master" Width="1.5" PointX="5.75" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.Designation" Width="1.5" PointX="11" PointY="0.5" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.PurchaseDetail" Width="1.5" PointX="7.5" PointY="0.5" IsExpanded="true" />
-        <AssociationConnector Association="Inventory_DflowModel.FK_PurchaseDetail_ItemMaster" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.Employee" Width="1.5" PointX="9.25" PointY="0.5" />
-        <AssociationConnector Association="Inventory_DflowModel.FK_Employee_Designation" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.Employment_Status" Width="1.5" PointX="0.5" PointY="5.125" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.Distributor_Master" Width="1.5" PointX="2.25" PointY="5.25" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.Vendor_Master" Width="1.5" PointX="5.75" PointY="5.25" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.PurchaseHeader" Width="1.5" PointX="7.625" PointY="3.875" />
-        <AssociationConnector Association="Inventory_DflowModel.FK_PurchaseDetail_PurchaseHeader" />
-        <AssociationConnector Association="Inventory_DflowModel.FK_PurchaseHeader_VendorMaster" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.customerType" Width="1.5" PointX="4" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.Gender" Width="1.5" PointX="0.5" PointY="7" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.marital_Status" Width="1.5" PointX="0.5" PointY="3.5" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.InvoiceDetail" Width="1.5" PointX="7.625" PointY="8.375" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.InvoiceHeader" Width="1.5" PointX="5.75" PointY="10.125" />
-        <AssociationConnector Association="Inventory_DflowModel.FK_InvoiceHeader_CustomerMaster" />
-        <AssociationConnector Association="Inventory_DflowModel.FK_Table_1_InvoiceHeader" />
-        <AssociationConnector Association="Inventory_DflowModel.FK_Table_1_ItemMaster" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.User_Group" Width="1.5" PointX="0.5" PointY="8.875" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.User_Master" Width="1.5" PointX="2.25" PointY="10.125" />
-        <AssociationConnector Association="Inventory_DflowModel.FK_UserMaster_UserGroup" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.Expense_Master" Width="1.5" PointX="11" PointY="3.375" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.FinancialYear" Width="1.5" PointX="9.25" PointY="6.5" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.PaymentMode" Width="1.5" PointX="7.5" PointY="11.5" />
-        <AssociationConnector Association="Inventory_DflowModel.FK_Employee_Gender" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.voucherHeader" Width="1.5" PointX="9.25" PointY="9" />
-        <AssociationConnector Association="Inventory_DflowModel.FK_voucherHeader_PaymentMode" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.Application_Parameter" Width="1.5" PointX="4" PointY="11.375" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.Stock" Width="1.5" PointX="4" PointY="7.375" />
-        <EntityTypeShape EntityType="Inventory_DflowModel.StockType" Width="1.5" PointX="0.5" PointY="11.875" />
-        <AssociationConnector Association="Inventory_DflowModel.FK_Stock_ItemMaster" />
-        <AssociationConnector Association="Inventory_DflowModel.FK_Stock_StockType" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_productionDetail_ItemMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_PurchaseDetail_ItemMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_Stock_ItemMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_voucherHeader_PaymentMode" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_productionDetail_productionHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_PurchaseDetail_PurchaseHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_PurchaseHeader_VendorMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_Stock_StockType" ManuallyRouted="false" />
+        <AssociationConnector Association="Inventory_DflowModel.FK_UserMaster_UserGroup" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -24,6 +24,6 @@ namespace Dflow_Inventory.DataContext
         public Nullable<decimal> amount { get; set; }
     
         public virtual InvoiceHeader InvoiceHeader { get; set; }
-        public virtual Item_Master ItemMaster { get; set; }
+        public virtual ItemMaster ItemMaster { get; set; }
     }
 }

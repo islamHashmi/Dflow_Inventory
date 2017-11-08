@@ -22,7 +22,7 @@ namespace Dflow_Inventory.DataContext
         public Nullable<decimal> quantity { get; set; }
         public Nullable<decimal> amount { get; set; }
     
-        public virtual Item_Master ItemMaster { get; set; }
+        public virtual ItemMaster ItemMaster { get; set; }
         public virtual PurchaseHeader PurchaseHeader { get; set; }
     }
 }

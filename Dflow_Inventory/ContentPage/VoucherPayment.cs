@@ -34,7 +34,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var expenses = db.Expense_Master
+                var expenses = db.ExpenseMasters
                                 .Select(m => new
                                 {
                                     id = m.expenseHeadId,
@@ -115,7 +115,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -184,17 +184,17 @@ namespace Dflow_Inventory.ContentPage
 
                             scope.Complete();
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
                             scope.Dispose();
-                            throw;
+                            MessageBox.Show(ex.Message);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -203,7 +203,7 @@ namespace Dflow_Inventory.ContentPage
             using (db = new Inventory_DflowEntities())
             {
                 DgvList.DataSource = (from a in db.voucherHeaders
-                                      join b in db.Expense_Master on a.expenseId equals b.expenseHeadId into exp
+                                      join b in db.ExpenseMasters on a.expenseId equals b.expenseHeadId into exp
                                       from b in exp.DefaultIfEmpty()
                                       join e in db.Employees on a.employeeId equals e.employeeId into emp
                                       from e in emp.DefaultIfEmpty()
@@ -273,7 +273,7 @@ namespace Dflow_Inventory.ContentPage
                 using (db = new Inventory_DflowEntities())
                 {
                     var voucher = (from a in db.voucherHeaders
-                                   join b in db.Customer_Master on a.customerId equals b.customerId into cus
+                                   join b in db.CustomerMasters on a.customerId equals b.customerId into cus
                                    from b in cus.DefaultIfEmpty()
                                    where a.voucherId == _id
                                    select new
@@ -319,7 +319,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -350,7 +350,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -370,7 +370,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -389,7 +389,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 

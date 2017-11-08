@@ -36,11 +36,11 @@ namespace Dflow_Inventory.ContentPage
                 CmbSex.ValueMember = "genderCode";
                 CmbSex.DisplayMember = "genderDescription";
 
-                CmbMaritalStatus.DataSource = db.marital_Status.ToList();
+                CmbMaritalStatus.DataSource = db.maritalStatus.ToList();
                 CmbMaritalStatus.ValueMember = "maritalStatusCode";
                 CmbMaritalStatus.DisplayMember = "maritalStatusDesc";
 
-                CmbEmpStatus.DataSource = db.Employment_Status.ToList();
+                CmbEmpStatus.DataSource = db.EmploymentStatus.ToList();
                 CmbEmpStatus.ValueMember = "empStatusCode";
                 CmbEmpStatus.DisplayMember = "empStatusDesc";
 
@@ -77,7 +77,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -179,7 +179,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -191,7 +191,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -240,7 +240,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -272,7 +272,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -285,9 +285,9 @@ namespace Dflow_Inventory.ContentPage
                                       from d in des.DefaultIfEmpty()
                                       join g in db.Genders on e.sex equals g.genderCode into gm
                                       from g in gm.DefaultIfEmpty()
-                                      join m in db.marital_Status on e.maritalStatus equals m.maritalStatusCode into ms
+                                      join m in db.maritalStatus on e.maritalStatus equals m.maritalStatusCode into ms
                                       from m in ms.DefaultIfEmpty()
-                                      join em in db.Employment_Status on e.empStatus equals em.empStatusCode into ems
+                                      join em in db.EmploymentStatus on e.empStatus equals em.empStatusCode into ems
                                       from em in ems.DefaultIfEmpty()
                                       where e.active == true
                                       select new
@@ -424,7 +424,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
     }

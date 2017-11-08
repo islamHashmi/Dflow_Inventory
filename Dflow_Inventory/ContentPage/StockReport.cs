@@ -30,7 +30,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var items = db.Item_Master
+                var items = db.ItemMasters
                             .Select(m => new
                             {
                                 itemId = m.itemId,
@@ -84,7 +84,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -97,7 +97,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
     }

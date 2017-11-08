@@ -45,7 +45,7 @@ namespace Dflow_Inventory.ContentPage
             {
                 int _customerCode = 0;
 
-                int.TryParse(db.Customer_Master.Max(m => m.customerCode), out _customerCode);
+                int.TryParse(db.CustomerMasters.Max(m => m.customerCode), out _customerCode);
 
                 TxtCustomerCode.Text = string.Format("{0}", _customerCode + 1);
             }
@@ -66,7 +66,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -101,11 +101,11 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    Customer_Master customer = new Customer_Master();
+                    DataContext.CustomerMaster customer = new DataContext.CustomerMaster();
 
                     if (CustomerId == 0)
                     {
-                        db.Customer_Master.Add(customer);
+                        db.CustomerMasters.Add(customer);
 
                         customer.customerCode = TxtCustomerCode.Text.Trim();
                         customer.entryBy = SessionHelper.UserId;
@@ -114,7 +114,7 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else
                     {
-                        customer = db.Customer_Master.FirstOrDefault(m => m.customerId == CustomerId && m.active == true);
+                        customer = db.CustomerMasters.FirstOrDefault(m => m.customerId == CustomerId && m.active == true);
 
                         customer.updatedBy = SessionHelper.UserId;
                         customer.updatedDate = DateTime.Now;
@@ -142,7 +142,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -154,7 +154,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -168,7 +168,7 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    var sm = db.Customer_Master.FirstOrDefault(x => x.customerId == customerId);
+                    var sm = db.CustomerMasters.FirstOrDefault(x => x.customerId == customerId);
 
                     if (sm != null)
                     {
@@ -200,7 +200,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -220,9 +220,9 @@ namespace Dflow_Inventory.ContentPage
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            if (db.Customer_Master.FirstOrDefault(x => x.customerId == customerId) != null)
+                            if (db.CustomerMasters.FirstOrDefault(x => x.customerId == customerId) != null)
                             {
-                                db.Customer_Master.FirstOrDefault(x => x.customerId == customerId).active = false;
+                                db.CustomerMasters.FirstOrDefault(x => x.customerId == customerId).active = false;
 
                                 db.SaveChanges();
                             }
@@ -232,7 +232,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -240,7 +240,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                DgvList.DataSource = db.Customer_Master
+                DgvList.DataSource = db.CustomerMasters
                                 .Select(m => new
                                 {
                                     customerId = m.customerId,
@@ -338,7 +338,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
     }

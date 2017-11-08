@@ -32,7 +32,7 @@ namespace Dflow_Inventory.ContentPage
                 {
                     using (db = new Inventory_DflowEntities())
                     {
-                        if (db.Expense_Master.FirstOrDefault(m => m.expenseName == TxtExpenseName.Text.Trim()) != null)
+                        if (db.ExpenseMasters.FirstOrDefault(m => m.expenseName == TxtExpenseName.Text.Trim()) != null)
                         {
                             MessageBox.Show("Expense Name already exists", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             e.Cancel = true;
@@ -42,7 +42,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -59,18 +59,18 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    Expense_Master em = new Expense_Master();
+                    DataContext.ExpenseMaster em = new DataContext.ExpenseMaster();
 
                     if (ExpenseHeadId == 0)
                     {
-                        db.Expense_Master.Add(em);
+                        db.ExpenseMasters.Add(em);
                         em.entryBy = SessionHelper.UserId;
                         em.entryDate = DateTime.Now;
                         em.active = true;
                     }
                     else
                     {
-                        em = db.Expense_Master.FirstOrDefault(m => m.expenseHeadId == ExpenseHeadId);
+                        em = db.ExpenseMasters.FirstOrDefault(m => m.expenseHeadId == ExpenseHeadId);
                         em.updatedBy = SessionHelper.UserId;
                         em.updatedDate = DateTime.Now;
                     }
@@ -86,7 +86,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -98,7 +98,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -113,7 +113,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                DgvList.DataSource = (from a in db.Expense_Master
+                DgvList.DataSource = (from a in db.ExpenseMasters
                                       where a.active == true
                                       select new
                                       {
@@ -170,7 +170,7 @@ namespace Dflow_Inventory.ContentPage
                 {
                     using (db = new Inventory_DflowEntities())
                     {
-                        var expense = db.Expense_Master.FirstOrDefault(m => m.expenseHeadId == _id);
+                        var expense = db.ExpenseMasters.FirstOrDefault(m => m.expenseHeadId == _id);
 
                         if (expense != null)
                         {
@@ -191,7 +191,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -214,7 +214,7 @@ namespace Dflow_Inventory.ContentPage
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            var expense = db.Expense_Master.FirstOrDefault(m => m.expenseHeadId == _id);
+                            var expense = db.ExpenseMasters.FirstOrDefault(m => m.expenseHeadId == _id);
 
                             if (expense != null)
                             {
@@ -230,7 +230,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
     }

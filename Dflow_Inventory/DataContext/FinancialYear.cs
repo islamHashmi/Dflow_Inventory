@@ -16,9 +16,9 @@ namespace Dflow_Inventory.DataContext
     {
         public string finYear { get; set; }
         public string finYearDescription { get; set; }
-        public int entryBy { get; set; }
-        public System.DateTime entryDate { get; set; }
         public System.DateTime startDate { get; set; }
         public System.DateTime endDate { get; set; }
+        public int entryBy { get; set; }
+        public System.DateTime entryDate { get; set; }
     }
 }

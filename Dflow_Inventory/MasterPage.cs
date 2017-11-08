@@ -13,7 +13,7 @@ namespace Dflow_Inventory
         {
             InitializeComponent();
 
-            Get_StatusStrip();
+            Get_StatusStrip();            
         }
 
         private void Get_StatusStrip()
@@ -57,11 +57,11 @@ namespace Dflow_Inventory
         {
             try
             {
-                Show_Form(new UnitMaster());
+                Show_Form(new ContentPage.UnitMaster());
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -69,11 +69,11 @@ namespace Dflow_Inventory
         {
             try
             {
-                Show_Form(new ItemMaster());
+                Show_Form(new ContentPage.ItemMaster());
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -81,26 +81,14 @@ namespace Dflow_Inventory
         {
             try
             {
-                Show_Form(new CustomerMaster());
+                Show_Form(new ContentPage.CustomerMaster());
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
-
-        private void VendorsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Show_Form(new VendorMaster());
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
+        
         private void DesignationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -109,7 +97,7 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -121,7 +109,7 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -129,11 +117,11 @@ namespace Dflow_Inventory
         {
             try
             {
-                Show_Form(new ExpenseMaster());
+                Show_Form(new ContentPage.ExpenseMaster());
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -145,7 +133,7 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -157,7 +145,7 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -169,7 +157,7 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -181,7 +169,7 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -189,11 +177,11 @@ namespace Dflow_Inventory
         {
             try
             {
-                Show_Form(new ApplicationParameter());
+                Show_Form(new ContentPage.ApplicationParameter());
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -201,11 +189,11 @@ namespace Dflow_Inventory
         {
             try
             {
-                Show_Form(new UserMaster());
+                Show_Form(new ContentPage.UserMaster());
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -217,7 +205,7 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -237,7 +225,7 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -259,7 +247,7 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -271,7 +259,7 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -283,7 +271,7 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -295,7 +283,7 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -307,7 +295,19 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void productionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new Production());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

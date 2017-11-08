@@ -202,6 +202,7 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
     <Property Name="sellingPrice" Type="decimal" Precision="10" Scale="2" />
     <Property Name="openingStock" Type="decimal" Precision="10" Scale="2" />
     <Property Name="currentStock" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="rawMaterial" Type="bit" Nullable="false" />
     <Property Name="active" Type="bit" Nullable="false" />
     <Property Name="entryBy" Type="int" Nullable="false" />
     <Property Name="entryDate" Type="datetime" Nullable="false" />
@@ -221,6 +222,30 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
     </Key>
     <Property Name="paymentCode" Type="char" MaxLength="2" Nullable="false" />
     <Property Name="paymentDescription" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="productionDetail">
+    <Key>
+      <PropertyRef Name="productionDetailId" />
+    </Key>
+    <Property Name="productionDetailId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="productionId" Type="bigint" Nullable="false" />
+    <Property Name="itemId" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="productionHeader">
+    <Key>
+      <PropertyRef Name="productionId" />
+    </Key>
+    <Property Name="productionId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="productionDate" Type="date" Nullable="false" />
+    <Property Name="batchNo" Type="varchar" MaxLength="50" />
+    <Property Name="totalQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="remark" Type="varchar" MaxLength="500" />
+    <Property Name="finYear" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="entryBy" Type="int" Nullable="false" />
+    <Property Name="entryDate" Type="datetime" Nullable="false" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedDate" Type="datetime" />
   </EntityType>
   <EntityType Name="PurchaseDetail">
     <Key>
@@ -259,8 +284,9 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
     </Key>
     <Property Name="stockId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="stockDate" Type="date" Nullable="false" />
-    <Property Name="invoiceId" Type="int" />
-    <Property Name="purchaseId" Type="int" />
+    <Property Name="invoiceId" Type="bigint" />
+    <Property Name="purchaseId" Type="bigint" />
+    <Property Name="productionId" Type="bigint" />
     <Property Name="itemId" Type="int" Nullable="false" />
     <Property Name="stockType" Type="char" MaxLength="1" Nullable="false" />
     <Property Name="openingStock" Type="decimal" Precision="18" Scale="2" />
@@ -438,6 +464,30 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_productionDetail_ItemMaster">
+    <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="1" />
+    <End Role="productionDetail" Type="Self.productionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItemMaster">
+        <PropertyRef Name="itemId" />
+      </Principal>
+      <Dependent Role="productionDetail">
+        <PropertyRef Name="itemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_productionDetail_productionHeader">
+    <End Role="productionHeader" Type="Self.productionHeader" Multiplicity="1" />
+    <End Role="productionDetail" Type="Self.productionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="productionHeader">
+        <PropertyRef Name="productionId" />
+      </Principal>
+      <Dependent Role="productionDetail">
+        <PropertyRef Name="productionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PurchaseDetail_ItemMaster">
     <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="1" />
     <End Role="PurchaseDetail" Type="Self.PurchaseDetail" Multiplicity="*" />
@@ -579,8 +629,9 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
     <Parameter Name="itemId" Type="int" Mode="In" />
     <Parameter Name="stockType" Type="char" Mode="In" />
     <Parameter Name="quantity" Type="decimal" Mode="In" />
-    <Parameter Name="invoiceId" Type="int" Mode="In" />
-    <Parameter Name="purchaseId" Type="int" Mode="In" />
+    <Parameter Name="invoiceId" Type="bigint" Mode="In" />
+    <Parameter Name="purchaseId" Type="bigint" Mode="In" />
+    <Parameter Name="productionId" Type="bigint" Mode="In" />
     <Parameter Name="cmdType" Type="char" Mode="In" />
     <Parameter Name="entryBy" Type="int" Mode="In" />
   </Function>
@@ -614,6 +665,8 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
     <EntitySet Name="ItemMaster" EntityType="Self.ItemMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="maritalStatus" EntityType="Self.maritalStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PaymentMode" EntityType="Self.PaymentMode" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="productionDetail" EntityType="Self.productionDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="productionHeader" EntityType="Self.productionHeader" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PurchaseDetail" EntityType="Self.PurchaseDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PurchaseHeader" EntityType="Self.PurchaseHeader" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
@@ -646,6 +699,14 @@ FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
     <AssociationSet Name="FK_ItemMaster_UnitMaster" Association="Self.FK_ItemMaster_UnitMaster">
       <End Role="UnitMaster" EntitySet="UnitMaster" />
       <End Role="ItemMaster" EntitySet="ItemMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_productionDetail_ItemMaster" Association="Self.FK_productionDetail_ItemMaster">
+      <End Role="ItemMaster" EntitySet="ItemMaster" />
+      <End Role="productionDetail" EntitySet="productionDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_productionDetail_productionHeader" Association="Self.FK_productionDetail_productionHeader">
+      <End Role="productionHeader" EntitySet="productionHeader" />
+      <End Role="productionDetail" EntitySet="productionDetail" />
     </AssociationSet>
     <AssociationSet Name="FK_PurchaseDetail_ItemMaster" Association="Self.FK_PurchaseDetail_ItemMaster">
       <End Role="ItemMaster" EntitySet="ItemMaster" />

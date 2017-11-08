@@ -35,7 +35,6 @@
             this.unitsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vendorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.designationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.employeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,6 +48,7 @@
             this.stockRegisterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.voucherReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.securityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applicationParameterToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.applicationParameterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +58,7 @@
             this.toolStripFinYear = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripLoginUser = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.voucherReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.productionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -69,6 +69,7 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mastersToolStripMenuItem,
             this.purchaseToolStripMenuItem,
+            this.productionToolStripMenuItem,
             this.salesToolStripMenuItem,
             this.voucherToolStripMenuItem,
             this.reportsToolStripMenuItem,
@@ -85,7 +86,6 @@
             this.unitsToolStripMenuItem,
             this.itemsToolStripMenuItem,
             this.customersToolStripMenuItem,
-            this.vendorsToolStripMenuItem,
             this.designationsToolStripMenuItem,
             this.employeesToolStripMenuItem,
             this.expensesToolStripMenuItem});
@@ -116,14 +116,6 @@
             this.customersToolStripMenuItem.Size = new System.Drawing.Size(164, 28);
             this.customersToolStripMenuItem.Text = "Customers";
             this.customersToolStripMenuItem.Click += new System.EventHandler(this.CustomersToolStripMenuItem_Click);
-            // 
-            // vendorsToolStripMenuItem
-            // 
-            this.vendorsToolStripMenuItem.Image = global::Dflow_Inventory.Properties.Resources.vendor_icon;
-            this.vendorsToolStripMenuItem.Name = "vendorsToolStripMenuItem";
-            this.vendorsToolStripMenuItem.Size = new System.Drawing.Size(164, 28);
-            this.vendorsToolStripMenuItem.Text = "Vendors";
-            this.vendorsToolStripMenuItem.Click += new System.EventHandler(this.VendorsToolStripMenuItem_Click);
             // 
             // designationsToolStripMenuItem
             // 
@@ -226,6 +218,13 @@
             this.purchaseReportToolStripMenuItem.Text = "Purchase Report";
             this.purchaseReportToolStripMenuItem.Click += new System.EventHandler(this.purchaseReportToolStripMenuItem_Click);
             // 
+            // voucherReportToolStripMenuItem
+            // 
+            this.voucherReportToolStripMenuItem.Name = "voucherReportToolStripMenuItem";
+            this.voucherReportToolStripMenuItem.Size = new System.Drawing.Size(188, 28);
+            this.voucherReportToolStripMenuItem.Text = "Voucher Report";
+            this.voucherReportToolStripMenuItem.Click += new System.EventHandler(this.voucherReportToolStripMenuItem_Click);
+            // 
             // securityToolStripMenuItem
             // 
             this.securityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -289,12 +288,12 @@
             this.toolStripLoginUser.Size = new System.Drawing.Size(118, 17);
             this.toolStripLoginUser.Text = "toolStripStatusLabel1";
             // 
-            // voucherReportToolStripMenuItem
+            // productionToolStripMenuItem
             // 
-            this.voucherReportToolStripMenuItem.Name = "voucherReportToolStripMenuItem";
-            this.voucherReportToolStripMenuItem.Size = new System.Drawing.Size(188, 28);
-            this.voucherReportToolStripMenuItem.Text = "Voucher Report";
-            this.voucherReportToolStripMenuItem.Click += new System.EventHandler(this.voucherReportToolStripMenuItem_Click);
+            this.productionToolStripMenuItem.Name = "productionToolStripMenuItem";
+            this.productionToolStripMenuItem.Size = new System.Drawing.Size(94, 27);
+            this.productionToolStripMenuItem.Text = "Production";
+            this.productionToolStripMenuItem.Click += new System.EventHandler(this.productionToolStripMenuItem_Click);
             // 
             // MasterPage
             // 
@@ -307,7 +306,7 @@
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MasterPage";
-            this.Text = "MasterPage";
+            this.Text = "D World";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MasterPage_FormClosing);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
@@ -328,7 +327,6 @@
         private System.Windows.Forms.ToolStripMenuItem unitsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem itemsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem vendorsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem designationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem employeesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem expensesToolStripMenuItem;
@@ -349,6 +347,7 @@
         private System.Windows.Forms.ToolStripMenuItem purchaseReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dailyReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem voucherReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem productionToolStripMenuItem;
     }
 }
 

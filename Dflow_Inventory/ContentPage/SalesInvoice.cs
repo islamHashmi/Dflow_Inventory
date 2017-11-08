@@ -56,9 +56,9 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    if (db.Item_Master.Where(x => x.active == true) != null)
+                    if (db.ItemMasters.Where(x => x.active == true) != null)
                     {
-                        foreach (var item in db.Item_Master.Where(x => x.active == true))
+                        foreach (var item in db.ItemMasters.Where(x => x.active == true))
                         {
                             string name = item.itemName;
 
@@ -143,8 +143,8 @@ namespace Dflow_Inventory.ContentPage
 
                     using (db = new Inventory_DflowEntities())
                     {
-                        var item = (from m in db.Item_Master
-                                    join b in db.Unit_Master on m.unitId equals b.unitId into unit
+                        var item = (from m in db.ItemMasters
+                                    join b in db.UnitMasters on m.unitId equals b.unitId into unit
                                     from b in unit.DefaultIfEmpty()
                                     where m.itemName == itemCode
                                     select new
@@ -179,7 +179,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -241,7 +241,7 @@ namespace Dflow_Inventory.ContentPage
             {
                 using (db = new Inventory_DflowEntities())
                 {
-                    if (db.Customer_Master
+                    if (db.CustomerMasters
                                     .Select(m => new
                                     {
                                         vendorId = m.customerId,
@@ -251,7 +251,7 @@ namespace Dflow_Inventory.ContentPage
                                     .Where(m => m.active == true && m.vendorName.Contains(TxtCustomerName.Text.Trim()))
                                     .ToList() != null)
                     {
-                        LstCustomer.DataSource = db.Customer_Master
+                        LstCustomer.DataSource = db.CustomerMasters
                                     .Select(m => new
                                     {
                                         vendorId = m.customerId,
@@ -270,7 +270,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -296,7 +296,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -319,7 +319,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -339,7 +339,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -352,7 +352,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -371,7 +371,7 @@ namespace Dflow_Inventory.ContentPage
             using (db = new Inventory_DflowEntities())
             {
                 DgvList.DataSource = (from m in db.InvoiceHeaders
-                                      join v in db.Customer_Master on m.customerId equals v.customerId into ven
+                                      join v in db.CustomerMasters on m.customerId equals v.customerId into ven
                                       from v in ven.DefaultIfEmpty()
                                       select new
                                       {
@@ -567,7 +567,8 @@ namespace Dflow_Inventory.ContentPage
                                         id.quantity = _quantity == 0 ? null : (decimal?)_quantity;
                                         id.amount = _amount == 0 ? null : (decimal?)_amount;
 
-                                        db.sp_Stock_InsertUpdate(CommanMethods.ConvertDate(dtpDate.Text), _itemId, "S", _quantity == 0 ? null : (decimal?)_quantity, _id, null, cmdType, SessionHelper.UserId);
+                                        db.sp_Stock_InsertUpdate(CommanMethods.ConvertDate(dtpDate.Text), _itemId, "S",
+                                                                    _quantity == 0 ? null : (decimal?)_quantity, _id, null, null, cmdType, SessionHelper.UserId);
                                     }
                                 }
 
@@ -579,7 +580,7 @@ namespace Dflow_Inventory.ContentPage
                         catch (Exception ex)
                         {
                             scope.Dispose();
-                            throw;
+                            MessageBox.Show(ex.Message);
                         }
                     }
 
@@ -590,7 +591,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -602,7 +603,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -617,7 +618,7 @@ namespace Dflow_Inventory.ContentPage
                     int.TryParse(Convert.ToString(DgvList["invoiceId", RowIndex].Value), out int _id);
 
                     var ih = (from m in db.InvoiceHeaders
-                              join v in db.Customer_Master on m.customerId equals v.customerId into ven
+                              join v in db.CustomerMasters on m.customerId equals v.customerId into ven
                               from v in ven.DefaultIfEmpty()
                               where m.invoiceId == _id
                               select new
@@ -639,7 +640,7 @@ namespace Dflow_Inventory.ContentPage
                               }).SingleOrDefault();
 
                     var pd = (from m in db.InvoiceDetails
-                              join i in db.Item_Master on m.itemId equals i.itemId into item
+                              join i in db.ItemMasters on m.itemId equals i.itemId into item
                               from i in item.DefaultIfEmpty()
                               where m.invoiceId == _id
                               select new
@@ -703,7 +704,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -754,10 +755,10 @@ namespace Dflow_Inventory.ContentPage
                                     scope.Complete();
                                 }
                             }
-                            catch (Exception)
+                            catch (Exception ex)
                             {
                                 scope.Dispose();
-                                throw;
+                                MessageBox.Show(ex.Message);
                             }
                         }
 
@@ -767,7 +768,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -802,7 +803,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -816,7 +817,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -875,10 +876,10 @@ namespace Dflow_Inventory.ContentPage
 
                                     scope.Complete();
                                 }
-                                catch (Exception)
+                                catch (Exception ex)
                                 {
                                     scope.Dispose();
-                                    throw;
+                                    MessageBox.Show(ex.Message);
                                 }
                             }
                         }
@@ -887,7 +888,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -899,7 +900,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -913,7 +914,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -925,7 +926,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -939,7 +940,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -956,7 +957,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -982,7 +983,7 @@ namespace Dflow_Inventory.ContentPage
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            if (db.Item_Master.FirstOrDefault(m => m.itemName == itemName) == null)
+                            if (db.ItemMasters.FirstOrDefault(m => m.itemName == itemName) == null)
                             {
                                 MessageBox.Show("Not found in master Item Name : " + Convert.ToString(e.FormattedValue), "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 e.Cancel = true;
@@ -998,11 +999,11 @@ namespace Dflow_Inventory.ContentPage
 
                     using (db = new Inventory_DflowEntities())
                     {
-                        if (db.Item_Master.FirstOrDefault(m => m.itemId == _itemId) != null)
+                        if (db.ItemMasters.FirstOrDefault(m => m.itemId == _itemId) != null)
                         {
-                            if (db.Item_Master.FirstOrDefault(m => m.itemId == _itemId).currentStock < _quantity)
+                            if (db.ItemMasters.FirstOrDefault(m => m.itemId == _itemId).currentStock < _quantity)
                             {
-                                MessageBox.Show("Entered quantity (" + _quantity + ") exceeds stock quantity (" + db.Item_Master.FirstOrDefault(m => m.itemId == _itemId).currentStock + ")", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("Entered quantity (" + _quantity + ") exceeds stock quantity (" + db.ItemMasters.FirstOrDefault(m => m.itemId == _itemId).currentStock + ")", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 e.Cancel = true;
                             }
                         }
@@ -1011,7 +1012,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -1044,7 +1045,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
     }

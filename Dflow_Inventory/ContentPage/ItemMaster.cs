@@ -44,14 +44,14 @@ namespace Dflow_Inventory.ContentPage
                     {
                         using (db = new Inventory_DflowEntities())
                         {
-                            Item_Master item = new Item_Master();
+                            DataContext.ItemMaster item = new DataContext.ItemMaster();
 
                             decimal.TryParse(TxtPrice.Text, out decimal _sellingPrice);
                             decimal.TryParse(TxtOpeningStk.Text, out decimal _openStock);
 
                             if (ItemId == 0)
                             {
-                                db.Item_Master.Add(item);
+                                db.ItemMasters.Add(item);
 
                                 item.itemCode = TxtItemCode.Text.Trim();
                                 item.entryBy = SessionHelper.UserId;
@@ -61,7 +61,7 @@ namespace Dflow_Inventory.ContentPage
                             }
                             else
                             {
-                                item = db.Item_Master.FirstOrDefault(m => m.itemId == ItemId && m.active == true);
+                                item = db.ItemMasters.FirstOrDefault(m => m.itemId == ItemId && m.active == true);
 
                                 item.updatedBy = SessionHelper.UserId;
                                 item.updatedDate = DateTime.Now;
@@ -72,6 +72,7 @@ namespace Dflow_Inventory.ContentPage
                             item.unitId = Convert.ToString(CmbUnit.SelectedValue) == "0" ? null : (int?)Convert.ToInt32(CmbUnit.SelectedValue);
                             item.sellingPrice = _sellingPrice == 0 ? null : (decimal?)_sellingPrice;
                             item.openingStock = _openStock == 0 ? null : (decimal?)_openStock;
+                            item.rawMaterial = chkRawMaterial.Checked;
 
                             db.SaveChanges();
 
@@ -108,10 +109,10 @@ namespace Dflow_Inventory.ContentPage
                             scope.Complete();
                         }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
                         scope.Dispose();
-                        throw;
+                        MessageBox.Show(ex.Message);
                     }
                 }
 
@@ -121,7 +122,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -148,7 +149,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -156,7 +157,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                var units = db.Unit_Master
+                var units = db.UnitMasters
                             .Select(m => new
                             {
                                 unitName = m.unitName + " (" + m.unitCode + ")",
@@ -182,7 +183,7 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    var item = db.Item_Master.FirstOrDefault(x => x.itemId == itemId);
+                    var item = db.ItemMasters.FirstOrDefault(x => x.itemId == itemId);
 
                     if (item != null)
                     {
@@ -193,6 +194,7 @@ namespace Dflow_Inventory.ContentPage
                         TxtPrice.Text = Convert.ToString(item.sellingPrice);
                         TxtOpeningStk.Text = Convert.ToString(item.openingStock);
                         CmbUnit.SelectedValue = item.unitId ?? 0;
+                        chkRawMaterial.Checked = item.rawMaterial;
 
                         TxtOpeningStk.ReadOnly = true;
                     }
@@ -210,7 +212,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -218,7 +220,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                int.TryParse(db.Item_Master.Max(m => m.itemCode), out int _itemCode);
+                int.TryParse(db.ItemMasters.Max(m => m.itemCode), out int _itemCode);
 
                 TxtItemCode.Text = $"{_itemCode + 1}";
             }
@@ -228,8 +230,8 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                DgvList.DataSource = (from m in db.Item_Master
-                                      join b in db.Unit_Master on m.unitId equals b.unitId into unit
+                DgvList.DataSource = (from m in db.ItemMasters
+                                      join b in db.UnitMasters on m.unitId equals b.unitId into unit
                                       from b in unit.DefaultIfEmpty()
                                       where m.active == true
                                       select new
@@ -294,9 +296,9 @@ namespace Dflow_Inventory.ContentPage
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            if (db.Item_Master.FirstOrDefault(x => x.itemId == itemId) != null)
+                            if (db.ItemMasters.FirstOrDefault(x => x.itemId == itemId) != null)
                             {
-                                db.Item_Master.FirstOrDefault(x => x.itemId == itemId).active = false;
+                                db.ItemMasters.FirstOrDefault(x => x.itemId == itemId).active = false;
 
                                 db.SaveChanges();
 
@@ -312,7 +314,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -355,7 +357,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -370,7 +372,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
     }

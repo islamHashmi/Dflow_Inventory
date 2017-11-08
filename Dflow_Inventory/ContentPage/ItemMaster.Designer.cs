@@ -31,6 +31,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.chkRawMaterial = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.TxtDescription = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.BtnCancel = new System.Windows.Forms.Button();
@@ -46,9 +49,7 @@
             this.TxtItemCode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.Link_shorcut = new System.Windows.Forms.LinkLabel();
             this.DgvList = new System.Windows.Forms.DataGridView();
-            this.label7 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -71,6 +72,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.chkRawMaterial);
+            this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.TxtDescription);
             this.tabPage1.Controls.Add(this.label6);
@@ -95,6 +98,34 @@
             this.tabPage1.Text = "Add Item";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // chkRawMaterial
+            // 
+            this.chkRawMaterial.AutoSize = true;
+            this.chkRawMaterial.Location = new System.Drawing.Point(201, 299);
+            this.chkRawMaterial.Name = "chkRawMaterial";
+            this.chkRawMaterial.Size = new System.Drawing.Size(15, 14);
+            this.chkRawMaterial.TabIndex = 15;
+            this.chkRawMaterial.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(53, 298);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(78, 18);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "Raw Material";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label7.Location = new System.Drawing.Point(363, 269);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(266, 18);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "(Opening stock can only be inserted only once)";
+            // 
             // TxtDescription
             // 
             this.TxtDescription.Location = new System.Drawing.Point(201, 106);
@@ -118,7 +149,7 @@
             this.BtnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(87)))), ((int)(((byte)(51)))));
             this.BtnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
             this.BtnCancel.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCancel.Location = new System.Drawing.Point(279, 322);
+            this.BtnCancel.Location = new System.Drawing.Point(279, 343);
             this.BtnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(78, 30);
@@ -132,7 +163,7 @@
             this.BtnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
             this.BtnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(204)))), ((int)(((byte)(0)))));
             this.BtnSave.Font = new System.Drawing.Font("Gill Sans MT", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSave.Location = new System.Drawing.Point(201, 322);
+            this.BtnSave.Location = new System.Drawing.Point(201, 343);
             this.BtnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(72, 30);
@@ -232,27 +263,15 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.Link_shorcut);
             this.tabPage2.Controls.Add(this.DgvList);
             this.tabPage2.Location = new System.Drawing.Point(4, 30);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(628, 413);
+            this.tabPage2.Size = new System.Drawing.Size(642, 413);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "View Items";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // Link_shorcut
-            // 
-            this.Link_shorcut.AutoSize = true;
-            this.Link_shorcut.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Link_shorcut.Location = new System.Drawing.Point(533, 4);
-            this.Link_shorcut.Name = "Link_shorcut";
-            this.Link_shorcut.Size = new System.Drawing.Size(92, 18);
-            this.Link_shorcut.TabIndex = 2;
-            this.Link_shorcut.TabStop = true;
-            this.Link_shorcut.Text = "Show Shortcuts";
             // 
             // DgvList
             // 
@@ -267,26 +286,16 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DgvList.DefaultCellStyle = dataGridViewCellStyle1;
-            this.DgvList.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.DgvList.Location = new System.Drawing.Point(3, 26);
+            this.DgvList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DgvList.Location = new System.Drawing.Point(3, 4);
             this.DgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DgvList.Name = "DgvList";
             this.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvList.Size = new System.Drawing.Size(622, 383);
+            this.DgvList.Size = new System.Drawing.Size(636, 405);
             this.DgvList.TabIndex = 0;
             this.DgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvList_CellDoubleClick);
             this.DgvList.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvList_RowPostPaint);
             this.DgvList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvList_KeyDown);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label7.Location = new System.Drawing.Point(363, 269);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(266, 18);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "(Opening stock can only be inserted only once)";
             // 
             // ItemMaster
             // 
@@ -302,7 +311,6 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvList)).EndInit();
             this.ResumeLayout(false);
 
@@ -326,9 +334,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView DgvList;
-        private System.Windows.Forms.LinkLabel Link_shorcut;
         private System.Windows.Forms.TextBox TxtDescription;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.CheckBox chkRawMaterial;
+        private System.Windows.Forms.Label label8;
     }
 }

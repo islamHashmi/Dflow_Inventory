@@ -15,15 +15,15 @@ namespace Dflow_Inventory.DataContext
     {
         public long stockId { get; set; }
         public System.DateTime stockDate { get; set; }
-        public Nullable<int> invoiceId { get; set; }
-        public Nullable<int> purchaseId { get; set; }
+        public Nullable<long> invoiceId { get; set; }
+        public Nullable<long> purchaseId { get; set; }
         public string itemCode { get; set; }
         public string itemName { get; set; }
         public string stockTypeDescription { get; set; }
         public Nullable<decimal> openingStock { get; set; }
         public Nullable<decimal> quantity { get; set; }
         public Nullable<decimal> closingStock { get; set; }
-        public string remark { get; set; }
         public string narration { get; set; }
+        public string remark { get; set; }
     }
 }

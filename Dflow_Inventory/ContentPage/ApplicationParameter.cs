@@ -22,7 +22,7 @@ namespace Dflow_Inventory.ContentPage
                 {
                     Clear_Fields();
 
-                    var app = db.Application_Parameter.FirstOrDefault();
+                    var app = db.ApplicationParameters.FirstOrDefault();
 
                     if(app != null)
                     {
@@ -42,7 +42,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -65,16 +65,16 @@ namespace Dflow_Inventory.ContentPage
         {
             try
             {
-                Application_Parameter app = new Application_Parameter();
+                DataContext.ApplicationParameter app = new DataContext.ApplicationParameter();
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    app = db.Application_Parameter.FirstOrDefault();
+                    app = db.ApplicationParameters.FirstOrDefault();
 
                     if (app == null)
                     {
-                        app = new Application_Parameter();
-                        db.Application_Parameter.Add(app);
+                        app = new DataContext.ApplicationParameter();
+                        db.ApplicationParameters.Add(app);
                     }
 
                     app.companyName = string.IsNullOrEmpty(TxtCompanyName.Text) ? null : TxtCompanyName.Text;
@@ -96,7 +96,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
     }

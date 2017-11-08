@@ -30,7 +30,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                int.TryParse(db.Supplier_Master.Max(m => m.supplierCode), out int _supplierCode);
+                int.TryParse(db.SupplierMasters.Max(m => m.supplierCode), out int _supplierCode);
 
                 TxtSupplierCode.Text = $"{_supplierCode + 1}";
             }
@@ -51,7 +51,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -86,11 +86,11 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    Supplier_Master supplier = new Supplier_Master();
+                    DataContext.SupplierMaster supplier = new DataContext.SupplierMaster();
 
                     if (SupplierId == 0)
                     {
-                        db.Supplier_Master.Add(supplier);
+                        db.SupplierMasters.Add(supplier);
 
                         supplier.supplierCode = TxtSupplierCode.Text.Trim();
                         supplier.entryBy = SessionHelper.UserId;
@@ -99,7 +99,7 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else
                     {
-                        supplier = db.Supplier_Master.FirstOrDefault(m => m.supplierId == SupplierId && m.active == true);
+                        supplier = db.SupplierMasters.FirstOrDefault(m => m.supplierId == SupplierId && m.active == true);
 
                         supplier.updatedBy = SessionHelper.UserId;
                         supplier.updatedDate = DateTime.Now;
@@ -126,7 +126,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -138,7 +138,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -150,7 +150,7 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    var sm = db.Supplier_Master.FirstOrDefault(x => x.supplierId == supplierId);
+                    var sm = db.SupplierMasters.FirstOrDefault(x => x.supplierId == supplierId);
 
                     if (sm != null)
                     {
@@ -182,7 +182,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -202,9 +202,9 @@ namespace Dflow_Inventory.ContentPage
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            if (db.Supplier_Master.FirstOrDefault(x => x.supplierId == supplierId) != null)
+                            if (db.SupplierMasters.FirstOrDefault(x => x.supplierId == supplierId) != null)
                             {
-                                db.Supplier_Master.FirstOrDefault(x => x.supplierId == supplierId).active = false;
+                                db.SupplierMasters.FirstOrDefault(x => x.supplierId == supplierId).active = false;
 
                                 db.SaveChanges();
                             }
@@ -214,7 +214,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -222,7 +222,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                DgvList.DataSource = db.Supplier_Master
+                DgvList.DataSource = db.SupplierMasters
                                 .Select(m => new
                                 {
                                     supplierId = m.supplierId,

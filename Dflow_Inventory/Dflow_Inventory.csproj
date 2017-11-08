@@ -236,13 +236,13 @@
     <Compile Include="ContentPage\VoucherReport.Designer.cs">
       <DependentUpon>VoucherReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataContext\Application_Parameter.cs">
+    <Compile Include="DataContext\ApplicationParameter.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\CustomerMaster.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataContext\customerType.cs">
-      <DependentUpon>dflowModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataContext\Customer_Master.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataContext\Designation.cs">
@@ -263,16 +263,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dflowModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DataContext\Distributor_Master.cs">
+    <Compile Include="DataContext\DistributorMaster.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataContext\Employee.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataContext\Employment_Status.cs">
+    <Compile Include="DataContext\EmploymentStatu.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataContext\Expense_Master.cs">
+    <Compile Include="DataContext\ExpenseMaster.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataContext\FinancialYear.cs">
@@ -287,13 +287,19 @@
     <Compile Include="DataContext\InvoiceHeader.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataContext\Item_Master.cs">
+    <Compile Include="DataContext\ItemMaster.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataContext\marital_Status.cs">
+    <Compile Include="DataContext\maritalStatu.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataContext\PaymentMode.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\productionDetail.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\productionHeader.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataContext\PurchaseDetail.cs">
@@ -326,9 +332,6 @@
     <Compile Include="DataContext\sp_Stock_Report_Detail_Result.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataContext\sp_Stock_Report_Result.cs">
-      <DependentUpon>dflowModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataContext\sp_Stock_Report_Summary_Result.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
@@ -341,19 +344,19 @@
     <Compile Include="DataContext\StockType.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataContext\Supplier_Master.cs">
+    <Compile Include="DataContext\SupplierMaster.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataContext\Unit_Master.cs">
+    <Compile Include="DataContext\UnitMaster.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataContext\User_Group.cs">
+    <Compile Include="DataContext\UserGroup.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataContext\User_Master.cs">
+    <Compile Include="DataContext\UserMaster.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataContext\Vendor_Master.cs">
+    <Compile Include="DataContext\VendorMaster.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataContext\voucherHeader.cs">
@@ -635,8 +638,8 @@
   <ItemGroup>
     <Content Include="DataContext\dflowModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>dflowModel.Context.cs</LastGenOutput>
       <DependentUpon>dflowModel.edmx</DependentUpon>
+      <LastGenOutput>dflowModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="DataContext\dflowModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -680,5 +683,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

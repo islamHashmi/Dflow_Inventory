@@ -54,7 +54,7 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    var user = db.User_Master.FirstOrDefault(m => m.userId == UserId && m.loginId == LoginId);
+                    var user = db.UserMasters.FirstOrDefault(m => m.userId == UserId && m.loginId == LoginId);
 
                     if(user == null)
                     {
@@ -75,7 +75,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 

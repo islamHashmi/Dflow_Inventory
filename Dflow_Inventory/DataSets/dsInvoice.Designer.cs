@@ -1008,8 +1008,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.invoiceIdColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'invoiceId\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'invoiceId\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1024,8 +1024,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.invoiceNumberColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'invoiceNumber\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'invoiceNumber\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1040,8 +1040,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.invoiceDateColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'invoiceDate\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'invoiceDate\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1056,8 +1056,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.customerNameColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'customerName\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'customerName\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1072,8 +1072,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.customerAddressColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'customerAddress\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'customerAddress\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1088,8 +1088,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.customerGSTColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'customerGST\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'customerGST\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1104,8 +1104,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.remarkColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'remark\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'remark\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1120,8 +1120,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((decimal)(this[this.tabledsInvoice.totalColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'total\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'total\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1136,8 +1136,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((decimal)(this[this.tabledsInvoice.discountColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'discount\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'discount\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1152,8 +1152,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((decimal)(this[this.tabledsInvoice.taxableAmountColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'taxableAmount\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'taxableAmount\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1168,8 +1168,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((decimal)(this[this.tabledsInvoice.cgstPercentColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'cgstPercent\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'cgstPercent\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1184,8 +1184,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((decimal)(this[this.tabledsInvoice.cgstAmountColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'cgstAmount\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'cgstAmount\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1200,8 +1200,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((decimal)(this[this.tabledsInvoice.sgstPercentColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sgstPercent\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'sgstPercent\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1216,8 +1216,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((decimal)(this[this.tabledsInvoice.sgstAmountColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sgstAmount\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'sgstAmount\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1232,8 +1232,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((decimal)(this[this.tabledsInvoice.totalAmountColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'totalAmount\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'totalAmount\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1248,8 +1248,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.itemNameColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'itemName\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'itemName\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1264,8 +1264,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.unitColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'unit\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'unit\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1280,8 +1280,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.hsnCodeColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'hsnCode\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'hsnCode\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1296,8 +1296,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((decimal)(this[this.tabledsInvoice.rateColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'rate\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'rate\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1312,8 +1312,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((decimal)(this[this.tabledsInvoice.quantityColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'quantity\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'quantity\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1328,8 +1328,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((decimal)(this[this.tabledsInvoice.amountColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'amount\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'amount\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1344,8 +1344,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.companyNameColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'companyName\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'companyName\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1360,8 +1360,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.dealsInColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'dealsIn\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'dealsIn\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1376,8 +1376,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.addressLine1Column]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'addressLine1\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'addressLine1\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1392,8 +1392,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.addressLine2Column]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'addressLine2\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'addressLine2\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1408,8 +1408,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.mobileNo1Column]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'mobileNo1\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'mobileNo1\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1424,8 +1424,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.mobileNo2Column]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'mobileNo2\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'mobileNo2\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1440,8 +1440,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.emailAddress1Column]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'emailAddress1\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'emailAddress1\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1456,8 +1456,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.emailAddress2Column]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'emailAddress2\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'emailAddress2\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1472,8 +1472,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.panNumberColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'panNumber\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'panNumber\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1488,8 +1488,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.gstNumberColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'gstNumber\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'gstNumber\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1504,8 +1504,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsInvoice.amtInWordsColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'amtInWords\' in table \'dsInvoice\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'amtInWords\' in table \'dsInvoice\' is DBNull.", e);
                     }
                 }
                 set {

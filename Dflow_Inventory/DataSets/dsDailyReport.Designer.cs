@@ -630,8 +630,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsDailyReport.receiptAmtColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'receiptAmt\' in table \'dsDailyReport\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'receiptAmt\' in table \'dsDailyReport\' is DBNull.", e);
                     }
                 }
                 set {
@@ -646,8 +646,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsDailyReport.paidAmtColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'paidAmt\' in table \'dsDailyReport\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'paidAmt\' in table \'dsDailyReport\' is DBNull.", e);
                     }
                 }
                 set {
@@ -662,8 +662,8 @@ namespace Dflow_Inventory.DataSets {
                     try {
                         return ((string)(this[this.tabledsDailyReport.invoiceDateColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'invoiceDate\' in table \'dsDailyReport\' is DBNull.", e);
+                    catch (global::System.InvalidCastException  e) {
+                        throw new global::System.Data.StrongTypingException ("The value for column \'invoiceDate\' in table \'dsDailyReport\' is DBNull.", e);
                     }
                 }
                 set {

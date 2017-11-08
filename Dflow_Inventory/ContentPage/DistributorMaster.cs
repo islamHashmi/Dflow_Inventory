@@ -29,7 +29,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                int.TryParse(db.Distributor_Master.Max(m => m.distributorCode), out int _distributorCode);
+                int.TryParse(db.DistributorMasters.Max(m => m.distributorCode), out int _distributorCode);
 
                 TxtDistributorCode.Text = $"{_distributorCode + 1}";
             }
@@ -50,7 +50,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -85,11 +85,11 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    Distributor_Master distributor = new Distributor_Master();
+                    DataContext.DistributorMaster distributor = new DataContext.DistributorMaster();
 
                     if (DistributorId == 0)
                     {
-                        db.Distributor_Master.Add(distributor);
+                        db.DistributorMasters.Add(distributor);
 
                         distributor.distributorCode = TxtDistributorCode.Text.Trim();
                         distributor.entryBy = SessionHelper.UserId;
@@ -98,7 +98,7 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else
                     {
-                        distributor = db.Distributor_Master.FirstOrDefault(m => m.distributorId == DistributorId && m.active == true);
+                        distributor = db.DistributorMasters.FirstOrDefault(m => m.distributorId == DistributorId && m.active == true);
 
                         distributor.updatedBy = SessionHelper.UserId;
                         distributor.updatedDate = DateTime.Now;
@@ -125,7 +125,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -137,7 +137,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -149,7 +149,7 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    var sm = db.Distributor_Master.FirstOrDefault(x => x.distributorId == distributorId);
+                    var sm = db.DistributorMasters.FirstOrDefault(x => x.distributorId == distributorId);
 
                     if (sm != null)
                     {
@@ -181,7 +181,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -201,9 +201,9 @@ namespace Dflow_Inventory.ContentPage
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            if (db.Distributor_Master.FirstOrDefault(x => x.distributorId == distributorId) != null)
+                            if (db.DistributorMasters.FirstOrDefault(x => x.distributorId == distributorId) != null)
                             {
-                                db.Distributor_Master.FirstOrDefault(x => x.distributorId == distributorId).active = false;
+                                db.DistributorMasters.FirstOrDefault(x => x.distributorId == distributorId).active = false;
 
                                 db.SaveChanges();
                             }
@@ -213,7 +213,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -221,7 +221,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                DgvList.DataSource = db.Distributor_Master
+                DgvList.DataSource = db.DistributorMasters
                                 .Select(m => new
                                 {
                                     distributorId = m.distributorId,

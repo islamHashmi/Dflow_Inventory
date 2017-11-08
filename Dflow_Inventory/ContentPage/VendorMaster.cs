@@ -29,7 +29,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                int.TryParse(db.Vendor_Master.Max(m => m.vendorCode), out int _vendorCode);
+                int.TryParse(db.VendorMasters.Max(m => m.vendorCode), out int _vendorCode);
 
                 TxtVendorCode.Text = $"{_vendorCode + 1}";
             }
@@ -50,7 +50,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -85,11 +85,11 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    Vendor_Master vendor = new Vendor_Master();
+                    DataContext.VendorMaster vendor = new DataContext.VendorMaster();
 
                     if (VendorId == 0)
                     {
-                        db.Vendor_Master.Add(vendor);
+                        db.VendorMasters.Add(vendor);
 
                         vendor.vendorCode = TxtVendorCode.Text.Trim();
                         vendor.entryBy = SessionHelper.UserId;
@@ -98,7 +98,7 @@ namespace Dflow_Inventory.ContentPage
                     }
                     else
                     {
-                        vendor = db.Vendor_Master.FirstOrDefault(m => m.vendorId == VendorId && m.active == true);
+                        vendor = db.VendorMasters.FirstOrDefault(m => m.vendorId == VendorId && m.active == true);
 
                         vendor.updatedBy = SessionHelper.UserId;
                         vendor.updatedDate = DateTime.Now;
@@ -125,7 +125,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -137,7 +137,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -149,7 +149,7 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    var sm = db.Vendor_Master.FirstOrDefault(x => x.vendorId == vendorId);
+                    var sm = db.VendorMasters.FirstOrDefault(x => x.vendorId == vendorId);
 
                     if (sm != null)
                     {
@@ -181,7 +181,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -201,11 +201,11 @@ namespace Dflow_Inventory.ContentPage
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            if (db.Vendor_Master.FirstOrDefault(x => x.vendorId == vendorId) != null)
+                            if (db.VendorMasters.FirstOrDefault(x => x.vendorId == vendorId) != null)
                             {
-                                db.Vendor_Master.FirstOrDefault(x => x.vendorId == vendorId).active = false;
-                                db.Vendor_Master.FirstOrDefault(x => x.vendorId == vendorId).updatedBy = SessionHelper.UserId;
-                                db.Vendor_Master.FirstOrDefault(x => x.vendorId == vendorId).updatedDate = DateTime.Now;
+                                db.VendorMasters.FirstOrDefault(x => x.vendorId == vendorId).active = false;
+                                db.VendorMasters.FirstOrDefault(x => x.vendorId == vendorId).updatedBy = SessionHelper.UserId;
+                                db.VendorMasters.FirstOrDefault(x => x.vendorId == vendorId).updatedDate = DateTime.Now;
 
                                 db.SaveChanges();
                             }
@@ -215,7 +215,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -223,7 +223,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                DgvList.DataSource = db.Vendor_Master
+                DgvList.DataSource = db.VendorMasters
                                 .Select(m => new
                                 {
                                     vendorId = m.vendorId,

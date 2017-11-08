@@ -31,6 +31,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cmbEmployee = new System.Windows.Forms.ComboBox();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cmbExpenseHead = new System.Windows.Forms.ComboBox();
             this.lblCustomerId = new System.Windows.Forms.Label();
             this.LstCustomer = new System.Windows.Forms.ListBox();
             this.grpPayment = new System.Windows.Forms.GroupBox();
@@ -54,13 +59,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.Link_shorcut = new System.Windows.Forms.LinkLabel();
             this.DgvList = new System.Windows.Forms.DataGridView();
-            this.cmbExpenseHead = new System.Windows.Forms.ComboBox();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cmbEmployee = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.grpPayment.SuspendLayout();
@@ -113,6 +112,47 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Add Payment";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(32, 127);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(40, 18);
+            this.label10.TabIndex = 38;
+            this.label10.Text = "Name";
+            // 
+            // cmbEmployee
+            // 
+            this.cmbEmployee.FormattingEnabled = true;
+            this.cmbEmployee.Location = new System.Drawing.Point(154, 92);
+            this.cmbEmployee.Name = "cmbEmployee";
+            this.cmbEmployee.Size = new System.Drawing.Size(288, 26);
+            this.cmbEmployee.TabIndex = 37;
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(154, 124);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(288, 23);
+            this.txtName.TabIndex = 36;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(32, 94);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(60, 18);
+            this.label9.TabIndex = 35;
+            this.label9.Text = "Employee";
+            // 
+            // cmbExpenseHead
+            // 
+            this.cmbExpenseHead.FormattingEnabled = true;
+            this.cmbExpenseHead.Location = new System.Drawing.Point(154, 59);
+            this.cmbExpenseHead.Name = "cmbExpenseHead";
+            this.cmbExpenseHead.Size = new System.Drawing.Size(288, 26);
+            this.cmbExpenseHead.TabIndex = 34;
             // 
             // lblCustomerId
             // 
@@ -328,7 +368,6 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.Link_shorcut);
             this.tabPage2.Controls.Add(this.DgvList);
             this.tabPage2.Location = new System.Drawing.Point(4, 30);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -338,17 +377,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "View Payments";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // Link_shorcut
-            // 
-            this.Link_shorcut.AutoSize = true;
-            this.Link_shorcut.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Link_shorcut.Location = new System.Drawing.Point(796, 4);
-            this.Link_shorcut.Name = "Link_shorcut";
-            this.Link_shorcut.Size = new System.Drawing.Size(92, 18);
-            this.Link_shorcut.TabIndex = 2;
-            this.Link_shorcut.TabStop = true;
-            this.Link_shorcut.Text = "Show Shortcuts";
             // 
             // DgvList
             // 
@@ -364,56 +392,15 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DgvList.DefaultCellStyle = dataGridViewCellStyle1;
-            this.DgvList.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.DgvList.Location = new System.Drawing.Point(3, 26);
+            this.DgvList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DgvList.Location = new System.Drawing.Point(3, 4);
             this.DgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DgvList.Name = "DgvList";
             this.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvList.Size = new System.Drawing.Size(885, 371);
+            this.DgvList.Size = new System.Drawing.Size(885, 393);
             this.DgvList.TabIndex = 0;
             this.DgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvList_CellDoubleClick);
             this.DgvList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvList_KeyDown);
-            // 
-            // cmbExpenseHead
-            // 
-            this.cmbExpenseHead.FormattingEnabled = true;
-            this.cmbExpenseHead.Location = new System.Drawing.Point(154, 59);
-            this.cmbExpenseHead.Name = "cmbExpenseHead";
-            this.cmbExpenseHead.Size = new System.Drawing.Size(288, 26);
-            this.cmbExpenseHead.TabIndex = 34;
-            // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(154, 124);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(288, 23);
-            this.txtName.TabIndex = 36;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(32, 94);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(60, 18);
-            this.label9.TabIndex = 35;
-            this.label9.Text = "Employee";
-            // 
-            // cmbEmployee
-            // 
-            this.cmbEmployee.FormattingEnabled = true;
-            this.cmbEmployee.Location = new System.Drawing.Point(154, 92);
-            this.cmbEmployee.Name = "cmbEmployee";
-            this.cmbEmployee.Size = new System.Drawing.Size(288, 26);
-            this.cmbEmployee.TabIndex = 37;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(32, 127);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(40, 18);
-            this.label10.TabIndex = 38;
-            this.label10.Text = "Name";
             // 
             // VoucherPayment
             // 
@@ -431,7 +418,6 @@
             this.grpPayment.ResumeLayout(false);
             this.grpPayment.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvList)).EndInit();
             this.ResumeLayout(false);
 
@@ -467,7 +453,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.LinkLabel Link_shorcut;
         private System.Windows.Forms.DataGridView DgvList;
         private System.Windows.Forms.ComboBox cmbEmployee;
         private System.Windows.Forms.Label label10;

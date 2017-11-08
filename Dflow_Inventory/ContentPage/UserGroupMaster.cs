@@ -32,7 +32,7 @@ namespace Dflow_Inventory.ContentPage
                 {
                     using (db = new Inventory_DflowEntities())
                     {
-                        if (db.User_Group.FirstOrDefault(m => m.groupName == TxtGroupName.Text.Trim()) != null)
+                        if (db.UserGroups.FirstOrDefault(m => m.groupName == TxtGroupName.Text.Trim()) != null)
                         {
                             MessageBox.Show(text: "Group Name already exists.", caption: "Warning", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
                             e.Cancel = true;
@@ -42,7 +42,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -59,18 +59,18 @@ namespace Dflow_Inventory.ContentPage
 
                 using (db = new Inventory_DflowEntities())
                 {
-                    User_Group grp = new User_Group();
+                    UserGroup grp = new UserGroup();
 
                     if (UserGroupId == 0)
                     {
-                        db.User_Group.Add(grp);
+                        db.UserGroups.Add(grp);
                         grp.entryBy = SessionHelper.UserGroupId;
                         grp.entryDate = DateTime.Now;
                         grp.active = true;
                     }
                     else
                     {
-                        grp = db.User_Group.FirstOrDefault(m => m.userGroupId == UserGroupId);
+                        grp = db.UserGroups.FirstOrDefault(m => m.userGroupId == UserGroupId);
                         grp.updatedBy = SessionHelper.UserId;
                         grp.updatedOn = DateTime.Now;
                     }
@@ -86,7 +86,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -98,7 +98,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
         
@@ -113,7 +113,7 @@ namespace Dflow_Inventory.ContentPage
         {
             using (db = new Inventory_DflowEntities())
             {
-                DgvList.DataSource = db.User_Group
+                DgvList.DataSource = db.UserGroups
                            .Select(m => new
                            {
                                userGroupId = m.userGroupId,
@@ -170,7 +170,7 @@ namespace Dflow_Inventory.ContentPage
                 {
                     using (db = new Inventory_DflowEntities())
                     {
-                        var ug = db.User_Group.FirstOrDefault(m => m.userGroupId == _id);
+                        var ug = db.UserGroups.FirstOrDefault(m => m.userGroupId == _id);
 
                         if (ug != null)
                         {
@@ -191,7 +191,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -214,11 +214,11 @@ namespace Dflow_Inventory.ContentPage
 
                         using (db = new Inventory_DflowEntities())
                         {
-                            if (db.User_Group.FirstOrDefault(m => m.userGroupId == _id) != null)
+                            if (db.UserGroups.FirstOrDefault(m => m.userGroupId == _id) != null)
                             {
-                                db.User_Group.FirstOrDefault(m => m.userGroupId == _id).active = false;
-                                db.User_Group.FirstOrDefault(m => m.userGroupId == _id).updatedBy = SessionHelper.UserId;
-                                db.User_Group.FirstOrDefault(m => m.userGroupId == _id).updatedOn = DateTime.Now;
+                                db.UserGroups.FirstOrDefault(m => m.userGroupId == _id).active = false;
+                                db.UserGroups.FirstOrDefault(m => m.userGroupId == _id).updatedBy = SessionHelper.UserId;
+                                db.UserGroups.FirstOrDefault(m => m.userGroupId == _id).updatedOn = DateTime.Now;
 
                                 db.SaveChanges();
                             }
@@ -228,7 +228,7 @@ namespace Dflow_Inventory.ContentPage
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
     }
