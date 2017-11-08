@@ -499,7 +499,7 @@ namespace Dflow_Inventory.ContentPage
                                         pd.quantity = _quantity == 0 ? null : (decimal?)_quantity;
                                         pd.amount = _amount == 0 ? null : (decimal?)_amount;
 
-                                        db.sp_Stock_InsertUpdate(CommanMethods.ConvertDate(dtpDate.Text), _itemId, "P",
+                                        db.sp_Stock_InsertUpdate(CommanMethods.ConvertDate(dtpDate.Text), _itemId, "R",
                                                                     _quantity == 0 ? null : (decimal?)_quantity, null, _id, null, cmdType, SessionHelper.UserId);
                                     }
                                 }
