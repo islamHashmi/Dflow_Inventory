@@ -766,6 +766,16 @@
       <Parameter Name="startDate" Mode="In" Type="DateTime" />
       <Parameter Name="endDate" Mode="In" Type="DateTime" />
     </FunctionImport>
+    <FunctionImport Name="sp_production_report_detail" ReturnType="Collection(Inventory_DflowModel.sp_production_report_detail_Result)">
+      <Parameter Name="finYear" Mode="In" Type="String" />
+      <Parameter Name="startDate" Mode="In" Type="DateTime" />
+      <Parameter Name="endDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_production_report_summary" ReturnType="Collection(Inventory_DflowModel.sp_production_report_summary_Result)">
+      <Parameter Name="finYear" Mode="In" Type="String" />
+      <Parameter Name="startDate" Mode="In" Type="DateTime" />
+      <Parameter Name="endDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_Daily_Report_Result">
     <Property Type="DateTime" Name="invoiceDate" Nullable="false" />
@@ -917,5 +927,21 @@
     <Property Type="String" Name="chequeNo" Nullable="true" MaxLength="6" />
     <Property Type="DateTime" Name="chequeDate" Nullable="true" />
     <Property Type="String" Name="narration" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="sp_production_report_detail_Result">
+    <Property Type="Int64" Name="productionId" Nullable="false" />
+    <Property Type="String" Name="batchNo" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="productionDate" Nullable="false" />
+    <Property Type="Decimal" Name="totalQuantity" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="String" Name="remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="itemName" Nullable="true" MaxLength="200" />
+    <Property Type="Decimal" Name="quantity" Nullable="true" Precision="10" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="sp_production_report_summary_Result">
+    <Property Type="Int64" Name="productionId" Nullable="false" />
+    <Property Type="String" Name="batchNo" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="productionDate" Nullable="false" />
+    <Property Type="Decimal" Name="totalQuantity" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="String" Name="remark" Nullable="true" MaxLength="500" />
   </ComplexType>
 </Schema>

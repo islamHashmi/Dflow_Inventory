@@ -310,5 +310,17 @@ namespace Dflow_Inventory
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void productionReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show_Form(new ProductionReport());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

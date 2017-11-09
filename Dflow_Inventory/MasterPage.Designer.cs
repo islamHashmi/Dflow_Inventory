@@ -39,6 +39,7 @@
             this.employeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.productionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.voucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.receiptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +59,7 @@
             this.toolStripFinYear = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripLoginUser = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.productionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.productionReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -148,6 +149,13 @@
             this.purchaseToolStripMenuItem.Text = "Purchase";
             this.purchaseToolStripMenuItem.Click += new System.EventHandler(this.PurchaseToolStripMenuItem_Click);
             // 
+            // productionToolStripMenuItem
+            // 
+            this.productionToolStripMenuItem.Name = "productionToolStripMenuItem";
+            this.productionToolStripMenuItem.Size = new System.Drawing.Size(94, 27);
+            this.productionToolStripMenuItem.Text = "Production";
+            this.productionToolStripMenuItem.Click += new System.EventHandler(this.productionToolStripMenuItem_Click);
+            // 
             // salesToolStripMenuItem
             // 
             this.salesToolStripMenuItem.Name = "salesToolStripMenuItem";
@@ -185,6 +193,7 @@
             this.stockRegisterToolStripMenuItem,
             this.salesReportToolStripMenuItem,
             this.purchaseReportToolStripMenuItem,
+            this.productionReportToolStripMenuItem,
             this.voucherReportToolStripMenuItem});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(74, 27);
@@ -193,35 +202,35 @@
             // dailyReportToolStripMenuItem
             // 
             this.dailyReportToolStripMenuItem.Name = "dailyReportToolStripMenuItem";
-            this.dailyReportToolStripMenuItem.Size = new System.Drawing.Size(188, 28);
+            this.dailyReportToolStripMenuItem.Size = new System.Drawing.Size(202, 28);
             this.dailyReportToolStripMenuItem.Text = "Daily Report";
             this.dailyReportToolStripMenuItem.Click += new System.EventHandler(this.dailyReportToolStripMenuItem_Click);
             // 
             // stockRegisterToolStripMenuItem
             // 
             this.stockRegisterToolStripMenuItem.Name = "stockRegisterToolStripMenuItem";
-            this.stockRegisterToolStripMenuItem.Size = new System.Drawing.Size(188, 28);
+            this.stockRegisterToolStripMenuItem.Size = new System.Drawing.Size(202, 28);
             this.stockRegisterToolStripMenuItem.Text = "Stock Register";
             this.stockRegisterToolStripMenuItem.Click += new System.EventHandler(this.StockRegisterToolStripMenuItem_Click);
             // 
             // salesReportToolStripMenuItem
             // 
             this.salesReportToolStripMenuItem.Name = "salesReportToolStripMenuItem";
-            this.salesReportToolStripMenuItem.Size = new System.Drawing.Size(188, 28);
+            this.salesReportToolStripMenuItem.Size = new System.Drawing.Size(202, 28);
             this.salesReportToolStripMenuItem.Text = "Sales Report";
             this.salesReportToolStripMenuItem.Click += new System.EventHandler(this.salesReportToolStripMenuItem_Click);
             // 
             // purchaseReportToolStripMenuItem
             // 
             this.purchaseReportToolStripMenuItem.Name = "purchaseReportToolStripMenuItem";
-            this.purchaseReportToolStripMenuItem.Size = new System.Drawing.Size(188, 28);
+            this.purchaseReportToolStripMenuItem.Size = new System.Drawing.Size(202, 28);
             this.purchaseReportToolStripMenuItem.Text = "Purchase Report";
             this.purchaseReportToolStripMenuItem.Click += new System.EventHandler(this.purchaseReportToolStripMenuItem_Click);
             // 
             // voucherReportToolStripMenuItem
             // 
             this.voucherReportToolStripMenuItem.Name = "voucherReportToolStripMenuItem";
-            this.voucherReportToolStripMenuItem.Size = new System.Drawing.Size(188, 28);
+            this.voucherReportToolStripMenuItem.Size = new System.Drawing.Size(202, 28);
             this.voucherReportToolStripMenuItem.Text = "Voucher Report";
             this.voucherReportToolStripMenuItem.Click += new System.EventHandler(this.voucherReportToolStripMenuItem_Click);
             // 
@@ -288,12 +297,12 @@
             this.toolStripLoginUser.Size = new System.Drawing.Size(118, 17);
             this.toolStripLoginUser.Text = "toolStripStatusLabel1";
             // 
-            // productionToolStripMenuItem
+            // productionReportToolStripMenuItem
             // 
-            this.productionToolStripMenuItem.Name = "productionToolStripMenuItem";
-            this.productionToolStripMenuItem.Size = new System.Drawing.Size(94, 27);
-            this.productionToolStripMenuItem.Text = "Production";
-            this.productionToolStripMenuItem.Click += new System.EventHandler(this.productionToolStripMenuItem_Click);
+            this.productionReportToolStripMenuItem.Name = "productionReportToolStripMenuItem";
+            this.productionReportToolStripMenuItem.Size = new System.Drawing.Size(202, 28);
+            this.productionReportToolStripMenuItem.Text = "Production Report";
+            this.productionReportToolStripMenuItem.Click += new System.EventHandler(this.productionReportToolStripMenuItem_Click);
             // 
             // MasterPage
             // 
@@ -348,6 +357,7 @@
         private System.Windows.Forms.ToolStripMenuItem dailyReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem voucherReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem productionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem productionReportToolStripMenuItem;
     }
 }
 

@@ -9,16 +9,16 @@ using System.Windows.Forms;
 
 namespace Dflow_Inventory.ContentPage
 {
-    public partial class PurchaseReport : Form
+    public partial class ProductionReport : Form
     {
         private Inventory_DflowEntities db;
 
-        public PurchaseReport()
+        public ProductionReport()
         {
             InitializeComponent();
         }
 
-        private void PurchaseReport_Load(object sender, EventArgs e)
+        private void ProductionReport_Load(object sender, EventArgs e)
         {
             this.reportViewer1.Refresh();
         }
@@ -40,17 +40,17 @@ namespace Dflow_Inventory.ContentPage
 
                     if (chkDetail.Checked)
                     {
-                        var detail = db.sp_purchase_report_detail(SessionHelper.FinYear, _startDate, _endDate).ToList();
+                        var detail = db.sp_production_report_detail(SessionHelper.FinYear, _startDate, _endDate).ToList();
 
-                        reportViewer1.LocalReport.ReportPath = Path.Combine(ConfigurationManager.AppSettings["reportPath"], "PurchaseReport_Detail.rdlc");
-                        reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("dsPurchase_Detail", detail));
+                        reportViewer1.LocalReport.ReportPath = Path.Combine(ConfigurationManager.AppSettings["reportPath"], "ProductionReport_Detail.rdlc");
+                        reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("dsProduction_Detail", detail));
                     }
                     else
                     {
-                        var summary = db.sp_purchase_report_summary(SessionHelper.FinYear, _startDate, _endDate).ToList();
+                        var summary = db.sp_production_report_summary(SessionHelper.FinYear, _startDate, _endDate).ToList();
 
-                        reportViewer1.LocalReport.ReportPath = Path.Combine(ConfigurationManager.AppSettings["reportPath"], "PurchaseReport_Summary.rdlc");
-                        reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("dsPurchase_Summary", summary));
+                        reportViewer1.LocalReport.ReportPath = Path.Combine(ConfigurationManager.AppSettings["reportPath"], "ProductionReport_Summary.rdlc");
+                        reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("dsProduction_Summary", summary));
                     }
 
                     reportViewer1.LocalReport.Refresh();

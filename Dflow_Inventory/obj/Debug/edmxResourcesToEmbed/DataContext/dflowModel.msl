@@ -632,5 +632,29 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_production_report_detail" FunctionName="Inventory_DflowModel.Store.sp_production_report_detail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Inventory_DflowModel.sp_production_report_detail_Result">
+          <ScalarProperty Name="productionId" ColumnName="productionId" />
+          <ScalarProperty Name="batchNo" ColumnName="batchNo" />
+          <ScalarProperty Name="productionDate" ColumnName="productionDate" />
+          <ScalarProperty Name="totalQuantity" ColumnName="totalQuantity" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="itemName" ColumnName="itemName" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_production_report_summary" FunctionName="Inventory_DflowModel.Store.sp_production_report_summary">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Inventory_DflowModel.sp_production_report_summary_Result">
+          <ScalarProperty Name="productionId" ColumnName="productionId" />
+          <ScalarProperty Name="batchNo" ColumnName="batchNo" />
+          <ScalarProperty Name="productionDate" ColumnName="productionDate" />
+          <ScalarProperty Name="totalQuantity" ColumnName="totalQuantity" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

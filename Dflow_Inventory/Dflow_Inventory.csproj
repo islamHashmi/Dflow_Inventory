@@ -158,6 +158,12 @@
     <Compile Include="ContentPage\Production.Designer.cs">
       <DependentUpon>Production.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContentPage\ProductionReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContentPage\ProductionReport.Designer.cs">
+      <DependentUpon>ProductionReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="ContentPage\PurchaseOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -320,6 +326,12 @@
     <Compile Include="DataContext\sp_invoice_report_summary_Result.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataContext\sp_production_report_detail_Result.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\sp_production_report_summary_Result.cs">
+      <DependentUpon>dflowModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataContext\sp_purchase_report_detail_Result.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
@@ -376,6 +388,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsInvoiceReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\dsProductionReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsProductionReport.xsd</DependentUpon>
     </Compile>
     <Compile Include="DataSets\dsPurchaseReport.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -454,6 +471,9 @@
     <EmbeddedResource Include="ContentPage\Production.resx">
       <DependentUpon>Production.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ContentPage\ProductionReport.resx">
+      <DependentUpon>ProductionReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ContentPage\PurchaseOrder.resx">
       <DependentUpon>PurchaseOrder.cs</DependentUpon>
     </EmbeddedResource>
@@ -513,6 +533,8 @@
     <EmbeddedResource Include="Reports\Invoice.rdlc" />
     <EmbeddedResource Include="Reports\InvoiceReport_Detail.rdlc" />
     <EmbeddedResource Include="Reports\InvoiceReport_Summary.rdlc" />
+    <EmbeddedResource Include="Reports\ProductionReport_Detail.rdlc" />
+    <EmbeddedResource Include="Reports\ProductionReport_Summary.rdlc" />
     <EmbeddedResource Include="Reports\PurchaseReport_Detail.rdlc" />
     <EmbeddedResource Include="Reports\PurchaseReport_Summary.rdlc" />
     <EmbeddedResource Include="Reports\StockReport_Detail.rdlc" />
@@ -560,6 +582,17 @@
     </None>
     <None Include="DataSets\dsInvoiceReport.xss">
       <DependentUpon>dsInvoiceReport.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\dsProductionReport.xsc">
+      <DependentUpon>dsProductionReport.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\dsProductionReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsProductionReport.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSets\dsProductionReport.xss">
+      <DependentUpon>dsProductionReport.xsd</DependentUpon>
     </None>
     <None Include="DataSets\dsPurchaseReport.xsc">
       <DependentUpon>dsPurchaseReport.xsd</DependentUpon>

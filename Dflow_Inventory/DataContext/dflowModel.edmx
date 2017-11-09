@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Inventory_DflowModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Inventory_DflowModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ApplicationParameter">
           <Key>
             <PropertyRef Name="applicationParameterId" />
@@ -618,6 +618,16 @@ warning 6002: The table/view 'Inventory_Dflow.dbo.EmploymentStatus' does not hav
           <Parameter Name="startDate" Type="date" Mode="In" />
           <Parameter Name="endDate" Type="date" Mode="In" />
         </Function>
+        <Function Name="sp_production_report_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="finYear" Type="char" Mode="In" />
+          <Parameter Name="startDate" Type="date" Mode="In" />
+          <Parameter Name="endDate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="sp_production_report_summary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="finYear" Type="char" Mode="In" />
+          <Parameter Name="startDate" Type="date" Mode="In" />
+          <Parameter Name="endDate" Type="date" Mode="In" />
+        </Function>
         <Function Name="sp_purchase_report_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="finYear" Type="char" Mode="In" />
           <Parameter Name="startDate" Type="date" Mode="In" />
@@ -750,8 +760,7 @@ FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
             <End Role="voucherHeader" EntitySet="voucherHeader" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Inventory_DflowModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1472,7 +1481,7 @@ FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
             <Parameter Name="finYear" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_invoice_print" ReturnType="Collection(Inventory_DflowModel.sp_invoice_print_Result)">
-            <Parameter Name="invoiceId" Mode="In" Type="Int32" />
+          <Parameter Name="invoiceId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_invoice_report_detail" ReturnType="Collection(Inventory_DflowModel.sp_invoice_report_detail_Result)">
             <Parameter Name="finYear" Mode="In" Type="String" />
@@ -1518,6 +1527,16 @@ FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
             <Parameter Name="voucherType" Mode="In" Type="String" />
             <Parameter Name="employeeId" Mode="In" Type="Int32" />
             <Parameter Name="customerId" Mode="In" Type="Int32" />
+            <Parameter Name="startDate" Mode="In" Type="DateTime" />
+            <Parameter Name="endDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_production_report_detail" ReturnType="Collection(Inventory_DflowModel.sp_production_report_detail_Result)">
+            <Parameter Name="finYear" Mode="In" Type="String" />
+            <Parameter Name="startDate" Mode="In" Type="DateTime" />
+            <Parameter Name="endDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_production_report_summary" ReturnType="Collection(Inventory_DflowModel.sp_production_report_summary_Result)">
+            <Parameter Name="finYear" Mode="In" Type="String" />
             <Parameter Name="startDate" Mode="In" Type="DateTime" />
             <Parameter Name="endDate" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -1672,6 +1691,22 @@ FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
           <Property Type="String" Name="chequeNo" Nullable="true" MaxLength="6" />
           <Property Type="DateTime" Name="chequeDate" Nullable="true" />
           <Property Type="String" Name="narration" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="sp_production_report_detail_Result">
+          <Property Type="Int64" Name="productionId" Nullable="false" />
+          <Property Type="String" Name="batchNo" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="productionDate" Nullable="false" />
+          <Property Type="Decimal" Name="totalQuantity" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="remark" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="itemName" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="quantity" Nullable="true" Precision="10" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="sp_production_report_summary_Result">
+          <Property Type="Int64" Name="productionId" Nullable="false" />
+          <Property Type="String" Name="batchNo" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="productionDate" Nullable="false" />
+          <Property Type="Decimal" Name="totalQuantity" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="remark" Nullable="true" MaxLength="500" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2307,6 +2342,30 @@ FROM [dbo].[EmploymentStatus] AS [EmploymentStatus]</DefiningQuery>
                 <ScalarProperty Name="chequeNo" ColumnName="chequeNo" />
                 <ScalarProperty Name="chequeDate" ColumnName="chequeDate" />
                 <ScalarProperty Name="narration" ColumnName="narration" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_production_report_detail" FunctionName="Inventory_DflowModel.Store.sp_production_report_detail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Inventory_DflowModel.sp_production_report_detail_Result">
+                <ScalarProperty Name="productionId" ColumnName="productionId" />
+                <ScalarProperty Name="batchNo" ColumnName="batchNo" />
+                <ScalarProperty Name="productionDate" ColumnName="productionDate" />
+                <ScalarProperty Name="totalQuantity" ColumnName="totalQuantity" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="itemName" ColumnName="itemName" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_production_report_summary" FunctionName="Inventory_DflowModel.Store.sp_production_report_summary">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Inventory_DflowModel.sp_production_report_summary_Result">
+                <ScalarProperty Name="productionId" ColumnName="productionId" />
+                <ScalarProperty Name="batchNo" ColumnName="batchNo" />
+                <ScalarProperty Name="productionDate" ColumnName="productionDate" />
+                <ScalarProperty Name="totalQuantity" ColumnName="totalQuantity" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

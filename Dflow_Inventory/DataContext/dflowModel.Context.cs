@@ -246,5 +246,39 @@ namespace Dflow_Inventory.DataContext
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_voucher_report_Result>("sp_voucher_report", finYearParameter, voucherTypeParameter, employeeIdParameter, customerIdParameter, startDateParameter, endDateParameter);
         }
+    
+        public virtual ObjectResult<sp_production_report_detail_Result> sp_production_report_detail(string finYear, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var finYearParameter = finYear != null ?
+                new ObjectParameter("finYear", finYear) :
+                new ObjectParameter("finYear", typeof(string));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("startDate", startDate) :
+                new ObjectParameter("startDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("endDate", endDate) :
+                new ObjectParameter("endDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_production_report_detail_Result>("sp_production_report_detail", finYearParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<sp_production_report_summary_Result> sp_production_report_summary(string finYear, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var finYearParameter = finYear != null ?
+                new ObjectParameter("finYear", finYear) :
+                new ObjectParameter("finYear", typeof(string));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("startDate", startDate) :
+                new ObjectParameter("startDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("endDate", endDate) :
+                new ObjectParameter("endDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_production_report_summary_Result>("sp_production_report_summary", finYearParameter, startDateParameter, endDateParameter);
+        }
     }
 }
