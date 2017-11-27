@@ -50,6 +50,7 @@ namespace Dflow_Inventory
                 using (db = new Inventory_DflowEntities())
                 {
                     var login = db.UserMasters.FirstOrDefault(m => m.loginId == TxtLoginId.Text.Trim() && m.loginKey == TxtPassword.Text.Trim());
+                    
 
                     if (login == null)
                     {
@@ -63,6 +64,8 @@ namespace Dflow_Inventory
                     login.lastlogin = DateTime.Now;
 
                     db.SaveChanges();
+
+                    //MessageBox.Show("Logged In Successfully...");
 
                     if (db.ApplicationParameters.FirstOrDefault() != null)
                     {
@@ -82,7 +85,7 @@ namespace Dflow_Inventory
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + Environment.NewLine + ex.InnerException.Message);
             }
         }
 

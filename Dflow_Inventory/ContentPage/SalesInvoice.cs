@@ -21,7 +21,7 @@ namespace Dflow_Inventory.ContentPage
         {
             InitializeComponent();
 
-            Autogenerate_InvoiceNumber();
+           // Autogenerate_InvoiceNumber();
             Get_Data();
         }
 
@@ -481,6 +481,14 @@ namespace Dflow_Inventory.ContentPage
 
                             if (InvoiceId == 0)
                             {
+                                var invoice = db.InvoiceHeaders.FirstOrDefault(x => x.invoiceNumber == TxtInvoiceNo.Text);
+
+                                if (invoice != null)
+                                {
+                                    MessageBox.Show("Invoice Number : " + TxtInvoiceNo.Text + " already is in use....");
+                                    return;
+                                }
+
                                 db.InvoiceHeaders.Add(ih);
 
                                 ih.invoiceNumber = TxtInvoiceNo.Text.Trim();
@@ -1040,6 +1048,30 @@ namespace Dflow_Inventory.ContentPage
                     {
                         MessageBox.Show(text: "Amount is empty for Item :" + DgvItems["Col_Item", e.RowIndex].Value, caption: "Information", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information);
                         e.Cancel = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TxtInvoiceNo_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(TxtInvoiceNo.Text) && _invoiceId == 0)
+                {
+                    using (db = new Inventory_DflowEntities())
+                    {
+                        var invoice = db.InvoiceHeaders.FirstOrDefault(x => x.invoiceNumber == TxtInvoiceNo.Text);
+
+                        if (invoice != null)
+                        {
+                            MessageBox.Show("Invoice Number : " + TxtInvoiceNo.Text + " is already in use...");
+                            e.Cancel = true;
+                        }
                     }
                 }
             }

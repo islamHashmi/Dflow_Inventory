@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsAccountLedger" targetNamespace="http://tempuri.org/dsAccountLedger.xsd" xmlns:mstns="http://tempuri.org/dsAccountLedger.xsd" xmlns="http://tempuri.org/dsAccountLedger.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsAccountLedger" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsAccountLedger" msprop:Generator_UserDSName="dsAccountLedger">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dsAccountLedger" msprop:Generator_TableClassName="dsAccountLedgerDataTable" msprop:Generator_TableVarName="tabledsAccountLedger" msprop:Generator_TablePropName="_dsAccountLedger" msprop:Generator_RowDeletingName="dsAccountLedgerRowDeleting" msprop:Generator_RowChangingName="dsAccountLedgerRowChanging" msprop:Generator_RowEvHandlerName="dsAccountLedgerRowChangeEventHandler" msprop:Generator_RowDeletedName="dsAccountLedgerRowDeleted" msprop:Generator_UserTableName="dsAccountLedger" msprop:Generator_RowChangedName="dsAccountLedgerRowChanged" msprop:Generator_RowEvArgName="dsAccountLedgerRowChangeEvent" msprop:Generator_RowClassName="dsAccountLedgerRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="VchNo" msprop:Generator_ColumnVarNameInTable="columnVchNo" msprop:Generator_ColumnPropNameInRow="VchNo" msprop:Generator_ColumnPropNameInTable="VchNoColumn" msprop:Generator_UserColumnName="VchNo" type="xs:string" minOccurs="0" />
+              <xs:element name="VchDate" msprop:Generator_ColumnVarNameInTable="columnVchDate" msprop:Generator_ColumnPropNameInRow="VchDate" msprop:Generator_ColumnPropNameInTable="VchDateColumn" msprop:Generator_UserColumnName="VchDate" type="xs:string" minOccurs="0" />
+              <xs:element name="ledgerType" msprop:Generator_ColumnVarNameInTable="columnledgerType" msprop:Generator_ColumnPropNameInRow="ledgerType" msprop:Generator_ColumnPropNameInTable="ledgerTypeColumn" msprop:Generator_UserColumnName="ledgerType" type="xs:string" minOccurs="0" />
+              <xs:element name="name" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_UserColumnName="name" type="xs:string" minOccurs="0" />
+              <xs:element name="amount" msprop:Generator_ColumnVarNameInTable="columnamount" msprop:Generator_ColumnPropNameInRow="amount" msprop:Generator_ColumnPropNameInTable="amountColumn" msprop:Generator_UserColumnName="amount" type="xs:string" minOccurs="0" />
+              <xs:element name="DrCr" msprop:Generator_ColumnVarNameInTable="columnDrCr" msprop:Generator_ColumnPropNameInRow="DrCr" msprop:Generator_ColumnPropNameInTable="DrCrColumn" msprop:Generator_UserColumnName="DrCr" type="xs:string" minOccurs="0" />
+              <xs:element name="narration" msprop:Generator_ColumnVarNameInTable="columnnarration" msprop:Generator_ColumnPropNameInRow="narration" msprop:Generator_ColumnPropNameInTable="narrationColumn" msprop:Generator_UserColumnName="narration" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

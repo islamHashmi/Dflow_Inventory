@@ -270,7 +270,7 @@ namespace Dflow_Inventory.ContentPage
             if (RowIndex >= 0)
             {
                 Clear_Controls();
-                
+
                 int.TryParse(Convert.ToString(DgvList["userId", RowIndex].Value), out int _id);
 
                 if (_id != 0)
@@ -286,7 +286,7 @@ namespace Dflow_Inventory.ContentPage
                             TxtPassword.Text = um.loginKey;
                             TxtConfirmPass.Text = um.loginKey;
                             TxtName.Text = um.name;
-                            TxtMobile.Text = um.mobileNumber.Trim();
+                            TxtMobile.Text = um.mobileNumber == null ? string.Empty : um.mobileNumber.Trim();
                             TxtEmail.Text = um.emailId;
                             cmbUserGroup.SelectedValue = um.userGroupId;
                         }
@@ -323,7 +323,7 @@ namespace Dflow_Inventory.ContentPage
                     {
                         if (DialogResult.No == MessageBox.Show("Are you sure to delete this record ? ", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                             return;
-                        
+
                         int.TryParse(s: Convert.ToString(DgvList["userId", DgvList.CurrentCell.RowIndex].Value), result: out int _id);
 
                         using (db = new Inventory_DflowEntities())
@@ -338,7 +338,7 @@ namespace Dflow_Inventory.ContentPage
                             }
                         }
                     }
-                    else if(e.KeyData ==(Keys.Shift | Keys.P))
+                    else if (e.KeyData == (Keys.Shift | Keys.P))
                     {
                         int.TryParse(s: Convert.ToString(DgvList["userId", DgvList.CurrentCell.RowIndex].Value), result: out int _id);
 

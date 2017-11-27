@@ -137,5 +137,5 @@ D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\bin\De
 D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\bin\Debug\zh-HANT\Microsoft.ReportViewer.WinForms.resources.dll
 D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.exe
 D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.pdb
-D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.csprojResolveAssemblyReference.cache
 D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.ContentPage.ProductionReport.resources
+D:\Islamuddin\Applications\DflowInventory\Dflow_Inventory\Dflow_Inventory\obj\Debug\Dflow_Inventory.csprojResolveAssemblyReference.cache

@@ -175,6 +175,7 @@
             this.TxtSGST.Name = "TxtSGST";
             this.TxtSGST.Size = new System.Drawing.Size(46, 25);
             this.TxtSGST.TabIndex = 14;
+            this.TxtSGST.Text = "9.00";
             this.TxtSGST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TxtSGST.TextChanged += new System.EventHandler(this.TxtSGST_TextChanged);
             this.TxtSGST.Leave += new System.EventHandler(this.TxtSGST_Leave);
@@ -216,6 +217,7 @@
             this.TxtCGST.Name = "TxtCGST";
             this.TxtCGST.Size = new System.Drawing.Size(46, 25);
             this.TxtCGST.TabIndex = 11;
+            this.TxtCGST.Text = "9.00";
             this.TxtCGST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TxtCGST.TextChanged += new System.EventHandler(this.TxtCGST_TextChanged);
             this.TxtCGST.Leave += new System.EventHandler(this.TxtCGST_Leave);
@@ -473,9 +475,9 @@
             this.TxtInvoiceNo.Location = new System.Drawing.Point(109, 19);
             this.TxtInvoiceNo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TxtInvoiceNo.Name = "TxtInvoiceNo";
-            this.TxtInvoiceNo.ReadOnly = true;
             this.TxtInvoiceNo.Size = new System.Drawing.Size(105, 23);
             this.TxtInvoiceNo.TabIndex = 1;
+            this.TxtInvoiceNo.Validating += new System.ComponentModel.CancelEventHandler(this.TxtInvoiceNo_Validating);
             // 
             // label3
             // 

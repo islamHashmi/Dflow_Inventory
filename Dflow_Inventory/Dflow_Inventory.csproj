@@ -374,6 +374,11 @@
     <Compile Include="DataContext\voucherHeader.cs">
       <DependentUpon>dflowModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataSets\dsAccountLedgerReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsAccountLedgerReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DataSets\dsDailyReport.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -529,6 +534,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reports\AccountLedgerReport.rdlc" />
     <EmbeddedResource Include="Reports\DailyReport.rdlc" />
     <EmbeddedResource Include="Reports\Invoice.rdlc" />
     <EmbeddedResource Include="Reports\InvoiceReport_Detail.rdlc" />
@@ -549,6 +555,17 @@
     </EntityDeploy>
     <None Include="DataContext\dflowModel.edmx.diagram">
       <DependentUpon>dflowModel.edmx</DependentUpon>
+    </None>
+    <None Include="DataSets\dsAccountLedgerReport.xsc">
+      <DependentUpon>dsAccountLedgerReport.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\dsAccountLedgerReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsAccountLedgerReport.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSets\dsAccountLedgerReport.xss">
+      <DependentUpon>dsAccountLedgerReport.xsd</DependentUpon>
     </None>
     <None Include="DataSets\dsDailyReport.xsc">
       <DependentUpon>dsDailyReport.xsd</DependentUpon>
